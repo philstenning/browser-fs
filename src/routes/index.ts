@@ -1,5 +1,5 @@
-import About from "./about";
-import Contact from "./contact";
-import Home from "./home";
+import About from "./About";
+import Contact from "./Contact";
+import Home from "./Home";
 
 export { About, Home, Contact };
