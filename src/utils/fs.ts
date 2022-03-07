@@ -13,7 +13,7 @@ export async function selectDirectoryOnUsersFileSystem() {
     // we only want a folder not files
     if (dirHandle.kind === "directory") {
       // create the Folder object to be saved in db.
-      return createFolder(dirHandle);
+      return createVirtualDirectory(dirHandle);
     }
   } catch (err) {
     console.error(`Error: ${err}`);
@@ -30,7 +30,7 @@ export async function selectDirectoryOnUsersFileSystem() {
  * @param parts 
  * @returns IVirtualDirectory Object
  */
-export function createFolder(
+export function createVirtualDirectory(
   dirHandle: FileSystemDirectoryHandle,
   filePath: string = "/",
   isRoot: boolean = false,
@@ -38,19 +38,20 @@ export function createFolder(
   parts: number = 0
 ): IVirtualDirectory {
   const createdAt = new Date();
+  const {name}=dirHandle
   // TODO perhaps we should use a guid.
   // the id uses the current time to generate a unique id,
   // as we could have multiple folders with the same name.
   const folder: IVirtualDirectory = {
-    id: md5(dirHandle.name + createdAt.toISOString()),
+    id: md5(name + createdAt.toISOString()),
     handle: dirHandle,
     created: createdAt,
     updated: createdAt,
-    name: dirHandle.name,
+    name: name,
     isRoot,
     filePath,
     rootId,
-    parts,
+    // parts,
   };
   return folder;
 }

@@ -14,8 +14,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+     "types": [
+      "wicg-file-system-access",
+      "cypress",
+    ]
   },
-  "include": ["src"],
+   "include": ["**/*.ts"],
+   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

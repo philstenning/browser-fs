@@ -18,3 +18,5 @@ pnpm dev
 // build 
 pnpm build
 ```
+
+TODO: add a file (.excludedFolders) with a list of excluded folder names to prevent unnecessary scanning of folders that do not need to be scanned.

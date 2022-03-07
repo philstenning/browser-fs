@@ -30,7 +30,7 @@ export interface IVirtualDirectory {
   rootId: string;
   handle: FileSystemDirectoryHandle;
   // the number of parts or files it  has in it.
-  parts: number;
+  // parts: number;
   // optional
 
   // if it is a root dir count of parts
