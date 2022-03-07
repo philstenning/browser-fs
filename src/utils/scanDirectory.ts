@@ -33,7 +33,7 @@ export class DriveScanError extends Error {
  */
 async function scanLocalDriveRecursively(
   directoryHandle: FileSystemDirectoryHandle,
-  fileTypes = ["stl", "3mf"],
+  fileTypes = ["txt", "md"],
   maxDepth = 5,
   excludedFolders: string[] = _excludedFolders,
   _depth = 0,
@@ -43,11 +43,13 @@ async function scanLocalDriveRecursively(
   for await (const entry of directoryHandle.values()) {
     const name = entry.name.toLowerCase();
 
+    // console.log('dddd',name)
     if (entry.kind === "file") {
       // get the file extension
       const fileExtension = name.slice(((name.lastIndexOf(".") - 1) >>> 0) + 2);
       // check if current file has the the requested extension.
       if (fileTypes.includes(fileExtension)) {
+        // console.log('xxx',name,'  fileect', fileExtension)
         const file = createVirtualFileSystemHandle(
           entry,
           `${_path}/${entry.name}`,
@@ -64,7 +66,7 @@ async function scanLocalDriveRecursively(
         // with the recursive scan
         if (_depth < maxDepth) {
           // call self to recursively scan drive
-          console.log(`depth: ${_depth}`);
+          // console.log(`depth: ${_depth}`);
           const entryContent = await scanLocalDriveRecursively(
             entry,
             fileTypes,
