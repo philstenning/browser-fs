@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { set, entries } from "idb-keyval";
 import { selectDirectoryOnUsersFileSystem } from "../utils/fs";
 import {
   scanLocalDriveRecursively,
   VirtualFileSystemHandle,
-} from "../utils/scanDirectory";
-import { IVirtualDirectory } from "../utils/types";
+  VirtualDirectory,
+} from "../utils";
+import {Link} from 'react-router-dom'
 
 export default function Home() {
-  const [rootDir, setRootDir] = useState<IVirtualDirectory | null>(null);
+  const [rootDir, setRootDir] = useState<VirtualDirectory | null>(null);
   const [data, setData] = useState<VirtualFileSystemHandle[]>([]);
   const handleClick = async () => {
     const res = await selectDirectoryOnUsersFileSystem();
@@ -17,15 +18,28 @@ export default function Home() {
       setRootDir(res);
       // console.log(res?.name);
 
-      const d = await scanLocalDriveRecursively(res.handle,['3mf']);
+      const d = await scanLocalDriveRecursively(res.handle, ["3mf"]);
       console.table(d);
       setData(d);
+
+      // save to indexDB
+      set(`__dir-handle__${res.name}`, res);
     }
   };
-
+  async function getHandles() {
+    console.log("getting handles...");
+    const allHandles = await entries();
+    console.table(allHandles);
+  }
+  useEffect(() => {
+    getHandles();
+  }, []);
   return (
     <div>
       <h1>welcome</h1>
+      <nav>
+        <Link to='about' >About</Link>
+      </nav>
 
       <button onClick={handleClick} data-cy="btn-select">
         open folder
@@ -39,13 +53,13 @@ export default function Home() {
       </ul>
       <hr />
       {rootDir && <h3> {rootDir.name}</h3>}
-      <ul>
+      <ul className="bfl">
         {data.length > 0 &&
           data.map((entry) =>
             entry.kind === "file" ? (
               <li key={entry.id}> {entry.name} </li>
             ) : (
-              <Folder folder={entry} />
+              <Folder key={entry.id} folder={entry} />
             )
           )}
       </ul>
@@ -58,13 +72,13 @@ interface Props {
 
 function Folder({ folder }: Props) {
   return (
-    <li>
-      <h4>{folder.name}</h4>
+    <li key={folder.id} className="bfl__folder">
+      {folder.name}
       <ul>
         {folder.entries?.map((entry) => {
           if (entry.kind === "file") {
             return (
-              <li key={entry.id}>
+              <li key={entry.id} className="bfl__file">
                 <h6>{entry.name} </h6> <pre>{entry.path}</pre>{" "}
               </li>
             );

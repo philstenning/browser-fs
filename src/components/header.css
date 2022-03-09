@@ -1,3 +1,17 @@
-.header{
-    background: var(--pink-8);
+.header {
+  background: var(--cyan-7);
+  padding-block: var(--size-3) ;
+}
+
+.main-nav {
+  display: flex;
+}
+
+.main-nav__item{
+    list-style: none;
+
+}
+.main-nav__link{
+    color: var(--cyan-1);
+    text-decoration: none;
 }

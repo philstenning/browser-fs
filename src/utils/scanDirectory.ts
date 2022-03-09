@@ -1,16 +1,8 @@
+import { dir } from "console";
 import md5 from "md5";
-import { excludedFolders as _excludedFolders } from "./excludedFolders";
+import { excludedFolders as _excludedFolders , VirtualFileSystemHandle} from "../utils"
 
-export interface VirtualFileSystemHandle {
-  id:string,
-  name: string;
-  depth?: number;
-  path?: string;
-  kind: "file" | "directory";
-  handle: FileSystemDirectoryHandle | FileSystemFileHandle;
-  extension: string;
-  entries?: VirtualFileSystemHandle[];
-}
+
 
 export class DriveScanError extends Error {
   constructor(msg: string) {
@@ -42,14 +34,13 @@ async function scanLocalDriveRecursively(
   const directoryContent: VirtualFileSystemHandle[] = [];
   for await (const entry of directoryHandle.values()) {
     const name = entry.name.toLowerCase();
-
-    // console.log('dddd',name)
     if (entry.kind === "file") {
       // get the file extension
       const fileExtension = name.slice(((name.lastIndexOf(".") - 1) >>> 0) + 2);
       // check if current file has the the requested extension.
       if (fileTypes.includes(fileExtension)) {
-        // console.log('xxx',name,'  fileect', fileExtension)
+        // const filehandle = await directoryHandle.getFileHandle(entry.name)
+        const fooo = await directoryHandle.resolve(entry);
         const file = createVirtualFileSystemHandle(
           entry,
           `${_path}/${entry.name}`,
@@ -79,7 +70,7 @@ async function scanLocalDriveRecursively(
           const folder = createVirtualFileSystemHandle(
             entry,
             `${_path}/${entry.name}`,
-            _depth ,
+            _depth,
             "",
             entryContent
           );
@@ -109,10 +100,11 @@ function createVirtualFileSystemHandle(
   entries: VirtualFileSystemHandle[] = []
 ): VirtualFileSystemHandle {
   return {
-    id:md5(`${handle.name}${path}`),
+    id: md5(`${handle.name}${path}`),
     name: handle.name,
     depth,
     path,
+    // pathR:
     kind: handle.kind,
     handle,
     extension,

@@ -1,4 +1,4 @@
-import {IVirtualDirectory} from './types'
+import {VirtualDirectory} from './types'
 import md5 from 'md5'
 
 /**
@@ -36,13 +36,13 @@ export function createVirtualDirectory(
   isRoot: boolean = false,
   rootId: string = "",
   parts: number = 0
-): IVirtualDirectory {
+): VirtualDirectory {
   const createdAt = new Date();
   const {name}=dirHandle
   // TODO perhaps we should use a guid.
   // the id uses the current time to generate a unique id,
   // as we could have multiple folders with the same name.
-  const folder: IVirtualDirectory = {
+  const folder: VirtualDirectory = {
     id: md5(name + createdAt.toISOString()),
     handle: dirHandle,
     created: createdAt,
