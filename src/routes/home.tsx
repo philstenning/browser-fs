@@ -30,8 +30,8 @@ export default function Home() {
   };
   async function getHandles() {
     console.log("getting handles...");
-    const allHandles = await entries();
-    console.table(allHandles);
+    // const allHandles = await entries();
+    // console.table(allHandles);
   }
   useEffect(() => {
     getHandles();

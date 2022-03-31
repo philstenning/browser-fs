@@ -1,6 +1,6 @@
-import { entries, del } from "idb-keyval";
+import { del } from "idb-keyval";
 import { VirtualFileSystemEntry } from "../types";
-
+import { rootStore } from "./stores";
 async function deleteAllVirtualRootDirectories() {
   throw new Error("not implemented Error");
 }
@@ -16,7 +16,7 @@ async function deleteVirtualRootDirectory(
   prependedText: string = "__vfs_entry__"
 ) {
   try {
-    await del(`${prependedText}${virtualFileSystemEntry.name}`);
+    await del(`${prependedText}${virtualFileSystemEntry.name}`, rootStore);
     return true;
   } catch (e) {
     console.log(`error deleting file: ${virtualFileSystemEntry.name}: ${e}`);

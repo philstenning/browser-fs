@@ -1,6 +1,8 @@
 import { entries } from "idb-keyval";
 import { VirtualFileSystemEntry } from "../types";
 import {checkPermissionsOfHandle} from '../file-system-operations'
+import {rootStore} from './stores'
+
 /**
  *  All VirtualFileSystemEntries that have been saved to indexDB are returned
  * @param prependedText  The text you you have prepend all your entries with.
@@ -9,7 +11,7 @@ async function getAllVirtualRootDirectories(
   prependedText: string = "__vfs_entry__"
 ) {
   try {
-    const allEntries = await entries();
+    const allEntries = await entries(rootStore);
 
     const allFolders: VirtualFileSystemEntry[] = [];
     allEntries.forEach((entry) => {
