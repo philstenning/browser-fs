@@ -1,21 +1,14 @@
-export interface VirtualDirectory {
+export interface VirtualRootDirectory {
   id: string;
   name: string;
   created: Date;
   updated: Date;
-  isRoot: boolean;
-  rootId: string;
   handle: FileSystemDirectoryHandle;
-  // the number of parts or files it  has in it.
-  // parts: number;
-  // optional
-
-  // if it is a root dir count of parts
   rootParts?: number;
   filePath?: string;
 }
 
-export interface VirtualFileSystemHandle {
+export interface VirtualFileSystemEntry {
   id: string;
   name: string;
   depth?: number;
@@ -24,7 +17,8 @@ export interface VirtualFileSystemHandle {
   kind: "file" | "directory";
   handle: FileSystemDirectoryHandle | FileSystemFileHandle;
   extension: string;
-  entries?: VirtualFileSystemHandle[];
+  entries?: VirtualFileSystemEntry[];
+  hasReadPermission:boolean
   
 }
 

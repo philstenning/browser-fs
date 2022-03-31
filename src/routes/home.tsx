@@ -1,29 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { set, entries } from "idb-keyval";
-import { selectDirectoryOnUsersFileSystem } from "../utils/fs";
+import { useState, useEffect } from "react";
+import { entries } from "idb-keyval";
+import { selectRootDirectoryOnLocalDrive } from "../utils/file-system-operations/fs";
 import {
   scanLocalDriveRecursively,
-  VirtualFileSystemHandle,
-  VirtualDirectory,
-} from "../utils";
-import {Link} from 'react-router-dom'
+  VirtualFileSystemEntry,
+  VirtualRootDirectory,
+} from "../utils/file-system-operations";
+import { saveVirtualRootDirectory } from "../utils/virtual-root-directories";
 
 export default function Home() {
-  const [rootDir, setRootDir] = useState<VirtualDirectory | null>(null);
-  const [data, setData] = useState<VirtualFileSystemHandle[]>([]);
+  const [rootDir, setRootDir] = useState<VirtualRootDirectory | null>(null);
+  const [data, setData] = useState<VirtualFileSystemEntry[]>([]);
   const handleClick = async () => {
-    const res = await selectDirectoryOnUsersFileSystem();
+    const res = await selectRootDirectoryOnLocalDrive();
 
     if (res) {
       setRootDir(res);
       // console.log(res?.name);
 
-      const d = await scanLocalDriveRecursively(res.handle, ["3mf"]);
+      const d = await scanLocalDriveRecursively(res.handle, ["3mf",'stl','gcode'],9);
       console.table(d);
+      console.log(JSON.stringify(d))
       setData(d);
 
       // save to indexDB
-      set(`__dir-handle__${res.name}`, res);
+      // set(`__dir-handle__${res.name}`, res);
+      const entry = await saveVirtualRootDirectory(res);
     }
   };
   async function getHandles() {
@@ -36,11 +38,6 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <h1>welcome</h1>
-      <nav>
-        <Link to='about' >About</Link>
-      </nav>
-
       <button onClick={handleClick} data-cy="btn-select">
         open folder
       </button>
@@ -48,7 +45,6 @@ export default function Home() {
       <ul>
         <li>name: {rootDir?.name}</li>
         <li>file path: {rootDir?.filePath}</li>
-        <li>isRoot: {rootDir?.isRoot}</li>
         <li>created: {rootDir?.created.toDateString()}</li>
       </ul>
       <hr />
@@ -67,7 +63,7 @@ export default function Home() {
   );
 }
 interface Props {
-  folder: VirtualFileSystemHandle;
+  folder: VirtualFileSystemEntry;
 }
 
 function Folder({ folder }: Props) {

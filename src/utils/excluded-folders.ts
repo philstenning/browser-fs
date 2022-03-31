@@ -1,4 +1,4 @@
-export const excludedFolders = [
+export const allFoldersToExcludeFromScanning = [
   "node_modules",
   "programFiles",
   "junk",
