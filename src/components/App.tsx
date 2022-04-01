@@ -1,10 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {About,Contact,Home} from "../routes";
 import Layout from "./Layout";
-
+import { RootDirectoryProvider } from "../utils/context/fs-context";
 
 function App() {
   return (
+    <RootDirectoryProvider>
+
     <BrowserRouter>
       <Routes>
         {/*  pages are wrapped in the  Layout component. */}
@@ -15,6 +17,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </RootDirectoryProvider>
   );
 }
 

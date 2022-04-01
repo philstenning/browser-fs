@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { entries } from "idb-keyval";
 import { selectRootDirectoryOnLocalDrive } from "../utils/file-system-operations/fs";
 import {
   scanLocalDriveRecursively,
@@ -11,21 +10,17 @@ import { saveVirtualRootDirectory } from "../utils/virtual-root-directories";
 export default function Home() {
   const [rootDir, setRootDir] = useState<VirtualRootDirectory | null>(null);
   const [data, setData] = useState<VirtualFileSystemEntry[]>([]);
+ 
+ 
   const handleClick = async () => {
     const res = await selectRootDirectoryOnLocalDrive();
 
     if (res) {
       setRootDir(res);
-      // console.log(res?.name);
-
       const d = await scanLocalDriveRecursively(res.handle, ["3mf",'stl','gcode'],9);
-      console.table(d);
-      console.log(JSON.stringify(d))
       setData(d);
-
-      // save to indexDB
-      // set(`__dir-handle__${res.name}`, res);
       const entry = await saveVirtualRootDirectory(res);
+
     }
   };
   async function getHandles() {
@@ -36,6 +31,7 @@ export default function Home() {
   useEffect(() => {
     getHandles();
   }, []);
+
   return (
     <div>
       <button onClick={handleClick} data-cy="btn-select">

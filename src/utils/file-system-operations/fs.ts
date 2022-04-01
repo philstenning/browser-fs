@@ -34,7 +34,7 @@ export async function selectRootDirectoryOnLocalDrive(dirPath = "/") {
  * @param parts 
  * @returns IVirtualDirectory Object
  */
-export function createVirtualRootDirectory(
+export  function createVirtualRootDirectory(
   dirHandle: FileSystemDirectoryHandle,
   filePath: string = "/",
   isRoot: boolean = false,
@@ -53,6 +53,7 @@ export function createVirtualRootDirectory(
     updated: createdAt,
     name: name,
     filePath,
+    hasReadPermission:true
   };
   return folder;
 }

@@ -15,6 +15,11 @@ function Header() {
               About
             </Link>
           </li>
+          <li className="main-nav__item">
+            <Link className="main-nav__link" to="/contact">
+              Contact
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

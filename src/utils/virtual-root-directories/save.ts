@@ -5,10 +5,12 @@ import { rootStore } from "./stores";
 async function saveVirtualRootDirectory(
   virtualRootDirectory: VirtualRootDirectory
 ) {
-  set(virtualRootDirectory.name, virtualRootDirectory, rootStore);
-
-  //  TODO: check if name already exists.
-  // throw new Error("not implemented Error");
+  try {
+    await set(virtualRootDirectory.id, virtualRootDirectory, rootStore);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 export { saveVirtualRootDirectory };

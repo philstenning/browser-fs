@@ -37,8 +37,14 @@ export default function About() {
     );
   }
 
-  const delHandle = (handle: VirtualFileSystemEntry) => {
-    deleteVirtualRootDirectory(handle);
+  const delHandle =async (handle: VirtualFileSystemEntry) => {
+     const result = await deleteVirtualRootDirectory(handle);
+     console.log('del', {result})
+     if(result){
+
+      setHandles(handles.filter(h=>h.id!== handle.id)) 
+
+     }
   };
 
   useEffect(() => {

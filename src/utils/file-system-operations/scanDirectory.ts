@@ -8,8 +8,8 @@ import { allFoldersToExcludeFromScanning, VirtualFileSystemEntry } from ".";
  * @param fileTypes an array of the files we want to return in the results
  * @param depth current depth of scan not to be set by user
  * @param maxDepth how deep do you want to scan
- * @param excludedFolders an array of folders that you want to exclude
- * from scanning
+ * @param excludedFolders an array of strings, folders that you want to exclude
+ * from scanning [node_modules, junk, ]
  * @returns Promise of an Object representing the directory structure with only the file extensions
  * supplied in the args.
  */

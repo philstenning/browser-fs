@@ -4,6 +4,8 @@ export interface VirtualRootDirectory {
   created: Date;
   updated: Date;
   handle: FileSystemDirectoryHandle;
+  hasReadPermission: boolean;
+  
   rootParts?: number;
   filePath?: string;
 }
@@ -11,14 +13,14 @@ export interface VirtualRootDirectory {
 export interface VirtualFileSystemEntry {
   id: string;
   name: string;
+  hasReadPermission:boolean
+  handle: FileSystemDirectoryHandle | FileSystemFileHandle;
+
   depth?: number;
   path?: string;
   pathR?: any;
   kind: "file" | "directory";
-  handle: FileSystemDirectoryHandle | FileSystemFileHandle;
   extension: string;
   entries?: VirtualFileSystemEntry[];
-  hasReadPermission:boolean
-  
 }
 
