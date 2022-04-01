@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, createContext, FC } from "react";
-import { VirtualRootDirectory } from "../types";
+import { VirtualRootDirectory } from "../types/virtual";
 
 import {
   selectRootDirectoryOnLocalDrive,
@@ -66,11 +66,14 @@ const RootDirectoryProvider: FC = ({ children }) => {
   }
 
   async function deleteRootDirectory(virtualRootDir: VirtualRootDirectory) {
+    console.log('started')
     const hasDeleted = await deleteVirtualRootDirectory(virtualRootDir);
+    console.log({hasDeleted})
     if (hasDeleted) {
       const filtered = rootDirectories.filter(
         (dir) => dir.id !== virtualRootDir.id
       );
+      console.log({filtered} , filtered.length)
       setRootDirectories(filtered);
       return true;
     }

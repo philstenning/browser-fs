@@ -1,5 +1,5 @@
 import { update } from "idb-keyval";
-import { VirtualRootDirectory } from "../types";
+import { VirtualRootDirectory } from "../types/virtual";
 
 async function updateVirtualRootDirectory(
   virtualRootDir: VirtualRootDirectory

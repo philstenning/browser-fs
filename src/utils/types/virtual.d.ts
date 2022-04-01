@@ -1,4 +1,4 @@
-export interface VirtualRootDirectory {
+interface VirtualRootDirectory {
   id: string;
   name: string;
   created: Date;
@@ -10,7 +10,7 @@ export interface VirtualRootDirectory {
   filePath?: string;
 }
 
-export interface VirtualFileSystemEntry {
+interface VirtualFileSystemEntry {
   id: string;
   name: string;
   hasReadPermission:boolean
@@ -24,3 +24,4 @@ export interface VirtualFileSystemEntry {
   entries?: VirtualFileSystemEntry[];
 }
 
+export { VirtualRootDirectory, VirtualFileSystemEntry };

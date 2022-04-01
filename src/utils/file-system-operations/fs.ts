@@ -1,4 +1,4 @@
-import {VirtualRootDirectory} from '../types'
+import {VirtualRootDirectory} from '../types/virtual'
 import md5 from 'md5'
 
 

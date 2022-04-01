@@ -6,5 +6,5 @@ export {
 export { checkPermissionsOfHandle } from "./permissions";
 export { scanLocalDriveRecursively } from "./scanDirectory";
 export { browserCheck } from "../browser-feature-check";
-export type { VirtualRootDirectory, VirtualFileSystemEntry } from "../types";
+export type { VirtualRootDirectory, VirtualFileSystemEntry } from "../types/virtual";
 export { allFoldersToExcludeFromScanning } from "../excluded-folders";

@@ -1,37 +1,27 @@
-import { useState, useEffect } from "react";
-import { selectRootDirectoryOnLocalDrive } from "../utils/file-system-operations/fs";
+import { useState } from "react";
 import {
-  scanLocalDriveRecursively,
   VirtualFileSystemEntry,
   VirtualRootDirectory,
 } from "../utils/file-system-operations";
-import { saveVirtualRootDirectory } from "../utils/virtual-root-directories";
-
+import { useRootDirectoryContext } from "../utils/context/root-directory-context";
 export default function Home() {
-  const [rootDir, setRootDir] = useState<VirtualRootDirectory | null>(null);
+  const {getNewRootDirectory } = useRootDirectoryContext();
+ 
+ 
+  const [rootDirector, setRootDir] = useState<VirtualRootDirectory | null>(
+    null
+  );
   const [data, setData] = useState<VirtualFileSystemEntry[]>([]);
  
  
   const handleClick = async () => {
-    const res = await selectRootDirectoryOnLocalDrive();
 
-    if (res) {
-      setRootDir(res);
-      const d = await scanLocalDriveRecursively(res.handle, ["3mf",'stl','gcode'],9);
-      setData(d);
-      const entry = await saveVirtualRootDirectory(res);
+      const res =await getNewRootDirectory()
+      if(res){
+        setRootDir(res)
+      }
 
-    }
   };
-  async function getHandles() {
-    console.log("getting handles...");
-    // const allHandles = await entries();
-    // console.table(allHandles);
-  }
-  useEffect(() => {
-    getHandles();
-  }, []);
-
   return (
     <div>
       <button onClick={handleClick} data-cy="btn-select">
@@ -39,12 +29,12 @@ export default function Home() {
       </button>
       <hr />
       <ul>
-        <li>name: {rootDir?.name}</li>
-        <li>file path: {rootDir?.filePath}</li>
-        <li>created: {rootDir?.created.toDateString()}</li>
+        <li>name: {rootDirector?.name}</li>
+        <li>file path: {rootDirector?.filePath}</li>
+        <li>created: {rootDirector?.created.toDateString()}</li>
       </ul>
       <hr />
-      {rootDir && <h3> {rootDir.name}</h3>}
+      {rootDirector && <h3> {rootDirector.name}</h3>}
       <ul className="bfl">
         {data.length > 0 &&
           data.map((entry) =>

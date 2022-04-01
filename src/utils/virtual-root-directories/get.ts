@@ -1,5 +1,5 @@
 import { entries } from "idb-keyval";
-import { VirtualFileSystemEntry , VirtualRootDirectory} from "../types";
+import { VirtualFileSystemEntry , VirtualRootDirectory} from "../types/virtual";
 import {checkPermissionsOfHandle} from '../file-system-operations'
 import {rootStore} from './stores'
 
