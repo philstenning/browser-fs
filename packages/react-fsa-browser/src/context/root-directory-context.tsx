@@ -1,17 +1,21 @@
-import { useState, useEffect, useContext, createContext, FC } from "react";
-import { VirtualRootDirectory } from "../types/virtual";
-
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  createContext,
+  FC,
+} from "react";
 import {
-  selectRootDirectoryOnLocalDrive,
-  checkPermissionsOfHandle,
-} from "../file-system-operations";
-import {
-  saveVirtualRootDirectory,
-  updateVirtualRootDirectory,
+  VirtualRootDirectory,
   deleteAllVirtualRootDirectories,
   deleteVirtualRootDirectory,
   getAllVirtualRootDirectories,
-} from "../virtual-root-directories";
+  checkPermissionsOfHandle,
+  selectRootDirectoryOnLocalDrive,
+  saveVirtualRootDirectory,
+  updateVirtualRootDirectory,
+  orderDirectoriesByDate,
+} from "fsa-browser";
 
 type RootDirectoryContextType = {
   getNewRootDirectory: () => Promise<VirtualRootDirectory | null>;
@@ -36,17 +40,37 @@ function useRootDirectoryContext() {
   return useContext(RootDirectoryContext) as RootDirectoryContextType;
 }
 
-const RootDirectoryProvider: FC = ({ children }) => {
+type RootProps = {
+  children: React.ReactChildren;
+  rootDirectoryOrder: RootDirOrderType;
+};
+type RootDirOrderType = "asc" | "desc";
+/**
+ * 
+ * @param param0 
+ * @returns 
+ */
+const RootDirectoryProvider = ({
+  children,
+  rootDirectoryOrder = "desc",
+}: RootProps) => {
   const [rootDirectories, setRootDirectories] = useState<
     VirtualRootDirectory[]
   >([]);
+
+  const [rootDirOrder, seRootDirOrder] =
+    useState<RootDirOrderType>(rootDirectoryOrder);
 
   async function getNewRootDirectory() {
     const result = await selectRootDirectoryOnLocalDrive();
     if (result) {
       const hasSaved = await saveVirtualRootDirectory(result);
       if (hasSaved) {
-        setRootDirectories((current) => [...current, result]);
+        const ordered = orderDirectoriesByDate(
+          [...rootDirectories, result],
+          rootDirOrder
+        );
+        setRootDirectories(ordered);
       }
       return result;
     }
@@ -59,21 +83,25 @@ const RootDirectoryProvider: FC = ({ children }) => {
       const filtered = rootDirectories.filter(
         (dir) => dir.id !== virtualRootDir.id
       );
-      setRootDirectories([...filtered, virtualRootDir]);
+      const ordered = orderDirectoriesByDate(
+        [...filtered, virtualRootDir],
+        rootDirOrder
+      );
+      setRootDirectories(ordered);
       return true;
     }
     return false;
   }
 
   async function deleteRootDirectory(virtualRootDir: VirtualRootDirectory) {
-    console.log('started')
+    console.log("started");
     const hasDeleted = await deleteVirtualRootDirectory(virtualRootDir);
-    console.log({hasDeleted})
+    console.log({ hasDeleted });
     if (hasDeleted) {
       const filtered = rootDirectories.filter(
         (dir) => dir.id !== virtualRootDir.id
       );
-      console.log({filtered} , filtered.length)
+      console.log({ filtered }, filtered.length);
       setRootDirectories(filtered);
       return true;
     }
@@ -94,7 +122,12 @@ const RootDirectoryProvider: FC = ({ children }) => {
         (dir) => dir.id !== virtualRootDir.id
       );
       virtualRootDir.hasReadPermission = true;
-      setRootDirectories([...filtered, virtualRootDir]);
+
+      const ordered = orderDirectoriesByDate(
+        [...filtered, virtualRootDir],
+        rootDirOrder
+      );
+      setRootDirectories(ordered);
       return true;
     }
     return false;
@@ -103,7 +136,8 @@ const RootDirectoryProvider: FC = ({ children }) => {
   async function getInitialData() {
     const allDirs = await getAllVirtualRootDirectories();
     if (allDirs) {
-      setRootDirectories(allDirs);
+      const order = orderDirectoriesByDate(allDirs, rootDirOrder);
+      setRootDirectories(order);
     }
   }
 

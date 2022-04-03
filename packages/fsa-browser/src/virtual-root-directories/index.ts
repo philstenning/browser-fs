@@ -6,5 +6,6 @@ export {
 export {updateVirtualRootDirectory} from './update'
 export {
   getAllVirtualRootDirectories,
-  getAllVirtualRootDirectoriesAndCheckPermissions
+  getAllVirtualRootDirectoriesAndCheckPermissions,
+  orderDirectoriesByDate
 } from "./get";

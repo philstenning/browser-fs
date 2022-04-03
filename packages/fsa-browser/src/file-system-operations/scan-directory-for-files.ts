@@ -1,5 +1,6 @@
 import md5 from "md5";
-import { allFoldersToExcludeFromScanning, VirtualFileSystemEntry } from ".";
+import { FoldersToExcludeFromScanning } from "../excluded-folders";
+import {VirtualFileSystemEntry} from './types'
 
 /**
  * From the point of entry we scan the local drive recursively for Directories
@@ -17,7 +18,7 @@ async function scanLocalDriveRecursively(
   directoryHandle: FileSystemDirectoryHandle,
   fileTypes = ["txt", "md"],
   maxDepth = 5,
-  excludedFolders: string[] = allFoldersToExcludeFromScanning,
+  excludedFolders: string[] = FoldersToExcludeFromScanning,
   _depth = 0,
   _path = ""
 ) {

@@ -1,7 +1,8 @@
+
 import {
-  VirtualRootDirectory
-} from "../utils/file-system-operations";
-import { useRootDirectoryContext } from "../utils/context/root-directory-context";
+  useRootDirectoryContext,
+  VirtualRootDirectory,
+} from "react-fsa-browser";
 
 export default function About() {
    const { rootDirectories, deleteRootDirectory ,getPermissionForVirtualRootDir} = useRootDirectoryContext();

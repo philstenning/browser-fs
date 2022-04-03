@@ -1,15 +1,13 @@
 import { entries } from "idb-keyval";
-import { VirtualFileSystemEntry , VirtualRootDirectory} from "../types/virtual";
-import {checkPermissionsOfHandle} from '../file-system-operations'
-import {rootStore} from './stores'
+import { VirtualRootDirectory } from "./types";
+import { checkPermissionsOfHandle } from "../file-system-operations";
+import { rootStore } from "./stores";
 
 /**
  *  All VirtualFileSystemEntries that have been saved to indexDB are returned
  * @param prependedText  The text you you have prepend all your entries with. Default is empty string.
  */
-async function getAllVirtualRootDirectories(
-  prependedText: string = ""
-) {
+async function getAllVirtualRootDirectories(prependedText: string = "") {
   try {
     const allEntries = await entries(rootStore);
 
@@ -22,14 +20,28 @@ async function getAllVirtualRootDirectories(
         allFolders.push(folder);
       }
     });
-    console.table(allFolders)
-    return allFolders;
+    console.table(allFolders);
+    const res = orderDirectoriesByDate(allFolders);
+    return res;
   } catch (e) {
     console.error("error getting handles:", e);
   }
   return null;
 }
 
+type Order = "asc" | "desc";
+
+function orderDirectoriesByDate(
+  directories: VirtualRootDirectory[],
+  order: Order = "asc"
+) {
+  return directories.sort((a, b) => {
+    if (order === "asc") {
+      return a.created < b.created ? -1 : 1;
+    }
+    return a.created > b.created ? -1 : 1;
+  });
+}
 
 async function getAllVirtualRootDirectoriesAndCheckPermissions(
   mode: FileSystemPermissionMode = "read"
@@ -51,8 +63,8 @@ async function getAllVirtualRootDirectoriesAndCheckPermissions(
   return checkedHandles;
 }
 
-
 export {
   getAllVirtualRootDirectories,
   getAllVirtualRootDirectoriesAndCheckPermissions,
+  orderDirectoriesByDate,
 };

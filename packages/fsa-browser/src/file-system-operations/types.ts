@@ -1,14 +1,3 @@
-interface VirtualRootDirectory {
-  id: string;
-  name: string;
-  created: Date;
-  updated: Date;
-  handle: FileSystemDirectoryHandle;
-  hasReadPermission: boolean;
-  
-  rootParts?: number;
-  filePath?: string;
-}
 
 interface VirtualFileSystemEntry {
   id: string;
@@ -24,4 +13,4 @@ interface VirtualFileSystemEntry {
   entries?: VirtualFileSystemEntry[];
 }
 
-export { VirtualRootDirectory, VirtualFileSystemEntry };
+export type {  VirtualFileSystemEntry };

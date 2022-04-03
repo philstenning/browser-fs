@@ -1,5 +1,5 @@
 import { del, clear } from "idb-keyval";
-import { VirtualRootDirectory } from "../types/virtual";
+import { VirtualRootDirectory } from "./types";
 import { rootStore } from "./stores";
 
 /**

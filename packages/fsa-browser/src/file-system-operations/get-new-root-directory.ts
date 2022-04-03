@@ -1,8 +1,5 @@
-import {VirtualRootDirectory} from '../types/virtual'
+import {VirtualRootDirectory} from '../virtual-root-directories/types'
 import md5 from 'md5'
-
-
-
 
 /**
  * Select a Directory (this will be known as the root directory) on 

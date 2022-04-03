@@ -1,0 +1,21 @@
+{
+  "name": "fsa-browser",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w "
+  },
+  "author": "philstenning",
+  "license": "ISC",
+  "dependencies": {
+    "idb-keyval": "^6.1.0",
+    "md5": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/md5": "^2.3.2",
+    "@types/wicg-file-system-access": "^2020.9.5",
+    "typescript": "^4.6.3"
+  }
+}

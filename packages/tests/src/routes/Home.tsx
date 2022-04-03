@@ -1,26 +1,23 @@
 import { useState } from "react";
 import {
+  useRootDirectoryContext,
   VirtualFileSystemEntry,
   VirtualRootDirectory,
-} from "../utils/file-system-operations";
-import { useRootDirectoryContext } from "../utils/context/root-directory-context";
+} from "react-fsa-browser";
+
 export default function Home() {
-  const {getNewRootDirectory } = useRootDirectoryContext();
- 
- 
+  const { getNewRootDirectory } = useRootDirectoryContext();
+
   const [rootDirector, setRootDir] = useState<VirtualRootDirectory | null>(
     null
   );
   const [data, setData] = useState<VirtualFileSystemEntry[]>([]);
- 
- 
+
   const handleClick = async () => {
-
-      const res =await getNewRootDirectory()
-      if(res){
-        setRootDir(res)
-      }
-
+    const res = await getNewRootDirectory();
+    if (res) {
+      setRootDir(res);
+    }
   };
   return (
     <div>
