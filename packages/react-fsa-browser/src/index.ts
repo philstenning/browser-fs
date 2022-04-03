@@ -6,4 +6,4 @@ export {
 export type { RootDirectoryContextType } from "./context/root-directory-context";
 
 // re-export from lib
-export type {VirtualFileSystemEntry,VirtualRootDirectory} from 'fsa-browser'
+export type {VirtualFileSystemEntry,VirtualRootDirectoryType} from 'fsa-browser'

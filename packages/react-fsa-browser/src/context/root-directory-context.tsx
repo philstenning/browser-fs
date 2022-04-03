@@ -1,12 +1,6 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  createContext,
-  FC,
-} from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import {
-  VirtualRootDirectory,
+  VirtualRootDirectoryType,
   deleteAllVirtualRootDirectories,
   deleteVirtualRootDirectory,
   getAllVirtualRootDirectories,
@@ -15,21 +9,24 @@ import {
   saveVirtualRootDirectory,
   updateVirtualRootDirectory,
   orderDirectoriesByDate,
+  RootDirOrderType,
 } from "fsa-browser";
 
 type RootDirectoryContextType = {
-  getNewRootDirectory: () => Promise<VirtualRootDirectory | null>;
+  getNewRootDirectory: () => Promise<VirtualRootDirectoryType | null>;
   updateRootDirectory: (
-    virtualRootDir: VirtualRootDirectory
+    virtualRootDir: VirtualRootDirectoryType
   ) => Promise<boolean>;
   deleteRootDirectory: (
-    virtualRootDir: VirtualRootDirectory
+    virtualRootDir: VirtualRootDirectoryType
   ) => Promise<boolean>;
   deleteAllRootDirectories: () => Promise<boolean>;
   getPermissionForVirtualRootDir: (
-    virtualRootDir: VirtualRootDirectory
+    virtualRootDir: VirtualRootDirectoryType
   ) => Promise<boolean>;
-  rootDirectories: VirtualRootDirectory[];
+  rootDirectories: VirtualRootDirectoryType[];
+  orderByDate: (order: RootDirOrderType) => void;
+  rootDirectoryOrder: RootDirOrderType;
 };
 
 const RootDirectoryContext = createContext<RootDirectoryContextType | null>(
@@ -41,25 +38,26 @@ function useRootDirectoryContext() {
 }
 
 type RootProps = {
-  children: React.ReactChildren;
-  rootDirectoryOrder: RootDirOrderType;
+  children: React.ReactNode;
+  InitialRootDirectoryOrder: RootDirOrderType;
 };
-type RootDirOrderType = "asc" | "desc";
+
 /**
- * 
- * @param param0 
- * @returns 
+ *
+ * @param param0
+ * @returns
  */
 const RootDirectoryProvider = ({
   children,
-  rootDirectoryOrder = "desc",
+  InitialRootDirectoryOrder = "desc",
 }: RootProps) => {
   const [rootDirectories, setRootDirectories] = useState<
-    VirtualRootDirectory[]
+    VirtualRootDirectoryType[]
   >([]);
 
-  const [rootDirOrder, seRootDirOrder] =
-    useState<RootDirOrderType>(rootDirectoryOrder);
+  const [rootDirectoryOrder, seRootDirOrder] = useState<RootDirOrderType>(
+    InitialRootDirectoryOrder
+  );
 
   async function getNewRootDirectory() {
     const result = await selectRootDirectoryOnLocalDrive();
@@ -68,7 +66,7 @@ const RootDirectoryProvider = ({
       if (hasSaved) {
         const ordered = orderDirectoriesByDate(
           [...rootDirectories, result],
-          rootDirOrder
+          rootDirectoryOrder
         );
         setRootDirectories(ordered);
       }
@@ -77,7 +75,7 @@ const RootDirectoryProvider = ({
     return null;
   }
 
-  async function updateRootDirectory(virtualRootDir: VirtualRootDirectory) {
+  async function updateRootDirectory(virtualRootDir: VirtualRootDirectoryType) {
     const hasUpdated = await updateVirtualRootDirectory(virtualRootDir);
     if (hasUpdated) {
       const filtered = rootDirectories.filter(
@@ -85,7 +83,7 @@ const RootDirectoryProvider = ({
       );
       const ordered = orderDirectoriesByDate(
         [...filtered, virtualRootDir],
-        rootDirOrder
+        rootDirectoryOrder
       );
       setRootDirectories(ordered);
       return true;
@@ -93,7 +91,7 @@ const RootDirectoryProvider = ({
     return false;
   }
 
-  async function deleteRootDirectory(virtualRootDir: VirtualRootDirectory) {
+  async function deleteRootDirectory(virtualRootDir: VirtualRootDirectoryType) {
     console.log("started");
     const hasDeleted = await deleteVirtualRootDirectory(virtualRootDir);
     console.log({ hasDeleted });
@@ -114,7 +112,7 @@ const RootDirectoryProvider = ({
   }
 
   async function getPermissionForVirtualRootDir(
-    virtualRootDir: VirtualRootDirectory
+    virtualRootDir: VirtualRootDirectoryType
   ) {
     const hasPermission = await checkPermissionsOfHandle(virtualRootDir.handle);
     if (hasPermission) {
@@ -125,7 +123,7 @@ const RootDirectoryProvider = ({
 
       const ordered = orderDirectoriesByDate(
         [...filtered, virtualRootDir],
-        rootDirOrder
+        rootDirectoryOrder
       );
       setRootDirectories(ordered);
       return true;
@@ -136,10 +134,15 @@ const RootDirectoryProvider = ({
   async function getInitialData() {
     const allDirs = await getAllVirtualRootDirectories();
     if (allDirs) {
-      const order = orderDirectoriesByDate(allDirs, rootDirOrder);
+      const order = orderDirectoriesByDate(allDirs, rootDirectoryOrder);
       setRootDirectories(order);
     }
   }
+
+  const orderByDate = (order: RootDirOrderType) => {
+    order === "asc" ? seRootDirOrder("asc") : seRootDirOrder("desc");
+    setRootDirectories(orderDirectoriesByDate(rootDirectories, order));
+  };
 
   useEffect(() => {
     getInitialData();
@@ -149,11 +152,13 @@ const RootDirectoryProvider = ({
     <RootDirectoryContext.Provider
       value={{
         rootDirectories,
+        rootDirectoryOrder,
         deleteAllRootDirectories,
         getNewRootDirectory,
         updateRootDirectory,
         deleteRootDirectory,
         getPermissionForVirtualRootDir,
+        orderByDate,
       }}
     >
       {children}
