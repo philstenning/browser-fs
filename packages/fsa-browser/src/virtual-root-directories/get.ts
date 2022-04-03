@@ -1,5 +1,5 @@
 import { entries } from "idb-keyval";
-import { VirtualRootDirectory } from "./types";
+import { VirtualRootDirectoryType } from "./types";
 import { checkPermissionsOfHandle } from "../file-system-operations";
 import { rootStore } from "./stores";
 
@@ -11,11 +11,11 @@ async function getAllVirtualRootDirectories(prependedText: string = "") {
   try {
     const allEntries = await entries(rootStore);
 
-    const allFolders: VirtualRootDirectory[] = [];
+    const allFolders: VirtualRootDirectoryType[] = [];
     allEntries.forEach((entry) => {
       if (entry[0].toLocaleString().startsWith(prependedText)) {
         // update the permissions to false and add it to our results.
-        const folder = entry[1] as VirtualRootDirectory;
+        const folder = entry[1] as VirtualRootDirectoryType;
         folder.hasReadPermission = false;
         allFolders.push(folder);
       }
@@ -32,7 +32,7 @@ async function getAllVirtualRootDirectories(prependedText: string = "") {
 type Order = "asc" | "desc";
 
 function orderDirectoriesByDate(
-  directories: VirtualRootDirectory[],
+  directories: VirtualRootDirectoryType[],
   order: Order = "asc"
 ) {
   return directories.sort((a, b) => {
@@ -49,7 +49,7 @@ async function getAllVirtualRootDirectoriesAndCheckPermissions(
   const virtualFileSystemHandles = await getAllVirtualRootDirectories();
   if (!virtualFileSystemHandles) return;
 
-  const checkedHandles: VirtualRootDirectory[] = [];
+  const checkedHandles: VirtualRootDirectoryType[] = [];
 
   for (const virtualFH of virtualFileSystemHandles) {
     virtualFH.hasReadPermission = await checkPermissionsOfHandle(

@@ -1,4 +1,4 @@
-interface VirtualRootDirectory {
+interface VirtualRootDirectoryType {
   id: string;
   name: string;
   created: Date;
@@ -11,4 +11,7 @@ interface VirtualRootDirectory {
 }
 
 
-export type { VirtualRootDirectory };
+type RootDirOrderType = "asc" | "desc";
+
+
+export type { VirtualRootDirectoryType ,RootDirOrderType };

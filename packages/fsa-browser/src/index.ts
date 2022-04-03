@@ -21,4 +21,4 @@ export {
 export {browserCheck} from './browser-feature-check'
 export {FoldersToExcludeFromScanning} from './excluded-folders'
 export type { VirtualFileSystemEntry } from "./file-system-operations/types";
-export type { VirtualRootDirectory } from "./virtual-root-directories/types";
+export type { VirtualRootDirectoryType, RootDirOrderType } from "./virtual-root-directories/types";
