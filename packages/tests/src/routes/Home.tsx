@@ -2,13 +2,13 @@ import { useState } from "react";
 import {
   useRootDirectoryContext,
   VirtualFileSystemEntry,
-  VirtualRootDirectory,
+  VirtualRootDirectoryType,
 } from "react-fsa-browser";
 
 export default function Home() {
   const { getNewRootDirectory } = useRootDirectoryContext();
 
-  const [rootDirector, setRootDir] = useState<VirtualRootDirectory | null>(
+  const [rootDirector, setRootDir] = useState<VirtualRootDirectoryType | null>(
     null
   );
   const [data, setData] = useState<VirtualFileSystemEntry[]>([]);

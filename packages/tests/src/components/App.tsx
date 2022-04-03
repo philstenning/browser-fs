@@ -5,7 +5,7 @@ import { RootDirectoryProvider } from "react-fsa-browser";
 
 function App() {
   return (
-    <RootDirectoryProvider>
+    <RootDirectoryProvider rootDirectoryOrder="asc">
 
     <BrowserRouter>
       <Routes>
