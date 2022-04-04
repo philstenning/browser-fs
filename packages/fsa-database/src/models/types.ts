@@ -1,31 +1,32 @@
 export interface IDbBase {
-  id: string;
+  id?: number;
   name: string;
-  created: Date;
+  created: number;
   creator?: IUser;
-  updated: Date;
+  updated: number;
 }
 
 export interface IDbFolder extends IDbBase {
   handle: FileSystemDirectoryHandle;
   isRoot: boolean;
-  rootId: string;
+  rootId: number;
   depth:number;
-  parts: IDbFile[];
+  // parts: IDbFile[];
   path: string;
   label:string;
 }
 export interface IDbFile extends IDbBase {
-  folderId: string;
-  rootId: string;
+  folderId: number;
+  rootId: number;
   handle: FileSystemFileHandle;
+  path:string;
   printed: boolean;
   description?: string;
   type: FileTypes;
   size?: number;
   tags: ITag[];
   imageUrl?: string;
-  collections  :IDbCollection[]
+  collections: number[];
 }
 
 export interface IDbCollection extends IDbBase {
@@ -35,13 +36,14 @@ export interface IDbCollection extends IDbBase {
 }
 
 export interface IUser {
-  id: string;
+  id?: number;
   name: string;
   link?: string;
+  email?:string
 }
 
 export interface ITag {
-  id: string;
+  id?: number;
   name: string;
 }
 

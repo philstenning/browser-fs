@@ -13,7 +13,8 @@ export {
 export {
   checkPermissionsOfHandle,
   createVirtualRootDirectory,
-  scanLocalDriveRecursively,
+  // scanLocalDriveRecursively,
+  scanLocalDrive,
   selectRootDirectoryOnLocalDrive,
 } from "./file-system-operations";
 

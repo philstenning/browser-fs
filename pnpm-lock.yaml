@@ -20,6 +20,21 @@ importers:
       '@types/wicg-file-system-access': 2020.9.5
       typescript: 4.6.3
 
+  packages/fsa-database:
+    specifiers:
+      '@types/react': ^17.0.33
+      dexie: ^3.2.1
+      dexie-react-hooks: ^1.1.1
+      react: ^18.0.0
+      typescript: ^4.6.3
+    dependencies:
+      '@types/react': 17.0.43
+      dexie: 3.2.1
+      dexie-react-hooks: 1.1.1_828f0a640d9024223dfb6d44c4d9c007
+      react: 18.0.0
+    devDependencies:
+      typescript: 4.6.3
+
   packages/react-fsa-browser:
     specifiers:
       fsa-browser: workspace:*
@@ -42,6 +57,7 @@ importers:
       cssnano: ^5.0.17
       cypress: ^9.5.1
       fsa-browser: workspace:*
+      fsa-database: workspace:*
       open-props: ^1.3.7
       postcss: ^8.4.6
       postcss-combine-duplicated-selectors: ^10.0.3
@@ -59,6 +75,7 @@ importers:
       vite: ^2.8.0
     dependencies:
       fsa-browser: link:../fsa-browser
+      fsa-database: link:../fsa-database
       postcss-import-ext-glob: 2.0.1_postcss@8.4.12
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -454,7 +471,6 @@ packages:
 
   /@types/prop-types/15.7.4:
     resolution: {integrity: sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==}
-    dev: true
 
   /@types/react-dom/17.0.14:
     resolution: {integrity: sha512-H03xwEP1oXmSfl3iobtmQ/2dHF5aBHr8aUMwyGZya6OW45G+xtdzmq6HkncefiBt5JU8DVyaWl/nWZbjZCnzAQ==}
@@ -468,11 +484,9 @@ packages:
       '@types/prop-types': 15.7.4
       '@types/scheduler': 0.16.2
       csstype: 3.0.11
-    dev: true
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
-    dev: true
 
   /@types/sinonjs__fake-timers/8.1.1:
     resolution: {integrity: sha512-0kSuKjAS0TrGLJ0M/+8MaFkGsQhZpB6pxOmvS3K8FYI72K//YmdfoW9X2qPsAKh1mkwxGD5zib9s1FIFed6E8g==}
@@ -925,7 +939,6 @@ packages:
 
   /csstype/3.0.11:
     resolution: {integrity: sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==}
-    dev: true
 
   /cypress/9.5.3:
     resolution: {integrity: sha512-ItelIVmqMTnKYbo1JrErhsGgQGjWOxCpHT1TfMvwnIXKXN/OSlPjEK7rbCLYDZhejQL99PmUqul7XORI24Ik0A==}
@@ -1023,6 +1036,23 @@ packages:
     resolution: {integrity: sha1-3zrhmayt+31ECqrgsp4icrJOxhk=}
     engines: {node: '>=0.4.0'}
     dev: true
+
+  /dexie-react-hooks/1.1.1_828f0a640d9024223dfb6d44c4d9c007:
+    resolution: {integrity: sha512-Cam5JP6PxHN564RvWEoe8cqLhosW0O4CAZ9XEVYeGHJBa6KEJlOpd9CUpV3kmU9dm2MrW97/lk7qkf1xpij7gA==}
+    peerDependencies:
+      '@types/react': '>=16'
+      dexie: '>=3.1.0-alpha.1 <5.0.0'
+      react: '>=16'
+    dependencies:
+      '@types/react': 17.0.43
+      dexie: 3.2.1
+      react: 18.0.0
+    dev: false
+
+  /dexie/3.2.1:
+    resolution: {integrity: sha512-Y8oz3t2XC9hvjkP35B5I8rUkKKwM36GGRjWQCMjzIYScg7W+GHKDXobSYswkisW7CxL1/tKQtggMDsiWqDUc1g==}
+    engines: {node: '>=6.0'}
+    dev: false
 
   /dom-serializer/1.3.2:
     resolution: {integrity: sha512-5c54Bk5Dw4qAxNOI1pFEizPSjVsx5+bpJKmL2kPn8JhBUq2q09tTCa3mjijun2NfK78NMouDYNMBkOrPZiS+ig==}

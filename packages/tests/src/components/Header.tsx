@@ -20,6 +20,11 @@ function Header() {
               Contact
             </Link>
           </li>
+          <li className="main-nav__item">
+            <Link className="main-nav__link" to="/db">
+              Database
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

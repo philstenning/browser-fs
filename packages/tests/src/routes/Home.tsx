@@ -4,7 +4,7 @@ import {
   VirtualFileSystemEntry,
   VirtualRootDirectoryType,
 } from "react-fsa-browser";
-
+import {RecursiveFolder} from '../components/recursive-folder'
 export default function Home() {
   const { getNewRootDirectory } = useRootDirectoryContext();
 
@@ -38,34 +38,13 @@ export default function Home() {
             entry.kind === "file" ? (
               <li key={entry.id}> {entry.name} </li>
             ) : (
-              <Folder key={entry.id} folder={entry} />
+              <RecursiveFolder key={entry.id} folder={entry} />
             )
           )}
       </ul>
     </div>
   );
 }
-interface Props {
-  folder: VirtualFileSystemEntry;
-}
 
-function Folder({ folder }: Props) {
-  return (
-    <li key={folder.id} className="bfl__folder">
-      {folder.name}
-      <ul>
-        {folder.entries?.map((entry) => {
-          if (entry.kind === "file") {
-            return (
-              <li key={entry.id} className="bfl__file">
-                <h6>{entry.name} </h6> <pre>{entry.path}</pre>{" "}
-              </li>
-            );
-          } else {
-            return <Folder key={entry.id} folder={entry} />;
-          }
-        })}
-      </ul>
-    </li>
-  );
-}
+
+

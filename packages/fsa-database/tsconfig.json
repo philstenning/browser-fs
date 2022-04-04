@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "types": [],
+    "outDir": "dist",
+    "declaration": true,
+    "strictPropertyInitialization": false
+  },
+  "include": ["./src/index.ts"],
+  "extends": "../../tsconfig.json"
+}
