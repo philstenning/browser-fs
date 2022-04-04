@@ -3,38 +3,31 @@ import { FoldersToExcludeFromScanning } from "../excluded-folders";
 import { VirtualFileSystemEntry } from "./types";
 import { checkPermissionsOfHandle } from "./handle-permissions-check";
 
-
 /**
- * 
- * 
- * @param directoryHandle 
- * @param fileTypes 
- * @param maxDepth 
- * @param excludedFolders 
- * @param _depth 
- * @param _path 
- * @returns 
+ * From the point of entry we scan the local drive recursively for Directories
+ * and files with a given file extension.
+ *
+ * @param directoryHandle the root from where we want to scan from
+ * @param fileTypes an array of the files we want to return in the results
+ * @param _depth current depth of scan not to be set by user
+ * @param maxDepth how deep do you want to scan
+ * @returns Promise of VirtualFileSystemEntry that is recursive.
  */
 async function scanLocalDrive(
   directoryHandle: FileSystemDirectoryHandle,
   fileTypes = ["3mf", "stl"],
   maxDepth = 5,
-  excludedFolders: string[] = FoldersToExcludeFromScanning,
-  _depth = 0,
-  _path = ""
+  excludedFolders: string[] = FoldersToExcludeFromScanning
 ) {
-
   // create the root object
-  const root = createVirtualFileSystemEntry(directoryHandle, _path, _depth);
+  const root = createVirtualFileSystemEntry(directoryHandle);
 
   // scan the rest of the directory
   const entries = await scanLocalDriveRecursively(
     directoryHandle,
     fileTypes,
-    maxDepth ,
-    excludedFolders,
-    _depth ,
-    _path
+    maxDepth,
+    excludedFolders
   );
   // add the the result of the scan to the root entries.
   root.entries = entries;
@@ -152,7 +145,6 @@ function createVirtualFileSystemEntry(
     name: handle.name,
     depth,
     path,
-    // pathR:
     kind: handle.kind,
     handle,
     extension,
@@ -161,4 +153,4 @@ function createVirtualFileSystemEntry(
   };
 }
 
-export { scanLocalDriveRecursively,scanLocalDrive };
+export { scanLocalDrive };

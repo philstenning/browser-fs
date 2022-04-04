@@ -13,7 +13,8 @@ export function RecursiveFolder({ folder }: Props) {
             return (
               <li key={entry.id} className="bfl__file">
                 <span className={style.file}>
-                  file: {entry.name} <pre>{entry.path}</pre>{" "}
+                  file: {entry.name}
+                   {/* <pre>{entry.path}</pre>{" "} */}
                 </span>
               </li>
             );
@@ -25,35 +26,36 @@ export function RecursiveFolder({ folder }: Props) {
     </li>
   );
 }
-interface Props2 {
-  folder: VirtualFileSystemEntry[];
-}
 
 type VListProps = {
   virtualEntry: VirtualFileSystemEntry;
 };
 export function RecursiveUnorderedList({ virtualEntry }: VListProps) {
   return (
-    <div>
-      <RecursiveFolder folder={virtualEntry} />
-    </div>
-  );
-}
+    <ul className={style.list}>
 
-export function RecursiveList({ folder }: Props2) {
-  return (
-    <ul>
-      {folder.map((entry) => (
-        <li
-          className={entry.kind === "file" ? style.file : style.recursiveFolder}
-        >
-          {entry.name}
-          {" ------ path: "} {entry.path}
-          {entry.kind === "directory" && (
-            <RecursiveList folder={entry.entries ?? []} />
-          )}
-        </li>
-      ))}
+      <RecursiveFolder folder={virtualEntry} />
     </ul>
   );
 }
+
+// interface Props2 {
+//   folder: VirtualFileSystemEntry;
+// }
+// export function RecursiveList({ folder }: Props2) {
+//   return (
+//     <ul>
+//       {folder.map((entry) => (
+//         <li
+//           className={entry.kind === "file" ? style.file : style.recursiveFolder}
+//         >
+//           {entry.name}
+//           {" ------ path: "} {entry.path}
+//           {entry.kind === "directory" && (
+//             <RecursiveList folder={entry.entries ?? []} />
+//           )}
+//         </li>
+//       ))}
+//     </ul>
+//   );
+// }
