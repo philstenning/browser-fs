@@ -2,10 +2,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {About,Contact,Home,Db} from "../routes";
 import Layout from "./Layout";
 import { RootDirectoryProvider } from "react-fsa-browser";
-import {createDatabase} from 'fsa-database'
+// import {createDatabase} from 'fsa-database'
 
 
-createDatabase() // initialize the database
+// createDatabase() // initialize the database
 
 function App() {
   return (

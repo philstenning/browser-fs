@@ -25,12 +25,14 @@ importers:
       '@types/react': ^17.0.33
       dexie: ^3.2.1
       dexie-react-hooks: ^1.1.1
+      fsa-browser: workspace:*
       react: ^18.0.0
       typescript: ^4.6.3
     dependencies:
       '@types/react': 17.0.43
       dexie: 3.2.1
       dexie-react-hooks: 1.1.1_828f0a640d9024223dfb6d44c4d9c007
+      fsa-browser: link:../fsa-browser
       react: 18.0.0
     devDependencies:
       typescript: 4.6.3

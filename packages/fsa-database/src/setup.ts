@@ -23,8 +23,10 @@ class FsaDb extends Dexie {
   }
 }
 
-export let db: FsaDb;
-export function createDatabase() {
-  db = new FsaDb();
-}
+// export let db: FsaDb;
+// export function createDatabase() {
+//   db = new FsaDb();
+// }
 // db.folders.each( folder=> folder.log())
+
+export const db = new FsaDb()

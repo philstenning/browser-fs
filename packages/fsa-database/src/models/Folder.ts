@@ -1,7 +1,7 @@
 import { IDbFolder } from "./types";
 import {AbstractEntity} from './Abstract'
 
-
+//TODO CLASSED only shallow copy !!!! remove.
 export class Folder extends AbstractEntity implements IDbFolder {
   handle: FileSystemDirectoryHandle;
   isRoot: boolean;
@@ -22,13 +22,21 @@ export class Folder extends AbstractEntity implements IDbFolder {
   ) {
     super(name, id);
     this.handle = handle;
+    console.log(this.handle)
     this.isRoot = isRoot;
     this.rootId = rootId;
     this.depth = depth;
     this.path = path;
     this.label = label;
   }
+  
+  
+
   log() {
     console.log(JSON.stringify(this));
+  }
+
+  showHandle(){
+    console.log(JSON.stringify(this.handle))
   }
 }

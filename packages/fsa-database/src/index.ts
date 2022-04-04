@@ -1,3 +1,4 @@
 export { Folder } from "./models/Folder";
-export { db, createDatabase } from "./setup";
-export {useLiveQuery} from 'dexie-react-hooks'
+export { db } from "./setup";
+export { useLiveQuery } from "dexie-react-hooks";
+export { createRootDirectoryInDatabase } from "./folders";
