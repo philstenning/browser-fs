@@ -12,7 +12,8 @@
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "fsa-browser": "workspace:*"
+    "fsa-browser": "workspace:*",
+    "fsa-database": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^4.6.3"

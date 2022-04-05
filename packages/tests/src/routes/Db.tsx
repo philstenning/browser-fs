@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { db, useLiveQuery } from "fsa-database";
 import { RecursiveUnorderedList } from "../components/recursive-folder";
 import {
@@ -22,15 +22,15 @@ const Db = () => {
   return (
     <div>
       <hr />
-      <Data />
+      {/* <Data /> */}
       {/* list of root dirs */}
       <hr />
       {virtualFileEntry && (
         <AddFolder virtualFileSystemEntry={virtualFileEntry} />
       )}
       <ul>
-        {rootDirectories.map((dir) => (
-          <li onClick={() => handleRootDirClick(dir)}>{dir.name} </li>
+        {rootDirectories.map((dir,index) => (
+          <li key={index} onClick={() => handleRootDirClick(dir)}>{dir.name} </li>
         ))}
       </ul>
 
@@ -47,15 +47,15 @@ const Db = () => {
 export default Db;
 
 const Data = () => {
-  const res = useLiveQuery(() => db.folders.toArray());
+  const res = useLiveQuery(() => db.directories.toArray());
   return (
     <ul>
-      {res?.map((folder) => (
+      {res && res?.map((folder) => (
         <li>
           {folder.name}
 
           <ul>
-            <li onClick={()=>folder.showHandle()}>{folder.name}</li>
+            <li >{folder.name}</li>
             <li>isRoot: {folder.isRoot.toString()}</li>
           </ul>
         </li>

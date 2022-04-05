@@ -1,4 +1,4 @@
-import { createRootDirectoryInDatabase } from "fsa-database";
+import { createRootDbDirectory } from "fsa-database";
 import { VirtualFileSystemEntry } from "fsa-browser";
 
 type props = {
@@ -6,8 +6,10 @@ type props = {
 };
 export default function AddToDB({ virtualFileSystemEntry }: props) {
   const handleClick = async () => {
-    const res = await createRootDirectoryInDatabase(virtualFileSystemEntry);
-    if (res) console.log(res);
+    if (virtualFileSystemEntry.handle.kind === "directory") {
+      const res = await createRootDbDirectory(virtualFileSystemEntry.handle);
+      if (res) console.log(res);
+    }
   };
   return (
     <div>

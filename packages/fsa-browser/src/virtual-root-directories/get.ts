@@ -20,7 +20,7 @@ async function getAllVirtualRootDirectories(prependedText: string = "") {
         allFolders.push(folder);
       }
     });
-    console.table(allFolders);
+    // console.table(allFolders);
     const res = orderDirectoriesByDate(allFolders);
     return res;
   } catch (e) {

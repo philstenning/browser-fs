@@ -40,11 +40,13 @@ importers:
   packages/react-fsa-browser:
     specifiers:
       fsa-browser: workspace:*
+      fsa-database: workspace:*
       react: ^18.0.0
       react-dom: ^18.0.0
       typescript: ^4.6.3
     dependencies:
       fsa-browser: link:../fsa-browser
+      fsa-database: link:../fsa-database
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
     devDependencies:

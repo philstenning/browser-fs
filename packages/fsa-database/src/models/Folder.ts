@@ -1,42 +1,63 @@
-import { IDbFolder } from "./types";
-import {AbstractEntity} from './Abstract'
+import { fsaDirectory } from "./types";
+import { db } from "../setup";
 
-//TODO CLASSED only shallow copy !!!! remove.
-export class Folder extends AbstractEntity implements IDbFolder {
-  handle: FileSystemDirectoryHandle;
-  isRoot: boolean;
-  rootId: number;
-  depth: number;
-  //   parts: IDbFile[];
-  path: string;
-  label: string;
-  constructor(
-    name: string,
-    handle: FileSystemDirectoryHandle,
-    isRoot: boolean = false,
-    rootId: number,
-    depth: number,
-    path: string,
-    label: string = "",
-    id?: number
-  ) {
-    super(name, id);
-    this.handle = handle;
-    console.log(this.handle)
-    this.isRoot = isRoot;
-    this.rootId = rootId;
-    this.depth = depth;
-    this.path = path;
-    this.label = label;
-  }
-  
-  
+export async function createRootDbDirectory(
+  handle: FileSystemDirectoryHandle
+): Promise<fsaDirectory | null> {
+  const directory = createDirectory(handle, "/", true, 0);
 
-  log() {
-    console.log(JSON.stringify(this));
+  const test = await directoryAlreadyExists(directory);
+
+  if (!test) {
+    console.error(
+      `A root directory with name: "${directory.name}" already exits in db.`
+    );
+    return null;
   }
 
-  showHandle(){
-    console.log(JSON.stringify(this.handle))
+  try {
+    const id = await db.directories.add(directory);
+    directory.id = id;
+    directory.rootId = id;
+    await db.directories.put(directory);
+
+    console.log({ directory });
+    return directory;
+  } catch (e) {
+    console.error("error creating root directory db entry");
+    return null;
   }
+}
+
+async function directoryAlreadyExists(dir: fsaDirectory) {
+  const dirs = await db.directories.where({ name: dir.name }).count();
+  if (dirs === 0) return true;
+  return false;
+}
+
+export function createDirectory(
+  handle: FileSystemDirectoryHandle,
+  path: string,
+  isRoot: boolean,
+  rootId: number,
+  partIds = [],
+  depth = 0,
+  creator = null
+) {
+  const createdAt = Date.now();
+  const directory: fsaDirectory = {
+    created: createdAt,
+    updated: createdAt,
+    depth,
+    handle,
+    path,
+    rootId,
+    isRoot: isRoot ? "true" : "false",
+    label: "",
+    name: handle.name,
+    creator,
+    partIds,
+    hidden: "false",
+  };
+  return directory;
 }

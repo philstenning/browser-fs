@@ -1,53 +1,54 @@
-export interface IDbBase {
+export interface fsaBase {
   id?: number;
   name: string;
   created: number;
-  creator?: IUser;
+  creator?: fsaUser | null;
   updated: number;
 }
 
-export interface IDbFolder extends IDbBase {
+export interface fsaDirectory extends fsaBase {
   handle: FileSystemDirectoryHandle;
-  isRoot: boolean;
+  isRoot: "true" | "false";
   rootId: number;
-  depth:number;
-  // parts: IDbFile[];
+  depth: number;
+  partIds: number[];
   path: string;
-  label:string;
+  label: string;
+  hidden: "true" | "false";
 }
-export interface IDbFile extends IDbBase {
+export interface fsaFile extends fsaBase {
   folderId: number;
   rootId: number;
   handle: FileSystemFileHandle;
   path:string;
   printed: boolean;
   description?: string;
-  type: FileTypes;
+  type: fsaFileTypes;
   size?: number;
-  tags: ITag[];
+  tags: fsaTag[];
   imageUrl?: string;
   collections: number[];
 }
 
-export interface IDbCollection extends IDbBase {
-  files: IDbFile[];
+export interface fsaUserCollection extends fsaBase {
+  files: fsaFile[];
   description?: string;
-  tags: ITag[];
+  tags: fsaTag[];
 }
 
-export interface IUser {
+export interface fsaUser {
   id?: number;
   name: string;
   link?: string;
   email?:string
 }
 
-export interface ITag {
+export interface fsaTag {
   id?: number;
   name: string;
 }
 
-export enum FileTypes {
+export enum fsaFileTypes {
   STL,
   OBJ,
   GCODE,

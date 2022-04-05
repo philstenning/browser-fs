@@ -25,6 +25,11 @@ function Header() {
               Database
             </Link>
           </li>
+          <li className="main-nav__item">
+            <Link className="main-nav__link" to="/provider">
+              DbProvider
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
