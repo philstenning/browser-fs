@@ -1,8 +1,8 @@
 import Dexie from "dexie";
 
-import {fsaDirectory} from './models/types'
+import {fsaDirectory, fsaFile} from './models/types'
 class FsaDb extends Dexie {
-  // files:Dexie.Table<IDbFile,number>;
+  files:Dexie.Table<fsaFile,number>;
   directories: Dexie.Table<fsaDirectory, number>;
   // collections:Dexie.Table<IDbCollection,number>;
 
@@ -12,8 +12,8 @@ class FsaDb extends Dexie {
 
     // define tables and indexes
     db.version(1).stores({
-      // files:`++id name path created`,
-      directories: `++id,name,created,hidden,isRoot`,
+      files: `++id,name,path,created,rootId,parentId,creator,type`,
+      directories: `++id,name,created,hidden,isRoot,rootId,creator`,
       // collections:`++id name created`
     });
   }

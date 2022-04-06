@@ -1,12 +1,12 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
 import {
-  createDirectory,
   createRootDbDirectory,
   db,
   fsaDirectory,
-  useLiveQuery
+  parseVirtualFileSystemEntry,
+  deleteRootFolderFiles
 } from "fsa-database";
-import { selectRootDirectoryOnLocalDrive ,scanLocalDrive } from "fsa-browser";
+import { selectRootDirectoryOnLocalDrive, scanLocalDrive } from "fsa-browser";
 
 type FsaDbContextType = {
   currentDbDirectory: fsaDirectory | null;
@@ -67,8 +67,15 @@ function FsaDbContextProvider({ children }: Props) {
         _setCurrentDbDirectory(dir);
 
         // now we need to scan the directory for its folders and files.
-        const data =await scanLocalDrive(dir.handle)
+        const data = await scanLocalDrive(dir.handle);
         // convert the data and save to the database.
+        if(dir.id){
+
+          const f = await parseVirtualFileSystemEntry(data,dir.id,dir.id)
+          if(f)console.log('success')
+        }else{
+          console.error(`directory ${dir.name} with an id: ${dir.id ?? 'no id given'} `)
+        }
 
       }
     }
@@ -84,7 +91,8 @@ function FsaDbContextProvider({ children }: Props) {
     // check that the event is not propagating to the
     // parent element.
     if (dir.id) {
-      await db.directories.delete(dir.id);
+      await db.directories.where('rootId').equals(dir.id).delete()
+      await deleteRootFolderFiles(dir.id)
       const filtered = rootDbDirectories.filter((d) => d.id !== dir.id);
       setRootDbDirectories(filtered);
 

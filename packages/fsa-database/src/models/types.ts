@@ -2,7 +2,7 @@ export interface fsaBase {
   id?: number;
   name: string;
   created: number;
-  creator?: fsaUser | null;
+  creator:string;
   updated: number;
 }
 
@@ -24,17 +24,17 @@ export interface fsaFile extends fsaBase {
   path:string;
   printed: boolean;
   description?: string;
-  type: fsaFileTypes;
+  type: string;
   size?: number;
-  tags: fsaTag[];
+  tags: string[];
   imageUrl?: string;
-  collections: number[];
+  userCollectionIds: number[];
 }
 
 export interface fsaUserCollection extends fsaBase {
-  files: fsaFile[];
+  files: number[];
   description?: string;
-  tags: fsaTag[];
+  tags: string[];
 }
 
 export interface fsaUser {
@@ -44,15 +44,17 @@ export interface fsaUser {
   email?:string
 }
 
-export interface fsaTag {
-  id?: number;
-  name: string;
-}
+// export interface fsaTag {
+//   id?: number;
+//   name: string;
+// }
 
-export enum fsaFileTypes {
-  STL,
-  OBJ,
-  GCODE,
-  THREE_MF,
-  NOT_SUPPORTED,
-}
+// export type fsaFileTypes ='stl'| 'obj'|'gcode'|'3mf'|'unknown'
+
+// export enum fsaFileTypes {
+//   STL,
+//   OBJ,
+//   GCODE,
+//   THREE_MF,
+//   NOT_SUPPORTED,
+// }

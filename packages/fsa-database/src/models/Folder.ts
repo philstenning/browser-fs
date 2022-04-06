@@ -2,9 +2,10 @@ import { fsaDirectory, fsaUser } from "./types";
 import { db } from "../setup";
 
 export async function createRootDbDirectory(
-  handle: FileSystemDirectoryHandle
+  handle: FileSystemDirectoryHandle,
+  creator:string='user'
 ): Promise<fsaDirectory | null> {
-  const directory = createDirectory(handle, "/", true, 0);
+  const directory = createDirectory(handle, "/", true, 0,[],0,creator);
 
   const test = await directoryAlreadyExists(directory);
 
@@ -30,7 +31,7 @@ export async function createRootDbDirectory(
 }
 
 async function directoryAlreadyExists(dir: fsaDirectory) {
-  const dirs = await db.directories.where({ name: dir.name }).count();
+  const dirs = await db.directories.where({isRoot:'true',name:dir.name}).count()
   if (dirs === 0) return true;
   return false;
 }
@@ -42,7 +43,7 @@ export function createDirectory(
   rootId: number,
   fileIds = [],
   depth = 0,
-  creator = null
+  creator = 'user'
 ) {
   const createdAt = Date.now();
   const directory: fsaDirectory = {
