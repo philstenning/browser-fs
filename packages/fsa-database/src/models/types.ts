@@ -11,13 +11,14 @@ export interface fsaDirectory extends fsaBase {
   isRoot: "true" | "false";
   rootId: number;
   depth: number;
-  partIds: number[];
+  fileIds: number[];
+  fileCount:number;
   path: string;
   label: string;
   hidden: "true" | "false";
 }
 export interface fsaFile extends fsaBase {
-  folderId: number;
+  parentId: number;
   rootId: number;
   handle: FileSystemFileHandle;
   path:string;

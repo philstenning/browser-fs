@@ -1,4 +1,4 @@
-import { fsaDirectory } from "./types";
+import { fsaDirectory, fsaUser } from "./types";
 import { db } from "../setup";
 
 export async function createRootDbDirectory(
@@ -40,7 +40,7 @@ export function createDirectory(
   path: string,
   isRoot: boolean,
   rootId: number,
-  partIds = [],
+  fileIds = [],
   depth = 0,
   creator = null
 ) {
@@ -56,7 +56,8 @@ export function createDirectory(
     label: "",
     name: handle.name,
     creator,
-    partIds,
+    fileIds,
+    fileCount:0,
     hidden: "false",
   };
   return directory;

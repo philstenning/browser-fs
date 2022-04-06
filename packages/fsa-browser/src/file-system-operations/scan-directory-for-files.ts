@@ -55,7 +55,7 @@ async function scanLocalDriveRecursively(
   _path = ""
 ) {
   const res = await checkPermissionsOfHandle(directoryHandle);
-  if (!res) return;
+  if (!res) return [];
   const directoryContent: VirtualFileSystemEntry[] = [];
   for await (const entry of directoryHandle.values()) {
     const name = entry.name.toLowerCase();

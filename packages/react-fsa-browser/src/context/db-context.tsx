@@ -4,8 +4,9 @@ import {
   createRootDbDirectory,
   db,
   fsaDirectory,
+  useLiveQuery
 } from "fsa-database";
-import { selectRootDirectoryOnLocalDrive } from "fsa-browser";
+import { selectRootDirectoryOnLocalDrive ,scanLocalDrive } from "fsa-browser";
 
 type FsaDbContextType = {
   currentDbDirectory: fsaDirectory | null;
@@ -36,9 +37,12 @@ function FsaDbContextProvider({ children }: Props) {
     _setCurrentDbDirectory(dir);
   }
 
+  /**
+   * Runs at startup of component
+   * Loads data into state objects.
+   */
   async function getInitialData() {
-    // const dirs = await db.directories.where({ isRoot: true }).toArray();
-    const dirs = await db.directories.where({isRoot:'true'}).toArray();
+    const dirs = await db.directories.where({ isRoot: "true" }).toArray();
     if (dirs.length > 0) {
       setRootDbDirectories(dirs);
 
@@ -47,6 +51,13 @@ function FsaDbContextProvider({ children }: Props) {
     }
   }
 
+  /**
+   * Opens the window.showDirectoryPicker and allows
+   * user to select a folder to scan for files.
+   * once selected it saves the entry to the database and
+   * adds it to the state object rootDbDirectories
+   * then set it as the currentDirectory
+   */
   async function addRootDirectory() {
     const virtualDir = await selectRootDirectoryOnLocalDrive();
     if (virtualDir) {
@@ -54,33 +65,42 @@ function FsaDbContextProvider({ children }: Props) {
       if (dir) {
         setRootDbDirectories((current) => [...current, dir]);
         _setCurrentDbDirectory(dir);
+
+        // now we need to scan the directory for its folders and files.
+        const data =await scanLocalDrive(dir.handle)
+        // convert the data and save to the database.
+
       }
     }
   }
 
+  /**
+   * Delete A single root directory from the database
+   * @param dir
+   * @returns Promise of boolean
+   */
   async function deleteRootDirectory(dir: fsaDirectory) {
-      // if you are getting some unexpected things happening 
-      // check that the event is not propagating to the 
-      // parent element.
+    // if you are getting some unexpected things happening
+    // check that the event is not propagating to the
+    // parent element.
     if (dir.id) {
       await db.directories.delete(dir.id);
       const filtered = rootDbDirectories.filter((d) => d.id !== dir.id);
       setRootDbDirectories(filtered);
 
-      // if it is the current selected item, 
+      // if it is the current selected item,
       // select the first of the filtered array
       // or null if it is now empty.
-      if (currentDbDirectory?.id === dir.id){
-          if (filtered.length > 0 ) {
-            _setCurrentDbDirectory(filtered[0]);
-          }
+      if (currentDbDirectory?.id === dir.id) {
+        if (filtered.length > 0) {
+          _setCurrentDbDirectory(filtered[0]);
+        }
       }
-      if(filtered.length===0){
-          _setCurrentDbDirectory(null)
+      if (filtered.length === 0) {
+        _setCurrentDbDirectory(null);
       }
     }
 
-  
     return false;
   }
 
