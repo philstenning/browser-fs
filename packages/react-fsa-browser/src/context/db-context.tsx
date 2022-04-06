@@ -4,7 +4,7 @@ import {
   db,
   fsaDirectory,
   parseVirtualFileSystemEntry,
-  deleteRootFolderFiles
+  deleteRootDbDirectoryAndFiles,
 } from "fsa-database";
 import { selectRootDirectoryOnLocalDrive, scanLocalDrive } from "fsa-browser";
 
@@ -14,6 +14,7 @@ type FsaDbContextType = {
   rootDbDirectories: fsaDirectory[];
   addRootDirectory: () => void;
   deleteRootDirectory: (dir: fsaDirectory) => Promise<boolean>;
+  isProcessing: boolean;
 };
 
 const FsaDbContext = createContext<FsaDbContextType | null>(null);
@@ -29,9 +30,11 @@ type Props = {
 function FsaDbContextProvider({ children }: Props) {
   const [currentDbDirectory, _setCurrentDbDirectory] =
     useState<fsaDirectory | null>(null);
+
   const [rootDbDirectories, setRootDbDirectories] = useState<fsaDirectory[]>(
     []
   );
+  const [isProcessing, setIsProcessing] = useState(false);
 
   function setCurrentDbDirectory(dir: fsaDirectory) {
     _setCurrentDbDirectory(dir);
@@ -59,6 +62,7 @@ function FsaDbContextProvider({ children }: Props) {
    * then set it as the currentDirectory
    */
   async function addRootDirectory() {
+    setIsProcessing(true)
     const virtualDir = await selectRootDirectoryOnLocalDrive();
     if (virtualDir) {
       const dir = await createRootDbDirectory(virtualDir.handle);
@@ -67,18 +71,19 @@ function FsaDbContextProvider({ children }: Props) {
         _setCurrentDbDirectory(dir);
 
         // now we need to scan the directory for its folders and files.
-        const data = await scanLocalDrive(dir.handle);
+        const data = await scanLocalDrive(dir.handle, ["png"],100);
         // convert the data and save to the database.
-        if(dir.id){
-
-          const f = await parseVirtualFileSystemEntry(data,dir.id,dir.id)
-          if(f)console.log('success')
-        }else{
-          console.error(`directory ${dir.name} with an id: ${dir.id ?? 'no id given'} `)
+        if (dir.id) {
+          const f = await parseVirtualFileSystemEntry(data, dir.id, dir.id);
+          if (f) console.log("success");
+        } else {
+          console.error(
+            `directory ${dir.name} with an id: ${dir.id ?? "no id given"} `
+            );
+          }
         }
-
       }
-    }
+      setIsProcessing(false)
   }
 
   /**
@@ -91,8 +96,9 @@ function FsaDbContextProvider({ children }: Props) {
     // check that the event is not propagating to the
     // parent element.
     if (dir.id) {
-      await db.directories.where('rootId').equals(dir.id).delete()
-      await deleteRootFolderFiles(dir.id)
+      const res = await deleteRootDbDirectoryAndFiles(dir);
+      if (!res) return false; // something went wrong.
+
       const filtered = rootDbDirectories.filter((d) => d.id !== dir.id);
       setRootDbDirectories(filtered);
 
@@ -124,6 +130,7 @@ function FsaDbContextProvider({ children }: Props) {
         rootDbDirectories,
         addRootDirectory,
         deleteRootDirectory,
+        isProcessing,
       }}
     >
       {children}

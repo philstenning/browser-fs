@@ -8,6 +8,7 @@ const DbProvider = () => {
     addRootDirectory,
     setCurrentDbDirectory,
     deleteRootDirectory,
+    isProcessing
   } = useFsaDbContext();
 
   const handleClick = (
@@ -21,6 +22,7 @@ const DbProvider = () => {
   return (
     <div>
       <p>Current dir: {currentDbDirectory?.name}</p>
+      <div>{isProcessing?'Processing':''}</div>
       <button onClick={addRootDirectory}>Add</button>
       <ul>
         {rootDbDirectories.map((dir, index) => (
