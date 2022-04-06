@@ -15,8 +15,8 @@ import { checkPermissionsOfHandle } from "./handle-permissions-check";
  */
 async function scanLocalDrive(
   directoryHandle: FileSystemDirectoryHandle,
-  fileTypes = ["3mf", "stl"],
-  maxDepth = 5,
+  fileTypes = ['jpg','png','gif'],
+  maxDepth = 10,
   excludedFolders: string[] = FoldersToExcludeFromScanning
 ) {
   // create the root object

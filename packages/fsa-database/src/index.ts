@@ -1,4 +1,4 @@
-export { createDirectory, createRootDbDirectory } from "./models/folder";
+export { createDirectory, createRootDbDirectory ,deleteRootDbDirectoryAndFiles} from "./models/folder";
 export {
   createFile,
   deleteFile,
