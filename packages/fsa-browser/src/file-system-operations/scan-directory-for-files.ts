@@ -19,6 +19,8 @@ async function scanLocalDrive(
   maxDepth = 10,
   excludedFolders: string[] = FoldersToExcludeFromScanning
 ) {
+
+  console.log(` scanning Root Directory for ${JSON.stringify(fileTypes)}`)
   // create the root object
   const root = createVirtualFileSystemEntry(directoryHandle);
 

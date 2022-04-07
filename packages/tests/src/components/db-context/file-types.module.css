@@ -1,0 +1,17 @@
+.container{
+
+    border: solid var(--red-6) var(--border-size-2);
+    padding: var(--size-3);
+}
+.header{
+    font-size: var(--font-size-4);
+}
+.list{
+    padding: 0;
+    margin: 0;
+}
+.listItem{
+    list-style: none;
+    padding: 0;
+
+}

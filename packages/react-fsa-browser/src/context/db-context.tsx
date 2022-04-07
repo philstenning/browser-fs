@@ -15,6 +15,8 @@ type FsaDbContextType = {
   addRootDirectory: () => void;
   deleteRootDirectory: (dir: fsaDirectory) => Promise<boolean>;
   isProcessing: boolean;
+  fileTypes:string[];
+  setFileTypes:(fileTypes:string[])=>void;
 };
 
 const FsaDbContext = createContext<FsaDbContextType | null>(null);
@@ -27,6 +29,11 @@ type Props = {
   children: React.ReactNode;
 };
 
+/**
+ * 
+ * @param param0 
+ * @returns 
+ */
 function FsaDbContextProvider({ children }: Props) {
   const [currentDbDirectory, _setCurrentDbDirectory] =
     useState<fsaDirectory | null>(null);
@@ -35,6 +42,18 @@ function FsaDbContextProvider({ children }: Props) {
     []
   );
   const [isProcessing, setIsProcessing] = useState(false);
+   const [fileTypes,_setFileTypes] = useState(['stl','gcode','3mf','jpg'])
+
+  function setFileTypes(fileTypes:string[]){
+    if(!!fileTypes.length){
+          const normalizedTypes:string[] =[]
+         fileTypes.forEach(fType=>{
+           const t = fType.replace('.','').trim().toLowerCase()
+           normalizedTypes.push(t)
+         }) 
+         _setFileTypes(normalizedTypes)
+    }
+  }
 
   function setCurrentDbDirectory(dir: fsaDirectory) {
     _setCurrentDbDirectory(dir);
@@ -44,7 +63,7 @@ function FsaDbContextProvider({ children }: Props) {
    * Runs at startup of component
    * Loads data into state objects.
    */
-  async function getInitialData() {
+  async function getInitialData(): Promise<void> {
     const dirs = await db.directories.where({ isRoot: "true" }).toArray();
     if (dirs.length > 0) {
       setRootDbDirectories(dirs);
@@ -62,8 +81,8 @@ function FsaDbContextProvider({ children }: Props) {
    * then set it as the currentDirectory
    */
   async function addRootDirectory() {
-    setIsProcessing(true)
     const virtualDir = await selectRootDirectoryOnLocalDrive();
+    setIsProcessing(true)
     if (virtualDir) {
       const dir = await createRootDbDirectory(virtualDir.handle);
       if (dir) {
@@ -71,11 +90,11 @@ function FsaDbContextProvider({ children }: Props) {
         _setCurrentDbDirectory(dir);
 
         // now we need to scan the directory for its folders and files.
-        const data = await scanLocalDrive(dir.handle, ["png"],100);
+        const data = await scanLocalDrive(dir.handle, fileTypes,100);
         // convert the data and save to the database.
         if (dir.id) {
           const f = await parseVirtualFileSystemEntry(data, dir.id, dir.id);
-          if (f) console.log("success");
+          
         } else {
           console.error(
             `directory ${dir.name} with an id: ${dir.id ?? "no id given"} `
@@ -131,6 +150,8 @@ function FsaDbContextProvider({ children }: Props) {
         addRootDirectory,
         deleteRootDirectory,
         isProcessing,
+        fileTypes,
+        setFileTypes
       }}
     >
       {children}
