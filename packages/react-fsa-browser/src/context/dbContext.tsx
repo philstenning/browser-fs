@@ -5,6 +5,8 @@ import {
   fsaDirectory,
   parseVirtualFileSystemEntry,
   deleteRootDbDirectoryAndFiles,
+  initializeDb,
+  useLiveQuery
 } from "fsa-database";
 import { selectRootDirectoryOnLocalDrive, scanLocalDrive } from "fsa-browser";
 
@@ -15,8 +17,8 @@ type FsaDbContextType = {
   addRootDirectory: () => void;
   deleteRootDirectory: (dir: fsaDirectory) => Promise<boolean>;
   isProcessing: boolean;
-  fileTypes:string[];
-  setFileTypes:(fileTypes:string[])=>void;
+  // fileTypes:string[];
+  // setFileTypes:(fileTypes:string[])=>void;
 };
 
 const FsaDbContext = createContext<FsaDbContextType | null>(null);
@@ -27,6 +29,7 @@ function useFsaDbContext() {
 
 type Props = {
   children: React.ReactNode;
+  fileExtensionsForApp?:string[]
 };
 
 /**
@@ -34,27 +37,20 @@ type Props = {
  * @param param0 
  * @returns 
  */
-function FsaDbContextProvider({ children }: Props) {
+function FsaDbContextProvider({
+  children,
+  fileExtensionsForApp = ["stl", "gcode", "3mf", "jpg"],
+}: Props) {
   const [currentDbDirectory, _setCurrentDbDirectory] =
     useState<fsaDirectory | null>(null);
 
   const [rootDbDirectories, setRootDbDirectories] = useState<fsaDirectory[]>(
     []
   );
+
   const [isProcessing, setIsProcessing] = useState(false);
-   const [fileTypes,_setFileTypes] = useState(['stl','gcode','3mf','jpg'])
-
-  function setFileTypes(fileTypes:string[]){
-    if(!!fileTypes.length){
-          const normalizedTypes:string[] =[]
-         fileTypes.forEach(fType=>{
-           const t = fType.replace('.','').trim().toLowerCase()
-           normalizedTypes.push(t)
-         }) 
-         _setFileTypes(normalizedTypes)
-    }
-  }
-
+  const fileTypes = useLiveQuery(()=>db.fileTypes.toArray())
+  
   function setCurrentDbDirectory(dir: fsaDirectory) {
     _setCurrentDbDirectory(dir);
   }
@@ -64,6 +60,10 @@ function FsaDbContextProvider({ children }: Props) {
    * Loads data into state objects.
    */
   async function getInitialData(): Promise<void> {
+    // if this is the first time the db has been opened
+    // we need to add some fileTypes
+    await initializeDb(fileExtensionsForApp);
+
     const dirs = await db.directories.where({ isRoot: "true" }).toArray();
     if (dirs.length > 0) {
       setRootDbDirectories(dirs);
@@ -82,7 +82,7 @@ function FsaDbContextProvider({ children }: Props) {
    */
   async function addRootDirectory() {
     const virtualDir = await selectRootDirectoryOnLocalDrive();
-    setIsProcessing(true)
+    setIsProcessing(true);
     if (virtualDir) {
       const dir = await createRootDbDirectory(virtualDir.handle);
       if (dir) {
@@ -90,19 +90,19 @@ function FsaDbContextProvider({ children }: Props) {
         _setCurrentDbDirectory(dir);
 
         // now we need to scan the directory for its folders and files.
-        const data = await scanLocalDrive(dir.handle, fileTypes,100);
+        const fileTypeNames = fileTypes?.map(ft=>ft.name) ?? []
+        const data = await scanLocalDrive(dir.handle, fileTypeNames, 100);
         // convert the data and save to the database.
         if (dir.id) {
           const f = await parseVirtualFileSystemEntry(data, dir.id, dir.id);
-          
         } else {
           console.error(
             `directory ${dir.name} with an id: ${dir.id ?? "no id given"} `
-            );
-          }
+          );
         }
       }
-      setIsProcessing(false)
+    }
+    setIsProcessing(false);
   }
 
   /**
@@ -150,8 +150,6 @@ function FsaDbContextProvider({ children }: Props) {
         addRootDirectory,
         deleteRootDirectory,
         isProcessing,
-        fileTypes,
-        setFileTypes
       }}
     >
       {children}

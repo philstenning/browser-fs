@@ -3,6 +3,7 @@ import React from "react";
 import { useFsaDbContext } from "react-fsa-browser";
 import FileTypes from '../components/db-context/file-types'
 import FileList from '../components/db-context/dir-list'
+import RootDir from '../components/db-context/rootDirectories'
 const DbProvider = () => {
   const {
     rootDbDirectories,
@@ -23,7 +24,7 @@ const DbProvider = () => {
 
   return (
     <div>
-      <p>Current dir: {currentDbDirectory?.name}</p>
+      {/* <p>Current dir: {currentDbDirectory?.name}</p>
       <div>{isProcessing?'Processing':''}</div>
       <button onClick={addRootDirectory}>Add</button>
       <ul>
@@ -33,7 +34,8 @@ const DbProvider = () => {
             <button onClick={(e) => handleClick(e, dir)}>Delete</button>
           </li>
         ))}
-      </ul>
+      </ul> */}
+      <RootDir/>
       <FileTypes/>
       <FileList/>
     </div>

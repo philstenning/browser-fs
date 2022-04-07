@@ -1,13 +1,21 @@
+
+// context
 export {
   RootDirectoryProvider,
   useRootDirectoryContext,
-} from "./context/root-directory-context";
-export { FsaDbContextProvider, useFsaDbContext } from "./context/db-context";
+  FsaDbContextProvider,
+  useFsaDbContext,
+} from "./context";
 
-export type { RootDirectoryContextType } from "./context/root-directory-context";
-export type { FsaDbContextType } from "./context/db-context";
-// re-export from lib.
+export type { RootDirectoryContextType, FsaDbContextType } from "./context";
+
+// re-export from fsa-browser
 export type {
   VirtualFileSystemEntry,
   VirtualRootDirectoryType,
 } from "fsa-browser";
+
+// Hooks 
+export * from "./hooks/fileTypes";
+export * from "./hooks/files";
+export {useRootDirectories} from './hooks/directories/useDirectories'

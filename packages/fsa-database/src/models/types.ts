@@ -37,6 +37,12 @@ export interface fsaUserCollection extends fsaBase {
   tags: string[];
 }
 
+export interface fsaState {
+  currentFile:number;
+  currentDirectory:number;
+  currentCollection:number;
+}
+
 export interface fsaUser {
   id?: number;
   name: string;
@@ -44,17 +50,10 @@ export interface fsaUser {
   email?:string
 }
 
-// export interface fsaTag {
-//   id?: number;
-//   name: string;
-// }
 
-// export type fsaFileTypes ='stl'| 'obj'|'gcode'|'3mf'|'unknown'
-
-// export enum fsaFileTypes {
-//   STL,
-//   OBJ,
-//   GCODE,
-//   THREE_MF,
-//   NOT_SUPPORTED,
-// }
+export type fsaFileType = {
+  id?: number;
+  name: string;
+  selected: boolean;
+  hidden: boolean;
+};
