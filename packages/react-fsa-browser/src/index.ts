@@ -19,3 +19,4 @@ export type {
 export * from "./hooks/fileTypes";
 export * from "./hooks/files";
 export {useRootDirectories} from './hooks/directories/useDirectories'
+export {useCollections} from './hooks/collections/useCollections'
