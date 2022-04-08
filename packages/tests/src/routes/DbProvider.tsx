@@ -1,6 +1,3 @@
-import { fsaDirectory } from "fsa-database";
-import React from "react";
-import { useFsaDbContext } from "react-fsa-browser";
 import FileTypes from "../components/db-context/file-types";
 import FileList from "../components/db-context/dir-list";
 import RootDir from "../components/db-context/rootDirectories";

@@ -1,9 +1,10 @@
-import { fsaFileType } from "fsa-database";
 import React from "react";
+import { fsaFileType } from "fsa-database";
 import { useFileTypes } from "react-fsa-browser";
 import styles from "./file-types.module.css";
+
 const FileTypes = () => {
-  const { fileTypes,toggleSelectedFileType , deleteFileType, addFileType} = useFileTypes();
+const { fileTypes,toggleSelectedFileType , deleteFileType, addFileType} = useFileTypes();
   
   const handleToggle = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,

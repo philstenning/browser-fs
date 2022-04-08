@@ -10,7 +10,7 @@ const RootDirectories = () => {
           rootDirectories.map((dir) => (
             <li key={dir.id}>
               {dir.name}
-              {isScanning.toString()}
+            
             </li>
           ))}
       </ul>
@@ -19,7 +19,7 @@ const RootDirectories = () => {
         onClick={addRootDirectory}
         disabled={isScanning}
       >
-        Add Root Directory
+        {!isScanning?'Add Root Directory':'Scanning Drive'}
       </button>
     </div>
   );
