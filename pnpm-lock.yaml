@@ -23,17 +23,21 @@ importers:
   packages/fsa-database:
     specifiers:
       '@types/react': ^17.0.33
+      '@types/uuid': ^8.3.4
       dexie: ^3.2.1
       dexie-react-hooks: ^1.1.1
       fsa-browser: workspace:*
       react: ^18.0.0
       typescript: ^4.6.3
+      uuid: ^8.3.2
     dependencies:
       '@types/react': 17.0.43
+      '@types/uuid': 8.3.4
       dexie: 3.2.1
       dexie-react-hooks: 1.1.1_828f0a640d9024223dfb6d44c4d9c007
       fsa-browser: link:../fsa-browser
       react: 18.0.0
+      uuid: 8.3.2
     devDependencies:
       typescript: 4.6.3
 
@@ -499,6 +503,10 @@ packages:
   /@types/sizzle/2.3.3:
     resolution: {integrity: sha512-JYM8x9EGF163bEyhdJBpR2QX1R5naCJHC8ucJylJ3w9/CVBaskdQ8WqBf8MmQrd1kRvp/a4TS8HJ+bxzR7ZJYQ==}
     dev: true
+
+  /@types/uuid/8.3.4:
+    resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
+    dev: false
 
   /@types/wicg-file-system-access/2020.9.5:
     resolution: {integrity: sha512-UYK244awtmcUYQfs7FR8710MJcefL2WvkyHMjA8yJzxd1mo0Gfn88sRZ1Bls7hiUhA2w7ne1gpJ9T5g3G0wOyA==}
@@ -2746,7 +2754,6 @@ packages:
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
-    dev: true
 
   /verror/1.10.0:
     resolution: {integrity: sha1-OhBcoXBTr1XW4nDB+CiGguGNpAA=}

@@ -1,12 +1,12 @@
 import Dexie from "dexie";
 
-import {fsaDirectory, fsaFile,fsaFileType, fsaState} from './models/types'
+import {fsaDirectory, fsaFile,fsaFileType, fsaState, fsaCollection} from './models/types'
 class FsaDb extends Dexie {
-  files:Dexie.Table<fsaFile,number>;
+  files: Dexie.Table<fsaFile, number>;
   directories: Dexie.Table<fsaDirectory, number>;
-  fileTypes:Dexie.Table<fsaFileType,number>;
-  state:Dexie.Table<fsaState, number>
-  // collections:Dexie.Table<IDbCollection,number>;
+  fileTypes: Dexie.Table<fsaFileType, number>;
+  state: Dexie.Table<fsaState, number>;
+  userCollections: Dexie.Table<fsaCollection, number>;
 
   constructor() {
     super("fsa-database");
@@ -18,7 +18,7 @@ class FsaDb extends Dexie {
       directories: `++id,name,created,hidden,isRoot,rootId,creator`,
       fileTypes: `++id,name,selected,hidden`,
       state: `++id,currentDirectory,currentFile,currentCollection`,
-      // collections:`++id name created`
+      userCollections: `++id,name,updated,files`,
     });
   }
 }
