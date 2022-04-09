@@ -6,19 +6,23 @@ import {
   parseVirtualFileSystemEntry,
   deleteRootDbDirectoryAndFiles,
   initializeDb,
-  useLiveQuery
+  useLiveQuery,
+  fsaCollection,
+  fsaFile,
+  fsaState,
 } from "fsa-database";
 import { selectRootDirectoryOnLocalDrive, scanLocalDrive } from "fsa-browser";
 
 type FsaDbContextType = {
-  currentDbDirectory: fsaDirectory | null;
-  setCurrentDbDirectory: (dir: fsaDirectory) => void;
-  rootDbDirectories: fsaDirectory[];
-  addRootDirectory: () => void;
-  deleteRootDirectory: (dir: fsaDirectory) => Promise<boolean>;
-  isProcessing: boolean;
-  // fileTypes:string[];
-  // setFileTypes:(fileTypes:string[])=>void;
+  currentCollection: fsaCollection | null;
+  currentDirectory: fsaDirectory | null;
+  currentFile: fsaFile | null;
+  currentRootDirectory: fsaDirectory | null;
+  stateId: number | null;
+  setCurrentDirectory: (dir: fsaDirectory) => void;
+  setCurrentRootDirectory: (dir: fsaDirectory) => void;
+  setCurrentCollection: (collection: fsaCollection) => void;
+  setCurrentFile: (file: fsaFile) => void;
 };
 
 const FsaDbContext = createContext<FsaDbContextType | null>(null);
@@ -29,30 +33,54 @@ function useFsaDbContext() {
 
 type Props = {
   children: React.ReactNode;
-  fileExtensionsForApp?:string[]
+  fileExtensionsForApp?: string[];
 };
 
 /**
- * 
- * @param param0 
- * @returns 
+ *
+ * @param param0
+ * @returns
  */
 function FsaDbContextProvider({
   children,
   fileExtensionsForApp = ["stl", "gcode", "3mf", "jpg"],
 }: Props) {
-  const [currentDbDirectory, _setCurrentDbDirectory] =
+  const [currentCollection, _setCurrentCollection] =
+    useState<fsaCollection | null>(null);
+  const [currentDirectory, _setCurrentDirectory] =
     useState<fsaDirectory | null>(null);
+  const [currentFile, _setCurrentFile] = useState<fsaFile | null>(null);
+  const [currentRootDirectory, _setCurrentRootDirectory] =
+    useState<fsaDirectory | null>(null);
+  const [stateId, setStateId] = useState(0);
 
-  const [rootDbDirectories, setRootDbDirectories] = useState<fsaDirectory[]>(
-    []
-  );
+  function saveState() {
+    db.state
+      .add({
+        currentCollection,
+        currentDirectory,
+        currentFile,
+        currentRootDirectory,
+      })
+      .then((id) => id);
+  }
 
-  const [isProcessing, setIsProcessing] = useState(false);
-  const fileTypes = useLiveQuery(()=>db.fileTypes.toArray())
-  
-  function setCurrentDbDirectory(dir: fsaDirectory) {
-    _setCurrentDbDirectory(dir);
+  function setCurrentDirectory(dir: fsaDirectory) {
+    _setCurrentDirectory(dir.id ?? 0);
+    saveState();
+  }
+  function setCurrentRootDirectory(dir: fsaDirectory) {
+    _setCurrentRootDirectory(dir.id ?? 0);
+    saveState();
+  }
+  function setCurrentFile(file: fsaFile) {
+    _setCurrentFile(file.id ?? 0);
+    saveState();
+  }
+
+  function setCurrentCollection(collection: fsaCollection) {
+    _setCurrentCollection(collection.id ?? 0);
+    saveState();
   }
 
   /**
@@ -64,77 +92,26 @@ function FsaDbContextProvider({
     // we need to add some fileTypes
     await initializeDb(fileExtensionsForApp);
 
-    const dirs = await db.directories.where({ isRoot: "true" }).toArray();
-    if (dirs.length > 0) {
-      setRootDbDirectories(dirs);
+    const initialState = await db.state.toCollection().last();
+    if (!initialState)return;
+    
 
-      //TODO this needs to be retrieved from a store of some kind.
-      _setCurrentDbDirectory(dirs[0]);
-    }
-  }
+    const collection = await db.userCollections.get(
+      initialState.currentCollection
+    );
 
-  /**
-   * Opens the window.showDirectoryPicker and allows
-   * user to select a folder to scan for files.
-   * once selected it saves the entry to the database and
-   * adds it to the state object rootDbDirectories
-   * then set it as the currentDirectory
-   */
-  async function addRootDirectory() {
-    const virtualDir = await selectRootDirectoryOnLocalDrive();
-    setIsProcessing(true);
-    if (virtualDir) {
-      const dir = await createRootDbDirectory(virtualDir.handle);
-      if (dir) {
-        setRootDbDirectories((current) => [...current, dir]);
-        _setCurrentDbDirectory(dir);
+    _setCurrentCollection(collection ?? null);
 
-        // now we need to scan the directory for its folders and files.
-        const fileTypeNames = fileTypes?.map(ft=>ft.name) ?? []
-        const data = await scanLocalDrive(dir.handle, fileTypeNames, 100);
-        // convert the data and save to the database.
-        if (dir.id) {
-          const f = await parseVirtualFileSystemEntry(data, dir.id, dir.id);
-        } else {
-          console.error(
-            `directory ${dir.name} with an id: ${dir.id ?? "no id given"} `
-          );
-        }
-      }
-    }
-    setIsProcessing(false);
-  }
+    const dir = await db.directories.get(initialState.currentDirectory);
+    _setCurrentDirectory(dir ?? null);
 
-  /**
-   * Delete A single root directory from the database
-   * @param dir
-   * @returns Promise of boolean
-   */
-  async function deleteRootDirectory(dir: fsaDirectory) {
-    // if you are getting some unexpected things happening
-    // check that the event is not propagating to the
-    // parent element.
-    if (dir.id) {
-      const res = await deleteRootDbDirectoryAndFiles(dir);
-      if (!res) return false; // something went wrong.
+    const root = await db.directories.get(initialState.currentRootDirectory);
+    _setCurrentRootDirectory(root ?? null);
 
-      const filtered = rootDbDirectories.filter((d) => d.id !== dir.id);
-      setRootDbDirectories(filtered);
+    const file = await db.files.get(initialState.currentFile);
+    _setCurrentFile(file ?? null);
 
-      // if it is the current selected item,
-      // select the first of the filtered array
-      // or null if it is now empty.
-      if (currentDbDirectory?.id === dir.id) {
-        if (filtered.length > 0) {
-          _setCurrentDbDirectory(filtered[0]);
-        }
-      }
-      if (filtered.length === 0) {
-        _setCurrentDbDirectory(null);
-      }
-    }
-
-    return false;
+    setStateId(initialState.id || 0);
   }
 
   useEffect(() => {
@@ -144,12 +121,15 @@ function FsaDbContextProvider({
   return (
     <FsaDbContext.Provider
       value={{
-        currentDbDirectory,
-        setCurrentDbDirectory,
-        rootDbDirectories,
-        addRootDirectory,
-        deleteRootDirectory,
-        isProcessing,
+        stateId,
+        currentCollection,
+        currentDirectory,
+        currentFile,
+        currentRootDirectory,
+        setCurrentCollection,
+        setCurrentDirectory,
+        setCurrentFile,
+        setCurrentRootDirectory,
       }}
     >
       {children}

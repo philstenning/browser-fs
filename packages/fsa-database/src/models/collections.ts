@@ -24,6 +24,13 @@ export async function createCollection(
   return await db.userCollections.get(id);
 }
 
+
+/**
+ * sdfalksjdf;lkasjdf
+ * @param collection 
+ * @param file 
+ * @returns sdfalsdfsdfsdf
+ */
 export async function addFileToCollection(
   collection: fsaCollection,
   file: fsaFile
@@ -39,6 +46,7 @@ export async function addFileToCollection(
 export async function removeFileFromCollection(
   collection: fsaCollection,
   file: fsaFile
+  
 ) {
   // if file is not in collection return
    if (!file.id || !collection.id) return;
