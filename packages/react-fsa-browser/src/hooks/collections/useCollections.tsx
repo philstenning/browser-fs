@@ -32,7 +32,7 @@ const useCollections = () => {
   };
 
   const addFileToCollection = (collection: fsaCollection, file: fsaFile) => {
-    fsaAddFileToCollection(collection, file).then((res) => res);
+    fsaAddFileToCollection( file,collection).then((res) => res);
   };
 
   const removeFileFromCollection = (

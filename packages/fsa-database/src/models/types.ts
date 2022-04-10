@@ -39,9 +39,11 @@ export interface fsaCollection extends fsaBase {
 }
 
 export interface fsaState {
-  currentFile:number;
-  currentDirectory:number;
+  id?:number;
   currentCollection:number;
+  currentDirectory:number;
+  currentRootDirectory:number;
+  currentFile:number;
 }
 
 export interface fsaUser {
