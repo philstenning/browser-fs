@@ -31,7 +31,7 @@ const useCollections = () => {
     deleteCollection(collection).then((res) => res);
   };
 
-  const addFileToCollection = (collection: fsaCollection, file: fsaFile) => {
+  const addFileToCollection = ( file: fsaFile,collection?: fsaCollection) => {
     fsaAddFileToCollection( file,collection).then((res) => res);
   };
 
