@@ -2,9 +2,10 @@ import { useState } from "react";
 import { selectRootDirectoryOnLocalDrive, scanLocalDrive } from "fsa-browser";
 import {
   parseVirtualFileSystemEntry,
-  createRootDbDirectory,
+  createRootDbDirectory,db
 } from "fsa-database";
 import { useFileTypesNames } from "../../index";
+import {useFsaDbContext} from '../../context/dbContext'
 /**
  * Opens the window.showDirectoryPicker and allows
  * user to select a folder to scan for files.
@@ -13,6 +14,7 @@ import { useFileTypesNames } from "../../index";
  * then set it as the currentDirectory
  */
 export function useAddRootDirectory() {
+  const {setCurrentRootDirectory} = useFsaDbContext()
   const [isScanning, setIsScanning] = useState(false);
   const names = useFileTypesNames();
 
@@ -34,6 +36,10 @@ export function useAddRootDirectory() {
             }
             )
           }
+
+          // now set the current rootDir in dbState
+          // console.log('setting root directory')
+           setCurrentRootDirectory(dir)
         });
       });
     });
@@ -41,5 +47,16 @@ export function useAddRootDirectory() {
     setIsScanning(false);
   };
 
+
+
+
   return { isScanning, addRootDirectory };
 }
+
+
+// async function setCurrentRootDirectory(id:number){
+//    const state = await db.state.toCollection().last()
+//    delete state?.id
+//    const newState = {...state,currentRootDirectory:id}
+//    await 
+// }

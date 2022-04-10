@@ -3,13 +3,13 @@ import styles from "./rootDirectories.module.css";
 const RootDirectories = () => {
   const { isScanning, rootDirectories, addRootDirectory } =
     useRootDirectories();
-    const {currentRootDirectory, setCurrentRootDirectory} = useFsaDbContext()
+    const {dbState, setCurrentRootDirectory} = useFsaDbContext()
   return (
     <div>
       <ul>
         {rootDirectories &&
           rootDirectories.map((dir) => (
-            <li className={currentRootDirectory?.id===dir.id?styles.active:''}  key={dir.id} onClick={()=>setCurrentRootDirectory(dir)}>
+            <li className={dbState.currentRootDirectory===dir.id?styles.active:''}  key={dir.id} onClick={()=>setCurrentRootDirectory(dir)}>
               {dir.name}
             
             </li>

@@ -1,47 +1,64 @@
-import { useState, useEffect } from "react";
 import { db, useLiveQuery } from "fsa-database";
-import { fsaFile } from "fsa-database";
+
 function useFileList(
-  filterBySelectedFileTypes: boolean = false,
-  rootDirId:number=0,
+  filterBySelectedFileTypes: boolean = true,
   filterByRootDirectory: boolean = true
-  ) {
-    const n = rootDirId
-    console.log({n})
-  const res = useLiveQuery(() =>{
-  console.log(n)
-   return db.state.toCollection().last()
+) {
+  // true, true
+  if (filterBySelectedFileTypes && filterByRootDirectory) {
+    return filterByTypeAndRootDir();
   }
-  );
-  console.log('called', {rootDirId} , res?.id, {...res})
-  return useLiveQuery(()=>db.files.where('type').equals('3mf').toArray());
-  
-  if (filterBySelectedFileTypes) {
-    // console.log('fone')
-    // return useLiveQuery(() => filterFileTypesOnly()) ?? [];
+  //false, false
+  if (!filterBySelectedFileTypes && !filterByRootDirectory) {
+    return useLiveQuery(() => db.files.toArray().then((res) => res)) ?? [];
   }
-  // return useLiveQuery(() => filterNone()) ?? [];
+
+  // false, true
+  if (filterByRootDirectory) return filterByRootDirOnly();
+  // true, false
+  if (filterBySelectedFileTypes) return filterFileTypesOnly();
+  throw new Error("we should not be here...");
+  return [];
 }
 
-const filterFileTypesAndRootDirs = () => {};
+function filterByTypeAndRootDir() {
+  const list = useLiveQuery(async () => {
+    const ft = await db.fileTypes.toArray();
+    const fileTypeNames = [...ft.filter((t) => t.selected).map((t) => t.name)];
+    const files = await db.files.where("type").anyOf(fileTypeNames).toArray();
+    const state = await db.state.toCollection().last();
+    if (!state) return [];
+    // return files.toArray()
+    return files.filter((f) => f.rootId === state.currentRootDirectory);
+  });
+  return list ?? [];
+}
 
-const filterRootDirsOnly = (rootDirId: number = 0) => {
- return  db.files
-        .where("rootId")
-        .equals(rootDirId)
+function filterByRootDirOnly() {
+  const list = useLiveQuery(async () => {
+    const state = await db.state.toCollection().last();
+    const files = await db.files
+      .where("rootId")
+      .equals(state?.currentRootDirectory ?? 0)
+      .toArray();
+    return files;
+  });
+  return list ?? [];
+}
+
+function filterFileTypesOnly() {
+  const list =
+    useLiveQuery(async () => {
+      const ft = await db.fileTypes.toArray();
+      return await db.files
+        .where("type")
+        //filter the fileTypes then return only the name
+        .anyOf(...ft.filter((t) => t.selected).map((t) => t.name))
         .toArray();
-    
-};
+    }) ?? [];
 
-const filterFileTypesOnly = () =>
-  db.fileTypes.toArray().then((ft) =>
-    db.files
-      .where("type")
-      //filter the fileTypes then return only the name
-      .anyOf(...ft.filter((t) => t.selected).map((t) => t.name))
-      .toArray()
-  );
+  return list;
+}
 
-const filterNone = () => db.files.toArray();
 
 export { useFileList };

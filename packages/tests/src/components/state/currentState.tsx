@@ -1,13 +1,20 @@
 import React from 'react'
 import {useFsaDbContext} from 'react-fsa-browser'
 function CurrentState() {
-    const {currentCollection,currentDirectory,currentRootDirectory,currentFile} = useFsaDbContext()
+    const  {dbState} = useFsaDbContext()
+    const {
+      currentCollection,
+      currentDirectory,
+      currentRootDirectory,
+      currentFile,
+    } = dbState
   return (
     <ul>
-      <li>Collection: {currentCollection?.name}</li>
-      <li>Directory: {currentDirectory?.name}</li>
-      <li>RootDirectory: {currentRootDirectory?.name}</li>
-      <li>File: {currentFile?.name}</li>
+      <li>Collection: {currentCollection}</li>
+      <li>Directory: {currentDirectory}</li>
+      <li>RootDirectory: {currentRootDirectory}</li>
+      <li>File: {currentFile}</li>
+      <li>id: {dbState.id?.toString()?? 'none'}</li>
     </ul>
   );
 }

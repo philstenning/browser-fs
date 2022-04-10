@@ -1,5 +1,5 @@
 import { VirtualFileSystemEntry } from "fsa-browser";
-import { db, fsaDirectory, fsaFile, createDirectory } from "../index";
+import { db, fsaDirectory, createDirectory } from "../index";
 import { saveFile, createFile } from "./file";
 /**
  * When passed a valid  virtualFileSystemEntry from fsa-browser scanLocalDrive()
@@ -17,7 +17,7 @@ export async function parseVirtualFileSystemEntry(
   if (!virtualFileSystemEntry.entries) return false;
 
   const dirs: fsaDirectory[] = [];
-  
+
   const fileIds: number[] = [];
 
   //iterate over each entries handle
@@ -57,7 +57,7 @@ export async function parseVirtualFileSystemEntry(
       );
 
       const dbFile = await saveFile(file);
-      if(dbFile?.id)fileIds.push(dbFile.id)
+      if (dbFile?.id) fileIds.push(dbFile.id);
     }
   }
 

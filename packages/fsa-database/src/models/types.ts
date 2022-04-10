@@ -39,7 +39,7 @@ export interface fsaCollection extends fsaBase {
 }
 
 export interface fsaState {
-  readonly id?:number;
+  id?:number;
   currentCollection:number;
   currentDirectory:number;
   currentRootDirectory:number;
