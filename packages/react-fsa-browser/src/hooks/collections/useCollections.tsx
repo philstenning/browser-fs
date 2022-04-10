@@ -31,8 +31,8 @@ const useCollections = () => {
     deleteCollection(collection).then((res) => res);
   };
 
-  const addFileToCollection = ( file: fsaFile,collection?: fsaCollection) => {
-    fsaAddFileToCollection( file,collection).then((res) => res);
+  const addFileToCollection = (file: fsaFile, collection?: fsaCollection) => {
+    fsaAddFileToCollection(file, collection).then((res) => res);
   };
 
   const removeFileFromCollection = (
@@ -45,6 +45,8 @@ const useCollections = () => {
     fsaUpdateCollection(collection).then((res) => res);
   };
 
+  const currentCollectionItems = getItems();
+
   return {
     collections,
     addCollection,
@@ -52,7 +54,24 @@ const useCollections = () => {
     addFileToCollection,
     removeFileFromCollection,
     updateCollection,
+    currentCollectionItems,
   };
 };
 
-export  {useCollections};
+function getItems() {
+  const list = useLiveQuery(async () => {
+    const state = await db.state.toCollection().last();
+    const collection = await db.userCollections.get(
+      state?.currentCollection ?? 0
+    );
+    if (collection) {
+      return (
+        (await db.files.where("id").anyOf(collection.files).toArray()) ?? []
+      );
+    }
+    return [];
+  });
+  return list ?? [];
+}
+
+export { useCollections };
