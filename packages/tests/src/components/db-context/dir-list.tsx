@@ -1,8 +1,10 @@
-import { useFileList, useCollections } from "react-fsa-browser";
+import { useFileList, useCollections , useFsaDbContext} from "react-fsa-browser";
 import styles from "./dir-list.module.css";
 
 
+
 function FileList() {
+  // const {currentRootDirectory} = useFsaDbContext()
     const list = useFileList(true)
     const {collections,addFileToCollection} = useCollections()
    return (

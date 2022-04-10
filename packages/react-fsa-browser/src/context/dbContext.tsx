@@ -1,17 +1,12 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
 import {
-  createRootDbDirectory,
   db,
   fsaDirectory,
-  parseVirtualFileSystemEntry,
-  deleteRootDbDirectoryAndFiles,
-  initializeDb,
-  useLiveQuery,
+  initializeDb, 
   fsaCollection,
   fsaFile,
   fsaState,
 } from "fsa-database";
-import { selectRootDirectoryOnLocalDrive, scanLocalDrive } from "fsa-browser";
 
 type FsaDbContextType = {
   currentCollection: fsaCollection | null;
@@ -45,6 +40,9 @@ function FsaDbContextProvider({
   children,
   fileExtensionsForApp = ["stl", "gcode", "3mf", "jpg"],
 }: Props) {
+  /////
+  const [state,setState]=useState<fsaState| null>(null)
+  /////
   const [currentCollection, _setCurrentCollection] =
     useState<fsaCollection | null>(null);
   const [currentDirectory, _setCurrentDirectory] =
@@ -57,29 +55,33 @@ function FsaDbContextProvider({
   function saveState() {
     db.state
       .add({
-        currentCollection,
-        currentDirectory,
-        currentFile,
-        currentRootDirectory,
+        currentCollection: currentCollection?.id ?? 0,
+        currentDirectory: currentDirectory?.id ?? 0,
+        currentFile: currentFile?.id ?? 0,
+        currentRootDirectory: currentRootDirectory?.id??0,
       })
-      .then((id) => id);
+      .then((id) => console.log({id}));
+  }
+
+  function s(state:fsaState){
+    db.state.add(state).then(res=> console.log({state}))
   }
 
   function setCurrentDirectory(dir: fsaDirectory) {
-    _setCurrentDirectory(dir.id ?? 0);
+    _setCurrentDirectory(dir);
     saveState();
   }
   function setCurrentRootDirectory(dir: fsaDirectory) {
-    _setCurrentRootDirectory(dir.id ?? 0);
+    _setCurrentRootDirectory(dir);
     saveState();
   }
   function setCurrentFile(file: fsaFile) {
-    _setCurrentFile(file.id ?? 0);
+    _setCurrentFile(file);
     saveState();
   }
 
   function setCurrentCollection(collection: fsaCollection) {
-    _setCurrentCollection(collection.id ?? 0);
+    _setCurrentCollection(collection);
     saveState();
   }
 
@@ -98,7 +100,7 @@ function FsaDbContextProvider({
 
     const collection = await db.userCollections.get(
       initialState.currentCollection
-    );
+    ); 
 
     _setCurrentCollection(collection ?? null);
 

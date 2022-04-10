@@ -1,6 +1,8 @@
-.lists {
+.split {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--size-3);
   border: solid var(--border-size-2) var(--green-2);
+  
 }
+

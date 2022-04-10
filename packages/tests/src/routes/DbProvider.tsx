@@ -3,15 +3,18 @@ import FileList from "../components/db-context/dir-list";
 import RootDir from "../components/db-context/rootDirectories";
 import styles from "./DbProvider.module.css";
 import CollectionList from "../components/collections/collectionsList";
-
+import CurrentState from '../components/state/currentState'
 const DbProvider = () => {
   return (
     <div>
-      <RootDir />
+      <div className={styles.split}>
+        <RootDir />
+        <CurrentState />
+      </div>
       <FileTypes />
-      <div className={styles.lists}>
+      <div className={styles.split}>
         <FileList />
-        <CollectionList/>
+        <CollectionList />
       </div>
     </div>
   );

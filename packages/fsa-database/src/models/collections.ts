@@ -1,6 +1,5 @@
 import { db } from "../setup";
 import { fsaCollection, fsaFile } from "./types";
-// import {v4 as uuid} from 'uuid'
 
 export async function createCollection(
   name: string,
@@ -24,19 +23,26 @@ export async function createCollection(
   return await db.userCollections.get(id);
 }
 
-
-/**
- * sdfalksjdf;lkasjdf
- * @param collection 
- * @param file 
- * @returns sdfalsdfsdfsdf
- */
 export async function addFileToCollection(
-  collection: fsaCollection,
-  file: fsaFile
+  file: fsaFile,
+  collection?: fsaCollection
 ) {
-  // is file already in collection return
-  if (!file.id || !collection.id) return;
+  if (!file.id) return false;
+  // if we don't pass in a collection
+  // try and retrieve one from the state.
+  if (!collection) {
+    const state = await db.state.toCollection().last();
+
+    // state.currentCollection is zero if not set.
+    if (!state || state.currentCollection === 0) return false;
+
+    const stateCollection = await db.userCollections.get(
+      state.currentCollection
+    );
+    if (!stateCollection) return false;
+    collection = stateCollection;
+  }
+  if (!collection.id) return false; // TODO smelly change to uuid? and set at init.
   if (collection.files.includes(file.id)) return false;
   collection.files.push(file.id);
   file.userCollectionIds.push(collection.id);
@@ -46,10 +52,9 @@ export async function addFileToCollection(
 export async function removeFileFromCollection(
   collection: fsaCollection,
   file: fsaFile
-  
 ) {
   // if file is not in collection return
-   if (!file.id || !collection.id) return;
+  if (!file.id || !collection.id) return;
   if (!collection.files.includes(file.id)) return false;
   const fileIds = file.userCollectionIds.filter((f) => f !== collection.id);
   const colIds = collection.files.filter((f) => f !== file.id);
@@ -106,7 +111,7 @@ export async function updateCollection(collection: fsaCollection) {
   for (const id of itemsToAdd) {
     const _file = await db.files.get(id);
     if (_file) {
-      const res = await addFileToCollection(collection, _file);
+      const res = await addFileToCollection(_file, collection);
       if (res) collection.files = [...collection.files, id];
     }
   }
@@ -133,7 +138,7 @@ export async function updateCollection(collection: fsaCollection) {
  * @returns
  */
 export async function deleteCollection(collection: fsaCollection) {
-   if (!collection.id) return false
+  if (!collection.id) return false;
   for (const fileId of collection.files) {
     const file = await db.files.get(fileId);
     if (!file) return;
