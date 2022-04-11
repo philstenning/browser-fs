@@ -22,7 +22,7 @@ export {
 } from "./models/collections";
 
 
-export { parseVirtualFileSystemEntry } from "./models/parse-virtual-fsa-entry";
+export { parseVirtualFileSystemEntry } from "./models/parseVirtualFsaEntry";
 export { db, initializeDb } from "./setup";
 export { useLiveQuery } from "dexie-react-hooks";
 export * from "./models/types";

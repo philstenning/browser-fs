@@ -1,7 +1,7 @@
 import md5 from "md5";
-import { FoldersToExcludeFromScanning } from "../excluded-folders";
+import { FoldersToExcludeFromScanning } from "../excludedFolders";
 import { VirtualFileSystemEntry } from "./types";
-import { checkPermissionsOfHandle } from "./handle-permissions-check";
+import { checkPermissionsOfHandle } from "./handlePermissionsCheck";
 
 /**
  * From the point of entry we scan the local drive recursively for Directories

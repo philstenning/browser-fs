@@ -4,8 +4,8 @@ export {
 
 } from "./get-new-root-directory";
 
-export { checkPermissionsOfHandle } from "./handle-permissions-check";
-export { scanLocalDrive } from "./scan-directory-for-files";
+export { checkPermissionsOfHandle } from "./handlePermissionsCheck";
+export { scanLocalDrive } from "./scanDirectoryForFiles";
 export type { VirtualFileSystemEntry } from "./types";
 
 

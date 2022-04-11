@@ -1,6 +1,6 @@
 import { entries } from "idb-keyval";
 import { VirtualRootDirectoryType } from "./types";
-import { checkPermissionsOfHandle } from "../file-system-operations";
+import { checkPermissionsOfHandle } from "../fileSystemOperations";
 import { rootStore } from "./stores";
 // import { FileSystemPermissionMode } from "wicg-file-system-access";
 

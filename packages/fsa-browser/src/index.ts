@@ -1,4 +1,3 @@
-import { formatDiagnostic } from "typescript";
 
 export {
   deleteAllVirtualRootDirectories,
@@ -8,18 +7,17 @@ export {
   saveVirtualRootDirectory,
   updateVirtualRootDirectory,
   orderDirectoriesByDate
-} from "./virtual-root-directories";
+} from "./virtualRootDirectories";
 
 export {
   checkPermissionsOfHandle,
   createVirtualRootDirectory,
-  // scanLocalDriveRecursively,
   scanLocalDrive,
   selectRootDirectoryOnLocalDrive,
-} from "./file-system-operations";
+} from "./fileSystemOperations";
 
 
-export {browserCheck} from './browser-feature-check'
-export {FoldersToExcludeFromScanning} from './excluded-folders'
-export type { VirtualFileSystemEntry } from "./file-system-operations/types";
-export type { VirtualRootDirectoryType, RootDirOrderType } from "./virtual-root-directories/types";
+export {browserCheck} from './browserFeatureCheck'
+export {FoldersToExcludeFromScanning} from './excludedFolders'
+export type { VirtualFileSystemEntry } from "./fileSystemOperations/types";
+export type { VirtualRootDirectoryType, RootDirOrderType } from "./virtualRootDirectories/types";

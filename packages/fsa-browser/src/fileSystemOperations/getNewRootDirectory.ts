@@ -1,4 +1,4 @@
-import { VirtualRootDirectoryType } from "../virtual-root-directories/types";
+import { VirtualRootDirectoryType } from "../virtualRootDirectories/types";
 import md5 from 'md5'
 
 /**
