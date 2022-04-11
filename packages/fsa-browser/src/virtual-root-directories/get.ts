@@ -2,6 +2,7 @@ import { entries } from "idb-keyval";
 import { VirtualRootDirectoryType } from "./types";
 import { checkPermissionsOfHandle } from "../file-system-operations";
 import { rootStore } from "./stores";
+// import { FileSystemPermissionMode } from "wicg-file-system-access";
 
 /**
  *  All VirtualFileSystemEntries that have been saved to indexDB are returned

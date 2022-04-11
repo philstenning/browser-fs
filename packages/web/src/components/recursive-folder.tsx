@@ -1,4 +1,5 @@
 import { VirtualFileSystemEntry } from "fsa-browser";
+//@ts-ignore
 import style from "./recursive-folder.module.css";
 interface Props {
   folder: VirtualFileSystemEntry;

@@ -14,11 +14,11 @@ export {
 } from "./models/file";
 
 export {
-  addFileToCollection,
   createCollection,
   deleteCollection,
-  removeFileFromCollection,
   updateCollection,
+  addFileToCollection,
+  removeFileFromCollection,
 } from "./models/collections";
 
 

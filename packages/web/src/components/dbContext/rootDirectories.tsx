@@ -1,4 +1,5 @@
-import { useRootDirectories, useFsaDbContext } from "react-fsa-browser";
+import { useRootDirectories, useFsaDbContext } from "react-fsa-database";
+//@ts-ignore
 import styles from "./rootDirectories.module.css";
 const RootDirectories = () => {
   const { isScanning, rootDirectories, addRootDirectory } =

@@ -1,5 +1,10 @@
-import { useFileList, useCollections , useFsaDbContext,} from "react-fsa-browser";
+import {
+  useFileList,
+  useCollections,
+  useFsaDbContext,
+} from "react-fsa-database";
 import {fsaFile} from 'fsa-database'
+//@ts-ignore
 import styles from "./fileList.module.css";
 
 

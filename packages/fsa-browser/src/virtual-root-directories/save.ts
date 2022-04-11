@@ -1,9 +1,9 @@
 import { set } from "idb-keyval";
-import { VirtualRootDirectory } from "./types";
+import { VirtualRootDirectoryType } from "./types";
 import { rootStore } from "./stores";
 
 async function saveVirtualRootDirectory(
-  virtualRootDirectory: VirtualRootDirectory
+  virtualRootDirectory: VirtualRootDirectoryType
 ) {
   try {
     await set(virtualRootDirectory.id, virtualRootDirectory, rootStore);

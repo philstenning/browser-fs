@@ -1,5 +1,6 @@
 // import React from "react";
 import { Link } from "react-router-dom";
+//@ts-ignore
 import style from './header.module.css'
 function Header() {
   return (

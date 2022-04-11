@@ -1,12 +1,18 @@
 import Dexie from "dexie";
 
-import {fsaDirectory, fsaFile,fsaFileType, fsaState, fsaCollection} from './models/types'
+import {
+  fsaDirectory,
+  fsaFile,
+  fsaFileType,
+  fsaState,
+  fsaCollection,
+} from "./models/types";
 class FsaDb extends Dexie {
-  files: Dexie.Table<fsaFile, number>;
-  directories: Dexie.Table<fsaDirectory, number>;
-  fileTypes: Dexie.Table<fsaFileType, number>;
-  state: Dexie.Table<fsaState, number>;
-  userCollections: Dexie.Table<fsaCollection, number>;
+  files!: Dexie.Table<fsaFile, number>;
+  directories!: Dexie.Table<fsaDirectory, number>;
+  fileTypes!: Dexie.Table<fsaFileType, number>;
+  state!: Dexie.Table<fsaState, number>;
+  userCollections!: Dexie.Table<fsaCollection, number>;
 
   constructor() {
     super("fsa-database");
@@ -22,27 +28,17 @@ class FsaDb extends Dexie {
     });
   }
 }
-const db = new FsaDb()
- async function initializeDb(fileTypes:string[]){
-
-   const ft = await db.fileTypes.count()
-   if(ft>0)return // only want to add if no entries already
-   if (!!fileTypes.length) {
-     
-    for(const fType of fileTypes){
-
+const db = new FsaDb();
+async function initializeDb(fileTypes: string[]) {
+  const ft = await db.fileTypes.count();
+  if (ft > 0) return; // only want to add if no entries already
+  if (!!fileTypes.length) {
+    for (const fType of fileTypes) {
       const name = fType.replace(".", "").trim().toLowerCase();
-      const _fileType:fsaFileType ={name,hidden:false,selected:true}
-      await db.fileTypes.add(_fileType)
+      const _fileType: fsaFileType = { name, hidden: false, selected: true };
+      await db.fileTypes.add(_fileType);
     }
-      
-     
-     
-   }
-
+  }
 }
 
-export {db,initializeDb}
-
-
-
+export { db, initializeDb };

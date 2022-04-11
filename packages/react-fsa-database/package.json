@@ -1,7 +1,7 @@
 {
-  "name": "react-fsa-browser",
+  "name": "react-fsa-database",
   "version": "0.1.0",
-  "description": "React.js context provider for fsa-browser",
+  "description": "scan your local drive using the file system access api and store the results in a database",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",

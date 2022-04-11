@@ -1,6 +1,7 @@
 import React from "react";
 import { fsaFileType } from "fsa-database";
-import { useFileTypes } from "react-fsa-browser";
+import { useFileTypes } from "react-fsa-database";
+//@ts-ignore
 import styles from "./fileTypes.module.css";
 
 const FileTypes = () => {
