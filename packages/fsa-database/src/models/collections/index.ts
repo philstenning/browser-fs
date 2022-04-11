@@ -1,0 +1,6 @@
+export {addFileToCollection} from './addFileToCollection'
+export {createCollection} from './createCollection'
+export {deleteCollection} from './deleteCollection'
+export {putCollectionAndFile} from './putCollectionAndFile'
+export {removeFileFromCollection} from './removeFileFromCollection'
+export {updateCollection} from './updateCollection'

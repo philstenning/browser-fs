@@ -1,8 +1,7 @@
-export {
-  createDirectory,
-  createRootDbDirectory,
-  deleteRootDbDirectoryAndFiles,
-} from "./models/folder";
+export { createDirectory } from "./models/directories/createDirectory";
+export { createRootDbDirectory } from "./models/directories/createRootDbDirectory";
+export { deleteRootDbDirectoryAndFiles } from "./models/directories/deleteRootDbDirectoryAndFiles";
+
 export {
   createFile,
   deleteFile,
@@ -11,7 +10,7 @@ export {
   saveFile,
   saveFiles,
   updateFile,
-} from "./models/file";
+} from "./models/file/";
 
 export {
   createCollection,
@@ -19,10 +18,9 @@ export {
   updateCollection,
   addFileToCollection,
   removeFileFromCollection,
-} from "./models/collections";
-
+} from "./models/collections/";
 
 export { parseVirtualFileSystemEntry } from "./models/parseVirtualFsaEntry";
-export { db, initializeDb } from "./setup";
+export { db, initializeDb } from "./db/setup";
 export { useLiveQuery } from "dexie-react-hooks";
 export * from "./models/types";

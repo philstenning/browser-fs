@@ -6,7 +6,7 @@ import {
   fsaFileType,
   fsaState,
   fsaCollection,
-} from "./models/types";
+} from "../models/types";
 class FsaDb extends Dexie {
   files!: Dexie.Table<fsaFile, number>;
   directories!: Dexie.Table<fsaDirectory, number>;

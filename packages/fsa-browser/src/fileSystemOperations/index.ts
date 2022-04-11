@@ -2,7 +2,7 @@ export {
   createVirtualRootDirectory,
   selectRootDirectoryOnLocalDrive,
 
-} from "./get-new-root-directory";
+} from "./getNewRootDirectory";
 
 export { checkPermissionsOfHandle } from "./handlePermissionsCheck";
 export { scanLocalDrive } from "./scanDirectoryForFiles";
