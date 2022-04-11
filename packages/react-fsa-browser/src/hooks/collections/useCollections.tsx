@@ -36,9 +36,27 @@ const useCollections = () => {
   };
 
   const removeFileFromCollection = (
-    collection: fsaCollection,
-    file: fsaFile
+    file: fsaFile,
+    collection?: fsaCollection
   ) => {
+    console.log({ file });
+    // if we don't have a collection
+    // we assume we want to remove it from
+    // the current selected collection
+    if (!collection) {
+      console.log("removeFileFromCollection: no collection");
+      getCurrentCollection().then((_collection) => {
+        if (_collection) {
+          const l = _collection.files;
+          const m = file.userCollectionIds;
+          console.log(l, m, "id:", _collection.id);
+          fsaRemoveFileFromCollection(_collection, file);
+        }
+      });
+      return;
+    }
+
+    console.log("removeFileFromCollection: has collection");
     fsaRemoveFileFromCollection(collection, file).then((res) => res);
   };
   const updateCollection = (collection: fsaCollection) => {
@@ -57,6 +75,18 @@ const useCollections = () => {
     currentCollectionItems,
   };
 };
+
+async function getCurrentState() {
+  return await db.state.toCollection().last() ?? null
+  
+}
+
+async function getCurrentCollection() {
+  const state =await getCurrentState()
+  const collection = await db.userCollections.get(state?.currentCollection ?? 0);
+  if (collection) return collection;
+  return null;
+}
 
 function getItems() {
   const list = useLiveQuery(async () => {
