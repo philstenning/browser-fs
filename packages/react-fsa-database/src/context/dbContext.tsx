@@ -9,6 +9,11 @@ import {
 } from "fsa-database";
 
 type FsaDbContextType = {
+  // currentCollection: fsaCollection | null;
+  // currentDirectory: fsaDirectory | null;
+  // currentFile: fsaFile | null;
+  // currentRootDirectory: fsaDirectory | null;
+  // stateId: number | null;
   dbState: fsaState;
   setCurrentDirectory: (dir: fsaDirectory) => void;
   setCurrentRootDirectory: (dir: fsaDirectory) => void;
@@ -52,7 +57,7 @@ function FsaDbContextProvider({
         if (res > 0) {
           // we have a new id, id is readonly
           // so create a new obj.
-          setDbState({ ...state, id: res });
+          setDbState( { ...state, id: res });
         }
       })
       .catch((err) => {

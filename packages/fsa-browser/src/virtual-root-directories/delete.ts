@@ -1,5 +1,5 @@
 import { del, clear } from "idb-keyval";
-import { VirtualRootDirectory } from "./types";
+import { VirtualRootDirectoryType } from "./types";
 import { rootStore } from "./stores";
 
 /**
@@ -23,7 +23,7 @@ async function deleteAllVirtualRootDirectories() {
  * @returns  Promise of Boolean
  */
 async function deleteVirtualRootDirectory(
-  virtualFileSystemEntry: VirtualRootDirectory,
+  virtualFileSystemEntry: VirtualRootDirectoryType,
   prependedText: string = ""
 ) {
   try {

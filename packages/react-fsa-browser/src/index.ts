@@ -3,11 +3,9 @@
 export {
   RootDirectoryProvider,
   useRootDirectoryContext,
-  FsaDbContextProvider,
-  useFsaDbContext,
-} from "./context";
+} from "./context/rootDirectoryContext";
 
-export type { RootDirectoryContextType, FsaDbContextType } from "./context";
+export type { RootDirectoryContextType } from "./context/rootDirectoryContext";
 
 // re-export from fsa-browser
 export type {
@@ -17,6 +15,6 @@ export type {
 
 // Hooks 
 export * from "./hooks/fileTypes";
-export * from "./hooks/files";
-export {useRootDirectories} from './hooks/directories/useDirectories'
-export {useCollections} from './hooks/collections/useCollections'
+// export * from "./hooks/files";
+// export {useRootDirectories} from './hooks/directories/useDirectories'
+// export {useCollections} from './hooks/collections/useCollections'

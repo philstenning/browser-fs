@@ -1,8 +1,8 @@
 import { update } from "idb-keyval";
-import { VirtualRootDirectory } from "./types";
+import { VirtualRootDirectoryType } from "./types";
 
 async function updateVirtualRootDirectory(
-  virtualRootDir: VirtualRootDirectory
+  virtualRootDir: VirtualRootDirectoryType
 ) {
   try {
     await update(virtualRootDir.id, () => virtualRootDir);

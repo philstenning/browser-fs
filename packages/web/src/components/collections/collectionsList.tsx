@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useCollections, useFsaDbContext } from "react-fsa-browser";
+import { useCollections, useFsaDbContext } from "react-fsa-database";
+//@ts-ignore
 import styles from "./collectionsList.module.css";
 function CollectionList() {
   const { collections } = useCollections();
