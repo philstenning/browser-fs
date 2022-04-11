@@ -1,8 +1,14 @@
+import { fsaFile } from 'fsa-database'
 import {useCollections, useFsaDbContext} from 'react-fsa-browser'
 
 function CollectionItems() {
-    const {currentCollectionItems} = useCollections()
+    const {currentCollectionItems, removeFileFromCollection} = useCollections()
    const {dbState,setCurrentFile} = useFsaDbContext()
+
+    const removeItem=(e:React.MouseEvent<HTMLButtonElement> ,file:fsaFile)=>{
+       e.stopPropagation()
+       removeFileFromCollection(file)
+    }
   return (
     <div>
         <h4>Collection Items</h4>
@@ -12,7 +18,7 @@ function CollectionItems() {
                 key={item.id}
                 className={dbState.currentFile===item.id?'active':''}
                 onClick={()=>setCurrentFile(item)}
-                >{item.name}</li>
+                >{item.name} <button onClick={(e)=>removeItem(e,item)}>Remove</button></li>
             ))}
         </ul>
     </div>

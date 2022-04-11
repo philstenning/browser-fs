@@ -1,5 +1,5 @@
 export interface fsaBase {
-  readonly id?: number;
+  id?: number;
   name: string;
   created: number;
   creator:string;
