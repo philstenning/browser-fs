@@ -1,3 +1,27 @@
 .active{
     color:var(--orange-3)
 }
+
+.list{
+    margin: 0;
+    padding: 0;
+width: 100%;
+& li{
+    padding:  0;
+    max-inline-size: 100%;
+    display: block;
+
+}
+}
+
+.btnGroup{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--size-3);
+    border: solid 1px gray;
+
+    /* & button{
+        border-radius: var(--radius-3);;;
+    } */
+}

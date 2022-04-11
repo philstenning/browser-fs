@@ -8,6 +8,7 @@ import {
   addFileToCollection as fsaAddFileToCollection,
   removeFileFromCollection as fsaRemoveFileFromCollection,
   updateCollection as fsaUpdateCollection,
+  removeAllFilesFromCollection,
   fsaFile,
 } from "fsa-database";
 
@@ -34,6 +35,8 @@ const useCollections = () => {
   const addFileToCollection = (file: fsaFile, collection?: fsaCollection) => {
     fsaAddFileToCollection(file, collection).then((res) => res);
   };
+
+
 
   const removeFileFromCollection = (
     file: fsaFile,
@@ -73,6 +76,7 @@ const useCollections = () => {
     removeFileFromCollection,
     updateCollection,
     currentCollectionItems,
+    removeAllFilesFromCollection
   };
 };
 
