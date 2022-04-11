@@ -7,7 +7,7 @@ import {
   VirtualRootDirectoryType,
 } from "fsa-browser";
 import { useRootDirectoryContext } from "react-fsa-browser";
-import AddFolder from "../components/addToDb";
+import AddFolder from "../junk/addToDb";
 
 const Db = () => {
   const { rootDirectories } = useRootDirectoryContext();

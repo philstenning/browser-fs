@@ -1,0 +1,27 @@
+.header {
+  background: var(--grape-9);
+  padding-block: var(--size-3);
+}
+
+.mainNav {
+  display: flex;
+  gap: var(--size-3);
+}
+
+.mainNav__item {
+  list-style: none;
+}
+.mainNav__link {
+  color: var(--cyan-1);
+  text-decoration: none;
+  color: var(--grape-0);
+
+  &:visited {
+    color: var(--grape-0);
+  }
+  
+  &:hover{
+    
+    color: var(--grape-2);
+  }
+}

@@ -1,8 +1,7 @@
-import React from 'react'
 import {Outlet} from 'react-router-dom'
 
 // components
-import {Footer,Header} from './index'
+import Header from './header'
 
 export default function Layout() {
 

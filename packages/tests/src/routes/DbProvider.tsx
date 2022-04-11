@@ -1,10 +1,11 @@
-import FileTypes from "../components/db-context/file-types";
-import FileList from "../components/db-context/dir-list";
-import RootDir from "../components/db-context/rootDirectories";
-import styles from "./DbProvider.module.css";
+import FileTypes from "../components/dbContext/fileTypes";
+import FileList from "../components/dbContext/fileList";
+import RootDir from "../components/dbContext/rootDirectories";
 import CollectionList from "../components/collections/collectionsList";
-import CurrentState from '../components/state/currentState'
-import CollectionItems from '../components/collections/collectionItems'
+import CurrentState from "../components/currentDbState/currentDbState";
+import CollectionItems from "../components/collections/currentCollectionItems";
+//@ts-ignore // don't know why but vscode ts can't find it???
+import styles from './dbProvider.module.css'
 const DbProvider = () => {
   return (
     <div>
@@ -16,9 +17,8 @@ const DbProvider = () => {
       <div className={styles.split}>
         <FileList />
         <div>
-
-        <CollectionList />
-        <CollectionItems/>
+          <CollectionList />
+          <CollectionItems />
         </div>
       </div>
     </div>

@@ -6,5 +6,5 @@
 
 /* app css */
 @import-glob "./utils/**.css";
-@import-glob "../components/**/*.css";
+/* @import-glob "../components*.css"; */
 /* @import-glob "../routes*.css"; */
