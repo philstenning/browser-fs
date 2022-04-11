@@ -5,24 +5,24 @@
  * @returns boolean; false if denied by user
  */
 async function checkPermissionsOfHandle(
-  dirHandle: FileSystemDirectoryHandle,
+  handle: FileSystemDirectoryHandle | FileSystemFileHandle,
   mode: FileSystemPermissionMode = "read"
 ) {
   //type PermissionState = "denied" | "granted" | "prompt"
   try {
-    let permission = await dirHandle.queryPermission({ mode });
+    let permission = await handle.queryPermission({ mode });
     if (permission === "prompt") {
-      permission = await dirHandle.requestPermission({ mode });
+      permission = await handle.requestPermission({ mode });
     }
     if (permission === "granted") {
       return true;
     }
   } catch (e) {
-    console.error(`Error Getting permission for Folder Handle ${e}`);
+    console.error(`Error Getting permission for handle ${e}`);
   }
 
   // user clicked: do not allow.
-  console.error("User denied access to Folder Handle.");
+  console.error("User denied access to handle.");
   return false;
 }
 
