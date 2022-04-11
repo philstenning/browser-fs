@@ -18,6 +18,7 @@ export {
   updateCollection,
   addFileToCollection,
   removeFileFromCollection,
+  removeAllFilesFromCollection
 } from "./models/collections/";
 
 export { parseVirtualFileSystemEntry } from "./models/parseVirtualFsaEntry";
