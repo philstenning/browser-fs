@@ -1,6 +1,6 @@
 import { VirtualFileSystemEntry } from "fsa-browser";
 import { db, fsaDirectory, createDirectory } from "../index";
-import { saveFile, createFile } from "./file/";
+import { saveFile, createFile } from "./files";
 /**
  * When passed a valid  virtualFileSystemEntry from fsa-browser scanLocalDrive()
  * we convert it into folders and files and save to the database.
