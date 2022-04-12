@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
   db,
   fsaCollection,
@@ -10,7 +10,9 @@ import {
   updateCollection as fsaUpdateCollection,
   removeAllFilesFromCollection,
   fsaFile,
+  DbError
 } from "fsa-database";
+
 
 const useCollections = () => {
   const collections = useLiveQuery(() => db.userCollections.toArray()) ?? [];
@@ -22,10 +24,13 @@ const useCollections = () => {
     creator: string = "",
     tags: string[] = []
   ) => {
+    if(name.length<1){
+      return new DbError("Collection name can not be empty",'error');
+    }
     createCollection(name, files, description, creator, tags).then((res) => {
       if (res) return true;
     });
-    return false;
+    return new DbError('Creating Collection','error');
   };
 
   const removeCollection = (collection: fsaCollection) => {

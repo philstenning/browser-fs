@@ -2,6 +2,7 @@ export { createDirectory } from "./models/directories/createDirectory";
 export { createRootDbDirectory } from "./models/directories/createRootDbDirectory";
 export { deleteRootDbDirectoryAndFiles } from "./models/directories/deleteRootDbDirectoryAndFiles";
 
+export { DbError} from './models/errors/dbError'
 export {
   createFile,
   deleteFile,
@@ -10,7 +11,7 @@ export {
   saveFile,
   saveFiles,
   updateFile,
-} from "./models/file/";
+} from "./models/files";
 
 export {
   createCollection,

@@ -19,6 +19,7 @@ export async function createCollection(
     description,
   };
 
+
   const id = await db.userCollections.add(collection);
   return await db.userCollections.get(id);
 }

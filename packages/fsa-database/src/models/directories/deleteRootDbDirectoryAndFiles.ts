@@ -1,5 +1,5 @@
 import { fsaDirectory } from "../types";
-import { deleteRootFolderFiles } from "../file/";
+import { deleteRootFolderFiles } from "../files";
 import { db } from "../../db/setup";
 
 export async function deleteRootDbDirectoryAndFiles(dir: fsaDirectory) {

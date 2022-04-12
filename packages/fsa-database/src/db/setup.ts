@@ -6,6 +6,7 @@ import {
   fsaFileType,
   fsaState,
   fsaCollection,
+  fsaError
 } from "../models/types";
 class FsaDb extends Dexie {
   files!: Dexie.Table<fsaFile, number>;
@@ -13,7 +14,7 @@ class FsaDb extends Dexie {
   fileTypes!: Dexie.Table<fsaFileType, number>;
   state!: Dexie.Table<fsaState, number>;
   userCollections!: Dexie.Table<fsaCollection, number>;
-
+  errors!:Dexie.Table<fsaError, number>;
   constructor() {
     super("fsa-database");
     const db = this;
@@ -25,6 +26,7 @@ class FsaDb extends Dexie {
       fileTypes: `++id,name,selected,hidden`,
       state: `++id,currentDirectory,currentFile,currentCollection`,
       userCollections: `++id,name,updated,files`,
+      errors:`++id,type,success`
     });
   }
 }
