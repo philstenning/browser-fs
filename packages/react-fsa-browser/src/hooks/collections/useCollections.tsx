@@ -12,7 +12,7 @@ import {
 } from "fsa-database";
 
 const useCollections = () => {
-  const collections = useLiveQuery(() => db.userCollections.toArray()) ?? [];
+  const collections = useLiveQuery(() => db.userCollections.orderBy('id').toArray()) ?? [];
 
   const addCollection = (
     name: string,

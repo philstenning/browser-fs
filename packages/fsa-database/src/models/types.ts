@@ -29,13 +29,21 @@ export interface fsaFile extends fsaBase {
   tags: string[];
   imageUrl?: string;
   userCollectionIds: number[];
+  dbName:string;
+  order:number;
 }
 
 export interface fsaCollection extends fsaBase {
   // id:string;
-  files: number[];
+  files: fsaCollectionFile[];
   description?: string;
   tags: string[];
+}
+
+export interface fsaCollectionFile{
+  fileId:number;
+  added:number;
+  order:number;
 }
 
 export interface fsaState {

@@ -9,16 +9,21 @@ import {
   updateCollection as fsaUpdateCollection,
   removeAllFilesFromCollection,
   fsaFile,
+  fsaCollectionFile,
   DbError,
 } from "fsa-database";
 import { useFsaDbContext } from "../../context/dbContext";
 
 const useCollections = () => {
-  const collections = useLiveQuery(() => db.userCollections.toArray()) ?? [];
+  const collections =
+    useLiveQuery(() =>
+      db.userCollections.orderBy("created").reverse().toArray()
+    ) ?? [];
   const { setCurrentCollection, dbState } = useFsaDbContext();
+
   const addCollection = (
     name: string,
-    files: number[] = [],
+    files: fsaCollectionFile[] = [],
     description = "",
     creator: string = "",
     tags: string[] = []
@@ -37,7 +42,21 @@ const useCollections = () => {
   };
 
   const removeCollection = (collection: fsaCollection) => {
-    deleteCollection(collection).then((res) => res);
+    deleteCollection(collection).then((res) => {
+
+      // if we only have one left set it as current
+      db.userCollections.count().then((count) => {
+        console.log({ count });
+        if (count === 1) {
+          db.userCollections
+            .toCollection()
+            .first()
+            .then((col) => {
+              if (col) setCurrentCollection(col);
+            });
+        }
+      });
+    });
   };
 
   const addFileToCollection = (file: fsaFile, collection?: fsaCollection) => {
@@ -104,14 +123,27 @@ async function getCurrentCollection() {
 
 function getItems() {
   const list = useLiveQuery(async () => {
+    // get state
     const state = await db.state.toCollection().last();
+    // get current collection
     const collection = await db.userCollections.get(
       state?.currentCollection ?? 0
     );
     if (collection) {
-      return (
-        (await db.files.where("id").anyOf(collection.files).toArray()) ?? []
-      );
+      // get the files
+      const files =
+        (await db.files
+          .where("id")
+          .anyOf(collection.files.map((f) => f.fileId))
+          .toArray()) ?? [];
+
+      // add order from the collection.
+      files.forEach((f) => {
+        f.order =
+          collection.files.filter((c) => c.fileId === f.id)[0].order ?? 0;
+      });
+      // sort asc order
+      return files.sort((a, b) => a.order - b.order);
     }
     return [];
   });

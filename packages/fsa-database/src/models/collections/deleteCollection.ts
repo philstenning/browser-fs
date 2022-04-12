@@ -1,6 +1,5 @@
 import { db } from "../../db/setup";
 import { fsaCollection } from "../types";
-// import { removeFileFromCollection } from "./removeFileFromCollection";
 import {removeAllFilesFromCollection} from './removeAllFilesFromCollection'
 /**
  * Remove the id from the files.userCollections prop
@@ -11,16 +10,6 @@ import {removeAllFilesFromCollection} from './removeAllFilesFromCollection'
 export async function deleteCollection(collection: fsaCollection) {
   if (!collection.id) return false;
   await removeAllFilesFromCollection(collection.id)
-  // for (const fileId of collection.files) {
-  //   const file = await db.files.get(fileId);
-  //   if (!file) return;
-  //   if (file.id === fileId) {
-  //     await removeFileFromCollection(collection, file);
-  //     return true;
-  //   }
-  // }
   await db.userCollections.delete(collection.id);
   return false;
-  // update/save files
-  // delete this collection.
 }

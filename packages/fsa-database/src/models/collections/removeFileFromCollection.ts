@@ -7,11 +7,20 @@ export async function removeFileFromCollection(
 ) {
   // if file is not in collection return
   if (!file.id || !collection.id) return;
-  if (!collection.files.includes(file.id)) return false;
+
+  //get file ids
+  const _fileIds = collection.files.map((f) => f.fileId);
+  // if its not in the collection return
+  if (!_fileIds.includes(file.id)) return false;
+
   console.log("fun", { collection }, { file });
-  const fileIds = file.userCollectionIds.filter((f) => f !== collection.id);
-  const colIds = collection.files.filter((f) => f !== file.id);
-  collection.files = colIds;
-  file.userCollectionIds = fileIds;
+  // remove collection id from file.userCollections
+  file.userCollectionIds = file.userCollectionIds.filter(
+    (f) => f !== collection.id
+  );
+  // remove the fsaCollectionFile from the collection
+  collection.files = collection.files.filter((f) => f.fileId !== file.id);
+
+  // save all to db.
   return await putCollectionAndFile(collection, file);
 }

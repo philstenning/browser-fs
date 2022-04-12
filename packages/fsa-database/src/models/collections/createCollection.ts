@@ -1,9 +1,9 @@
 import { db } from "../../db/setup";
-import { fsaCollection } from "../types";
+import { fsaCollection,fsaCollectionFile } from "../types";
 
 export async function createCollection(
   name: string,
-  files: number[] = [],
+  files: fsaCollectionFile[] = [],
   description = "",
   creator: string = "",
   tags: string[] = []
