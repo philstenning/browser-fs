@@ -13,7 +13,6 @@ export async function removeFileFromCollection(
   // if its not in the collection return
   if (!_fileIds.includes(file.id)) return false;
 
-  console.log("fun", { collection }, { file });
   // remove collection id from file.userCollections
   file.userCollectionIds = file.userCollectionIds.filter(
     (f) => f !== collection.id

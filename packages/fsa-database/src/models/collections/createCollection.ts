@@ -30,7 +30,6 @@ export async function createCollection(
   if (count > 0) {
     const res = await appendCollectionName(name);
     if (res) {
-      console.log("after", res);
       collection.name = res;
     }
   }

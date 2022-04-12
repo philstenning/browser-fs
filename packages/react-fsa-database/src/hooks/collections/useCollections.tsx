@@ -46,7 +46,6 @@ const useCollections = () => {
 
       // if we only have one left set it as current
       db.userCollections.count().then((count) => {
-        console.log({ count });
         if (count === 1) {
           db.userCollections
             .toCollection()
@@ -70,17 +69,17 @@ const useCollections = () => {
     file: fsaFile,
     collection?: fsaCollection
   ) => {
-    console.log({ file });
+
     // if we don't have a collection
     // we assume we want to remove it from
     // the current selected collection
     if (!collection) {
-      console.log("removeFileFromCollection: no collection");
+      // console.log("removeFileFromCollection: no collection");
       getCurrentCollection().then((_collection) => {
         if (_collection) {
           const l = _collection.files;
           const m = file.userCollectionIds;
-          console.log(l, m, "id:", _collection.id);
+;
           fsaRemoveFileFromCollection(_collection, file);
         }
       });
