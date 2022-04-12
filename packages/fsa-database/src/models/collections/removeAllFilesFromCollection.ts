@@ -4,7 +4,8 @@ import { removeFileFromCollection } from "./removeFileFromCollection";
 export async function removeAllFilesFromCollection(collectionId: number) {
   const collection = await db.userCollections.get(collectionId);
   if (!collection) return;
-  const files = await db.files.bulkGet(collection.files);
+  
+  const files = await db.files.bulkGet(collection.files.map(f=>f.fileId));
 
   // remove collection id from each file
   // then put bach in the db

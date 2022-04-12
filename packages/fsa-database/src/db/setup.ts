@@ -25,7 +25,7 @@ class FsaDb extends Dexie {
       directories: `++id,name,created,hidden,isRoot,rootId,creator`,
       fileTypes: `++id,name,selected,hidden`,
       state: `++id,currentDirectory,currentFile,currentCollection`,
-      userCollections: `++id,name,updated,files`,
+      userCollections: `++id,name,created,updated`,
       errors:`++id,type,success`
     });
   }

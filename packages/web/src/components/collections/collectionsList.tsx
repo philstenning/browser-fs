@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useCollections, useFsaDbContext } from "react-fsa-database";
-import {fsaCollection} from 'fsa-database'
+import { fsaCollection } from "fsa-database";
 //@ts-ignore
 import styles from "./collectionsList.module.css";
 function CollectionList() {
-  const { collections, removeAllFilesFromCollection ,removeCollection} = useCollections();
+  const { collections, removeAllFilesFromCollection, removeCollection } =
+    useCollections();
   const { dbState, setCurrentCollection } = useFsaDbContext();
 
   const clearCollection = (
@@ -21,13 +22,13 @@ function CollectionList() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     collection: fsaCollection
   ) => {
-     e.stopPropagation();
+    e.stopPropagation();
     removeCollection(collection);
   };
 
   return (
     <div>
-      <h3>Collections {collections.length}</h3>
+      <h3>Collections ({collections.length})</h3>
       <Add />
       <ul className={styles.list}>
         {collections.map((col) => (
@@ -42,7 +43,7 @@ function CollectionList() {
               {" "}
               {col.name} <span>files:{col.files.length}</span>
               <button onClick={(e) => clearCollection(e, col)}>Clear</button>
-              <button onClick={e=> deleteCollection(e,col)}>Delete</button>
+              <button onClick={(e) => deleteCollection(e, col)}>Delete</button>
             </div>
           </li>
         ))}
