@@ -29,7 +29,7 @@ function filterByTypeAndRootDir() {
     const state = await db.state.toCollection().last();
     if (!state) return [];
     // return files.toArray()
-    return files.filter((f) => f.rootId === state.currentRootDirectory);
+    return files.filter((f) => f.rootId === state.currentRootDirectoryId);
   });
   return list ?? [];
 }
@@ -37,9 +37,10 @@ function filterByTypeAndRootDir() {
 function filterByRootDirOnly() {
   const list = useLiveQuery(async () => {
     const state = await db.state.toCollection().last();
+    if(!state?.currentRootDirectoryId ) return
     const files = await db.files
       .where("rootId")
-      .equals(state?.currentRootDirectory ?? 0)
+      .equals(state?.currentRootDirectoryId )
       .toArray();
     return files;
   });

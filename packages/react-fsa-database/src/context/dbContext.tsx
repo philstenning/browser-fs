@@ -15,10 +15,10 @@ type FsaDbContextType = {
   // currentRootDirectory: fsaDirectory | null;
   // stateId: number | null;
   dbState: fsaState;
-  setCurrentDirectory: (dir: fsaDirectory) => void;
-  setCurrentRootDirectory: (dir: fsaDirectory) => void;
-  setCurrentCollection: (collection: fsaCollection) => void;
-  setCurrentFile: (file: fsaFile) => void;
+  setCurrentDirectoryId: (idOrNull: string | null) => void;
+  setCurrentRootDirectoryId: (idOrNull: string | null) => void;
+  setCurrentCollectionId: (idOrNull: string | null) => void;
+  setCurrentFileId: (idOrNull: string | null) => void;
 };
 
 const FsaDbContext = createContext<FsaDbContextType | null>(null);
@@ -43,10 +43,10 @@ function FsaDbContextProvider({
 }: Props) {
   /////
   const [dbState, setDbState] = useState<fsaState>({
-    currentCollection: 0,
-    currentDirectory: 0,
-    currentFile: 0,
-    currentRootDirectory: 0,
+    currentCollectionId: null,
+    currentDirectoryId: null,
+    currentFileId: null,
+    currentRootDirectoryId: null,
   });
 
   function saveState(state: fsaState) {
@@ -65,24 +65,17 @@ function FsaDbContextProvider({
       });
   }
 
-  function setCurrentDirectory(dir: fsaDirectory) {
-    if (dir.id === dbState.currentDirectory) return;
-    saveState({ ...dbState, currentDirectory: dir.id ?? 0 });
+  function setCurrentDirectoryId(idOrNull: string | null) {
+    saveState({ ...dbState, currentDirectoryId: idOrNull });
   }
-  function setCurrentRootDirectory(dir: fsaDirectory) {
-    if (dir.id === dbState.currentRootDirectory) return;
-    saveState({ ...dbState, currentRootDirectory: dir.id ?? 0 });
+  function setCurrentRootDirectoryId(idOrNull: string | null) {
+    saveState({ ...dbState, currentRootDirectoryId: idOrNull });
   }
-  function setCurrentFile(file: fsaFile) {
-    if (file.id === dbState.currentFile) return;
-    // _setCurrentFile(file);
-    saveState({ ...dbState, currentFile: file.id ?? 0 });
-    // saveState();
+  function setCurrentFileId(idOrNull: string | null) {
+    saveState({ ...dbState, currentFileId: idOrNull });
   }
-
-  function setCurrentCollection(collection: fsaCollection) {
-    if (collection.id === dbState.currentCollection) return;
-    saveState({ ...dbState, currentCollection: collection.id ?? 0 });
+  function setCurrentCollectionId(idOrNull: string | null) {
+    saveState({ ...dbState, currentCollectionId: idOrNull });
   }
 
   /**
@@ -108,10 +101,10 @@ function FsaDbContextProvider({
     <FsaDbContext.Provider
       value={{
         dbState,
-        setCurrentCollection,
-        setCurrentDirectory,
-        setCurrentFile,
-        setCurrentRootDirectory,
+        setCurrentCollectionId,
+        setCurrentDirectoryId,
+        setCurrentFileId,
+        setCurrentRootDirectoryId,
       }}
     >
       {children}

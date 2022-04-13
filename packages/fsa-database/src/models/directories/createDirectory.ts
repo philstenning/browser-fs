@@ -1,22 +1,24 @@
 import { fsaDirectory } from "../types";
-
+import {v4 as uuid} from 'uuid'
 export function createDirectory(
   handle: FileSystemDirectoryHandle,
   path: string,
   isRoot: boolean,
-  rootId: number,
+  rootId: string,
   fileIds = [],
   depth = 0,
   creator = "user"
 ) {
   const createdAt = Date.now();
+  const id = uuid()
   const directory: fsaDirectory = {
+    id,
     created: createdAt,
     updated: createdAt,
     depth,
     handle,
     path,
-    rootId,
+    rootId:isRoot?id:rootId,// if it isRoot set this same as id.
     isRoot: isRoot ? "true" : "false",
     label: "",
     name: handle.name,

@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "declaration": false,
-    "types": ["wicg-file-system-access"],
+   
   },
   "include": ["./src/index.ts"],
   "exclude": ["node_modules"],

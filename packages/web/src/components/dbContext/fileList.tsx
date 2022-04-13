@@ -9,7 +9,7 @@ import styles from "./fileList.module.css";
 import { checkPermissionsOfHandle } from "fsa-browser";
 
 function FileList() {
-  const { dbState, setCurrentFile } = useFsaDbContext();
+  const { dbState, setCurrentFileId } = useFsaDbContext();
   const list = useFileList(true, true);
   const { addFileToCollection } = useCollections();
 
@@ -19,7 +19,7 @@ function FileList() {
   ) => {
     e.stopPropagation();
     addFileToCollection(file);
-    setCurrentFile(file);
+    setCurrentFileId(file.id);
   };
 
   const checkPerm = (
@@ -55,7 +55,7 @@ function FileList() {
         {list &&
           list.map((file, index) => (
             <li
-              className={dbState.currentFile === file.id ? styles.active : ""}
+              className={dbState.currentFileId === file.id ? styles.active : ""}
               onClick={(e) => handleClick(e, file)}
               key={index}
             >

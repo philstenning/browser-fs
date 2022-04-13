@@ -11,14 +11,14 @@ import { saveFile, createFile } from "./files";
  */
 export async function parseVirtualFileSystemEntry(
   virtualFileSystemEntry: VirtualFileSystemEntry,
-  rootId: number,
-  parentId: number
+  rootId: string,
+  parentId: string
 ) {
   if (!virtualFileSystemEntry.entries) return false;
 
   const dirs: fsaDirectory[] = [];
 
-  const fileIds: number[] = [];
+  const fileIds: string[] = [];
 
   //iterate over each entries handle
   // virtualFileSystemEntry.entries.forEach(async (entry) => {
@@ -73,7 +73,7 @@ export async function parseVirtualFileSystemEntry(
 
 // update the current fsaDirectory object parts property
 //  only if we have files to add.
-async function updateParentDirectory(fileIds: number[], parentId: number) {
+async function updateParentDirectory(fileIds: string[], parentId: string) {
   if (fileIds.length > 0) {
     const parentDir = await db.directories
       .where(":id")

@@ -1,9 +1,9 @@
 import { fsaFile } from "../types";
-
+import { v4 as uuid } from "uuid";
 export function createFile(
   handle: FileSystemFileHandle,
-  parentId: number,
-  rootId: number,
+  parentId: string,
+  rootId: string,
   path: string,
   type: string,
   name: string = handle.name,
@@ -12,10 +12,11 @@ export function createFile(
   tags: string[],
   description: string = "",
   imageUrl: string = "",
-  userCollectionIds: number[] = []
+  userCollectionIds: string[] = []
 ) {
   const createdAt = Date.now();
   const file: fsaFile = {
+    id: uuid(),
     name,
     handle,
     rootId,
@@ -30,6 +31,8 @@ export function createFile(
     updated: createdAt,
     imageUrl,
     userCollectionIds,
+    order: 0,
+    dbName: "",
   };
 
   return file;

@@ -9,24 +9,24 @@ import {
   fsaError
 } from "../models/types";
 class FsaDb extends Dexie {
-  files!: Dexie.Table<fsaFile, number>;
-  directories!: Dexie.Table<fsaDirectory, number>;
+  files!: Dexie.Table<fsaFile, string>;
+  directories!: Dexie.Table<fsaDirectory, string>;
+  userCollections!: Dexie.Table<fsaCollection, string>;
   fileTypes!: Dexie.Table<fsaFileType, number>;
   state!: Dexie.Table<fsaState, number>;
-  userCollections!: Dexie.Table<fsaCollection, number>;
-  errors!:Dexie.Table<fsaError, number>;
+  errors!: Dexie.Table<fsaError, number>;
   constructor() {
     super("fsa-database");
     const db = this;
 
     // define tables and indexes
     db.version(2).stores({
-      files: `++id,name,path,created,rootId,parentId,creator,type`,
-      directories: `++id,name,created,hidden,isRoot,rootId,creator`,
+      files: `id,name,path,created,rootId,parentId,creator,type`,
+      directories: `id,name,created,hidden,isRoot,rootId,creator`,
+      userCollections: `id,name,created,updated`,
       fileTypes: `++id,name,selected,hidden`,
       state: `++id,currentDirectory,currentFile,currentCollection`,
-      userCollections: `++id,name,created,updated`,
-      errors:`++id,type,success`
+      errors: `++id,type,success`,
     });
   }
 }

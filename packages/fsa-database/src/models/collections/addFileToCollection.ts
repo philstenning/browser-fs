@@ -1,6 +1,7 @@
 import { db } from "../../db/setup";
 import { fsaCollection, fsaFile, fsaCollectionFile } from "../types";
 import { putCollectionAndFile } from "./putCollectionAndFile";
+
 export async function addFileToCollection(
   file: fsaFile,
   collection?: fsaCollection
@@ -14,13 +15,13 @@ export async function addFileToCollection(
      
 
     // state.currentCollection is zero if not set.
-    if (!state || state.currentCollection === 0) {
+    if (!state || !state.currentCollectionId) {
       console.error("no collection to add too, make one first.");
       return false;
     }
 
     let stateCollection = await db.userCollections.get(
-      state.currentCollection
+      state.currentCollectionId
     );
     if (!stateCollection) {
       // if we got here there is no save state collection
@@ -42,9 +43,8 @@ export async function addFileToCollection(
     fileId: file.id,
     added: Date.now(),
     order: 0,
-  };
-
-  if (!collection.id) return false; // TODO smelly change to uuid? and set at init.
+  }
+  if (!collection) return false; 
   // check if file with same id exists already
   for (const f of collection.files) {
     if (f.fileId === collectionFile.fileId) {

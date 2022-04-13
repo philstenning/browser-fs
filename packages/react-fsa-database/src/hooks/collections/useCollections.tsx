@@ -19,7 +19,7 @@ const useCollections = () => {
     useLiveQuery(() =>
       db.userCollections.orderBy("created").reverse().toArray()
     ) ?? [];
-  const { setCurrentCollection, dbState } = useFsaDbContext();
+  const { setCurrentCollectionId, dbState } = useFsaDbContext();
 
   const addCollection = (
     name: string,
@@ -34,7 +34,7 @@ const useCollections = () => {
     createCollection(name, files, description, creator, tags)
       .then((res) => {
         if (res) {
-          setCurrentCollection(res);
+          setCurrentCollectionId(res.id);
           return true;
         }
       })
@@ -43,7 +43,6 @@ const useCollections = () => {
 
   const removeCollection = (collection: fsaCollection) => {
     deleteCollection(collection).then((res) => {
-
       // if we only have one left set it as current
       db.userCollections.count().then((count) => {
         if (count === 1) {
@@ -51,7 +50,7 @@ const useCollections = () => {
             .toCollection()
             .first()
             .then((col) => {
-              if (col) setCurrentCollection(col);
+              if (col) setCurrentCollectionId(col.id);
             });
         }
       });
@@ -61,15 +60,14 @@ const useCollections = () => {
   const addFileToCollection = (file: fsaFile, collection?: fsaCollection) => {
     fsaAddFileToCollection(file, collection).then((res) => res);
     // set the passed collection to the current collection if it isn't already.
-    if (collection && dbState.currentCollection !== collection.id)
-      setCurrentCollection(collection);
+    if (collection && dbState.currentCollectionId !== collection.id)
+      setCurrentCollectionId(collection.id);
   };
 
   const removeFileFromCollection = (
     file: fsaFile,
     collection?: fsaCollection
   ) => {
-
     // if we don't have a collection
     // we assume we want to remove it from
     // the current selected collection
@@ -79,7 +77,6 @@ const useCollections = () => {
         if (_collection) {
           const l = _collection.files;
           const m = file.userCollectionIds;
-;
           fsaRemoveFileFromCollection(_collection, file);
         }
       });
@@ -113,20 +110,20 @@ async function getCurrentState() {
 
 async function getCurrentCollection() {
   const state = await getCurrentState();
-  const collection = await db.userCollections.get(
-    state?.currentCollection ?? 0
-  );
-  if (collection) return collection;
-  return null;
+  if (!state?.currentCollectionId) return;
+  const collection = await db.userCollections.get(state?.currentCollectionId);
+  if (!collection) return null;
+  return collection;
 }
 
 function getItems() {
   const list = useLiveQuery(async () => {
     // get state
     const state = await db.state.toCollection().last();
+    if (!state?.currentCollectionId) return;
     // get current collection
     const collection = await db.userCollections.get(
-      state?.currentCollection ?? 0
+      state?.currentCollectionId
     );
     if (collection) {
       // get the files

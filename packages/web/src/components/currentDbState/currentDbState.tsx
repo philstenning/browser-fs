@@ -3,18 +3,18 @@ import { useFsaDbContext } from "react-fsa-database";
 function CurrentState() {
     const  {dbState} = useFsaDbContext()
     const {
-      currentCollection,
-      currentDirectory,
-      currentRootDirectory,
-      currentFile,
-    } = dbState
+      currentCollectionId,
+      currentDirectoryId,
+      currentRootDirectoryId,
+      currentFileId,
+    } = dbState;
   return (
     <ul>
-      <li>Collection: {currentCollection}</li>
-      <li>Directory: {currentDirectory}</li>
-      <li>RootDirectory: {currentRootDirectory}</li>
-      <li>File: {currentFile}</li>
-      <li>id: {dbState.id?.toString()?? 'none'}</li>
+      <li>Collection: {currentCollectionId}</li>
+      <li>Directory: {currentDirectoryId}</li>
+      <li>RootDirectory: {currentRootDirectoryId}</li>
+      <li>File: {currentFileId}</li>
+      <li>id: {dbState.id?.toString()?? 'null'}</li>
     </ul>
   );
 }
