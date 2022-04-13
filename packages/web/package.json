@@ -1,5 +1,5 @@
 {
-  "name": "fsa-browser-test",
+  "name": "fsa-browser-web",
   "private": true,
   "version": "0.1.0",
   "scripts": {

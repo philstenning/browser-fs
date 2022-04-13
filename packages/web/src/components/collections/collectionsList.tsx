@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useCollections, useFsaDbContext } from "react-fsa-database";
+import {useLiveQuery,db} from 'fsa-database'
 import { fsaCollection } from "fsa-database";
 //@ts-ignore
 import styles from "./collectionsList.module.css";
@@ -8,7 +9,13 @@ function CollectionList() {
     useCollections();
   const { dbState, setCurrentCollectionId } = useFsaDbContext();
 
-  const clearCollection = (
+
+const res = useLiveQuery(()=>db.userCollections.toArray())
+console.log({res })
+console.log({collections })
+  
+
+const clearCollection = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     collection: fsaCollection
   ) => {

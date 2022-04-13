@@ -12,21 +12,21 @@ function Header() {
               Home
             </Link>
           </li>
-          <li className={style.mainNav__item}>
+          {/* <li className={style.mainNav__item}>
             <Link className={style.mainNav__link} to="/about">
               About
             </Link>
-          </li>
-          <li className={style.mainNav__link}>
+          </li> */}
+          {/* <li className={style.mainNav__link}>
             <Link className={style.mainNav__link} to="/contact">
               Contact
             </Link>
-          </li>
-          <li className={style.mainNav__link}>
+          </li> */}
+          {/* <li className={style.mainNav__link}>
             <Link className={style.mainNav__link} to="/db">
               Database
             </Link>
-          </li>
+          </li> */}
           <li className={style.mainNav__link}>
             <Link className={style.mainNav__link} to="/provider">
               DbProvider

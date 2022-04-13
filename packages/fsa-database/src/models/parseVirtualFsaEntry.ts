@@ -75,10 +75,10 @@ export async function parseVirtualFileSystemEntry(
 //  only if we have files to add.
 async function updateParentDirectory(fileIds: string[], parentId: string) {
   if (fileIds.length > 0) {
-    const parentDir = await db.directories
-      .where(":id")
-      .equals(parentId)
-      .first();
+    const parentDir = await db.directories.get(parentId);
+    // .where(":id")
+    // .equals(parentId)
+
     if (!parentDir) {
       console.error(
         "No directory in db with that id. updateParentDirectory() "
