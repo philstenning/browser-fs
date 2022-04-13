@@ -3,9 +3,9 @@
     "types": ["wicg-file-system-access"],
     "outDir": "dist",
     "declaration": true,
-    
-    
+    "skipLibCheck": true
   },
-   "include": ["./src/index.ts"],
+  "include": ["./src/index.ts"],
+  "exclude": ["node_modules"],
   "extends": "../../tsconfig.json"
 }

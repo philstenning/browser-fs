@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "types": [],
+    "types": ["wicg-file-system-access"],
     "outDir": "dist",
     "declaration": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true
   },
   "include": ["./src/index.ts"],
   "extends": "../../tsconfig.json"
