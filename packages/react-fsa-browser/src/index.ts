@@ -13,8 +13,3 @@ export type {
   VirtualRootDirectoryType,
 } from "fsa-browser";
 
-// Hooks 
-export * from "./hooks/fileTypes";
-// export * from "./hooks/files";
-// export {useRootDirectories} from './hooks/directories/useDirectories'
-// export {useCollections} from './hooks/collections/useCollections'

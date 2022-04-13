@@ -6,7 +6,7 @@ import styles from "./collectionsList.module.css";
 function CollectionList() {
   const { collections, removeAllFilesFromCollection, removeCollection } =
     useCollections();
-  const { dbState, setCurrentCollection } = useFsaDbContext();
+  const { dbState, setCurrentCollectionId } = useFsaDbContext();
 
   const clearCollection = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -15,7 +15,7 @@ function CollectionList() {
     e.stopPropagation();
 
     removeAllFilesFromCollection(collection.id);
-    setCurrentCollection(collection);
+    setCurrentCollectionId(collection.id);
   };
 
   const deleteCollection = (
@@ -34,10 +34,10 @@ function CollectionList() {
         {collections.map((col) => (
           <li
             className={
-              col.id === dbState.currentCollection ? styles.active : ""
+              col.id === dbState.currentCollectionId ? styles.active : ""
             }
             key={col.id}
-            onClick={() => setCurrentCollection(col)}
+            onClick={() => setCurrentCollectionId(col.id)}
           >
             <div className={styles.btnGroup}>
               {" "}

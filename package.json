@@ -10,7 +10,8 @@
   "scripts": {
     "clean": "pnpm -r exec -- rm -rf node_modules",
     "dev": "pnpm -r dev",
-    "watch": "pnpm -r  --parallel watch"
+    "watch": "pnpm -r  --parallel watch",
+    "build":"pnpm -r build"
   },
   "repository": {
     "type": "git",

@@ -2,7 +2,6 @@ import { db } from "../../db/setup";
 import { fsaFile } from "../types";
 
 export async function deleteFile(file: fsaFile) {
-  if (!file.id) return false;
   try {
     await db.files.delete(file.id);
     console.log("TODO remove from User collections");

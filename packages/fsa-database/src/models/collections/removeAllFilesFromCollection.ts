@@ -1,14 +1,14 @@
 import { db } from "../../db/setup";
 import { removeFileFromCollection } from "./removeFileFromCollection";
 
-export async function removeAllFilesFromCollection(collectionId: number) {
+export async function removeAllFilesFromCollection(collectionId: string) {
   const collection = await db.userCollections.get(collectionId);
   if (!collection) return;
   
   const files = await db.files.bulkGet(collection.files.map(f=>f.fileId));
 
   // remove collection id from each file
-  // then put bach in the db
+  // then put back in the db
   await db.transaction('rw',db.userCollections, db.files,async ()=>{
       
             try{

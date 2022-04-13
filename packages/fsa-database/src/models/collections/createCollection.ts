@@ -1,6 +1,6 @@
 import { db } from "../../db/setup";
 import { fsaCollection,fsaCollectionFile } from "../types";
-
+import {v4 as uuid} from 'uuid'
 export async function createCollection(
   name: string,
   files: fsaCollectionFile[] = [],
@@ -10,6 +10,7 @@ export async function createCollection(
 ): Promise<fsaCollection | undefined> {
   const createdAt = Date.now();
   const collection: fsaCollection = {
+    id:uuid(),
     created: createdAt,
     updated: createdAt,
     name,

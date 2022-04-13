@@ -14,7 +14,7 @@ import { useFsaDbContext } from "../../context/dbContext";
  * then set it as the currentDirectory
  */
 export function useAddRootDirectory() {
-  const { setCurrentRootDirectory } = useFsaDbContext();
+  const { setCurrentRootDirectoryId } = useFsaDbContext();
   const [isScanning, setIsScanning] = useState(false);
   const names = useFileTypesNames();
 
@@ -36,7 +36,7 @@ export function useAddRootDirectory() {
           }
 
           // now set the current rootDir in dbState
-          setCurrentRootDirectory(dir);
+          setCurrentRootDirectoryId(dir.id);
         });
       });
     });

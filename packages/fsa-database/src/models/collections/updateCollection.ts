@@ -1,5 +1,5 @@
 import { db } from "../../db/setup";
-import { fsaCollection } from "../types";
+import { fsaCollection,fsaCollectionFile } from "../types";
 import {addFileToCollection} from './addFileToCollection'
 import {removeFileFromCollection} from './removeFileFromCollection'
 
@@ -14,11 +14,12 @@ export async function updateCollection(collection: fsaCollection) {
   if (!collection.id) return;
   const oldCollection = await db.userCollections.get(collection.id);
   if (!oldCollection) return;
-  const itemsToAdd: number[] = [];
-  const itemsToDel: number[] = [];
+  const itemsToAdd: fsaCollectionFile[] = [];
+  const itemsToDel: fsaCollectionFile[] = [];
   // the items are in the new one
   // but not in the old so need to
   //be added.
+  // TODO check if this still works
   collection.files.forEach((n) => {
     if (oldCollection.files.includes(n)) {
       itemsToAdd.push(n);

@@ -1,11 +1,11 @@
 import { fsaDirectory } from "../types";
 import { db } from "../../db/setup";
-import {createDirectory} from './createDirectory'
+import { createDirectory } from "./createDirectory";
 export async function createRootDbDirectory(
   handle: FileSystemDirectoryHandle,
   creator: string = "user"
 ): Promise<fsaDirectory | null> {
-  const directory = createDirectory(handle, "/", true, 0, [], 0, creator);
+  const directory = createDirectory(handle, "/", true, "", [], 0, creator);
 
   const test = await directoryAlreadyExists(directory);
 

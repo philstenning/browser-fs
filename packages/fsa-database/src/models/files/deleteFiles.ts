@@ -5,8 +5,8 @@ import { fsaFile } from "../types";
 
 export async function deleteFiles(files: fsaFile[]) {
   const ids = files.map((f) => f.id);
-
-  if (!!ids) return false;
+  console.log('del files' , ids.length)
+  if (!ids.length) return false;
   try {
     await db.files.bulkDelete(ids);
     console.log("TODO remove from User collections");
