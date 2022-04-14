@@ -7,6 +7,7 @@ export interface fsaBase {
 }
 
 export interface fsaDirectory extends fsaBase {
+  parentId: string | null;
   handle: FileSystemDirectoryHandle;
   isRoot: "true" | "false";
   rootId: string;
@@ -19,6 +20,7 @@ export interface fsaDirectory extends fsaBase {
 }
 export interface fsaFile extends fsaBase {
   parentId: string;
+  InitialParentId: string;
   rootId: string;
   handle: FileSystemFileHandle;
   path: string;
@@ -29,8 +31,8 @@ export interface fsaFile extends fsaBase {
   tags: string[];
   imageUrl?: string;
   userCollectionIds: string[];
-  dbName: string;
   order: number;
+  hidden: "true" | "false";
 }
 
 export interface fsaCollection extends fsaBase {

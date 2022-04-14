@@ -4,6 +4,7 @@ import RootDir from "../components/dbContext/rootDirectories";
 import CollectionList from "../components/collections/collectionsList";
 import CurrentState from "../components/currentDbState/currentDbState";
 import CollectionItems from "../components/collections/currentCollectionItems";
+import DirectoriesForRootDir from "../components/directories/directoriesForRootDir";
 //@ts-ignore // don't know why but vscode ts can't find it???
 import styles from './dbProvider.module.css'
 const DbProvider = () => {
@@ -19,6 +20,7 @@ const DbProvider = () => {
         <div>
           <CollectionList />
           <CollectionItems />
+          <DirectoriesForRootDir/>
         </div>
       </div>
     </div>

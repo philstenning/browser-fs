@@ -33,6 +33,7 @@ export async function parseVirtualFileSystemEntry(
         path ?? "",
         false,
         rootId,
+        parentId,
         [],
         depth
       );
