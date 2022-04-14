@@ -1,0 +1,60 @@
+import { fsaDirectory, db } from "fsa-database";
+
+export async function mergeToParentDir(
+  directory: fsaDirectory,
+  toRoot: boolean = false
+) {
+  // we have current dir  from props
+  try {
+    let useThisDir = false;
+    let parentDir: fsaDirectory | undefined;
+    while (!useThisDir) {
+      // if we want to merge to root we get it here.
+      if (toRoot) {
+        parentDir = await db.directories.get(directory.rootId);
+      } else {
+        // or get parent dir
+        if(directory.parentId)
+        parentDir = await db.directories.get(directory.parentId);
+      }
+      if (!parentDir) return false;
+
+      // check if it is hidden if it is get it's parent recursive
+      // if we have got to root then exit also.
+      if ((parentDir.hidden = "false" || parentDir.isRoot)) {
+        useThisDir = true;
+      }
+    }
+    if (!parentDir) return;
+
+    // get files for current dir
+    const files = await db.files.bulkGet(directory.fileIds);
+
+    // change the parent id to the new parent id // leave initParent as set.
+    await db.transaction("rw", db.directories, db.files, async () => {
+      for (const f of files) {
+          if(!f || !parentDir) break;
+
+        f.parentId = parentDir.id;
+        await db.files.put(f);
+
+        // we need these later, so store them
+        const ids = directory.fileIds;
+
+        // remove file ids from old parent dir
+        directory.fileCount = 0;
+        directory.fileIds = [];
+        await db.directories.put(directory);
+
+        // add file ids to new parent dir
+        parentDir.fileIds = [...parentDir.fileIds, ...ids];
+        parentDir.fileCount = parentDir.fileIds.length;
+
+        await db.directories.put(parentDir)
+
+      }
+    });
+  } catch (err) {
+    console.error(`error merging directory to parent ${directory.name} ${err}`);
+  }
+}

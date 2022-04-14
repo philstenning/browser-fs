@@ -4,6 +4,7 @@ import { useFsaDbContext } from "../../context/dbContext";
 
 import { update } from "./update";
 import { hideDirAndFiles } from "./hideDirAndFiles";
+import {mergeToParentDir} from './mergeToParentDir'
 function useDirectories() {
   const [showHidden, setShowHidden] = useState(true);
   const { setCurrentDirectoryId } = useFsaDbContext();
@@ -30,9 +31,9 @@ function useDirectories() {
   const toggleHidden = () => {
     setShowHidden((cur) => !cur);
   };
-const mergeToParentDirectory=()=>{
-  throw new Error('not implemented error')
-}
+const mergeToParentDirectory = async (directory: fsaDirectory) => {
+  await mergeToParentDir(directory);
+};
 const mergeToRootDirectory=()=>{
   throw new Error('not implemented error')
 }

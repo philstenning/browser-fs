@@ -1,6 +1,6 @@
 import { db, useLiveQuery } from "fsa-database";
 
-function useFileList(
+function useRootFileList(
   filterBySelectedFileTypes: boolean = true,
   filterByRootDirectory: boolean = true
 ) {
@@ -62,4 +62,4 @@ function filterFileTypesOnly() {
 }
 
 
-export { useFileList };
+export { useRootFileList };

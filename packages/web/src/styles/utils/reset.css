@@ -2,6 +2,14 @@ li{
     list-style: none;
 }
 
+.hidden{
+    color: var(--red-3);
+    position: relative;
+}
+.hidden::before{
+    content: 👎;
+}
+
 .active{
     color: var(--orange-3);
 }

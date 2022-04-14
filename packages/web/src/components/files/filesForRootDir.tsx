@@ -1,16 +1,17 @@
 import {
-  useFileList,
+  useRootFileList,
   useCollections,
   useFsaDbContext,
 } from "react-fsa-database";
 import { fsaFile } from "fsa-database";
 //@ts-ignore
-import styles from "./fileList.module.css";
+import styles from "./filesForRootDir.module.css";
+
 import { checkPermissionsOfHandle } from "fsa-browser";
 
-function FileList() {
+function FilesForRootDir() {
   const { dbState, setCurrentFileId } = useFsaDbContext();
-  const list = useFileList(true, true);
+  const list = useRootFileList(true, true);
   const { addFileToCollection } = useCollections();
 
   const handleClick = (
@@ -48,6 +49,12 @@ function FileList() {
     });
   };
 
+  const listStyles = (file: fsaFile) => {
+    return `${dbState.currentFileId === file.id ? "active" : ""} ${
+      file.hidden === "true" ? "hidden" : ""
+    }`;
+  };
+
   return (
     <div className={styles.container}>
       <h3>File List ({list.length})</h3>
@@ -55,11 +62,11 @@ function FileList() {
         {list &&
           list.map((file, index) => (
             <li
-              className={dbState.currentFileId === file.id ? styles.active : ""}
+              className={listStyles(file)}
               onClick={(e) => handleClick(e, file)}
               key={index}
             >
-              {file.name}{" "}
+              {file.name} {file.hidden}
               <button onClick={(e) => checkPerm(e, file)}>check</button>
             </li>
           ))}
@@ -68,4 +75,4 @@ function FileList() {
   );
 }
 
-export default FileList;
+export default FilesForRootDir;

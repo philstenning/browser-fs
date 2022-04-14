@@ -7,15 +7,15 @@ export async function hideDirAndFiles(
   await db.transaction("rw", db.directories, db.files, async () => {
     try {
       const files = await db.files.bulkGet(directory.fileIds);
-
-      files.forEach((file) => {
+      console.log( {files})
+      for (const file of files) {
         if (!file) return;
         file.hidden = hide;
-        db.files.put(file);
-      });
-      directory.hidden=hide
-      await db.directories.put(directory);
+        await db.files.put(file);
+      }
 
+      directory.hidden = hide;
+      await db.directories.put(directory);
     } catch (e) {
       console.error(
         `error hiding directory and it's files. ${directory.name} ${e}`
