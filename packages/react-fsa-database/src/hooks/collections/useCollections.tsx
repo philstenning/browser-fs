@@ -52,6 +52,8 @@ const useCollections = () => {
             .then((col) => {
               if (col) setCurrentCollectionId(col.id);
             });
+        }else if(count===0){
+          setCurrentCollectionId(null);
         }
       });
     });
