@@ -21,7 +21,7 @@ class FsaDb extends Dexie {
 
     // define tables and indexes
     db.version(2).stores({
-      files: `id,name,path,created,rootId,parentId,creator,type`,
+      files: `id,name,path,created,rootId,parentId,creator,type,hidden`,
       directories: `id,name,created,hidden,isRoot,rootId,creator`,
       userCollections: `id,name,created,updated`,
       fileTypes: `++id,name,selected,hidden`,

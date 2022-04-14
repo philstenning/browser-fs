@@ -32,7 +32,8 @@ export function createFile(
     imageUrl,
     userCollectionIds,
     order: 0,
-    dbName: "",
+    hidden: "false",
+    InitialParentId: parentId,
   };
 
   return file;

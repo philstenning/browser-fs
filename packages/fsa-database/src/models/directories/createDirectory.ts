@@ -5,6 +5,7 @@ export function createDirectory(
   path: string,
   isRoot: boolean,
   rootId: string,
+  parentId:string| null,
   fileIds = [],
   depth = 0,
   creator = "user"
@@ -26,6 +27,7 @@ export function createDirectory(
     fileIds,
     fileCount: 0,
     hidden: "false",
+    parentId
   };
   return directory;
 }
