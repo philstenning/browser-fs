@@ -15,7 +15,7 @@ export type {
 
 // Hooks 
 export * from "./hooks/fileTypes";
-export * from "./hooks/files";
+export {useRootFileList,useDirectoryFiles} from "./hooks/files";
 export {useRootDirectories} from './hooks/rootDirectories/useRootDirectories'
 export {useDirectories} from './hooks/directories/useDirectories'
 export {useCollections} from './hooks/collections/useCollections'
