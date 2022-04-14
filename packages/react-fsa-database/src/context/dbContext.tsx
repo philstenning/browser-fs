@@ -1,19 +1,7 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
-import {
-  db,
-  fsaDirectory,
-  initializeDb,
-  fsaCollection,
-  fsaFile,
-  fsaState,
-} from "fsa-database";
+import { db, initializeDb, fsaState } from "fsa-database";
 
 type FsaDbContextType = {
-  // currentCollection: fsaCollection | null;
-  // currentDirectory: fsaDirectory | null;
-  // currentFile: fsaFile | null;
-  // currentRootDirectory: fsaDirectory | null;
-  // stateId: number | null;
   dbState: fsaState;
   setCurrentDirectoryId: (idOrNull: string | null) => void;
   setCurrentRootDirectoryId: (idOrNull: string | null) => void;
@@ -57,7 +45,7 @@ function FsaDbContextProvider({
         if (res > 0) {
           // we have a new id, id is readonly
           // so create a new obj.
-          setDbState( { ...state, id: res });
+          setDbState({ ...state, id: res });
         }
       })
       .catch((err) => {
@@ -66,15 +54,20 @@ function FsaDbContextProvider({
   }
 
   function setCurrentDirectoryId(idOrNull: string | null) {
+    if (dbState.currentDirectoryId === idOrNull) return;
     saveState({ ...dbState, currentDirectoryId: idOrNull });
   }
   function setCurrentRootDirectoryId(idOrNull: string | null) {
+    // only update if changed.
+    if (dbState.currentRootDirectoryId === idOrNull) return;
     saveState({ ...dbState, currentRootDirectoryId: idOrNull });
   }
   function setCurrentFileId(idOrNull: string | null) {
+    if (dbState.currentFileId === idOrNull) return;
     saveState({ ...dbState, currentFileId: idOrNull });
   }
   function setCurrentCollectionId(idOrNull: string | null) {
+    if (dbState.currentCollectionId === idOrNull) return;
     saveState({ ...dbState, currentCollectionId: idOrNull });
   }
 
