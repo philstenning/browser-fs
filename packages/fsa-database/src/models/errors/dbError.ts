@@ -7,7 +7,7 @@ export class DbError implements fsaError{
   type: "warning" | "error" | "unknown";
   constructor(
     message: string,
-    type?: "warning" | "error" | "unknown",
+    type: "warning" | "error" | "unknown"='error',
     info: string = "",
     success: boolean = false
   ) {

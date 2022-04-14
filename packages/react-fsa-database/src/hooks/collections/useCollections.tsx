@@ -6,7 +6,7 @@ import {
   deleteCollection,
   addFileToCollection as fsaAddFileToCollection,
   removeFileFromCollection as fsaRemoveFileFromCollection,
-  updateCollection as fsaUpdateCollection,
+  updateCollection,
   removeAllFilesFromCollection,
   fsaFile,
   fsaCollectionFile,
@@ -21,52 +21,46 @@ const useCollections = () => {
     ) ?? [];
   const { setCurrentCollectionId, dbState } = useFsaDbContext();
 
-  const addCollection = (
+  const addCollection = async (
     name: string,
     files: fsaCollectionFile[] = [],
     description = "",
     creator: string = "",
     tags: string[] = []
   ) => {
-    // if(name.length<1){
-    //   return new DbError("Collection name can not be empty",'error');
-    // }
-    createCollection(name, files, description, creator, tags)
-      .then((res) => {
-        if (res) {
-          setCurrentCollectionId(res.id);
-          return true;
-        }
-      })
-      .catch((err) => new DbError("Creating Collection", "error", err));
+    const res = await createCollection(name, files, description, creator, tags);
+    if (res) {
+      setCurrentCollectionId(res.id);
+      return true;
+    }
   };
 
-  const removeCollection = (collection: fsaCollection) => {
-    deleteCollection(collection).then((res) => {
-      // if we only have one left set it as current
-      db.userCollections.count().then((count) => {
-        if (count === 1) {
-          db.userCollections
-            .toCollection()
-            .first()
-            .then((col) => {
-              if (col) setCurrentCollectionId(col.id);
-            });
-        }else if(count===0){
-          setCurrentCollectionId(null);
-        }
-      });
-    });
+  const removeCollection = async (collection: fsaCollection) => {
+    const res = await deleteCollection(collection);
+    if (!res) return;
+    // if we only have one left set it as current.
+    const count = await db.userCollections.count();
+    if (count === 1) {
+      const col = await db.userCollections.toCollection().first();
+      if (col) setCurrentCollectionId(col.id);
+      // If there is none left
+    } else if (count === 0) {
+      setCurrentCollectionId(null);
+    }
   };
 
-  const addFileToCollection = (file: fsaFile, collection?: fsaCollection) => {
-    fsaAddFileToCollection(file, collection).then((res) => res);
+  const addFileToCollection = async (
+    file: fsaFile,
+    collection?: fsaCollection
+  ) => {
+    const added = await fsaAddFileToCollection(file, collection);
+    if (!added) return;
     // set the passed collection to the current collection if it isn't already.
     if (collection && dbState.currentCollectionId !== collection.id)
       setCurrentCollectionId(collection.id);
   };
 
-  const removeFileFromCollection = (
+  const removeFileFromCollection = async (
     file: fsaFile,
     collection?: fsaCollection
   ) => {
@@ -74,22 +68,13 @@ const useCollections = () => {
     // we assume we want to remove it from
     // the current selected collection
     if (!collection) {
-      // console.log("removeFileFromCollection: no collection");
-      getCurrentCollection().then((_collection) => {
-        if (_collection) {
-          const l = _collection.files;
-          const m = file.userCollectionIds;
-          fsaRemoveFileFromCollection(_collection, file);
-        }
-      });
+      const _collection = await getCurrentCollection();
+      if (_collection) {
+        await fsaRemoveFileFromCollection(_collection, file);
+      }
       return;
     }
-
-    console.log("removeFileFromCollection: has collection");
-    fsaRemoveFileFromCollection(collection, file).then((res) => res);
-  };
-  const updateCollection = (collection: fsaCollection) => {
-    fsaUpdateCollection(collection).then((res) => res);
+    await fsaRemoveFileFromCollection(collection, file);
   };
 
   const currentCollectionItems = getItems();
@@ -124,9 +109,7 @@ function getItems() {
     const state = await db.state.toCollection().last();
     if (!state?.currentCollectionId) return;
     // get current collection
-    const collection = await db.userCollections.get(
-      state?.currentCollectionId
-    );
+    const collection = await db.userCollections.get(state?.currentCollectionId);
     if (collection) {
       // get the files
       const files =

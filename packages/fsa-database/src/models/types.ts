@@ -1,5 +1,5 @@
 export interface fsaBase {
-  id?: string;
+  id: string;
   name: string;
   created: number;
   creator: string;
@@ -34,8 +34,6 @@ export interface fsaFile extends fsaBase {
 }
 
 export interface fsaCollection extends fsaBase {
-  // id:string;
-  dbId?:number;
   files: fsaCollectionFile[];
   description?: string;
   tags: string[];

@@ -1,5 +1,5 @@
 import Dexie from "dexie";
-import  'dexie-observable'
+// import  'dexie-observable'
 import {
   fsaDirectory,
   fsaFile,
@@ -21,9 +21,9 @@ class FsaDb extends Dexie {
 
     // define tables and indexes
     db.version(2).stores({
-      files: `$$id,name,path,created,rootId,parentId,creator,type`,
-      directories: `$$id,name,created,hidden,isRoot,rootId,creator`,
-      userCollections: `$$id,name,created,updated`,
+      files: `id,name,path,created,rootId,parentId,creator,type`,
+      directories: `id,name,created,hidden,isRoot,rootId,creator`,
+      userCollections: `id,name,created,updated`,
       fileTypes: `++id,name,selected,hidden`,
       state: `++id,currentDirectory,currentFile,currentCollection`,
       errors: `++id,type,success`,
