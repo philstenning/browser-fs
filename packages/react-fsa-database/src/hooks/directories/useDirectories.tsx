@@ -5,6 +5,8 @@ import { useFsaDbContext } from "../../context/dbContext";
 import { update } from "./update";
 import { hideDirAndFiles } from "./hideDirAndFiles";
 import {mergeToParentDir} from './mergeToParentDir'
+import { unMergeDirectories } from "./unMergeDirectories";
+
 function useDirectories() {
   const [showHidden, setShowHidden] = useState(true);
   const { setCurrentDirectoryId } = useFsaDbContext();
@@ -45,7 +47,8 @@ const mergeToRootDirectory=()=>{
     unHideDirectory,
     toggleHidden,
     mergeToParentDirectory,
-    mergeToRootDirectory
+    mergeToRootDirectory,
+    unMergeDirectories
   };
 }
 

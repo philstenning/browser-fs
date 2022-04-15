@@ -1,4 +1,3 @@
-import React from "react";
 import {  db, useLiveQuery, fsaFile } from "fsa-database";
 function useDirectoryFiles() {
   const directoryFiles = useLiveQuery<fsaFile[]>(async () => {
