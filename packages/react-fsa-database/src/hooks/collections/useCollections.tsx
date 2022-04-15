@@ -12,7 +12,7 @@ import {
   fsaCollectionFile,
 } from "fsa-database";
 import { useFsaDbContext } from "../../context/dbContext";
-
+import {copyToFileSystem} from '../../features/copyToFileSystem'
 const useCollections = () => {
   const collections =
     useLiveQuery(() =>
@@ -52,6 +52,7 @@ const useCollections = () => {
     file: fsaFile,
     collection?: fsaCollection
   ) => {
+    await copyToFileSystem(file)
     const added = await fsaAddFileToCollection(file, collection);
     if (!added) return;
     // set the passed collection to the current collection if it isn't already.
