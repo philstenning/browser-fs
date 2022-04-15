@@ -10,7 +10,6 @@ import {
   removeAllFilesFromCollection,
   fsaFile,
   fsaCollectionFile,
-  DbError,
 } from "fsa-database";
 import { useFsaDbContext } from "../../context/dbContext";
 
@@ -79,6 +78,24 @@ const useCollections = () => {
 
   const currentCollectionItems = getItems();
 
+
+
+
+const  cloneCollection= async(
+  collection: fsaCollection,
+  name: string = "copy"
+)=> {
+  if (name === "copy") name = `${collection.name}_copy`;
+  const { files, description, creator, tags } = collection;
+  const clone =
+    (await createCollection(name, files, description, creator, tags)) ?? null;
+  if (!clone) return false;
+  setCurrentCollectionId(clone.id);
+  return clone;
+}
+
+
+
   return {
     collections,
     addCollection,
@@ -87,6 +104,7 @@ const useCollections = () => {
     removeFileFromCollection,
     updateCollection,
     currentCollectionItems,
+    cloneCollection,
     removeAllFilesFromCollection,
   };
 };

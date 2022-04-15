@@ -5,8 +5,13 @@ import { fsaCollection } from "fsa-database";
 //@ts-ignore
 import styles from "./collectionsList.module.css";
 function CollectionList() {
-  const { collections, removeAllFilesFromCollection, removeCollection } =
-    useCollections();
+  const {
+    collections,
+    removeAllFilesFromCollection,
+    removeCollection,
+    cloneCollection,
+  } = useCollections();
+
   const { dbState, setCurrentCollectionId } = useFsaDbContext();
 
   const clearCollection = (
@@ -25,6 +30,13 @@ function CollectionList() {
   ) => {
     e.stopPropagation();
     removeCollection(collection);
+  };
+  const copyCollection = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    collection: fsaCollection
+  ) => {
+    e.stopPropagation();
+    cloneCollection(collection);
   };
 
   return (
@@ -45,6 +57,7 @@ function CollectionList() {
               {col.name} <span>files:{col.files.length}</span>
               <button onClick={(e) => clearCollection(e, col)}>Clear</button>
               <button onClick={(e) => deleteCollection(e, col)}>Delete</button>
+              <button onClick={(e) => copyCollection(e, col)}>Copy</button>
             </div>
           </li>
         ))}
