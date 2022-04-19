@@ -39,6 +39,8 @@ export interface fsaCollection extends fsaBase {
   files: fsaCollectionFile[];
   description?: string;
   tags: string[];
+  handle?: FileSystemDirectoryHandle;
+  saveToFileSystem:boolean 
 }
 
 export interface fsaCollectionFile {

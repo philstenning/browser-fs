@@ -37,7 +37,7 @@ export async function addFileToCollection(
     }
     collection = stateCollection;
   }
-
+  
   // create file
   const collectionFile: fsaCollectionFile = {
     fileId: file.id,

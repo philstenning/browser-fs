@@ -1,6 +1,9 @@
-import { db, fsaDirectory, useLiveQuery } from "fsa-database";
-
-import { deleteRootDbDirectoryAndFiles } from "fsa-database";
+import {
+  db,
+  fsaDirectory,
+  useLiveQuery,
+  deleteRootDbDirectoryAndFiles,
+} from "fsa-database";
 import { useAddRootDirectory } from "../rootDirectories/useAddRootDirectory";
 
 export function useRootDirectories() {
