@@ -39,6 +39,7 @@ export interface fsaCollection extends fsaBase {
   files: fsaCollectionFile[];
   description?: string;
   tags: string[];
+  parentHandle?: FileSystemDirectoryHandle;
   handle?: FileSystemDirectoryHandle;
   saveToFileSystem:boolean 
 }

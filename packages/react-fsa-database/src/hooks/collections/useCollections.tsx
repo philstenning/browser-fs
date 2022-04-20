@@ -10,9 +10,9 @@ import {
   removeAllFilesFromCollection,
   fsaFile,
   fsaCollectionFile,
+  saveCollectionToFileSystem,
 } from "fsa-database";
 import { useFsaDbContext } from "../../context/dbContext";
-import {saveCollectionToFileSystem} from './saveCollectionToFileSystem'
 
 const useCollections = () => {
   const collections =
@@ -53,7 +53,6 @@ const useCollections = () => {
     file: fsaFile,
     collection?: fsaCollection
   ) => {
- 
     const added = await fsaAddFileToCollection(file, collection);
     if (!added) return;
     // set the passed collection to the current collection if it isn't already.
@@ -80,23 +79,18 @@ const useCollections = () => {
 
   const currentCollectionItems = getItems();
 
-
-
-
-const  cloneCollection= async(
-  collection: fsaCollection,
-  name: string = "copy"
-)=> {
-  if (name === "copy") name = `${collection.name}_copy`;
-  const { files, description, creator, tags } = collection;
-  const clone =
-    (await createCollection(name, files, description, creator, tags)) ?? null;
-  if (!clone) return false;
-  setCurrentCollectionId(clone.id);
-  return clone;
-}
-
-
+  const cloneCollection = async (
+    collection: fsaCollection,
+    name: string = "copy"
+  ) => {
+    if (name === "copy") name = `${collection.name}_copy`;
+    const { files, description, creator, tags } = collection;
+    const clone =
+      (await createCollection(name, files, description, creator, tags)) ?? null;
+    if (!clone) return false;
+    setCurrentCollectionId(clone.id);
+    return clone;
+  };
 
   return {
     collections,

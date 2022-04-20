@@ -14,15 +14,16 @@ export {
 } from "./models/files";
 
 export {
+  addFileToCollection,
   createCollection,
   deleteCollection,
   updateCollection,
-  addFileToCollection,
   removeFileFromCollection,
-  removeAllFilesFromCollection
+  removeAllFilesFromCollection,
+  saveCollectionToFileSystem,
 } from "./models/collections/";
 
 export { parseVirtualFileSystemEntry } from "./models/parseVirtualFsaEntry";
 export { db, initializeDb } from "./db/setup";
 export { useLiveQuery } from "dexie-react-hooks";
-export * from "./models/types";
+export  * from "./models/types";

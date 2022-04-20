@@ -1,16 +1,10 @@
-import { db, fsaFile } from "fsa-database";
+import { db } from "../../db/setup";
+import {fsaCollection,fsaFile} from '../types'
 import { checkPermissionsOfHandle } from "fsa-browser";
+
 export async function saveCollectionToFileSystem(collectionId: string) {
   const collection = await getCollectionsSavedLocationHandle(collectionId);
   if (!collection || !collection.handle) return false;
-
-  //check dir has write permission
-  const hasPermission = await checkPermissionsOfHandle(
-    collection.handle,
-    "readwrite"
-  );
-
-  if (!hasPermission) return false;
 
   // get all files from db
   const files = await db.files.bulkGet(collection.files.map((f) => f.fileId));
@@ -42,7 +36,11 @@ export async function saveCollectionToFileSystem(collectionId: string) {
     }
   }
 }
-
+/**
+ * checks and/or gets the permissions for the 
+ * root directories from the files array
+ * @param files 
+ */
 async function getRootIdPermissions(files: (fsaFile | undefined)[]) {
   // use a set to get unique list or ids
   const ids = new Set<string>();
@@ -61,52 +59,65 @@ async function getRootIdPermissions(files: (fsaFile | undefined)[]) {
   }
 }
 
-
 /**
- * TODO from ;here...
- * at the moment if the root dir has been 
- * deleted  you get an error that you can't do 
- * anything about.
- * you need to check the dir exists first befor saving data
- * to it or you will get this error
- * TODO save the parent directory handle as well
- * collection.handle = await handle.getDirectoryHandle(collection.name, {
- *     create: true,
- *   });
- *   use  with options then it will create if not exists.
+ *
  */
-
-
 async function getCollectionsSavedLocationHandle(collectionId: string) {
   // get collection from db
   const collection = await db.userCollections.get(collectionId);
-console.log('ffff')
-  try {
-    await collection?.handle?.values();
-  } catch (e) {
-    console.error(`oh no not heree`, e);
-  }
-
   if (!collection) return null;
 
-  // do we have a dir handle set if not get one
-  if (!collection.handle) {
-    //assign it the new handle or overwrite it
-    const handle = await window.showDirectoryPicker({
-      //   startIn: "pictures",
-    });
-    // create folder for collection if it exists delete content first
-    collection.handle = await handle.getDirectoryHandle(collection.name, {
+  // do we have parent handle? if not get one
+  await getCollectionParentHandle(collection);
+  if (!collection.parentHandle) return null;
+
+  if (!(await checkForCollectionDirectoryHandle(collection))) return null;
+
+  try {
+    // save in db
+    await db.userCollections.put(collection);
+    return collection;
+  } catch (e) {
+    console.error(`error saving userCollection ${collection.name}  ${e}`);
+    return null;
+  }
+}
+
+async function checkForCollectionDirectoryHandle(collection: fsaCollection) {
+  const { parentHandle } = collection;
+  if (!parentHandle) return false;
+  // we need permissions on the parent handle
+  //check dir has write permission
+  const hasPermission = await checkPermissionsOfHandle(
+    parentHandle,
+    "readwrite"
+  );
+
+  if (!hasPermission) return false;
+  try {
+    // get the handle or create if not exists.
+    collection.handle = await parentHandle.getDirectoryHandle(collection.name, {
       create: true,
     });
-    // save in db
-    try {
-      await db.userCollections.put(collection);
-      return collection;
-    } catch (e) {
-      console.error(`error saving userCollection ${collection.name}  ${e}`);
-    }
+    return true;
+  } catch (e) {
+    console.error(
+      `error getting directory handle for ${collection.name} id: ${collection.id}: checkForCollectionDirectoryHandle()  ${e}`
+    );
   }
 
-  return collection;
+  return false;
+}
+
+async function getCollectionParentHandle(collection: fsaCollection) {
+  if (!collection.parentHandle) {
+    //assign it the new handle or overwrite it
+    try {
+      collection.parentHandle = await window.showDirectoryPicker();
+    } catch (e) {
+      console.error(
+        `error getting parent directory handle: getCollectionParentHandle() ${e}`
+      );
+    }
+  }
 }
