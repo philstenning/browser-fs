@@ -14,12 +14,12 @@ function FilesForRootDir() {
   const list = useRootFileList(true, true);
   const { addFileToCollection } = useCollections();
 
-  const handleClick = (
+  const handleClick = async (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
     file: fsaFile
   ) => {
     e.stopPropagation();
-    addFileToCollection(file);
+     await addFileToCollection(file);
     setCurrentFileId(file.id);
   };
 
@@ -34,19 +34,6 @@ function FilesForRootDir() {
         //  checkPerm2(e,file)
       })
       .catch((err) => console.error("first ", err));
-  };
-
-  const checkPerm2 = (
-    e: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    file: fsaFile
-  ) => {
-    file.handle.getFile().then((f) => {
-      console.log(
-        ` \n\n ${f.name} /  ${f.size.toString()} / ${f.type.toLowerCase()} , ${
-          f.lastModified
-        }, `
-      );
-    });
   };
 
   const listStyles = (file: fsaFile) => {

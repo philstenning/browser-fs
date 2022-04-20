@@ -18,6 +18,7 @@ export async function createCollection(
     files,
     tags,
     description,
+    saveToFileSystem:false,
   };
 
   if (name.length < 1) {

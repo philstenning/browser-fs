@@ -10,6 +10,7 @@ function CollectionList() {
     removeAllFilesFromCollection,
     removeCollection,
     cloneCollection,
+    saveCollectionToFileSystem
   } = useCollections();
 
   const { dbState, setCurrentCollectionId } = useFsaDbContext();
@@ -41,7 +42,7 @@ function CollectionList() {
 
   return (
     <div>
-      <h3>Collections ({collections.length})</h3>
+      <h3 > Collections ({collections.length})</h3>
       <Add />
       <ul className={styles.list}>
         {collections.map((col) => (
@@ -53,11 +54,12 @@ function CollectionList() {
             onClick={() => setCurrentCollectionId(col.id)}
           >
             <div className={styles.btnGroup}>
-              {" "}
-              {col.name} <span>files:{col.files.length}</span>
+              <span> {col.name}</span>
+              <span>files:{col.files.length}</span>
               <button onClick={(e) => clearCollection(e, col)}>Clear</button>
               <button onClick={(e) => deleteCollection(e, col)}>Delete</button>
               <button onClick={(e) => copyCollection(e, col)}>Copy</button>
+              <button onClick={(e) => saveCollectionToFileSystem( col.id)}>save</button>
             </div>
           </li>
         ))}

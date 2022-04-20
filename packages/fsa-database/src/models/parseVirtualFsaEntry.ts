@@ -1,4 +1,4 @@
-import { VirtualFileSystemEntry } from "fsa-browser";
+import type { VirtualFileSystemEntry } from "fsa-browser";
 import { db, fsaDirectory, createDirectory } from "../index";
 import { saveFile, createFile } from "./files";
 /**
