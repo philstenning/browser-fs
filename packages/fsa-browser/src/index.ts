@@ -1,13 +1,13 @@
 
-export {
-  deleteAllVirtualRootDirectories,
-  deleteVirtualRootDirectory,
-  getAllVirtualRootDirectories,
-  getAllVirtualRootDirectoriesAndCheckPermissions,
-  saveVirtualRootDirectory,
-  updateVirtualRootDirectory,
-  orderDirectoriesByDate
-} from "./virtualRootDirectories";
+// export {
+//   deleteAllVirtualRootDirectories,
+//   deleteVirtualRootDirectory,
+//   getAllVirtualRootDirectories,
+//   getAllVirtualRootDirectoriesAndCheckPermissions,
+//   saveVirtualRootDirectory,
+//   updateVirtualRootDirectory,
+//   orderDirectoriesByDate
+// } from "./virtualRootDirectories";
 
 export {
   checkPermissionsOfHandle,

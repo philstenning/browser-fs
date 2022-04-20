@@ -2,7 +2,7 @@ import { fsaDirectory } from "../types";
 import { deleteRootFolderFiles } from "../files";
 import { db } from "../../db/setup";
 
-export async function deleteRootDbDirectoryAndFiles(dir: fsaDirectory) {
+export async function deleteRootDirectoryAndFiles(dir: fsaDirectory) {
   if (!dir.id) return false;
   try {
     const hasDeletedFiles = await deleteRootFolderFiles(dir.id);

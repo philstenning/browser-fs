@@ -34,6 +34,7 @@ export function createFile(
     order: 0,
     hidden: "false",
     InitialParentId: parentId,
+    lastChecked: createdAt,
   };
 
   return file;

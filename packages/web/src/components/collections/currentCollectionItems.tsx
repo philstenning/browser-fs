@@ -1,7 +1,7 @@
 import { fsaFile } from 'fsa-database'
 import {useCollections, useFsaDbContext} from 'react-fsa-database'
 //@ts-ignore
-import styles from "./currentCollectionItems.module.css";
+// import styles from "./currentCollectionItems.module.css";
 function CollectionItems() {
     const {currentCollectionItems, removeFileFromCollection,} = useCollections()
    const {dbState,setCurrentFileId} = useFsaDbContext()

@@ -1,10 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-
-import About from "../../routes/About";
-import Contact from "../../routes/Contact";
-import Home from "../../routes/Home";
-import Db from "../../routes/db";
+// import About from "../../routes/About";
+// import Contact from "../../routes/Contact";
+// import Home from "../../routes/Home";
+// import Db from "../../routes/db";
 import DbProvider from "../../routes/dbProvider";
 
 import Layout from "./Layout";
