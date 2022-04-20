@@ -17,6 +17,7 @@ export interface fsaDirectory extends fsaBase {
   path: string;
   label: string;
   hidden: "true" | "false";
+  lastChecked: number;
 }
 export interface fsaFile extends fsaBase {
   parentId: string;
@@ -33,6 +34,7 @@ export interface fsaFile extends fsaBase {
   userCollectionIds: string[];
   order: number;
   hidden: "true" | "false";
+  lastChecked:number;
 }
 
 export interface fsaCollection extends fsaBase {

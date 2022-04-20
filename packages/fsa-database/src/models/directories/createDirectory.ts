@@ -27,7 +27,8 @@ export function createDirectory(
     fileIds,
     fileCount: 0,
     hidden: "false",
-    parentId
+    parentId,
+    lastChecked:createdAt
   };
   return directory;
 }

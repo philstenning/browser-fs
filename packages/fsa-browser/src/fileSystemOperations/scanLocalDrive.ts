@@ -80,7 +80,7 @@ async function scanLocalDriveRecursively(
         // with the recursive scan
         if (_depth < maxDepth) {
           // call self to recursively scan drive
-          console.log({ _depth }, `${_path}/${entry.name}`);
+          // console.log({ _depth }, `${_path}/${entry.name}`);
           const entryContent = await scanLocalDriveRecursively(
             entry,
             fileTypes,

@@ -5,3 +5,9 @@
 .active{
     color:var(--orange-3)
 }
+
+.btnGroup{
+    display: flex;
+    gap: var(--size-3);
+
+}

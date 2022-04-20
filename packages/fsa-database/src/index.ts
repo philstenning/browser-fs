@@ -2,6 +2,7 @@ export {
   createDirectory,
   createRootDirectory,
   deleteRootDirectoryAndFiles,
+  reScanDirectories,
 } from "./models/directories";
 
 export {
@@ -20,6 +21,7 @@ export {
   deleteCollection,
   updateCollection,
   removeFileFromCollection,
+  removeFileFromAllCollection,
   removeAllFilesFromCollection,
   saveCollectionToFileSystem,
 } from "./models/collections/";
