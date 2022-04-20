@@ -19,7 +19,14 @@ export async function reScanDirectories() {
     .toArray();
 
   const fileExtensions = (await db.fileTypes.toArray()).map((t) => t.name);
-
+ 
+  for (const currentDir of rootDirs) {
+        const result = await checkPermissionsOfHandle(currentDir.handle);
+        if (!result) {
+          console.log(`skipped scanning for ${currentDir.name}`);
+          continue; //  skip this handle it will fail.
+        }
+ }
   for (const currentDir of rootDirs) {
     // check permissions of handles
     const result = await checkPermissionsOfHandle(currentDir.handle);
