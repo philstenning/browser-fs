@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { selectRootDirectoryOnLocalDrive, scanLocalDrive } from "fsa-browser";
-import {
-  parseVirtualFileSystemEntry,
-  createRootDirectory,
-} from "fsa-database";
+import { parseVirtualFileSystemEntry, createRootDirectory } from "fsa-database";
 import { useFileTypesNames } from "../../index";
 import { useFsaDbContext } from "../../context/dbContext";
 /**
@@ -18,32 +15,26 @@ export function useAddRootDirectory() {
   const [isScanning, setIsScanning] = useState(false);
   const names = useFileTypesNames();
 
-  const addRootDirectory = () => {
-    selectRootDirectoryOnLocalDrive().then((virtualDir) => {
-      if (!virtualDir) return;
-      setIsScanning(true);
-      // save to db
-      createRootDirectory(virtualDir.handle).then((dir) => {
-        // scan drive for folders and files
-        scanLocalDrive(virtualDir.handle, names, 100).then((data) => {
-          if (!data.id) return;
-          if (!dir) return;
-          if (dir.id) {
-            parseVirtualFileSystemEntry(data, dir.id, dir.id).then(() => {
-              setIsScanning(false);
-              console.log("scanning finished");
-            });
-          }
-
-          // now set the current rootDir in dbState
-          setCurrentRootDirectoryId(dir.id);
-        });
+  const addRootDirectory = async () => {
+    const virtualDir = await selectRootDirectoryOnLocalDrive();
+    if (!virtualDir) return;
+    setIsScanning(true);
+    // save to db
+    const dir = await createRootDirectory(virtualDir.handle);
+    // scan drive for folders and files
+    const data = await scanLocalDrive(virtualDir.handle, names, 100);
+    if (!data.id) return;
+    if (!dir) return;
+    if (dir.id) {
+      parseVirtualFileSystemEntry(data, dir.id, dir.id).then(() => {
+        setIsScanning(false);
       });
-    });
+    }
+    // now set the current rootDir in dbState
+    setCurrentRootDirectoryId(dir.id);
 
     setIsScanning(false);
   };
 
   return { isScanning, addRootDirectory };
 }
-
