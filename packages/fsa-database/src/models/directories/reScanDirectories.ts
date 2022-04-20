@@ -46,30 +46,27 @@ export async function reScanDirectories() {
 
     // remove all files that have not been updated
     // they don't exist anymore.
-    const removedFiles = await db.files
-      .where("lastChecked")
-      .notEqual(lastChecked)
-      .toArray();
+    const removedFiles = (
+      await db.files.where({ rootId: currentDir.id }).toArray()
+    ).filter((f) => f.lastChecked !== lastChecked);
     if (removedFiles.length) {
       for (const fileToRemove of removedFiles) {
         // remove file from collections
         await removeFileFromAllCollection(fileToRemove);
         await db.files.delete(fileToRemove.id);
       }
-      const count = await db.files
-        .where("lastChecked")
-        .notEqual(lastChecked)
-        .toArray();
+      const count = (
+        await db.files.where({ rootId: currentDir.id }).toArray()
+      ).filter((f) => f.lastChecked !== lastChecked);
       if (count.length)
         console.error(` there are still ${count.length} files to remove`);
       count.forEach((f) => console.log(`${f.path} 🤬`));
     }
 
     /// remove all removed directories
-    const removedDirs = await db.directories
-      .where("lastChecked")
-      .notEqual(lastChecked)
-      .toArray();
+    const removedDirs = (await db.directories
+      .where({ rootId: currentDir.id })
+      .toArray()).filter(d=>d.lastChecked!== lastChecked)
 
     for (const dir of removedDirs) {
       const files = await db.files.where("parentId").equals(dir.id).count();
@@ -81,10 +78,11 @@ export async function reScanDirectories() {
         );
       }
     }
-    const count = await db.directories
-      .where("lastChecked")
-      .notEqual(lastChecked)
-      .count();
+    const count = (await db.directories
+      .where({ rootId: currentDir.id })
+      .toArray())
+      .filter((d) => d.lastChecked !== lastChecked).length
+      
     if (count) console.error(` there are still ${count} directories to remove`);
 
     // for each directory check file count
