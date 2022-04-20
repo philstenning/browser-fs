@@ -2,7 +2,7 @@ import {
   db,
   fsaDirectory,
   useLiveQuery,
-  deleteRootDbDirectoryAndFiles,
+  deleteRootDirectoryAndFiles,
 } from "fsa-database";
 import { useAddRootDirectory } from "../rootDirectories/useAddRootDirectory";
 
@@ -14,7 +14,7 @@ export function useRootDirectories() {
   );
 
   const deleteRootDirectory = (dir: fsaDirectory) => {
-    deleteRootDbDirectoryAndFiles(dir);
+    deleteRootDirectoryAndFiles(dir);
   };
   return { rootDirectories, deleteRootDirectory, isScanning, addRootDirectory };
 }

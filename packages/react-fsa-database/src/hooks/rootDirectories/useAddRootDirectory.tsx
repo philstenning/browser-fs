@@ -2,7 +2,7 @@ import { useState } from "react";
 import { selectRootDirectoryOnLocalDrive, scanLocalDrive } from "fsa-browser";
 import {
   parseVirtualFileSystemEntry,
-  createRootDbDirectory,
+  createRootDirectory,
 } from "fsa-database";
 import { useFileTypesNames } from "../../index";
 import { useFsaDbContext } from "../../context/dbContext";
@@ -23,7 +23,7 @@ export function useAddRootDirectory() {
       if (!virtualDir) return;
       setIsScanning(true);
       // save to db
-      createRootDbDirectory(virtualDir.handle).then((dir) => {
+      createRootDirectory(virtualDir.handle).then((dir) => {
         // scan drive for folders and files
         scanLocalDrive(virtualDir.handle, names, 100).then((data) => {
           if (!data.id) return;

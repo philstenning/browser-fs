@@ -1,11 +1,9 @@
 import { db } from "../../db/setup";
 import { fsaFile } from "../types";
 
-
-
 export async function deleteFiles(files: fsaFile[]) {
   const ids = files.map((f) => f.id);
-  console.log('del files' , ids.length)
+  console.log("del files", ids.length);
   if (!ids.length) return false;
   try {
     await db.files.bulkDelete(ids);

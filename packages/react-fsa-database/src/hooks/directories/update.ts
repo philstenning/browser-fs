@@ -1,4 +1,4 @@
-import { db, fsaDirectory, useLiveQuery } from "fsa-database";
+import { db, fsaDirectory } from "fsa-database";
 
 export async function update(directory: fsaDirectory) {
  

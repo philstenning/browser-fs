@@ -1,7 +1,7 @@
 import { fsaDirectory } from "../types";
 import { db } from "../../db/setup";
 import { createDirectory } from "./createDirectory";
-export async function createRootDbDirectory(
+export async function createRootDirectory(
   handle: FileSystemDirectoryHandle,
   creator: string = "user"
 ): Promise<fsaDirectory | null> {

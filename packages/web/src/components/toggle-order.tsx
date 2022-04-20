@@ -1,4 +1,3 @@
-import {RootDirOrderType} from 'fsa-browser'
 import {useRootDirectoryContext} from 'react-fsa-browser'
 export default function ToggleOrder(){
     const {orderByDate,rootDirectoryOrder} = useRootDirectoryContext()

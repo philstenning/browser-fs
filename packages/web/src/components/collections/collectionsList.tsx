@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useCollections, useFsaDbContext } from "react-fsa-database";
-import { useLiveQuery, db } from "fsa-database";
 import { fsaCollection } from "fsa-database";
 //@ts-ignore
 import styles from "./collectionsList.module.css";
