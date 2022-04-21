@@ -52,6 +52,7 @@ function FilesForRootDir() {
               className={listStyles(file)}
               onClick={(e) => handleClick(e, file)}
               key={index}
+              data-testid={index}
             >
               {file.name} {file.hidden}
               <button onClick={(e) => checkPerm(e, file)}>check</button>
