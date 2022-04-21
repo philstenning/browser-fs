@@ -1,0 +1,5 @@
+.filter{
+    margin-block: var(--size-3);
+    max-inline-size: 100%;
+    width: 30ch;
+}
