@@ -1,7 +1,7 @@
 import { fsaDirectory } from "fsa-database";
 import React, { useState, useEffect } from "react";
 import { useFsaDbContext, useDirectories } from "react-fsa-database";
-import { createBrotliDecompress } from "zlib";
+
 //@ts-ignore
 import styles from "./directoriesForRootDir.module.css";
 const DirectoriesForRootDir = () => {
