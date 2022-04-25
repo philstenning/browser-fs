@@ -1,17 +1,20 @@
 import { fsaDirectory } from "../types";
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from "uuid";
 export function createDirectory(
   handle: FileSystemDirectoryHandle,
   path: string,
   isRoot: boolean,
   rootId: string,
-  parentId:string| null,
+  parentId: string | null,
   fileIds = [],
   depth = 0,
-  creator = "user"
+  creator = "user",
+  readPermission: "true" | "false" = "false"
 ) {
   const createdAt = Date.now();
-  const id = uuid()
+  const id = uuid();
+  if(isRoot)console.log({readPermission})
+  
   const directory: fsaDirectory = {
     id,
     created: createdAt,
@@ -19,7 +22,7 @@ export function createDirectory(
     depth,
     handle,
     path,
-    rootId:isRoot?id:rootId,// if it isRoot set this same as id.
+    rootId: isRoot ? id : rootId, // if it isRoot set this same as id.
     isRoot: isRoot ? "true" : "false",
     label: "",
     name: handle.name,
@@ -28,7 +31,8 @@ export function createDirectory(
     fileCount: 0,
     hidden: "false",
     parentId,
-    lastChecked:createdAt
+    lastChecked: createdAt,
+    readPermission,
   };
   return directory;
 }

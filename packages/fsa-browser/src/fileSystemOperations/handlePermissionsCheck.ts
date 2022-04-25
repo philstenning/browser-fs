@@ -15,6 +15,8 @@ async function checkPermissionsOfHandle(
       permission = await handle.requestPermission({ mode });
     }
     if (permission === "granted") {
+
+      
       return true;
     }
   } catch (e) {

@@ -6,7 +6,7 @@ import {
   FoldersToExcludeFromScanning,
 } from "fsa-browser";
 import { createDirectory } from "../directories/createDirectory";
-import { createFile, saveFile ,bytesToSize} from "../files";
+import { createFile, saveFile, bytesToSize } from "../files";
 import { removeFileFromAllCollection } from "../collections";
 
 /**
@@ -40,8 +40,8 @@ export async function reScanRootDirectories() {
   console.time("reScanDirectories");
 
   for (const currentDir of rootDirs) {
-    console.log(`scan of dir ${currentDir.name} started`);
-    console.timeLog("reScanDirectories");
+    // console.log(`scan of dir ${currentDir.name} started`);
+    // console.timeLog("reScanDirectories");
     // check permissions of handles
     // we have already done this but if the user
     // clicked cancel we don't get a chance to re-do
@@ -51,13 +51,14 @@ export async function reScanRootDirectories() {
       continue; //  skip this handle it will fail.
     }
 
-    //👍 call scanLocalDrive for each handle
+    //👍 call scanLocalDrive for  handle
     const virtualFileSystemEntry = await scanLocalDrive(
       currentDir.handle,
       fileExtensions,
       100,
       FoldersToExcludeFromScanning
     );
+
     await checkVirtualFileSystemEntry(
       virtualFileSystemEntry,
       lastChecked,
@@ -123,6 +124,7 @@ export async function reScanRootDirectories() {
       // console.table(files);
       dir.fileCount = files.length;
       dir.fileIds = files.map((f) => f.id);
+      dir.readPermission = "true";
       await db.directories.put(dir);
     }
   }
@@ -184,6 +186,7 @@ async function checkVirtualFileSystemEntry(
       }
     } else {
       // we have a directory
+      // console.log("👉 Dir", entry.name);
 
       // get dirs where root is same
       const rootIdDirs = await db.directories
@@ -195,8 +198,8 @@ async function checkVirtualFileSystemEntry(
       //we then  should have the same dir
       if (dir && (await entry.handle.isSameEntry(dir.handle))) {
         dir.lastChecked = lastChecked;
+        dir.readPermission = "true";
         await db.directories.put(dir);
-        // console.log("👉", entry.name);
 
         await checkVirtualFileSystemEntry(entry, lastChecked, rootId, dir.id);
       } else {
@@ -209,7 +212,9 @@ async function checkVirtualFileSystemEntry(
             rootId,
             parentId,
             [],
-            depth
+            depth,
+            "user",
+            "true"
           );
           directory.lastChecked = lastChecked;
           const id = await db.directories.add(directory);

@@ -5,8 +5,18 @@ export async function createRootDirectory(
   handle: FileSystemDirectoryHandle,
   creator: string = "user"
 ): Promise<fsaDirectory | null> {
-  const directory = createDirectory(handle, "/", true, "",null ,[], 0, creator);
-
+  const directory = createDirectory(
+    handle,
+    "/",
+    true,
+    "",
+    null,
+    [],
+    0,
+    creator,
+    "true"
+  );
+  console.log({ directory });
   const test = await directoryAlreadyExists(directory);
 
   if (!test) {
