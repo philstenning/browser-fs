@@ -3,7 +3,7 @@ import {
   useCollections,
   useFsaDbContext,
 } from "react-fsa-database";
-import { fsaFile } from "fsa-database";
+import { db, fsaFile } from "fsa-database";
 //@ts-ignore
 import styles from "./filesForRootDir.module.css";
 
@@ -19,21 +19,26 @@ function FilesForRootDir() {
     file: fsaFile
   ) => {
     e.stopPropagation();
-     await addFileToCollection(file);
+    await addFileToCollection(file);
     setCurrentFileId(file.id);
   };
 
-  const checkPerm = (
+  const checkPerm = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     file: fsaFile
   ) => {
     e.stopPropagation();
-    checkPermissionsOfHandle(file.handle)
-      .then((res) => {
-        console.log(`file ${file.path} has permission`);
-        //  checkPerm2(e,file)
-      })
-      .catch((err) => console.error("first ", err));
+    //TODO: Move to library
+
+    const res = await checkPermissionsOfHandle(file.handle);
+    if (res) {
+      const dirs = await db.directories
+        .where("rootId")
+        .equals(file.rootId)
+        .toArray();
+      dirs.forEach((d) => (d.readPermission = "true"));
+      await db.directories.bulkPut(dirs);
+    }
   };
 
   const listStyles = (file: fsaFile) => {
@@ -55,9 +60,8 @@ function FilesForRootDir() {
               data-testid={index}
             >
               {file.name} {file.hidden}
-              <button onClick={(e) => checkPerm(e, file)}>check</button>
-
-              {' '}{file.size}
+              <button onClick={(e) => checkPerm(e, file)}>check</button>{" "}
+              {file.size}
             </li>
           ))}
       </ul>

@@ -17,6 +17,11 @@ export {
   useFindDuplicateFiles,
 } from "./hooks/files";
 
-export { useRootDirectories } from "./hooks/rootDirectories/useRootDirectories";
+export {
+  useRootDirectories,
+  useAddRootDirectory,
+  useReScanRootDirectories,
+} from "./hooks/rootDirectories";
+
 export { useDirectories } from "./hooks/directories/useDirectories";
 export { useCollections } from "./hooks/collections/useCollections";

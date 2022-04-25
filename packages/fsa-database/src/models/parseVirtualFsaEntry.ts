@@ -35,7 +35,9 @@ export async function parseVirtualFileSystemEntry(
         rootId,
         parentId,
         [],
-        depth
+        depth,
+        "user",
+        'true'
       );
       dirs.push(directory);
       const id = await db.directories.add(directory);
@@ -45,7 +47,7 @@ export async function parseVirtualFileSystemEntry(
     } else {
       // convert to fsaFile object
       // console.log(`${entry.name} ${entry.extension}`)
-      const file =await createFile(
+      const file = await createFile(
         handle,
         parentId,
         rootId,

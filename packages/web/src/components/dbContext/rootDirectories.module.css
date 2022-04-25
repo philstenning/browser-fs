@@ -11,3 +11,19 @@
     gap: var(--size-3);
 
 }
+
+.listItem{
+    display: flex;
+    border: solid 1px;
+}
+.reScanSpin{
+    
+    animation: var(--animation-spin);
+    /* border: solid 1px; */
+    width: fit-content;
+    
+    &:before{
+        content:'🐬'
+    }
+
+}
