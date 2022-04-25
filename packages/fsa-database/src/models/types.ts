@@ -28,7 +28,8 @@ export interface fsaFile extends fsaBase {
   printed: boolean;
   description?: string;
   type: string;
-  size?: number;
+  size?: string;
+
   tags: string[];
   imageUrl?: string;
   userCollectionIds: string[];

@@ -56,6 +56,8 @@ function FilesForRootDir() {
             >
               {file.name} {file.hidden}
               <button onClick={(e) => checkPerm(e, file)}>check</button>
+
+              {' '}{file.size}
             </li>
           ))}
       </ul>

@@ -45,7 +45,7 @@ export async function parseVirtualFileSystemEntry(
     } else {
       // convert to fsaFile object
       // console.log(`${entry.name} ${entry.extension}`)
-      const file = createFile(
+      const file =await createFile(
         handle,
         parentId,
         rootId,

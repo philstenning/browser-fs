@@ -1,4 +1,4 @@
-export { createFile } from "./createFile";
+export { createFile ,bytesToSize } from "./createFile";
 export { deleteFile } from "./deleteFile";
 export { deleteFiles } from "./deleteFiles";
 export { deleteRootFolderFiles } from "./deleteRootFolderFiles";

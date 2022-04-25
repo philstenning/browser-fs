@@ -6,8 +6,12 @@ import {
   FoldersToExcludeFromScanning,
 } from "fsa-browser";
 import { createDirectory } from "./createDirectory";
-import { createFile, saveFile } from "../files";
+import { createFile, saveFile ,bytesToSize} from "../files";
 import { removeFileFromAllCollection } from "../collections";
+
+/**
+ * Re-scan all the root directories we have in the db.
+ */
 export async function reScanDirectories() {
   const lastChecked = Date.now();
 
@@ -18,17 +22,29 @@ export async function reScanDirectories() {
     .equals("true")
     .toArray();
 
+  // get the file extensions we want to look for.
   const fileExtensions = (await db.fileTypes.toArray()).map((t) => t.name);
- 
+
+  // check all handles now!
+  // if we do this later some will fail
+  // because we need a user interaction and this
+  // must be reset after a period of time.
   for (const currentDir of rootDirs) {
-        const result = await checkPermissionsOfHandle(currentDir.handle);
-        if (!result) {
-          console.log(`skipped scanning for ${currentDir.name}`);
-          continue; //  skip this handle it will fail.
-        }
- }
+    const result = await checkPermissionsOfHandle(currentDir.handle);
+    if (!result) {
+      console.log(`skipped scanning for ${currentDir.name}`);
+      continue; //  skip this handle it will fail.
+    }
+  }
+  // check how long scan takes
+  console.time("reScanDirectories");
+
   for (const currentDir of rootDirs) {
+    console.log(`scan of dir ${currentDir.name} started`);
+    console.timeLog("reScanDirectories");
     // check permissions of handles
+    // we have already done this but if the user
+    // clicked cancel we don't get a chance to re-do
     const result = await checkPermissionsOfHandle(currentDir.handle);
     if (!result) {
       console.log(`skipped scanning for ${currentDir.name}`);
@@ -71,9 +87,9 @@ export async function reScanDirectories() {
     }
 
     /// remove all removed directories
-    const removedDirs = (await db.directories
-      .where({ rootId: currentDir.id })
-      .toArray()).filter(d=>d.lastChecked!== lastChecked)
+    const removedDirs = (
+      await db.directories.where({ rootId: currentDir.id }).toArray()
+    ).filter((d) => d.lastChecked !== lastChecked);
 
     for (const dir of removedDirs) {
       const files = await db.files.where("parentId").equals(dir.id).count();
@@ -85,19 +101,23 @@ export async function reScanDirectories() {
         );
       }
     }
-    const count = (await db.directories
-      .where({ rootId: currentDir.id })
-      .toArray())
-      .filter((d) => d.lastChecked !== lastChecked).length
-      
+
+    // find out how many dirs under this root dir
+    // haven't been updated  - these need to be removed.
+    const count = (
+      await db.directories.where({ rootId: currentDir.id }).toArray()
+    ).filter((d) => d.lastChecked !== lastChecked).length;
+
     if (count) console.error(` there are still ${count} directories to remove`);
 
-    // for each directory check file count
+    // we now need to update the dirs props under the
+    // current root dir
     const dirList = await db.directories
       .where("rootId")
       .equals(currentDir.id)
       .toArray();
 
+    // for each directory check file count
     for (const dir of dirList) {
       const files = await db.files.where("parentId").equals(dir.id).toArray();
       // console.table(files);
@@ -112,6 +132,8 @@ export async function reScanDirectories() {
   // finally
   // get all files where they have not been updated and delete them
   // and remove them from the directory files list and collections
+
+  console.timeEnd("reScanDirectories");
   console.log("re-scan all done...👍");
 }
 
@@ -135,7 +157,7 @@ async function checkVirtualFileSystemEntry(
       // so create and add one.
       if (!file) {
         if (entry.handle.kind === "file") {
-          const _file = createFile(
+          const _file = await createFile(
             entry.handle,
             parentId,
             rootId,
@@ -151,6 +173,9 @@ async function checkVirtualFileSystemEntry(
           if (dbFile?.id) fileIds.push(dbFile.id);
         }
       } else if (await file.handle.isSameEntry(entry.handle)) {
+        // recheck file size if file has changed
+        const fileSize = (await file.handle.getFile()).size;
+        file.size = bytesToSize(fileSize);
         // console.log(`${entry.path} 🎉 is same`);
         file.lastChecked = lastChecked;
         await db.files.put(file);
