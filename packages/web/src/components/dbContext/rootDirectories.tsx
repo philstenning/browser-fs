@@ -1,5 +1,5 @@
 import { useRootDirectories, useFsaDbContext } from "react-fsa-database";
-import {reScanDirectories} from 'fsa-database'
+import {reScanRootDirectories} from 'fsa-database'
 //@ts-ignore
 import styles from "./rootDirectories.module.css";
 const RootDirectories = () => {
@@ -26,7 +26,7 @@ const RootDirectories = () => {
         >
         {!isScanning?'Add Root Directory':'Scanning Drive'}
       </button>
-      <button onClick={reScanDirectories}>ReScan Root Directories</button>
+      <button onClick={reScanRootDirectories}>ReScan Root Directories</button>
         </div>
     </div>
   );

@@ -1,13 +1,25 @@
-import { fsaDirectory, db } from "fsa-database";
+import {
+  fsaDirectory,
+  db,
+  checkDirectoryForFilesInCollections,
+} from "../../index";
 
-export async function hideDirAndFiles(
+export async function hideDirectoryAndFiles(
   directory: fsaDirectory,
-  hide: "true" | "false" = "true"
+  hide: "true" | "false" = "true",
+  checkForFilesInCollections = true
 ) {
+  // if files are in collections they will still be set to hidden
+  // so we check first if they are in a collection
+  if (
+    checkForFilesInCollections &&
+    (await checkDirectoryForFilesInCollections(directory)).hasCollections
+  ) {
+    return false;
+  }
   await db.transaction("rw", db.directories, db.files, async () => {
     try {
       const files = await db.files.bulkGet(directory.fileIds);
-      console.log( {files})
       for (const file of files) {
         if (!file) return;
         file.hidden = hide;

@@ -5,14 +5,14 @@ import {
   VirtualFileSystemEntry,
   FoldersToExcludeFromScanning,
 } from "fsa-browser";
-import { createDirectory } from "./createDirectory";
+import { createDirectory } from "../directories/createDirectory";
 import { createFile, saveFile ,bytesToSize} from "../files";
 import { removeFileFromAllCollection } from "../collections";
 
 /**
  * Re-scan all the root directories we have in the db.
  */
-export async function reScanDirectories() {
+export async function reScanRootDirectories() {
   const lastChecked = Date.now();
 
   // get root all dirs

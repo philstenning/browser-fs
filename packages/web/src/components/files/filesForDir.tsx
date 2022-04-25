@@ -17,8 +17,9 @@ function FilesForDir() {
   return (
     <div>
      <h5> Files for current Directory </h5> 
-      {directoryFiles&&  directoryFiles.map((file) => (
+      {directoryFiles.map((file, index) => (
         <li
+        data-testid={`ffcd_listItem_${index}`}
         className={dbState.currentFileId===file.id?'active':''}
         onClick={(e) => handleSetCurrentFile(e, file)} key={file.id}>
           {file.name}

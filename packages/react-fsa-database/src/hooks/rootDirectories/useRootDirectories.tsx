@@ -3,6 +3,7 @@ import {
   fsaDirectory,
   useLiveQuery,
   deleteRootDirectoryAndFiles,
+
 } from "fsa-database";
 import { useAddRootDirectory } from "../rootDirectories/useAddRootDirectory";
 
@@ -12,6 +13,8 @@ export function useRootDirectories() {
   const rootDirectories = useLiveQuery(() =>
     db.directories.where("isRoot").equals("true").toArray()
   );
+  
+ 
 
   const deleteRootDirectory = (dir: fsaDirectory) => {
     deleteRootDirectoryAndFiles(dir);

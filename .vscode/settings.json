@@ -8,5 +8,6 @@
   ],
 
   // you can also add support for autocomplete in other file extensions
-  "cssvar.extensions": ["css", "html", "jsx", "tsx", "scss"]
+  "cssvar.extensions": ["css", "html", "jsx", "tsx", "scss"],
+  "cSpell.words": ["ffcd_listItem_"]
 }
