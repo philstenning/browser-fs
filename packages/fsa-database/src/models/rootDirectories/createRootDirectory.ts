@@ -1,6 +1,6 @@
 import { fsaDirectory } from "../types";
 import { db } from "../../db/setup";
-import { createDirectory } from "./createDirectory";
+import { createDirectory } from "../directories/createDirectory";
 export async function createRootDirectory(
   handle: FileSystemDirectoryHandle,
   creator: string = "user"

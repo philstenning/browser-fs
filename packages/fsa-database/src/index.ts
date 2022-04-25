@@ -1,8 +1,13 @@
 export {
-  createDirectory,
   createRootDirectory,
   deleteRootDirectoryAndFiles,
-  reScanDirectories,
+  reScanRootDirectories,
+} from "./models/rootDirectories";
+
+export {
+  createDirectory,
+  checkDirectoryForFilesInCollections,
+  hideDirectoryAndFiles,
 } from "./models/directories";
 
 export {

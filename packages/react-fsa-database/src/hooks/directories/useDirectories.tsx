@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { db, fsaDirectory, useLiveQuery } from "fsa-database";
+import { db, fsaDirectory, useLiveQuery, hideDirectoryAndFiles } from "fsa-database";
 import { useFsaDbContext } from "../../context/dbContext";
 
 import { update } from "./update";
-import { hideDirAndFiles } from "./hideDirAndFiles";
+
 import {mergeToParentDir} from './mergeToParentDir'
 import { unMergeDirectories } from "./unMergeDirectories";
 
@@ -23,10 +23,10 @@ function useDirectories() {
   }, [showHidden]);
 
 
-  const hideDirectory = hideDirAndFiles;
+  const hideDirectory = hideDirectoryAndFiles;
 
   const unHideDirectory = (directory: fsaDirectory) =>
-    hideDirAndFiles(directory, "false");
+    hideDirectoryAndFiles(directory, "false");
 
   const updateDirectory = update;
 
@@ -56,4 +56,4 @@ const mergeToRootDirectory=()=>{
 
 export { useDirectories };
 
-async function _updateDirectory() {}
+

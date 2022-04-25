@@ -3,3 +3,9 @@
     max-inline-size: 100%;
     width: 30ch;
 }
+
+
+.hideButtons{
+    display: flex;
+    gap:var(--size-3);
+}

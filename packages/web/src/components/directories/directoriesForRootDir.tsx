@@ -57,46 +57,63 @@ const DirectoriesForRootDir = () => {
     unMergeDirectories(directory);
   };
     return (
-    <div>
-      <h4>
-        Directories For RootDir (files {filteredDirs && filteredDirs.length})
-        <button onClick={toggleHidden}>toggle</button>
-      </h4>
-      <input
-        className={styles.filter}
-        type="search"
-        autoComplete="off"
-        name="filter"
-        id="filter"
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-      />
-      <ul>
-        {filteredDirs?.map((dir, index) => (
-          // list Item
-          <li
-            className={dbState.currentDirectoryId === dir.id ? "active" : ""}
-            onClick={() => setCurrentDirectoryId(dir.id)}
-            key={dir.id}
-          >
-            {" "}
-            {index} {dir.name} ({dir.fileCount}){" "}
-            <button onClick={(e) => hideDir(e, dir)}>
-              {dir.hidden === "false" ? "hide" : "show"}
-            </button>{" "}
-            {dir.isRoot === "false" && (
-              <button onClick={(e) => mergeParent(e, dir)}>merge parent</button>
-            )}
-            {dir.isRoot === "true" && (
-              <button onClick={(e) => unMergeParent(e, dir)}>UnMergeAll</button>
-            )}
-          </li>
+      <div>
+        <h4>
+          Directories For RootDir (files {filteredDirs && filteredDirs.length})
+        </h4>
+        <div className={styles.hideButtons}>
 
-          //  end of list Item
-        ))}
-      </ul>
-    </div>
-  );
+          <button data-testid="dirForRootId_btn" onClick={toggleHidden}>
+            Toggle Hidden
+          </button>
+          <button data-test-id={`dfr_btn_unHideAll`}>UnHide All</button>
+        </div>
+        <input
+          className={styles.filter}
+          type="search"
+          autoComplete="off"
+          name="filter"
+          id="dfr_filter"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />
+        <ul>
+          {filteredDirs?.map((dir, index) => (
+            // list Item
+            <li
+              data-test-id={`dfr_listItem_${index}`}
+              className={dbState.currentDirectoryId === dir.id ? "active" : ""}
+              onClick={() => setCurrentDirectoryId(dir.id)}
+              key={dir.id}
+            >
+              {" "}
+              {index} {dir.name} ({dir.fileCount}){" "}
+              <button
+                data-test-id={`dfr_btn_hide_${index}`}
+                onClick={(e) => hideDir(e, dir)}
+              >
+                {dir.hidden === "false" ? "hide" : "show"}
+              </button>{" "}
+              {dir.isRoot === "false" && (
+                <button
+                  data-test-id={`dfr_btn_merge_${index}`}
+                  onClick={(e) => mergeParent(e, dir)}
+                >
+                  merge parent
+                </button>
+              )}
+              {dir.isRoot === "true" && (
+                <button onClick={(e) => unMergeParent(e, dir)}>
+                  UnMergeAll
+                </button>
+              )}
+            </li>
+
+            //  end of list Item
+          ))}
+        </ul>
+      </div>
+    );
 };
 
 export default DirectoriesForRootDir;

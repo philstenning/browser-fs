@@ -8,7 +8,7 @@ function useDirectoryFiles() {
       .where("parentId")
       .equals(state.currentDirectoryId)
       .toArray();
-  }, []);
+  }, []) ?? [];
 
   return { directoryFiles };
 }
