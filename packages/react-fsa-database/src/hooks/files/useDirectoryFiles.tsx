@@ -5,11 +5,11 @@ function useDirectoryFiles() {
     if (!state || !state.currentDirectoryId) return [];
     // const currentDir = await db.directories.get(currentDirectoryId)
     return await db.files
-      .where("parentId")
-      .equals(state.currentDirectoryId)
+      .where({parentId:state.currentDirectoryId,hidden:'false'})
       .toArray();
   }, []) ?? [];
 
+  console.log('gtt\vggg')
   return { directoryFiles };
 }
 
