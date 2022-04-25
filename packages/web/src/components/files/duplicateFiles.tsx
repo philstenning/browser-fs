@@ -51,9 +51,7 @@ const FileList = ({ file}: Props) => {
     <div>
       <h5>Ids of duplicate files</h5>
       <ul>
-        { filtered.length
-
-}{filtered.map(f=> (
+        {filtered.length>1 && filtered.map(f=> (
     <li key={f.id} onClick={()=>toggleHidden(f)}>{f.name} {f.hidden}</li>
 ))}
       </ul>
