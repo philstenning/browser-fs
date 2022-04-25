@@ -6,7 +6,7 @@ import CurrentState from "../components/currentDbState/currentDbState";
 import CollectionItems from "../components/collections/currentCollectionItems";
 import DirectoriesForRootDir from "../components/directories/directoriesForRootDir";
 import FilesForDir from '../components/files/filesForDir'
-
+import DuplicateFiles from "../components/files/duplicateFiles";
 //@ts-ignore // don't know why but vscode ts can't find it???
 import styles from './dbProvider.module.css'
 const DbProvider = () => {
@@ -18,12 +18,16 @@ const DbProvider = () => {
       </div>
       <FileTypes />
       <div className={styles.split}>
+        <div>
+
+        <DuplicateFiles/>
         <FileList />
+        </div>
         <div>
           <CollectionList />
           <CollectionItems />
-          <DirectoriesForRootDir/>
-          <FilesForDir/>
+          <DirectoriesForRootDir />
+          <FilesForDir />
         </div>
       </div>
     </div>
