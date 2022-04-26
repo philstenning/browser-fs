@@ -1,5 +1,6 @@
 import { db } from "../../db/setup";
 
+import { removeFileFromCollectionsSavedLocation } from "./index";
 export async function removeAllFilesFromCollection(collectionId: string) {
   const collection = await db.userCollections.get(collectionId);
   if (!collection) return;
@@ -17,12 +18,16 @@ export async function removeAllFilesFromCollection(collectionId: string) {
         );
         file.userCollectionIds = fileIds;
         await db.files.put(file);
+     
       }
       //
       collection.files = [];
       await db.userCollections.put(collection);
+    
     } catch (err) {
       console.error("error removing files from collection.");
     }
   });
 }
+
+

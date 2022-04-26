@@ -1,5 +1,8 @@
 import { fsaCollection, fsaFile } from "../types";
 import { putCollectionAndFile } from "./putCollectionAndFile";
+
+import { removeFileFromCollectionsSavedLocation } from "./index";
+
 import {db} from '../../db/setup'
 export async function removeFileFromCollection(
   collection: fsaCollection,
@@ -17,9 +20,11 @@ export async function removeFileFromCollection(
   file.userCollectionIds = file.userCollectionIds.filter(
     (f) => f !== collection.id
   );
+  await removeFileFromCollectionsSavedLocation(file,collection)
+  
   // remove the fsaCollectionFile from the collection
   collection.files = collection.files.filter((f) => f.fileId !== file.id);
-
+  console.log('removing file')
   // save all to db.
   return await putCollectionAndFile(collection, file);
 }

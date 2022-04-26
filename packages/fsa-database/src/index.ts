@@ -28,6 +28,7 @@ export {
   removeFileFromCollection,
   removeFileFromAllCollection,
   removeAllFilesFromCollection,
+  removeFileFromCollectionsSavedLocation,
   saveCollectionToFileSystem,
 } from "./models/collections/";
 
