@@ -8,6 +8,7 @@ import {
 import { createDirectory } from "../directories/createDirectory";
 import { createFile, saveFile, bytesToSize } from "../files";
 import { removeFileFromAllCollection } from "../collections";
+import { fsaDirectory } from "../types";
 
 /**
  * Re-scan all the root directories we have in the db.
@@ -122,34 +123,33 @@ export async function reScanRootDirectories() {
 
     // we now need to update the dirs props under the
     // current root dir
-    const dirList = await db.directories
-      .where("rootId")
-      .equals(currentDir.id)
-      .toArray();
+    await updateDirectoryForRootDir(currentDir);
 
-    // for each directory check file count
-    for (const dir of dirList) {
-      const files = await db.files.where("parentId").equals(dir.id).toArray();
-      // console.table(files);
-      dir.fileCount = files.length;
-      dir.fileIds = files.map((f) => f.id);
-      dir.readPermission = "true";
-      await db.directories.put(dir);
-    }
 
+    // update ui status.
     currentDir.isScanning=false
     currentDir.scanFinished=true
      db.directories.put(currentDir)
   }
 
-  // any files/ dirs not in db need to be added
-
-  // finally
-  // get all files where they have not been updated and delete them
-  // and remove them from the directory files list and collections
-
   console.timeEnd("reScanDirectories");
-  console.log("re-scan all done...👍");
+  // console.log("re-scan all done...👍");
+}
+
+async function updateDirectoryForRootDir(currentDir: fsaDirectory) {
+  const dirList = await db.directories
+    .where("rootId")
+    .equals(currentDir.id)
+    .toArray();
+
+  // for each directory check file count
+  for (const dir of dirList) {
+    const files = await db.files.where("parentId").equals(dir.id).toArray();
+    dir.fileCount = files.length;
+    dir.fileIds = files.map((f) => f.id);
+    dir.readPermission = "true";
+    await db.directories.put(dir);
+  }
 }
 
 async function checkVirtualFileSystemEntry(

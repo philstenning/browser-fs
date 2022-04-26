@@ -13,7 +13,6 @@ export function createDirectory(
 ) {
   const createdAt = Date.now();
   const id = uuid();
-  if(isRoot)console.log({readPermission})
   
   const directory: fsaDirectory = {
     id,
