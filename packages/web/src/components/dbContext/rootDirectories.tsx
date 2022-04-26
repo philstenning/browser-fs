@@ -4,7 +4,8 @@ import {
   useFsaDbContext,
   useReScanRootDirectories,
 } from "react-fsa-database";
-
+import { ImSpinner6 } from "react-icons/im";
+import { fsaDirectory } from "../../../../react-fsa-database/node_modules/fsa-database/src";
 //@ts-ignore
 import styles from "./rootDirectories.module.css";
 
@@ -38,12 +39,8 @@ const RootDirectories = () => {
               onClick={() => setCurrentRootDirectoryId(dir.id)}
             >
               {" "}
-              <span>
-                {dir.name}{" "}</span>
-                <div className={styles.reScanSpin}>
-                  {dir.readPermission === "true" ? "✔️" : ""}
-                
-              </div>
+              <span>{dir.name} </span>
+              <ScanningContent dir={dir} scanning={scanning} />
             </li>
           ))}
       </ul>
@@ -55,10 +52,45 @@ const RootDirectories = () => {
         >
           {!scanning ? "Add Root Directory" : "Scanning Drive"}
         </button>
-        <button onClick={reScanRootDirectories}>ReScan Root Directories</button>
+        <button disabled={scanning} onClick={reScanRootDirectories}>
+          ReScan Root Directories
+        </button>
       </div>
     </div>
   );
 };
 
 export default RootDirectories;
+
+type Props = {
+  dir: fsaDirectory;
+  scanning: boolean;
+};
+
+function ScanningContent({ dir, scanning }: Props) {
+  const started = dir.isScanning;
+  const finished = dir.scanFinished;
+  if (dir.readPermission === "false") return <span>❌</span>;
+
+  if (scanning) {
+    if (started && !finished)
+      return (
+        <span className={styles.onScanSpin}>
+          <ImSpinner6 />
+        </span>
+      );
+    if (!finished) {
+      return (
+        <span className={styles.content}>
+          {" "}
+          <ImSpinner6 />
+          pending...
+        </span>
+      );
+    }
+  }
+
+  // if (started && finished) return "✔️";
+  // if(scanning )return <span><ImSpinner6 /> pending...</span> ;
+  return <span>✔️</span>;
+}

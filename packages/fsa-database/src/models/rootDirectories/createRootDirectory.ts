@@ -16,7 +16,7 @@ export async function createRootDirectory(
     creator,
     "true"
   );
-  console.log({ directory });
+  // console.log({ directory });
   const test = await directoryAlreadyExists(directory);
 
   if (!test) {
@@ -27,12 +27,15 @@ export async function createRootDirectory(
   }
 
   try {
-    const id = await db.directories.add(directory);
-    directory.id = id;
-    directory.rootId = id;
-    await db.directories.put(directory);
+    
+    directory.rootId = directory.id;
+    
 
-    console.log({ directory });
+    await db.directories.add(directory);
+    // directory.id = id;
+    // await db.directories.put(directory);
+
+    // console.log({ directory });
     return directory;
   } catch (e) {
     console.error("error creating root directory db entry");

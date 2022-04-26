@@ -40,6 +40,12 @@ export async function parseVirtualFileSystemEntry(
         'true'
       );
       dirs.push(directory);
+
+      // set props for ui
+      // if( rootId){
+      //   directory.isScanning=true
+      //   directory.scanFinished=false
+      // }
       const id = await db.directories.add(directory);
 
       // !!!important - recursively scan each directory
@@ -63,11 +69,6 @@ export async function parseVirtualFileSystemEntry(
       if (dbFile?.id) fileIds.push(dbFile.id);
     }
   }
-
-  // once we have processed the directory
-  // bulk save to the database.
-  // const bulkAddNumber = await db.directories.bulkAdd(dirs);
-  // console.log({ bulkAddNumber });
 
   await updateParentDirectory(fileIds, parentId);
 
