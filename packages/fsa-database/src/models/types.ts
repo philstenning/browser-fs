@@ -85,3 +85,19 @@ export type fsaError = {
   info: string;
   type: "warning" | "error" | "unknown";
 };
+
+export interface fsaSettingCreate {
+  sessionStarted: number;
+  // if a file is removed from collection it is
+  //removed from local disk also
+  cleanFilesFromCollections: boolean;
+  // when a collection is removed
+  // remove all files and its directory
+  // from local disk
+  cleanCollectionsWhenRemoved: boolean;
+  lastScanned:number
+}
+export interface fsaSetting extends fsaSettingCreate {
+  id: number;
+
+}

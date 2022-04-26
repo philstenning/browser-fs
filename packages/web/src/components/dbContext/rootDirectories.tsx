@@ -5,6 +5,7 @@ import {
   useReScanRootDirectories,
 } from "react-fsa-database";
 import { ImSpinner6 } from "react-icons/im";
+import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 import { fsaDirectory } from "../../../../react-fsa-database/node_modules/fsa-database/src";
 //@ts-ignore
 import styles from "./rootDirectories.module.css";
@@ -83,8 +84,8 @@ function ScanningContent({ dir, scanning }: Props) {
       return (
         <span className={styles.content}>
           {" "}
-          <ImSpinner6 />
-          pending...
+          <IoEllipsisHorizontalSharp />
+        
         </span>
       );
     }
