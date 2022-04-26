@@ -101,6 +101,7 @@ importers:
       react-dom: ^17.0.2
       react-fsa-browser: workspace:*
       react-fsa-database: workspace:*
+      react-icons: ^4.3.1
       react-router-dom: ^6.2.1
       typescript: ^4.6.3
       vite: 2.9.1
@@ -112,6 +113,7 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       react-fsa-browser: link:../react-fsa-browser
       react-fsa-database: link:../react-fsa-database
+      react-icons: 4.3.1_react@17.0.2
       react-router-dom: 6.3.0_react-dom@17.0.2+react@17.0.2
     devDependencies:
       '@types/node': 17.0.23
@@ -2502,6 +2504,14 @@ packages:
       loose-envify: 1.4.0
       react: 18.0.0
       scheduler: 0.21.0
+    dev: false
+
+  /react-icons/4.3.1_react@17.0.2:
+    resolution: {integrity: sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 17.0.2
     dev: false
 
   /react-refresh/0.12.0:

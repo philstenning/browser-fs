@@ -1,29 +1,32 @@
-.isScanning{
-    background: var(--gray-8);
+.isScanning {
+  background: var(--gray-8);
 }
 
-.active{
-    color:var(--orange-3)
+.active {
+  color: var(--orange-3);
 }
 
-.btnGroup{
-    display: flex;
-    gap: var(--size-3);
-
+.btnGroup {
+  padding-block: var(--size-3);
+  display: flex;
+  gap: var(--size-3);
+  gap: var(--size-3);
 }
 
-.listItem{
-    display: flex;
-    border: solid 1px;
+.listItem {
+  display: flex;
+  /* border: solid 1px; */
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--size-2);
 }
-.reScanSpin{
-    
-    animation: var(--animation-spin);
-    /* border: solid 1px; */
-    width: fit-content;
-    
-    &:before{
-        content:'🐬'
-    }
 
+.content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--size-3);
+}
+.onScanSpin {
+  animation: var(--animation-spin);
 }

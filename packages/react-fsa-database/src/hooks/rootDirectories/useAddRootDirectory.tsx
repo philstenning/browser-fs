@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { selectRootDirectoryOnLocalDrive, scanLocalDrive } from "fsa-browser";
-import { parseVirtualFileSystemEntry, createRootDirectory } from "fsa-database";
+import { parseVirtualFileSystemEntry, createRootDirectory ,db } from "fsa-database";
 import { useFileTypesNames } from "../../index";
 import { useFsaDbContext } from "../../context/dbContext";
 /**
@@ -21,18 +21,30 @@ export function useAddRootDirectory() {
     setIsScanning(true);
     // save to db
     const dir = await createRootDirectory(virtualDir.handle);
+
+    // set rootDir as scanning
+    if(dir){
+
+      dir.isScanning=true
+      dir.scanFinished=false
+      await db.directories.put(dir)
+    }
     // scan drive for folders and files
     const data = await scanLocalDrive(virtualDir.handle, names, 100);
     if (!data.id) return;
     if (!dir) return;
     if (dir.id) {
-      parseVirtualFileSystemEntry(data, dir.id, dir.id).then(() => {
+     await parseVirtualFileSystemEntry(data, dir.id, dir.id).then(() => {
         setIsScanning(false);
       });
     }
     // now set the current rootDir in dbState
     setCurrentRootDirectoryId(dir.id);
-
+     if (dir) {
+       dir.isScanning = false;
+       dir.scanFinished = true;
+       await db.directories.put(dir);
+     }
     setIsScanning(false);
   };
 

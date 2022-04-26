@@ -35,6 +35,9 @@ export async function reScanRootDirectories() {
       console.log(`skipped scanning for ${currentDir.name}`);
       continue; //  skip this handle it will fail.
     }
+    currentDir.readPermission = "true";
+    currentDir.scanFinished = false;
+    await db.directories.put(currentDir);
   }
   // check how long scan takes
   console.time("reScanDirectories");
@@ -50,6 +53,12 @@ export async function reScanRootDirectories() {
       console.log(`skipped scanning for ${currentDir.name}`);
       continue; //  skip this handle it will fail.
     }
+
+    // let the user know we are scanning this dir.
+     currentDir.isScanning=true
+     currentDir.scanFinished=false
+     currentDir.readPermission='true'
+     await db.directories.put(currentDir)
 
     //👍 call scanLocalDrive for  handle
     const virtualFileSystemEntry = await scanLocalDrive(
@@ -127,6 +136,10 @@ export async function reScanRootDirectories() {
       dir.readPermission = "true";
       await db.directories.put(dir);
     }
+
+    currentDir.isScanning=false
+    currentDir.scanFinished=true
+     db.directories.put(currentDir)
   }
 
   // any files/ dirs not in db need to be added

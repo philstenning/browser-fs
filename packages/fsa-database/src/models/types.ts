@@ -19,6 +19,8 @@ export interface fsaDirectory extends fsaBase {
   hidden: "true" | "false";
   lastChecked: number;
   readPermission: "true" | "false";
+  isScanning: boolean;
+  scanFinished: boolean;
 }
 export interface fsaFile extends fsaBase {
   parentId: string;

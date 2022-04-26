@@ -33,6 +33,8 @@ export function createDirectory(
     parentId,
     lastChecked: createdAt,
     readPermission,
+    isScanning:false,
+    scanFinished:true
   };
   return directory;
 }
