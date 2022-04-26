@@ -28,6 +28,9 @@ export function useAddRootDirectory() {
       dir.isScanning=true
       dir.scanFinished=false
       await db.directories.put(dir)
+    }else{
+      setIsScanning(false)
+      return
     }
     // scan drive for folders and files
     const data = await scanLocalDrive(virtualDir.handle, names, 100);
