@@ -9,3 +9,4 @@ export {
 } from "./removeFileFromCollection";
 export { removeAllFilesFromCollection } from "./removeAllFilesFromCollection";
 export { saveCollectionToFileSystem } from "./saveCollectionToFileSystem";
+export { removeFileFromCollectionsSavedLocation } from "./removeFileFromCollectionsSavedLocation";
