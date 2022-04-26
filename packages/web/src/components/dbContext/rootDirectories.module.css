@@ -26,7 +26,11 @@
   justify-content: flex-start;
   align-items: center;
   gap: var(--size-3);
+  color: var(--green-2);
 }
 .onScanSpin {
   animation: var(--animation-spin);
+  color: var(--green-2);
+}
+.pending {
 }

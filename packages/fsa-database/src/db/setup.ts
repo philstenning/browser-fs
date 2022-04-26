@@ -7,7 +7,10 @@ import {
   fsaState,
   fsaCollection,
   fsaError,
+  fsaSetting,
 } from "../models/types";
+import { createSetting } from "../models/settings/createSetting";
+
 class FsaDb extends Dexie {
   files!: Dexie.Table<fsaFile, string>;
   directories!: Dexie.Table<fsaDirectory, string>;
@@ -15,6 +18,7 @@ class FsaDb extends Dexie {
   fileTypes!: Dexie.Table<fsaFileType, number>;
   state!: Dexie.Table<fsaState, number>;
   errors!: Dexie.Table<fsaError, number>;
+  settings!: Dexie.Table<fsaSetting, number>;
   constructor() {
     super("fsa-database");
     const db = this;
@@ -27,6 +31,7 @@ class FsaDb extends Dexie {
       fileTypes: `++id,name,selected,hidden`,
       state: `++id,currentDirectory,currentFile,currentCollection`,
       errors: `++id,type,success`,
+      settings: `++id`,
     });
   }
 }
@@ -35,6 +40,38 @@ const db = new FsaDb();
 async function initializeDb(fileTypes: string[]) {
   console.time("initializeDb");
 
+  await createFileTypesIfNotExist(fileTypes);
+
+  await createSettingsIfNotExist();
+
+  await resetPermissionsOnAllDirectories();
+
+  // see how long it has taken.
+  console.timeEnd("initializeDb");
+}
+
+export { db, initializeDb };
+
+async function createSettingsIfNotExist() {
+  const setting = await db.settings.toCollection().last();
+  if (setting) {
+    const {
+      lastScanned,
+      cleanCollectionsWhenRemoved,
+      cleanFilesFromCollections,
+    } = setting;
+
+    await createSetting(
+      lastScanned,
+      cleanCollectionsWhenRemoved,
+      cleanFilesFromCollections
+    );
+  } else {
+    await createSetting();
+  }
+}
+
+async function createFileTypesIfNotExist(fileTypes: string[]) {
   try {
     const ft = await db.fileTypes.count();
     // if (ft > 0) return; // only want to add if no entries already
@@ -48,8 +85,9 @@ async function initializeDb(fileTypes: string[]) {
   } catch (e) {
     console.error(`Error creating fileTypes\n ${e}`);
   }
+}
 
-  // reset permissions on all directories
+async function resetPermissionsOnAllDirectories() {
   try {
     const dirs = await db.directories.toArray();
     if (dirs) {
@@ -61,7 +99,4 @@ async function initializeDb(fileTypes: string[]) {
   } catch (e) {
     console.error(`Error updating directories permissions\n ${e}`);
   }
-  console.timeEnd("initializeDb");
 }
-
-export { db, initializeDb };

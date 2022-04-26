@@ -31,6 +31,12 @@ export {
   saveCollectionToFileSystem,
 } from "./models/collections/";
 
+export {
+  createSetting,
+  updateSetting,
+  updateSettingLastScanned,
+} from "./models/settings";
+
 export { parseVirtualFileSystemEntry } from "./models/parseVirtualFsaEntry";
 export { db, initializeDb } from "./db/setup";
 export { useLiveQuery } from "dexie-react-hooks";
