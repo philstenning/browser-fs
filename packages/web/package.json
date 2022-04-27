@@ -9,6 +9,7 @@
     "test": "pnpm cypress open"
   },
   "dependencies": {
+    "@szhsin/react-menu": "^3.0.0",
     "fsa-browser": "workspace:*",
     "fsa-database": "workspace:*",
     "postcss-import-ext-glob": "^2.0.1",

@@ -32,5 +32,10 @@
   animation: var(--animation-spin);
   color: var(--green-2);
 }
-.pending {
+.btnTrash {
+  background-color: inherit;
+
+  &:hover{
+    color:var(--red-6)
+  }
 }

@@ -6,13 +6,14 @@ import {
 } from "react-fsa-database";
 import { ImSpinner6 } from "react-icons/im";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
-import { fsaDirectory } from "../../../../react-fsa-database/node_modules/fsa-database/src";
+import { fsaDirectory } from "fsa-database";
+import { BiTrash } from "react-icons/bi";
 //@ts-ignore
 import styles from "./rootDirectories.module.css";
 
 const RootDirectories = () => {
   const [scanning, setScanning] = useState(false);
-  const { isScanning, rootDirectories, addRootDirectory } =
+  const { isScanning, rootDirectories, addRootDirectory, deleteRootDirectory } =
     useRootDirectories();
   const { isReScanning, reScanRootDirectories } = useReScanRootDirectories();
   const { dbState, setCurrentRootDirectoryId } = useFsaDbContext();
@@ -39,7 +40,12 @@ const RootDirectories = () => {
               key={dir.id}
               onClick={() => setCurrentRootDirectoryId(dir.id)}
             >
-              {" "}
+              <button
+                className={styles.btnTrash}
+                onClick={() => deleteRootDirectory(dir)}
+              >
+                <BiTrash />
+              </button>
               <span>{dir.name} </span>
               <ScanningContent dir={dir} scanning={scanning} />
             </li>
@@ -85,7 +91,6 @@ function ScanningContent({ dir, scanning }: Props) {
         <span className={styles.content}>
           {" "}
           <IoEllipsisHorizontalSharp />
-        
         </span>
       );
     }
