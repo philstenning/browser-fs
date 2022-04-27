@@ -1,6 +1,6 @@
 import { db } from "../../db/setup";
 import { fsaCollection, fsaFile } from "../types";
-// import { removeFileFromCollectionsSavedLocation } from "./index";
+import { mapCollectionNameToFileName } from "./saveCollectionToFileSystem";
 
 export async function removeAllFilesFromCollection(collectionId: string) {
   const collection = await db.userCollections.get(collectionId);
@@ -36,10 +36,11 @@ async function removeAllFileFromCollectionsSavedLocation(
 ) {
   if (!collection.handle) return;
 
-  for (const file of files) {
+  // map the file names so we remove the correct file.
+  const mappedFiles = mapCollectionNameToFileName(files, collection);
+  for (const file of mappedFiles) {
     if (file) {
       try {
-        
         await collection.handle.removeEntry(file.name);
       } catch (e) {
         console.warn(`unable to remove file from local drive it probably did not exist, 

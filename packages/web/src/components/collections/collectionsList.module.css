@@ -21,7 +21,11 @@ width: 100%;
     gap: var(--size-3);
     border: solid 1px gray;
 
-    /* & button{
-        border-radius: var(--radius-3);;;
-    } */
+}
+.form{
+    display: flex;
+    gap: var(--size-2);
+    margin: var(--size-3);
+}
+.add{
 }

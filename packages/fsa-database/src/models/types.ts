@@ -54,6 +54,7 @@ export interface fsaCollectionFile {
   fileId: string;
   added: number;
   order: number;
+  name:string;
 }
 
 export interface fsaState {
