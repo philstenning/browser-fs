@@ -7,8 +7,11 @@ export async function removeAllFilesFromCollection(collectionId: string) {
   if (!collection) return;
 
   const files = await db.files.bulkGet(collection.files.map((f) => f.fileId));
+ 
+   if(collection.handle && collection.files.length){
 
-  await removeAllFileFromCollectionsSavedLocation(collection, files);
+     await removeAllFileFromCollectionsSavedLocation(collection, files);
+   }
   // remove collection id from each file
   // then put back in the db
   await db.transaction("rw", db.userCollections, db.files, async () => {
@@ -29,6 +32,7 @@ export async function removeAllFilesFromCollection(collectionId: string) {
     }
   });
 }
+
 
 async function removeAllFileFromCollectionsSavedLocation(
   collection: fsaCollection,
