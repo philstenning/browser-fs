@@ -5,6 +5,7 @@ li{
 .hidden{
     color: var(--red-3);
     position: relative;
+    text-decoration: line-through;
 }
 .hidden::before{
     content: 👎;

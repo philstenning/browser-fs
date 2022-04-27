@@ -7,8 +7,8 @@ export async function removeFileFromCollectionsSavedLocation(
   collection: fsaCollection
 ) {
   if (!collection.handle) return;
-  const { handle, name } = collection;
-  // check user settings if we need to remove file
+  const { handle,files } = collection;
+  // check user settings if we need to remove file from fs
   const settings = await db.settings.toCollection().last();
   if (!settings) return;
   const { cleanFilesFromCollections } = settings;
@@ -18,7 +18,8 @@ export async function removeFileFromCollectionsSavedLocation(
   if (!(await checkPermissionsOfHandle(handle, "readwrite"))) return;
   try {
       // const dirHandle = await handle.getDirectoryHandle(name);
-      await handle.removeEntry(file.name);
+      const fileName = files.filter(f=>f.fileId === file.id)[0].name
+      await handle.removeEntry(fileName);
   } catch (e) {
     console.warn(`unable to remove file from local drive it probably did not exist, 
     directory: ${handle.name} 

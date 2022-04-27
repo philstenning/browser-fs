@@ -78,13 +78,15 @@ function Add() {
   };
 
   return (
-    <form>
+    <form className={styles.form}>
       <input
-        type="text"
+       className={styles.add}
+        type="search"
         name="colName"
         id="colName"
         onChange={(e) => setCollectionName(e.target.value)}
         value={collectionName}
+        autoComplete='off'
       />
       <button onClick={(e) => handleClick(e)}>Add</button>
     </form>

@@ -1,5 +1,5 @@
 import { db } from "../../db/setup";
-import {fsaCollection,fsaFile} from '../types'
+import { fsaCollection, fsaFile } from "../types";
 import { checkPermissionsOfHandle } from "fsa-browser";
 
 export async function saveCollectionToFileSystem(collectionId: string) {
@@ -7,12 +7,17 @@ export async function saveCollectionToFileSystem(collectionId: string) {
   if (!collection || !collection.handle) return false;
 
   // get all files from db
-  const files = await db.files.bulkGet(collection.files.map((f) => f.fileId));
+  let files = await db.files.bulkGet(collection.files.map((f) => f.fileId));
+  //temporarily map collections.names to file.names
+  // just for saving files
+  const mappedFiles = mapCollectionNameToFileName(files, collection);
+  
+ mappedFiles.forEach(f=>console.log(f?.name))
 
-  await getRootIdPermissions([...files]);
+  await getRootIdPermissions([...mappedFiles]);
 
   // save a copy to folder you got the handle for
-  for (const file of files) {
+  for (const file of mappedFiles) {
     if (file) {
       // if we don't have permission it will fail
       // without warning you. so check for it.
@@ -20,7 +25,7 @@ export async function saveCollectionToFileSystem(collectionId: string) {
       try {
         const f = await file.handle.getFile();
         // create new file handle for the directory
-        const newFileHandel = await collection.handle.getFileHandle(f.name, {
+        const newFileHandel = await collection.handle.getFileHandle(file.name, {
           create: true,
         });
         const writable = await newFileHandel.createWritable();
@@ -36,12 +41,27 @@ export async function saveCollectionToFileSystem(collectionId: string) {
     }
   }
 }
+
+
+export function mapCollectionNameToFileName(
+  files: (fsaFile | undefined)[],
+  collection: fsaCollection
+) {
+  return files.map((file) => {
+    if (file) {
+      file.name = collection.files.filter((f) => f.fileId === file.id)[0].name;
+      return file
+    }
+    
+  })
+}
+
 /**
- * checks and/or gets the permissions for the 
+ * checks and/or gets the permissions for the
  * root directories from the files array
- * @param files 
+ * @param files
  */
-async function getRootIdPermissions(files: (fsaFile | undefined)[]) {
+ async function getRootIdPermissions(files: (fsaFile | undefined)[]) {
   // use a set to get unique list or ids
   const ids = new Set<string>();
   files.forEach((f) => {

@@ -117,7 +117,10 @@ async function getCurrentCollection() {
   if (!collection) return null;
   return collection;
 }
-
+/**
+ * get the items/files of the currently selected collection
+ * @returns
+ */
 function getItems() {
   const list = useLiveQuery(async () => {
     // get state
@@ -135,8 +138,10 @@ function getItems() {
 
       // add order from the collection.
       files.forEach((f) => {
-        f.order =
-          collection.files.filter((c) => c.fileId === f.id)[0].order ?? 0;
+        const match = collection.files.filter((c) => c.fileId === f.id)[0];
+        f.order = match.order ?? 0
+        f.name= match.name
+       
       });
       // sort asc order
       return files.sort((a, b) => a.order - b.order);
