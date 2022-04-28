@@ -11,17 +11,16 @@ import DuplicateFiles from "../components/files/duplicateFiles";
 import styles from './dbProvider.module.css'
 const DbProvider = () => {
   return (
-    <div>
-      <div className={styles.split}>
+    <div data-testid="dbProvider">
+      <div className={styles.split} data-testid="dbProviderSplit__left">
         <RootDir />
         <CurrentState />
       </div>
       <FileTypes />
-      <div className={styles.split}>
+      <div className={styles.split} data-testid="dbProviderSplit__right">
         <div>
-
-        <DuplicateFiles/>
-        <FileList />
+          <DuplicateFiles />
+          <FileList />
         </div>
         <div>
           <CollectionList />

@@ -27,10 +27,10 @@ const RootDirectories = () => {
   }, [isScanning, isReScanning]);
 
   return (
-    <div>
+    <div data-testid="rootDirectories">
       <ul>
         {rootDirectories &&
-          rootDirectories.map((dir) => (
+          rootDirectories.map((dir,index) => (
             <li
               className={
                 dbState.currentRootDirectoryId === dir.id
@@ -43,6 +43,7 @@ const RootDirectories = () => {
               <button
                 className={styles.btnTrash}
                 onClick={() => deleteRootDirectory(dir)}
+                data-testid={`rootDirectoriesListItem-${index}_btnDelete`}
               >
                 <BiTrash />
               </button>
@@ -53,7 +54,6 @@ const RootDirectories = () => {
       </ul>
       <div className={styles.btnGroup}>
         <button
-          // className={isScanning ? "" : styles.isScanning}
           onClick={addRootDirectory}
           disabled={scanning}
         >

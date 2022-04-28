@@ -48,16 +48,16 @@ function FilesForRootDir() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="filesForRootDir">
       <h3>File List ({list.length})</h3>
-      <ul>
+      <ul data-testid="filesForRootDirList">
         {list &&
           list.map((file, index) => (
             <li
               className={listStyles(file)}
               onClick={(e) => handleClick(e, file)}
               key={index}
-              data-testid={index}
+              data-testid={`filesForRootDirListItem-${index}`}
             >
               {file.name} {file.hidden}
               <button onClick={(e) => checkPerm(e, file)}>check</button>{" "}

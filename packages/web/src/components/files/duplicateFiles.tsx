@@ -18,14 +18,20 @@ function DuplicateFiles() {
   };
 
   return (
-    <div>
+    <div data-testid="duplicateFiles">
       <FileList file={filtered} allFiles={duplicateFiles} />
-      {duplicateFiles &&
-        duplicateFiles.map((f) => (
-          <li key={f.id} onClick={(e) => handleClick(e, f)}>
-            {f.name} ({f.count}){" "}
-          </li>
-        ))}
+      <ul data-testid="dupFileGroupList">
+        {duplicateFiles &&
+          duplicateFiles.map((f,index) => (
+            <li
+              key={f.id}
+              onClick={(e) => handleClick(e, f)}
+              data-testid={`dupFileListItem-${index}`}
+            >
+              {f.name} ({f.count}){" "}
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }
@@ -50,10 +56,17 @@ const FileList = ({ file}: Props) => {
   return (
     <div>
       <h5>Ids of duplicate files</h5>
-      <ul>
-        {filtered.length>1 && filtered.map(f=> (
-    <li key={f.id} onClick={()=>toggleHidden(f)}>{f.name} {f.hidden}</li>
-))}
+      <ul data-testid="dupFileList">
+        {filtered.length > 1 &&
+          filtered.map((f,index) => (
+            <li
+              key={f.id}
+              onClick={() => toggleHidden(f)}
+              data-testid={`dupFileListItem-${index}`}
+            >
+              {f.name} {f.hidden}
+            </li>
+          ))}
       </ul>
     </div>
   );

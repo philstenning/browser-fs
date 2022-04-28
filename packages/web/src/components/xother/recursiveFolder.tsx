@@ -6,7 +6,7 @@ interface Props {
 }
 export function RecursiveFolder({ folder }: Props) {
   return (
-    <li key={folder.id} className={style.list}>
+    <li key={folder.id} className={style.list} data-testid="recursiveFolder">
       Folder: {folder.name}
       <ul className={style.none}>
         {folder.entries?.map((entry) => {
@@ -15,7 +15,7 @@ export function RecursiveFolder({ folder }: Props) {
               <li key={entry.id} className="bfl__file">
                 <span className={style.file}>
                   file: {entry.name}
-                   {/* <pre>{entry.path}</pre>{" "} */}
+                  {/* <pre>{entry.path}</pre>{" "} */}
                 </span>
               </li>
             );
@@ -33,30 +33,8 @@ type VListProps = {
 };
 export function RecursiveUnorderedList({ virtualEntry }: VListProps) {
   return (
-    <ul className={style.list}>
-
+    <ul className={style.list} data-testid="recursiveUnorderedList">
       <RecursiveFolder folder={virtualEntry} />
     </ul>
   );
 }
-
-// interface Props2 {
-//   folder: VirtualFileSystemEntry;
-// }
-// export function RecursiveList({ folder }: Props2) {
-//   return (
-//     <ul>
-//       {folder.map((entry) => (
-//         <li
-//           className={entry.kind === "file" ? style.file : style.recursiveFolder}
-//         >
-//           {entry.name}
-//           {" ------ path: "} {entry.path}
-//           {entry.kind === "directory" && (
-//             <RecursiveList folder={entry.entries ?? []} />
-//           )}
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// }
