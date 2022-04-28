@@ -39,7 +39,14 @@ export {
 } from "./models/settings";
 
 export { parseVirtualFileSystemEntry } from "./models/parseVirtualFsaEntry";
-export { db, initializeDb } from "./db/setup";
+export {
+  db,
+  initializeDatabase,
+  exportDatabase,
+  importDatabase,
+  fetchDatabase,
+} from "./db";
+
 export { useLiveQuery } from "dexie-react-hooks";
 export * from "./models/types";
 

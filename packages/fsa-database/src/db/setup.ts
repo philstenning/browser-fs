@@ -37,7 +37,7 @@ class FsaDb extends Dexie {
 }
 const db = new FsaDb();
 
-async function initializeDb(fileTypes: string[]) {
+async function initializeDatabase(fileTypes: string[]) {
   console.time("initializeDb");
 
   await createFileTypesIfNotExist(fileTypes);
@@ -50,7 +50,7 @@ async function initializeDb(fileTypes: string[]) {
   console.timeEnd("initializeDb");
 }
 
-export { db, initializeDb };
+export { db, initializeDatabase };
 
 async function createSettingsIfNotExist() {
   const setting = await db.settings.toCollection().last();
