@@ -57,16 +57,15 @@ const DirectoriesForRootDir = () => {
     unMergeDirectories(directory);
   };
     return (
-      <div>
+      <div data-testid="directoriesForRootDir">
         <h4>
           Directories For RootDir (files {filteredDirs && filteredDirs.length})
         </h4>
         <div className={styles.hideButtons}>
-
-          <button data-testid="dirForRootId_btn" onClick={toggleHidden}>
+          <button data-testid="directoriesForRootDir_btnToggle" onClick={toggleHidden}>
             Toggle Hidden
           </button>
-          <button data-test-id={`dfr_btn_unHideAll`}>UnHide All</button>
+          <button data-test-id="directoriesForRootDir_btnUnHideAll">UnHide All</button>
         </div>
         <input
           className={styles.filter}

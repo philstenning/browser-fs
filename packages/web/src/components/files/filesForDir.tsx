@@ -15,13 +15,15 @@ function FilesForDir() {
     setCurrentFileId(file.id)
   };
   return (
-    <div>
-     <h5> Files for current Directory </h5> 
+    <div data-testid="filesForDir">
+      <h5> Files for current Directory </h5>
       {directoryFiles.map((file, index) => (
         <li
-        data-testid={`ffcd_listItem_${index}`}
-        className={dbState.currentFileId===file.id?'active':''}
-        onClick={(e) => handleSetCurrentFile(e, file)} key={file.id}>
+          data-testid={`ffcd_listItem_${index}`}
+          className={dbState.currentFileId === file.id ? "active" : ""}
+          onClick={(e) => handleSetCurrentFile(e, file)}
+          key={file.id}
+        >
           {file.name}
         </li>
       ))}
