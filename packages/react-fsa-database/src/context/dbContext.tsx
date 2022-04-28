@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
-import { db, initializeDb, fsaState } from "fsa-database";
+import { db, initializeDatabase, fsaState } from "fsa-database";
 
 type FsaDbContextType = {
   dbState: fsaState;
@@ -78,7 +78,7 @@ function FsaDbContextProvider({
   async function getInitialData(): Promise<void> {
     // if this is the first time the db has been opened
     // we need to add some fileTypes
-    await initializeDb(fileExtensionsForApp);
+    await initializeDatabase(fileExtensionsForApp);
 
     const initialState = await db.state.toCollection().last();
     if (!initialState) return;

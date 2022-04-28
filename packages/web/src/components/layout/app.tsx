@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Contact from "../../routes/Contact";
 // import Home from "../../routes/Home";
 // import Db from "../../routes/db";
+import Start from '../../routes/start'
 import DbProvider from "../../routes/dbProvider";
 
 import Layout from "./Layout";
@@ -23,7 +24,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/db" element={<Db />} /> */}
             <Route path="/provider" element={<DbProvider />} />
-            <Route index element={<DbProvider />} />
+            <Route index element={<Start />} />
           </Route>
         </Routes>
       </BrowserRouter>

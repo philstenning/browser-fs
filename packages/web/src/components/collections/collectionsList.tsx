@@ -109,7 +109,12 @@ function Add() {
         value={collectionName}
         autoComplete="off"
       />
-      <button onClick={(e) => handleClick(e)}>Add</button>
+      <button
+        onClick={(e) => handleClick(e)}
+        data-testid={`collectionList_btnAdd`}
+      >
+        Add
+      </button>
     </form>
   );
 }
