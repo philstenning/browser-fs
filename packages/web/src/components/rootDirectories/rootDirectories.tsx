@@ -10,6 +10,7 @@ import { fsaDirectory } from "fsa-database";
 import { BiTrash } from "react-icons/bi";
 //@ts-ignore
 import styles from "./rootDirectories.module.css";
+import { dirname } from "path";
 
 const RootDirectories = () => {
   const [scanning, setScanning] = useState(false);
@@ -30,7 +31,7 @@ const RootDirectories = () => {
     <div data-testid="rootDirectories">
       <ul>
         {rootDirectories &&
-          rootDirectories.map((dir,index) => (
+          rootDirectories.map((dir, index) => (
             <li
               className={
                 dbState.currentRootDirectoryId === dir.id
@@ -43,20 +44,17 @@ const RootDirectories = () => {
               <button
                 className={styles.btnTrash}
                 onClick={() => deleteRootDirectory(dir)}
-                data-testid={`rootDirectoriesListItem-${index}_btnDelete`}
+                data-cy={`deleteRootDir_${dir.name}`}
               >
                 <BiTrash />
               </button>
-              <span>{dir.name} </span>
+              <span data-cy={`selectRootDir_${dir.name}`}>{dir.name} </span>
               <ScanningContent dir={dir} scanning={scanning} />
             </li>
           ))}
       </ul>
       <div className={styles.btnGroup}>
-        <button
-          onClick={addRootDirectory}
-          disabled={scanning}
-        >
+        <button onClick={addRootDirectory} disabled={scanning}>
           {!scanning ? "Add Root Directory" : "Scanning Drive"}
         </button>
         <button disabled={scanning} onClick={reScanRootDirectories}>

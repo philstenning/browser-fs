@@ -14,7 +14,7 @@ export async function selectPreviouslySelectedRootDir() {
       .where("isRoot")
       .equals("true")
       .toArray();
-    console.log(`there are ${rootDirs.length} left`);
+    // console.log(`there are ${rootDirs.length} left`);
 
     const count = rootDirs.length;
     if (count <= 1) {
@@ -25,12 +25,12 @@ export async function selectPreviouslySelectedRootDir() {
           const { rootId } = rootDirs[0];
           state.currentDirectoryId = rootId;
           state.currentRootDirectoryId = rootId;
-          console.log("selected last remaining root Dir ");
+          // console.log("selected last remaining root Dir ");
         } else {
           state.currentDirectoryId = initialDbState.currentDirectoryId;
           state.currentRootDirectoryId = initialDbState.currentRootDirectoryId;
           state.currentFileId = initialDbState.currentFileId;
-          console.log("No rootDirs left. ");
+          // console.log("No rootDirs left. ");
         }
         await db.state.add(state);
         return;
@@ -65,11 +65,11 @@ export async function selectPreviouslySelectedRootDir() {
         // remove the id before adding it.
         delete newState.id;
         await db.state.put(newState);
-        console.log(
-          "selected last used root Dir ",
-          state.currentRootDirectoryId,
-          { currentRootDirectoryId }
-        );
+        // console.log(
+        //   "selected last used root Dir ",
+        //   state.currentRootDirectoryId,
+        //   { currentRootDirectoryId }
+        // );
         return;
       }
     }

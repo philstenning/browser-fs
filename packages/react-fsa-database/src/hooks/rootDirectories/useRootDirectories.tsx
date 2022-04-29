@@ -11,7 +11,7 @@ export function useRootDirectories() {
   const { addRootDirectory, isScanning } = useAddRootDirectory();
 
   const rootDirectories = useLiveQuery(() =>
-    db.directories.where("isRoot").equals("true").toArray()
+    db.directories.orderBy('created').filter(f=>f.isRoot==='true').toArray()
   );
 
   const deleteRootDirectory = (dir: fsaDirectory) => {
