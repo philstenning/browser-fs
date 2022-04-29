@@ -47,6 +47,9 @@ export {
   fetchDatabase,
 } from "./db";
 
+
+export {initialDbState} from './models/state'
+
 export { useLiveQuery } from "dexie-react-hooks";
 export * from "./models/types";
 

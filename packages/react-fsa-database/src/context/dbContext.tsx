@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
-import { db, initializeDatabase, fsaState } from "fsa-database";
+import { db, initializeDatabase, fsaState, useLiveQuery,initialDbState } from "fsa-database";
 
 type FsaDbContextType = {
   dbState: fsaState;
@@ -20,6 +20,7 @@ type Props = {
   fileExtensionsForApp?: string[];
 };
 
+
 /**
  *
  * @param param0
@@ -29,29 +30,13 @@ function FsaDbContextProvider({
   children,
   fileExtensionsForApp = ["stl", "gcode", "3mf", "jpg"],
 }: Props) {
-  /////
-  const [dbState, setDbState] = useState<fsaState>({
-    currentCollectionId: null,
-    currentDirectoryId: null,
-    currentFileId: null,
-    currentRootDirectoryId: null,
-  });
+  const [dbState, setDbState] = useState<fsaState>(initialDbState);
+  const currentDbState = useLiveQuery(() => db.state.toCollection().last());
 
-  function saveState(state: fsaState) {
+  const saveState = async (state: fsaState) => {
     delete state.id;
-    db.state
-      .add(state)
-      .then((res) => {
-        if (res > 0) {
-          // we have a new id, id is readonly
-          // so create a new obj.
-          setDbState({ ...state, id: res });
-        }
-      })
-      .catch((err) => {
-        console.log("error: ", err);
-      });
-  }
+    await db.state.add(state);
+  };
 
   function setCurrentDirectoryId(idOrNull: string | null) {
     if (dbState.currentDirectoryId === idOrNull) return;
@@ -71,24 +56,30 @@ function FsaDbContextProvider({
     saveState({ ...dbState, currentCollectionId: idOrNull });
   }
 
-  /**
-   * Runs at startup of component
-   * Loads data into state objects.
-   */
+
+
+
+  
+  /** 
+   * if this is the first time the db has been opened
+   *  we need to add some fileTypes 
+   **/
   async function getInitialData(): Promise<void> {
-    // if this is the first time the db has been opened
-    // we need to add some fileTypes
     await initializeDatabase(fileExtensionsForApp);
 
-    const initialState = await db.state.toCollection().last();
-    if (!initialState) return;
-
-    setDbState(initialState);
   }
 
+  // run at start up 
   useEffect(() => {
     getInitialData();
-  }, []);
+  }, []);  
+
+  useEffect(() => {
+    if (currentDbState) {
+      console.log({currentDbState})
+      setDbState(currentDbState);
+    }
+  }, [currentDbState]);
 
   return (
     <FsaDbContext.Provider
