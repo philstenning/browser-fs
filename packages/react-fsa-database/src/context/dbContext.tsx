@@ -76,7 +76,6 @@ function FsaDbContextProvider({
 
   useEffect(() => {
     if (currentDbState) {
-      console.log({currentDbState})
       setDbState(currentDbState);
     }
   }, [currentDbState]);

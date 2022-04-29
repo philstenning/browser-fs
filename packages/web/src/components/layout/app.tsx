@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Home from "../../routes/Home";
 // import Db from "../../routes/db";
 import Start from '../../routes/start'
-import DbProvider from "../../routes/dbProvider";
+import TestPage from "../../routes/testPage";
 
 import Layout from "./Layout";
 import {
@@ -23,7 +23,7 @@ function App() {
             {/* <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/db" element={<Db />} /> */}
-            <Route path="/provider" element={<DbProvider />} />
+            <Route path="/provider" element={<TestPage />} />
             <Route index element={<Start />} />
           </Route>
         </Routes>

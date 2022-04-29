@@ -18,10 +18,10 @@ function CollectionItems() {
     <div data-testid="currentCollectionItems">
       <h4>Collection Items</h4>
       {/* currentCollectionItems */}
-      <ul>
+      <ul data-cy="currentCollection">
         {currentCollectionItems.map((item, index) => (
           <li
-            data-testid={`collectionItem-${index}`}
+            data-cy={`collectionItem-${index}`}
             key={item.id}
             className={`${dbState.currentFileId === item.id ? "active" : ""} ${
               item.hidden === "true" ? "hidden" : ""

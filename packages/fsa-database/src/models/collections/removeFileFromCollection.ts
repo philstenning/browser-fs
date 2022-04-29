@@ -24,7 +24,6 @@ export async function removeFileFromCollection(
   
   // remove the fsaCollectionFile from the collection
   collection.files = collection.files.filter((f) => f.fileId !== file.id);
-  console.log('removing file')
   // save all to db.
   return await putCollectionAndFile(collection, file);
 }
