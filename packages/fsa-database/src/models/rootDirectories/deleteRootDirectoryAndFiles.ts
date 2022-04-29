@@ -1,6 +1,8 @@
 import { fsaDirectory } from "../types";
 import { deleteRootFolderFiles } from "../files";
 import { db } from "../../db/setup";
+import {selectPreviouslySelectedRootDir} from './selectPreviouslySelectedRootDir'
+
 
 export async function deleteRootDirectoryAndFiles(dir: fsaDirectory) {
   if (!dir.id) return false;
@@ -8,6 +10,7 @@ export async function deleteRootDirectoryAndFiles(dir: fsaDirectory) {
     const hasDeletedFiles = await deleteRootFolderFiles(dir.id);
     if (hasDeletedFiles) {
       await db.directories.where("rootId").equals(dir.id).delete();
+      await selectPreviouslySelectedRootDir();
       return true;
     }
   } catch (error) {
@@ -18,3 +21,4 @@ export async function deleteRootDirectoryAndFiles(dir: fsaDirectory) {
   }
   return false;
 }
+
