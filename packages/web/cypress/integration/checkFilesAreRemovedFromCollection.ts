@@ -38,12 +38,12 @@ it("files are removed from collections when root directories are deleted", funct
   /* ==== End Cypress Studio ==== */
   /* ==== Generated with Cypress Studio ==== */
   cy.get('[data-cy="deleteRootDir_root_1"]').click();
-   cy.get('[data-cy="currentCollection"] > li').should("have.length", 5);
-   cy.get('[data-cy="deleteRootDir_root_2"]').click();
-   cy.get('[data-cy="currentCollection"] > li').should("have.length", 2);
-   cy.get('[data-cy="deleteRootDir_root_3"]').click();
-   cy.get('[data-cy="currentCollection"] > li').should("have.length", 0);
-   /* ==== End Cypress Studio ==== */
+  cy.get('[data-cy="currentCollection"] > li').should("have.length", 5);
+  cy.get('[data-cy="deleteRootDir_root_2"]').click();
+  cy.get('[data-cy="currentCollection"] > li').should("have.length", 2);
+  cy.get('[data-cy="deleteRootDir_root_3"]').click();
+  cy.get('[data-cy="currentCollection"] > li').should("have.length", 0);
+  /* ==== End Cypress Studio ==== */
 });
 
 export {};
