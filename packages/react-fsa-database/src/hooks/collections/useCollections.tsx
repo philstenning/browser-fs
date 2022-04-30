@@ -54,7 +54,10 @@ const useCollections = () => {
     collection?: fsaCollection
   ) => {
     const added = await fsaAddFileToCollection(file, collection);
-    if (!added) return;
+    if (!added) {
+      console.error('file not added to collection...')
+      return;}
+      console.log('file added to collection...')
     // set the passed collection to the current collection if it isn't already.
     if (collection && dbState.currentCollectionId !== collection.id)
       setCurrentCollectionId(collection.id);
