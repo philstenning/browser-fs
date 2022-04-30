@@ -1,5 +1,11 @@
 import React, { useState, useContext, createContext, useEffect } from "react";
-import { db, initializeDatabase, fsaState, useLiveQuery,initialDbState } from "fsa-database";
+import {
+  db,
+  initializeDatabase,
+  fsaState,
+  useLiveQuery,
+  initialDbState,
+} from "fsa-database";
 
 type FsaDbContextType = {
   dbState: fsaState;
@@ -20,7 +26,6 @@ type Props = {
   fileExtensionsForApp?: string[];
 };
 
-
 /**
  *
  * @param param0
@@ -38,41 +43,36 @@ function FsaDbContextProvider({
     await db.state.add(state);
   };
 
-  function setCurrentDirectoryId(idOrNull: string | null) {
+  const setCurrentDirectoryId = async (idOrNull: string | null) => {
     if (dbState.currentDirectoryId === idOrNull) return;
-    saveState({ ...dbState, currentDirectoryId: idOrNull });
-  }
-  function setCurrentRootDirectoryId(idOrNull: string | null) {
+    await saveState({ ...dbState, currentDirectoryId: idOrNull });
+  };
+  const setCurrentRootDirectoryId = async (idOrNull: string | null) => {
     // only update if changed.
     if (dbState.currentRootDirectoryId === idOrNull) return;
-    saveState({ ...dbState, currentRootDirectoryId: idOrNull });
-  }
-  function setCurrentFileId(idOrNull: string | null) {
+    await saveState({ ...dbState, currentRootDirectoryId: idOrNull });
+  };
+  const setCurrentFileId = async (idOrNull: string | null) => {
     if (dbState.currentFileId === idOrNull) return;
-    saveState({ ...dbState, currentFileId: idOrNull });
-  }
-  function setCurrentCollectionId(idOrNull: string | null) {
+    await saveState({ ...dbState, currentFileId: idOrNull });
+  };
+  const setCurrentCollectionId = async (idOrNull: string | null) => {
     if (dbState.currentCollectionId === idOrNull) return;
-    saveState({ ...dbState, currentCollectionId: idOrNull });
-  }
+    await saveState({ ...dbState, currentCollectionId: idOrNull });
+  };
 
-
-
-
-  
-  /** 
+  /**
    * if this is the first time the db has been opened
-   *  we need to add some fileTypes 
+   *  we need to add some fileTypes
    **/
   async function getInitialData(): Promise<void> {
     await initializeDatabase(fileExtensionsForApp);
-
   }
 
-  // run at start up 
+  // run at start up
   useEffect(() => {
     getInitialData();
-  }, []);  
+  }, []);
 
   useEffect(() => {
     if (currentDbState) {
