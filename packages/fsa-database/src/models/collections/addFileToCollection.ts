@@ -36,12 +36,7 @@ export async function addFileToCollection(
   }
 
   // create file
-  const collectionFile: fsaCollectionFile = {
-    fileId: file.id,
-    added: Date.now(),
-    order: 0,
-    name: file.name,
-  };
+  const collectionFile: fsaCollectionFile = createCollectionFile(file);
   if (!collection) return false;
   // check if file with same id exists already
   for (const f of collection.files) {
@@ -56,6 +51,15 @@ export async function addFileToCollection(
   collection.files.push(collectionFile);
   file.userCollectionIds.push(collection.id);
   return await putCollectionAndFile(collection, file);
+}
+
+function createCollectionFile(file: fsaFile): fsaCollectionFile {
+  return {
+    fileId: file.id,
+    added: Date.now(),
+    order: 0,
+    name: file.name,
+  };
 }
 
 function checkIfFileWithSameNameExists(

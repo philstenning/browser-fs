@@ -15,7 +15,7 @@ function FilesForRootDir() {
   const { addFileToCollection } = useCollections();
 
   const handleClick = async (
-    e: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
     file: fsaFile
   ) => {
     e.stopPropagation();
@@ -55,11 +55,13 @@ function FilesForRootDir() {
           list.map((file, index) => (
             <li
               className={listStyles(file)}
-              onClick={(e) => handleClick(e, file)}
-              key={index}
+             
+              key={file.id}
+              >
+             <span onClick={(e) => handleClick(e, file)}
               data-testid={`filesForRootDirListItem-${index}`}
-            >
-              {file.name} {file.hidden}
+             
+             >{file.name} {file.hidden}</span>  
               <button onClick={(e) => checkPerm(e, file)}>check</button>{" "}
               {file.size}
             </li>
