@@ -54,7 +54,7 @@ export interface fsaCollectionFile {
   fileId: string;
   added: number;
   order: number;
-  name:string;
+  name: string;
 }
 
 export interface fsaState {
@@ -87,18 +87,14 @@ export type fsaError = {
   type: "warning" | "error" | "unknown";
 };
 
-export interface fsaSettingCreate {
+export interface fsaSetting {
+  id?: number;
   sessionStarted: number;
-  // if a file is removed from collection it is
-  //removed from local disk also
-  cleanFilesFromCollections: boolean;
-  // when a collection is removed
-  // remove all files and its directory
-  // from local disk
-  cleanCollectionsWhenRemoved: boolean;
-  lastScanned:number
-}
-export interface fsaSetting extends fsaSettingCreate {
-  id: number;
-
+  // when a file is removed from a collection,
+  // removed  it from local disk also
+  cleanUpFiles: boolean;
+  // when a collection is removed, remove
+  // all is files from local disk
+  cleanUpCollections: boolean;
+  lastScanned: number;
 }

@@ -11,8 +11,8 @@ export async function removeFileFromCollectionsSavedLocation(
   // check user settings if we need to remove file from fs
   const settings = await db.settings.toCollection().last();
   if (!settings) return;
-  const { cleanFilesFromCollections } = settings;
-  if (!cleanFilesFromCollections) return;
+  const { cleanUpFiles } = settings;
+  if (!cleanUpFiles) return;
 
   console.log({ handle });
   if (!(await checkPermissionsOfHandle(handle, "readwrite"))) return;

@@ -9,7 +9,7 @@ import {
   fsaError,
   fsaSetting,
 } from "../models/types";
-import { createSetting } from "../models/settings/createSetting";
+import { createSetting, saveSetting } from "../models/settings/createSetting";
 
 class FsaDb extends Dexie {
   files!: Dexie.Table<fsaFile, string>;
@@ -42,7 +42,11 @@ async function initializeDatabase(fileTypes: string[]) {
 
   await createFileTypesIfNotExist(fileTypes);
 
-  await createSettingsIfNotExist();
+   const setting = await createSetting(false);
+   if(setting) {
+     setting.sessionStarted = Date.now()
+    await saveSetting(setting)
+   }
 
   await resetPermissionsOnAllDirectories();
 
@@ -52,24 +56,24 @@ async function initializeDatabase(fileTypes: string[]) {
 
 export { db, initializeDatabase };
 
-async function createSettingsIfNotExist() {
-  const setting = await db.settings.toCollection().last();
-  if (setting) {
-    const {
-      lastScanned,
-      cleanCollectionsWhenRemoved,
-      cleanFilesFromCollections,
-    } = setting;
+// async function createSettingsIfNotExist() {
+//   const setting = await db.settings.toCollection().last();
+//   if (setting) {
+//     const {
+//       lastScanned,
+//       removeFilesFromDriveWhenCollectionRemoved,
+//       removeFileFromDriveIfRemovedFromCollection,
+//     } = setting;
 
-    await createSetting(
-      lastScanned,
-      cleanCollectionsWhenRemoved,
-      cleanFilesFromCollections
-    );
-  } else {
-    await createSetting();
-  }
-}
+//     await createSetting(
+//       lastScanned,
+//       removeFilesFromDriveWhenCollectionRemoved,
+//       removeFileFromDriveIfRemovedFromCollection
+//     );
+//   } else {
+//     await createSetting();
+//   }
+// }
 
 async function createFileTypesIfNotExist(fileTypes: string[]) {
   try {
