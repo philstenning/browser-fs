@@ -14,6 +14,14 @@ function CollectionItems() {
     removeFileFromCollection(file);
   };
 
+  const setCurrentItem = (
+    e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
+    id: string
+  ) => {
+    e.stopPropagation();
+    setCurrentFileId(id);
+  };
+
   return (
     <div data-testid="currentCollectionItems">
       <h4>Collection Items</h4>
@@ -21,14 +29,17 @@ function CollectionItems() {
       <ul data-cy="currentCollection">
         {currentCollectionItems.map((item, index) => (
           <li
-            data-cy={`collectionItem-${index}`}
             key={item.id}
             className={`${dbState.currentFileId === item.id ? "active" : ""} ${
               item.hidden === "true" ? "hidden" : ""
             }`}
-            onClick={() => setCurrentFileId(item.id)}
           >
-            {item.order} {item.name}{" "}
+            <span
+              onClick={(e) => setCurrentItem(e, item.id)}
+              data-cy={`collectionItem-${index}`}
+            >
+              {item.order} {item.name}
+            </span>
             <button
               onClick={(e) => removeItem(e, item)}
               data-testid={`collectionItem-${index}-btnRemove`}

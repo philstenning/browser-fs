@@ -22,6 +22,11 @@ width: 100%;
     border: solid 1px gray;
 
 }
+
+.nameGroup{
+    display: flex;
+    gap: var(--size-2);
+}
 .form{
     display: flex;
     gap: var(--size-2);

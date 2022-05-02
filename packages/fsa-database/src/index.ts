@@ -45,10 +45,10 @@ export {
   exportDatabase,
   importDatabase,
   fetchDatabase,
+  loadDatabase,
 } from "./db";
 
-
-export {initialDbState} from './models/state'
+export { initialDbState } from "./models/state";
 
 export { useLiveQuery } from "dexie-react-hooks";
 export * from "./models/types";

@@ -24,59 +24,57 @@ function CollectionList() {
     setCurrentCollectionId(collection.id);
   };
 
-  const deleteCollection = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    collection: fsaCollection
-  ) => {
-    e.stopPropagation();
-    removeCollection(collection);
-  };
-  const copyCollection = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    collection: fsaCollection
-  ) => {
-    e.stopPropagation();
-    cloneCollection(collection);
-  };
-
   return (
-    <div data-testid="collectionList">
+    <div>
       <h3> Collections ({collections.length})</h3>
       <Add />
-      <ul className={styles.list}>
+      <ul className={styles.list} data-cy="collectionList">
         {collections.map((col, index) => (
           <li
             className={
               col.id === dbState.currentCollectionId ? styles.active : ""
             }
             key={col.id}
-            onClick={() => setCurrentCollectionId(col.id)}
-            data-testid={`collectionListItem-${index}`}
           >
             <div className={styles.btnGroup}>
-              <span> {col.name}</span>
-              <span>files:{col.files.length}</span>
+              <span
+                data-cy={`selectCollection-${index}`}
+                onClick={() => setCurrentCollectionId(col.id)}
+                className={styles.nameGroup}
+              >
+                <span>{col.name}</span>
+                <span>files:{col.files.length}</span>
+              </span>
               <button
-                onClick={(e) => clearCollection(e, col)}
-                data-testid={`collectionListItem-${index}_btnClear`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  clearCollection(e, col);
+                }}
+                data-cy={`clearCollection-${index}`}
               >
                 Clear
               </button>
               <button
-                onClick={(e) => deleteCollection(e, col)}
-                data-testid={`collectionListItem-${index}_btnDelete`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removeCollection(col);
+                }}
+                data-cy={`deleteCollection-${index}`}
               >
                 Delete
               </button>
               <button
-                onClick={(e) => copyCollection(e, col)}
-                data-testid={`collectionListItem-${index}_btnCopy`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  cloneCollection(col);
+                }}
+                data-cy={`copyCollection-${index}`}
               >
                 Copy
               </button>
               <button
                 onClick={(e) => saveCollectionToFileSystem(col.id)}
-                data-testid={`collectionListItem-${index}_btnSave`}
+                data-cy={`saveCollection-${index}`}
               >
                 save
               </button>
@@ -93,25 +91,26 @@ export default CollectionList;
 function Add() {
   const { addCollection } = useCollections();
   const [collectionName, setCollectionName] = useState("");
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    addCollection(collectionName);
-  };
 
   return (
     <form className={styles.form}>
       <input
         className={styles.add}
         type="search"
-        name="colName"
-        id="colName"
+        name="addCollectionInput"
+        id="addCollectionInput"
+        
         onChange={(e) => setCollectionName(e.target.value)}
         value={collectionName}
         autoComplete="off"
       />
       <button
-        onClick={(e) => handleClick(e)}
-        data-testid={`collectionList_btnAdd`}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          addCollection(collectionName);
+        }}
+        data-cy={`addCollectionButton`}
       >
         Add
       </button>

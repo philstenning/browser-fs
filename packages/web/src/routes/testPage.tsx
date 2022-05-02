@@ -7,6 +7,7 @@ import CollectionItems from "../components/collections/currentCollectionItems";
 import DirectoriesForRootDir from "../components/directories/directoriesForRootDir";
 import FilesForDir from "../components/files/filesForDir";
 import DuplicateFiles from "../components/files/duplicateFiles";
+import CurrentFile from '../components/files/currentFile'
 //@ts-ignore // don't know why but vscode ts can't find it???
 import styles from "./testPage.module.css";
 const TestPage = () => {
@@ -16,7 +17,10 @@ const TestPage = () => {
         <RootDir />
         <CurrentState />
       </div>
-      <FileTypes />
+      <div className={styles.split}>
+        <FileTypes />
+        <CurrentFile/>
+      </div>
       <div className={styles.split} data-testid="dbProviderSplit__right">
         <div>
           <FileList />

@@ -8,6 +8,7 @@ import { db, fsaFile } from "fsa-database";
 import styles from "./filesForRootDir.module.css";
 
 import { checkPermissionsOfHandle } from "fsa-browser";
+import { dir } from "console";
 
 function FilesForRootDir() {
   const { dbState, setCurrentFileId } = useFsaDbContext();
@@ -49,8 +50,8 @@ function FilesForRootDir() {
 
   return (
     <div className={styles.container} data-testid="filesForRootDir">
-      <h3>File List ({list.length})</h3>
-      <ul data-testid="filesForRootDirList">
+      <h3 >Files for Current Root ({list.length})</h3>
+      <ul data-cy="filesForRootDirList">
         {list &&
           list.map((file, index) => (
             <li

@@ -16,7 +16,7 @@ const foo = (data: ImportProgress) => {
  * @param {string}fileName
  */
 export const fetchDatabase = async (
-  fileName: string = "testing/fsaDb.data"
+  fileName: string = "testing/fsaDb.json"
 ) => {
   const request = new Request(fileName);
 

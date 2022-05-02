@@ -20,7 +20,7 @@
       "cypress",
     ]
   },
-   "include": ["**/*.ts", "cypress/integration/checkFilesAreRemovedFromCollection.ts"],
+   "include": ["**/*.ts", "cypress/integration/collections.ts"],
    "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
