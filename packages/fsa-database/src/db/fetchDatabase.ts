@@ -1,6 +1,6 @@
 import { importInto } from "dexie-export-import";
 import { ImportProgress } from "dexie-export-import/dist/import";
-import { db } from "./setup";
+import { db , resetPermissionsOnAllDirectories} from "./setup";
 
 const foo = (data: ImportProgress) => {
   if (!!data.done) {
@@ -28,6 +28,8 @@ export const fetchDatabase = async (
         clearTablesBeforeImport: true,
         progressCallback: foo,
       });
+      await resetPermissionsOnAllDirectories()
+
     }
   } catch (error) {
     console.error(`Error fetching database ${error}`);

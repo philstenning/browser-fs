@@ -87,7 +87,7 @@ async function createFileTypesIfNotExist(fileTypes: string[]) {
   }
 }
 
-async function resetPermissionsOnAllDirectories() {
+export async function resetPermissionsOnAllDirectories() {
   try {
     const dirs = await db.directories.toArray();
     if (dirs) {

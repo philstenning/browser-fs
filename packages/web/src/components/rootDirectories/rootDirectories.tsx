@@ -10,7 +10,7 @@ import { fsaDirectory } from "fsa-database";
 import { BiTrash } from "react-icons/bi";
 //@ts-ignore
 import styles from "./rootDirectories.module.css";
-import { dirname } from "path";
+
 
 const RootDirectories = () => {
   const [scanning, setScanning] = useState(false);
@@ -49,7 +49,7 @@ const RootDirectories = () => {
                 <BiTrash />
               </button>
               <span data-cy={`selectRootDir_${dir.name}`}>{dir.name} </span>
-              <ScanningContent dir={dir} scanning={scanning} />
+              <ScanningContent dir={dir} scanning={scanning}  index={index}/>
             </li>
           ))}
       </ul>
@@ -70,12 +70,13 @@ export default RootDirectories;
 type Props = {
   dir: fsaDirectory;
   scanning: boolean;
+  index:number;
 };
 
-function ScanningContent({ dir, scanning }: Props) {
+function ScanningContent({ dir, scanning ,index}: Props) {
   const started = dir.isScanning;
   const finished = dir.scanFinished;
-  if (dir.readPermission === "false") return <span>❌</span>;
+  if (dir.readPermission === "false") return <span data-cy={`rootDirHasPermission-${index}`}>❌</span>;
 
   if (scanning) {
     if (started && !finished)
@@ -96,5 +97,5 @@ function ScanningContent({ dir, scanning }: Props) {
 
   // if (started && finished) return "✔️";
   // if(scanning )return <span><ImSpinner6 /> pending...</span> ;
-  return <span>✔️</span>;
+  return <span data-cy={`rootDirHasPermission-${index}`}>✔️</span>;
 }
