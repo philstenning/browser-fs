@@ -5,4 +5,5 @@ export const initialDbState: fsaState = {
   currentDirectoryId: "null",
   currentFileId: "null",
   currentRootDirectoryId: "null",
+  isScanning:false
 }

@@ -1,4 +1,4 @@
-import { saveSetting,db,fsaSetting } from "../../";
+import { saveSetting, db, fsaSetting } from "../../";
 
 export async function createSetting(
   save: boolean = true,
@@ -32,7 +32,8 @@ export function createInitialSetting() {
     cleanUpFiles: true,
     sessionStarted: now,
     lastScanned: now,
-    autoSaveCollections:false
+    autoSaveCollections: false,
+    scanInterval: 0,
   };
   return setting;
 }

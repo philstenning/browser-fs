@@ -9,7 +9,7 @@ import { useAddRootDirectory } from "../rootDirectories/useAddRootDirectory";
 // import second from "serialize-javascript";
 // import   from "";
 export function useRootDirectories() {
-  const { addRootDirectory, isScanning } = useAddRootDirectory();
+  const { addRootDirectory } = useAddRootDirectory();
 
   const rootDirectories = useLiveQuery(() =>
     db.directories
@@ -27,5 +27,5 @@ export function useRootDirectories() {
 
     deleteRootDirectoryAndFiles(dir);
   };
-  return { rootDirectories, deleteRootDirectory, isScanning, addRootDirectory };
+  return { rootDirectories, deleteRootDirectory, addRootDirectory };
 }

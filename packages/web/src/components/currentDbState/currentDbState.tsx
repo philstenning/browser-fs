@@ -6,7 +6,7 @@ function CurrentState() {
     currentCollectionId,
     currentDirectoryId,
     currentRootDirectoryId,
-    currentFileId,
+    currentFileId,isScanning
   } = dbState;
   return (
     <ul data-testid="currentDbState">
@@ -18,6 +18,9 @@ function CurrentState() {
       </li>
       <li data-testid="currentDbState_rootDir">
         RootDirectory: {currentRootDirectoryId}
+      </li>
+      <li data-testid="currentDbState_rootDir">
+        isScanning: {isScanning?'true':'false'}
       </li>
       <li data-testid="currentDbState_file">File: {currentFileId}</li>
       <li data-testid="currentDbState_id">
