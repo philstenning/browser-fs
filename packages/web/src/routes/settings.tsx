@@ -1,17 +1,28 @@
 //@ts-ignore
+import { useState, useEffect } from "react";
+//@ts-ignore
 import styles from "./settings.module.css";
 import { useSettings } from "react-fsa-database";
 import { fsaSetting } from "fsa-database";
-
 export default function Settings() {
   const { fsaSettings, setFsaSettings } = useSettings();
-  const { autoSaveCollections,cleanUpFiles, lastScanned, sessionStarted } = fsaSettings;
+  const {
+    autoSaveCollections,
+    cleanUpFiles,
+    lastScanned,
+    sessionStarted,
+    scanInterval,
+  } = fsaSettings;
+  const [scanTime, setScanTime] = useState(0);
 
-  const updateSettings = (
-    e: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    settings: fsaSetting
-  ) => {
-    setFsaSettings(settings);
+  useEffect(() => {
+    if (scanInterval !== scanTime) {
+      setScanTime(scanInterval);
+    }
+  }, [scanInterval]);
+
+  const changeScanTime = (value: string) => {
+    setScanTime(parseInt(value, 10));
   };
 
   const formatDate = (dateTime: number) => {
@@ -27,7 +38,7 @@ export default function Settings() {
       <ul>
         <li
           onClick={(e) =>
-            updateSettings(e, {
+            setFsaSettings({
               ...fsaSettings,
               cleanUpFiles: !cleanUpFiles,
             })
@@ -37,7 +48,7 @@ export default function Settings() {
         </li>
         <li
           onClick={(e) =>
-            updateSettings(e, {
+            setFsaSettings({
               ...fsaSettings,
               autoSaveCollections: !autoSaveCollections,
             })
@@ -47,6 +58,22 @@ export default function Settings() {
         </li>
         <li>lastScanned: {formatDate(lastScanned)}</li>
         <li>sessionStarted: {formatDate(sessionStarted)}</li>
+        <li>
+          scanInterval:{" "}
+          <input
+            onChange={(e) => changeScanTime(e.target.value)}
+            type="number"
+            name=""
+            id=""
+            value={scanTime}
+            onBlur={(e) =>
+              setFsaSettings({
+                ...fsaSettings,
+                scanInterval: parseInt(e.target.value, 10),
+              })
+            }
+          />
+        </li>
       </ul>
     </div>
   );

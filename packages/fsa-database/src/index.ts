@@ -2,7 +2,7 @@ export {
   createRootDirectory,
   deleteRootDirectoryAndFiles,
   reScanRootDirectories,
-  rootDirHasFilesInCollections
+  rootDirHasFilesInCollections,
 } from "./models/rootDirectories";
 
 export {
@@ -52,7 +52,7 @@ export {
   loadDatabase,
 } from "./db";
 
-export { initialDbState } from "./models/state";
+export { initialDbState, saveState } from "./models/state";
 
 export { useLiveQuery } from "dexie-react-hooks";
 export * from "./models/types";

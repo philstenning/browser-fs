@@ -63,6 +63,7 @@ export interface fsaState {
   currentDirectoryId: string | null;
   currentRootDirectoryId: string | null;
   currentFileId: string | null;
+  isScanning: boolean;
 }
 
 export interface fsaUser {
@@ -97,5 +98,6 @@ export interface fsaSetting {
   // when a file is added to collection
   // save to disk
   autoSaveCollections: boolean;
+  scanInterval: number; // default is 0 or none.
   lastScanned: number;
 }
