@@ -1,4 +1,4 @@
-import { db } from "../../db/setup";
+import { db, getCurrentSetting } from "../../";
 import { fsaCollection, fsaFile } from "../types";
 import { mapCollectionNameToFileName } from "./saveCollectionToFileSystem";
 
@@ -7,11 +7,13 @@ export async function removeAllFilesFromCollection(collectionId: string) {
   if (!collection) return;
 
   const files = await db.files.bulkGet(collection.files.map((f) => f.fileId));
- 
-   if(collection.handle && collection.files.length){
 
-     await removeAllFileFromCollectionsSavedLocation(collection, files);
-   }
+  // check user settings if we need to remove file from fs
+  const settings = await getCurrentSetting();
+
+  if (collection.handle && collection.files.length && settings.cleanUpFiles) {
+    await removeAllFileFromCollectionsSavedLocation(collection, files);
+  }
   // remove collection id from each file
   // then put back in the db
   await db.transaction("rw", db.userCollections, db.files, async () => {
@@ -33,13 +35,11 @@ export async function removeAllFilesFromCollection(collectionId: string) {
   });
 }
 
-
 async function removeAllFileFromCollectionsSavedLocation(
   collection: fsaCollection,
   files: (fsaFile | undefined)[]
 ) {
   if (!collection.handle) return;
-
   // map the file names so we remove the correct file.
   const mappedFiles = mapCollectionNameToFileName(files, collection);
   for (const file of mappedFiles) {

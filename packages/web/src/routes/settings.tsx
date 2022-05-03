@@ -5,8 +5,7 @@ import { fsaSetting } from "fsa-database";
 
 export default function Settings() {
   const { fsaSettings, setFsaSettings } = useSettings();
-  const { cleanUpCollections, cleanUpFiles, lastScanned, sessionStarted } =
-    fsaSettings;
+  const { autoSaveCollections,cleanUpFiles, lastScanned, sessionStarted } = fsaSettings;
 
   const updateSettings = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
@@ -30,24 +29,24 @@ export default function Settings() {
           onClick={(e) =>
             updateSettings(e, {
               ...fsaSettings,
-              cleanUpCollections: !cleanUpCollections,
+              cleanUpFiles: !cleanUpFiles,
             })
           }
         >
-          cleanUpCollections {cleanUpCollections.toString()}{" "}
+          cleanUpFiles: {cleanUpFiles.toString()}{" "}
         </li>
         <li
           onClick={(e) =>
             updateSettings(e, {
               ...fsaSettings,
-              cleanUpFiles: !cleanUpFiles,
+              autoSaveCollections: !autoSaveCollections,
             })
           }
         >
-          cleanUpFiles {cleanUpFiles.toString()}{" "}
+          autoSaveCollections: {autoSaveCollections.toString()}{" "}
         </li>
-        <li>lastScanned {formatDate(lastScanned)}</li>
-        <li>sessionStarted {formatDate(sessionStarted)}</li>
+        <li>lastScanned: {formatDate(lastScanned)}</li>
+        <li>sessionStarted: {formatDate(sessionStarted)}</li>
       </ul>
     </div>
   );

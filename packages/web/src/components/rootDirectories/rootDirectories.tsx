@@ -30,6 +30,7 @@ const RootDirectories = () => {
       }
     }
     return () => {
+      setScanning(false);
       isSubscribed = false;
     };
   }, [isScanning, isReScanning]);

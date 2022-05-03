@@ -30,9 +30,9 @@ export function createInitialSetting() {
   const now = Date.now();
   const setting: fsaSetting = {
     cleanUpFiles: true,
-    cleanUpCollections: true,
     sessionStarted: now,
     lastScanned: now,
+    autoSaveCollections:false
   };
   return setting;
 }
