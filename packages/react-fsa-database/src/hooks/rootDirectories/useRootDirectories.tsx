@@ -3,6 +3,7 @@ import {
   fsaDirectory,
   useLiveQuery,
   deleteRootDirectoryAndFiles,
+  rootDirHasFilesInCollections,
 } from "fsa-database";
 import { useAddRootDirectory } from "../rootDirectories/useAddRootDirectory";
 // import second from "serialize-javascript";
@@ -11,13 +12,18 @@ export function useRootDirectories() {
   const { addRootDirectory, isScanning } = useAddRootDirectory();
 
   const rootDirectories = useLiveQuery(() =>
-    db.directories.orderBy('created').filter(f=>f.isRoot==='true').toArray()
+    db.directories
+      .orderBy("created")
+      .filter((f) => f.isRoot === "true")
+      .toArray()
   );
 
-  const deleteRootDirectory = (dir: fsaDirectory) => {
-    const { handle } = dir;
-    const g = JSON.parse(JSON.stringify(handle));
-
+  const deleteRootDirectory = async (dir: fsaDirectory) => {
+    const hasCollections = await rootDirHasFilesInCollections(dir.id);
+    if (hasCollections) {
+      console.error("TODO: have collections don't delete");
+      // return;
+    }
 
     deleteRootDirectoryAndFiles(dir);
   };
