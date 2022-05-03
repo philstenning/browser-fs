@@ -19,6 +19,7 @@ const useCollections = () => {
     useLiveQuery(() =>
       db.userCollections.orderBy("created").reverse().toArray()
     ) ?? [];
+    
   const { setCurrentCollectionId, dbState } = useFsaDbContext();
 
   const addCollection = async (

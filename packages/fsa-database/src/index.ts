@@ -2,6 +2,7 @@ export {
   createRootDirectory,
   deleteRootDirectoryAndFiles,
   reScanRootDirectories,
+  rootDirHasFilesInCollections
 } from "./models/rootDirectories";
 
 export {
