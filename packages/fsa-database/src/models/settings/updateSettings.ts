@@ -1,15 +1,13 @@
-import { fsaSetting} from "../types";
-import { db } from "../../db/setup";
+import { db, fsaSetting } from "../../";
 
 export async function updateSetting(setting: fsaSetting) {
   try {
-    //@ts-ignore  we don't want the id to
-    delete setting.id;
-    await db.settings.add(setting);
-    return true;
+    if (Object.hasOwn(setting, "id")) delete setting.id;
+    const id = await db.settings.add(setting as fsaSetting);
+    return { ...setting, id } as fsaSetting;
   } catch (e) {
-    console.error(`Error updating setting`);
-    return false;
+    console.error(`Error creating Setting ${e}`);
+    return null;
   }
 }
 
@@ -21,4 +19,8 @@ export async function updateSettingLastScanned(
     setting.lastScanned = timeOfScan;
     await updateSetting(setting);
   }
+}
+
+export async function saveSetting(setting: fsaSetting) {
+  await updateSetting(setting);
 }

@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Db from "../../routes/db";
 import Start from '../../routes/start'
 import TestPage from "../../routes/testPage";
-
+import Settings from '../../routes/settings'
 import Layout from "./Layout";
 import {
   // RootDirectoryProvider,
@@ -23,6 +23,7 @@ function App() {
             {/* <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/db" element={<Db />} /> */}
+            <Route path="/settings" element={<Settings />} />
             <Route path="/provider" element={<TestPage />} />
             <Route index element={<Start />} />
           </Route>

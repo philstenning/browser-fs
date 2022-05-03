@@ -1,2 +1,7 @@
-export {createSetting} from './createSetting'
-export {updateSetting, updateSettingLastScanned} from './updateSettings'
+export { createSetting,createInitialSetting,getCurrentSetting } from "./createSetting";
+export {
+  updateSetting,
+  updateSettingLastScanned,
+  saveSetting,
+  
+} from "./updateSettings";

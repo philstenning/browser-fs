@@ -1,5 +1,4 @@
 import Dexie from "dexie";
-// import  'dexie-observable'
 import {
   fsaDirectory,
   fsaFile,
@@ -8,8 +7,9 @@ import {
   fsaCollection,
   fsaError,
   fsaSetting,
-} from "../models/types";
-import { createSetting, saveSetting } from "../models/settings/createSetting";
+  createSetting,
+  saveSetting,
+} from "../../";
 
 class FsaDb extends Dexie {
   files!: Dexie.Table<fsaFile, string>;
@@ -42,11 +42,11 @@ async function initializeDatabase(fileTypes: string[]) {
 
   await createFileTypesIfNotExist(fileTypes);
 
-   const setting = await createSetting(false);
-   if(setting) {
-     setting.sessionStarted = Date.now()
-    await saveSetting(setting)
-   }
+  const setting = await createSetting(false);
+  if (setting) {
+    setting.sessionStarted = Date.now();
+    await saveSetting(setting);
+  }
 
   await resetPermissionsOnAllDirectories();
 
@@ -55,25 +55,6 @@ async function initializeDatabase(fileTypes: string[]) {
 }
 
 export { db, initializeDatabase };
-
-// async function createSettingsIfNotExist() {
-//   const setting = await db.settings.toCollection().last();
-//   if (setting) {
-//     const {
-//       lastScanned,
-//       removeFilesFromDriveWhenCollectionRemoved,
-//       removeFileFromDriveIfRemovedFromCollection,
-//     } = setting;
-
-//     await createSetting(
-//       lastScanned,
-//       removeFilesFromDriveWhenCollectionRemoved,
-//       removeFileFromDriveIfRemovedFromCollection
-//     );
-//   } else {
-//     await createSetting();
-//   }
-// }
 
 async function createFileTypesIfNotExist(fileTypes: string[]) {
   try {
