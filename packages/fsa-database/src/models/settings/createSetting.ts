@@ -1,19 +1,4 @@
-import { fsaSetting } from "../types";
-import { db } from "../../db/setup";
-
-// export async function createSetting(
-//   lastScanned?: number,
-//   removeFilesFromDriveWhenCollectionRemoved: boolean = true,
-//   removeFileFromDriveIfRemovedFromCollection: boolean = true
-// ) {
-//   const now = Date.now();
-//   const setting: fsaSetting = {
-//     removeFilesFromDriveWhenCollectionRemoved,
-//     removeFileFromDriveIfRemovedFromCollection,
-//     sessionStarted: now,
-//     lastScanned: lastScanned ?? now,
-//   };
-// }
+import { saveSetting,db,fsaSetting } from "../../";
 
 export async function createSetting(
   save: boolean = true,
@@ -41,7 +26,7 @@ export async function getCurrentSetting() {
   return createInitialSetting();
 }
 
-function createInitialSetting() {
+export function createInitialSetting() {
   const now = Date.now();
   const setting: fsaSetting = {
     cleanUpFiles: true,
@@ -50,15 +35,4 @@ function createInitialSetting() {
     lastScanned: now,
   };
   return setting;
-}
-
-export async function saveSetting(setting: fsaSetting) {
-  try {
-    if (Object.hasOwn(setting, "id")) delete setting.id;
-    const id = await db.settings.add(setting as fsaSetting);
-    return { ...setting, id } as fsaSetting;
-  } catch (e) {
-    console.error(`Error creating Setting ${e}`);
-    return null;
-  }
 }

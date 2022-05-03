@@ -33,7 +33,10 @@ export {
 } from "./models/collections/";
 
 export {
+  createInitialSetting,
   createSetting,
+  getCurrentSetting,
+  saveSetting,
   updateSetting,
   updateSettingLastScanned,
 } from "./models/settings";

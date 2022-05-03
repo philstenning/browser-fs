@@ -25,3 +25,4 @@ export {
 
 export { useDirectories } from "./hooks/directories/useDirectories";
 export { useCollections } from "./hooks/collections/useCollections";
+export {useSettings}from './hooks/settings/useSettings'

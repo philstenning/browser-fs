@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   useRootDirectories,
   useFsaDbContext,
@@ -11,20 +11,27 @@ import { BiTrash } from "react-icons/bi";
 //@ts-ignore
 import styles from "./rootDirectories.module.css";
 
-
 const RootDirectories = () => {
   const [scanning, setScanning] = useState(false);
   const { isScanning, rootDirectories, addRootDirectory, deleteRootDirectory } =
     useRootDirectories();
+  const ref = useRef(null);
   const { isReScanning, reScanRootDirectories } = useReScanRootDirectories();
   const { dbState, setCurrentRootDirectoryId } = useFsaDbContext();
 
   useEffect(() => {
-    if (isReScanning || isScanning) {
-      setScanning(true);
-    } else {
-      setScanning(false);
+    //  clean up if unmounted.
+    let isSubscribed = true;
+    if (isSubscribed) {
+      if (isReScanning || isScanning) {
+        setScanning(true);
+      } else {
+        setScanning(false);
+      }
     }
+    return () => {
+      isSubscribed = false;
+    };
   }, [isScanning, isReScanning]);
 
   return (
@@ -49,7 +56,7 @@ const RootDirectories = () => {
                 <BiTrash />
               </button>
               <span data-cy={`selectRootDir_${dir.name}`}>{dir.name} </span>
-              <ScanningContent dir={dir} scanning={scanning}  index={index}/>
+              <ScanningContent dir={dir} scanning={scanning} index={index} />
             </li>
           ))}
       </ul>
@@ -70,13 +77,14 @@ export default RootDirectories;
 type Props = {
   dir: fsaDirectory;
   scanning: boolean;
-  index:number;
+  index: number;
 };
 
-function ScanningContent({ dir, scanning ,index}: Props) {
+function ScanningContent({ dir, scanning, index }: Props) {
   const started = dir.isScanning;
   const finished = dir.scanFinished;
-  if (dir.readPermission === "false") return <span data-cy={`rootDirHasPermission-${index}`}>❌</span>;
+  if (dir.readPermission === "false")
+    return <span data-cy={`rootDirHasPermission-${index}`}>❌</span>;
 
   if (scanning) {
     if (started && !finished)
