@@ -90,11 +90,12 @@ export type fsaError = {
 export interface fsaSetting {
   id?: number;
   sessionStarted: number;
-  // when a file is removed from a collection,
-  // removed  it from local disk also
+  // when files are removed from a collection,
+  // or a collection is deleted
+  // removed files  from local disk also
   cleanUpFiles: boolean;
-  // when a collection is removed, remove
-  // all is files from local disk
-  cleanUpCollections: boolean;
+  // when a file is added to collection
+  // save to disk
+  autoSaveCollections: boolean;
   lastScanned: number;
 }

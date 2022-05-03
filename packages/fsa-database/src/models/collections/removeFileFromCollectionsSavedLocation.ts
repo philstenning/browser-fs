@@ -1,4 +1,4 @@
-import { db } from "../../db/setup";
+import { getCurrentSetting } from "../../";
 import { fsaCollection, fsaFile } from "../types";
 import { checkPermissionsOfHandle } from "fsa-browser";
 
@@ -9,8 +9,7 @@ export async function removeFileFromCollectionsSavedLocation(
   if (!collection.handle) return;
   const { handle,files } = collection;
   // check user settings if we need to remove file from fs
-  const settings = await db.settings.toCollection().last();
-  if (!settings) return;
+  const settings = await getCurrentSetting()
   const { cleanUpFiles } = settings;
   if (!cleanUpFiles) return;
 
