@@ -51,6 +51,7 @@ export {
   importDatabase,
   fetchDatabase,
   loadDatabase,
+  resetDatabase,deleteDatabase
 } from "./db";
 
 export { getFileTypeNames } from "./models/fileTypes/getFileTypeNames";

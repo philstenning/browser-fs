@@ -14,5 +14,3 @@ export async function addExcludedFolderName(name: string) {
     console.error(`Error adding excludedFolder name:${name} ${error}`);
   }
 }
-
-
