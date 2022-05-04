@@ -2,6 +2,7 @@ import { db } from "../../db/setup";
 import { fsaCollection, fsaFile, fsaCollectionFile } from "../types";
 import { putCollectionAndFile } from "./putCollectionAndFile";
 import {getFileExtension,getFileNameWithoutExtension} from '../../utils'
+import {getCurrentState,setCurrentCollectionId} from '../state'
 export async function addFileToCollection(
   file: fsaFile,
   collection?: fsaCollection
@@ -11,7 +12,7 @@ export async function addFileToCollection(
   // try and retrieve one from the state.
   if (!collection) {
     // get the last state object saved
-    const state = await db.state.toCollection().last();
+    const state = await getCurrentState()
 
     // state.currentCollection is zero if not set.
     if (!state || !state.currentCollectionId) {
@@ -31,6 +32,7 @@ export async function addFileToCollection(
         stateCollection = await db.userCollections.toCollection().first();
       }
       if (!stateCollection) return false;
+      await setCurrentCollectionId(stateCollection.id);
     }
     collection = stateCollection;
   }
@@ -41,7 +43,8 @@ export async function addFileToCollection(
   // check if file with same id exists already
   for (const f of collection.files) {
     if (f.fileId === collectionFile.fileId) {
-      return;
+      console.log(`This file is already in the collection. ${f.name}`)
+      return true;
     }
   }
   collectionFile.name = checkIfFileWithSameNameExists(file.name, collection);

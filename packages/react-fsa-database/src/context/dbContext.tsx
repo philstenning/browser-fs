@@ -45,9 +45,8 @@ function FsaDbContextProvider({
   const [dbState, setDbState] = useState<fsaState>(initialDbState);
   const currentDbState = useLiveQuery(() => db.state.toCollection().last());
   const settings =
-    useLiveQuery(() => db.settings.toCollection().last()) ??
-    createInitialSetting();
-  const { scanInterval } = settings;
+    useLiveQuery(() => db.settings.toCollection().last())
+  // const { scanInterval } = settings;
 
   /**
    * if this is the first time the db has been opened
@@ -69,18 +68,18 @@ function FsaDbContextProvider({
   }, [currentDbState]);
 
   //set re-scan timer.
-  useEffect(() => {
-    if (scanInterval > 0) {
-      console.log(`rescan set to ${scanInterval} ${scanInterval===1?'min':'mins'}`);
-      const timer = setInterval(() => {
-      }, scanInterval * 600);
-      return () => {
-        clearInterval(timer);
-      };
-    }else{
-      console.log('rescan off')
-    }
-  }, [scanInterval]);
+  // useEffect(() => {
+  //   if (scanInterval > 0) {
+  //     console.log(`rescan set to ${scanInterval} ${scanInterval===1?'min':'mins'}`);
+  //     const timer = setInterval(() => {
+  //     }, scanInterval * 600);
+  //     return () => {
+  //       clearInterval(timer);
+  //     };
+  //   }else{
+  //     console.log('rescan off')
+  //   }
+  // }, [scanInterval]);
 
   return (
     <FsaDbContext.Provider

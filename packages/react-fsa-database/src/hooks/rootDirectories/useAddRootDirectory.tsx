@@ -6,7 +6,8 @@ import {
   db,
   saveState,
   fsaDirectory,
-  getFileTypeNames
+  getFileTypeNames,
+  setCurrentRootDirectoryId
 } from "fsa-database";
 import { useFsaDbContext } from "../../context/dbContext";
 /**
@@ -17,7 +18,6 @@ import { useFsaDbContext } from "../../context/dbContext";
  * then set it as the currentDirectory
  */
 export function useAddRootDirectory() {
-  const { setCurrentRootDirectoryId } = useFsaDbContext();
   
   const addRootDirectory = async () => {
     const virtualDir = await selectRootDirectoryOnLocalDrive();

@@ -9,7 +9,9 @@ import {
   fsaSetting,
   createSetting,
   saveSetting,
+  saveState, initialDbState
 } from "../../";
+import { getCurrentState } from "../models/state";
 
 class FsaDb extends Dexie {
   files!: Dexie.Table<fsaFile, string>;
@@ -29,7 +31,7 @@ class FsaDb extends Dexie {
       directories: `id,name,hidden,isRoot,rootId,creator,fileCount,lastChecked,parentId,readPermission,created,[isRoot+name]`,
       userCollections: `id,name,created,updated`,
       fileTypes: `++id,name,selected,hidden`,
-      state: `++id,currentDirectory,currentFile,currentCollection`,
+      state: `++id,currentDirectoryId,currentFileId,currentCollectionId`,
       errors: `++id,type,success`,
       settings: `++id`,
     });
@@ -40,6 +42,8 @@ const db = new FsaDb();
 async function initializeDatabase(fileTypes: string[]) {
   console.time("initializeDb");
 
+
+  await saveState(await getCurrentState())
   await createFileTypesIfNotExist(fileTypes);
 
   const setting = await createSetting(false);
