@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 //@ts-ignore
 import styles from "./settings.module.css";
 import { useSettings } from "react-fsa-database";
-import { fsaSetting } from "fsa-database";
+
+import ExcludedFolders from "../components/excludedFolders/excludedFolders";
+
 export default function Settings() {
   const { fsaSettings, setFsaSettings } = useSettings();
   const {
@@ -34,47 +36,51 @@ export default function Settings() {
 
   return (
     <div>
-      <h1>Settings</h1>
-      <ul>
-        <li
-          onClick={(e) =>
-            setFsaSettings({
-              ...fsaSettings,
-              cleanUpFiles: !cleanUpFiles,
-            })
-          }
-        >
-          cleanUpFiles: {cleanUpFiles.toString()}{" "}
-        </li>
-        <li
-          onClick={(e) =>
-            setFsaSettings({
-              ...fsaSettings,
-              autoSaveCollections: !autoSaveCollections,
-            })
-          }
-        >
-          autoSaveCollections: {autoSaveCollections.toString()}{" "}
-        </li>
-        <li>lastScanned: {formatDate(lastScanned)}</li>
-        <li>sessionStarted: {formatDate(sessionStarted)}</li>
-        <li>
-          scanInterval:{" "}
-          <input
-            onChange={(e) => changeScanTime(e.target.value)}
-            type="number"
-            name=""
-            id=""
-            value={scanTime}
-            onBlur={(e) =>
+      <div>
+        <h1>Settings</h1>
+        <ul>
+          <li
+            onClick={(e) =>
               setFsaSettings({
                 ...fsaSettings,
-                scanInterval: parseInt(e.target.value, 10),
+                cleanUpFiles: !cleanUpFiles,
               })
             }
-          />
-        </li>
-      </ul>
+          >
+            cleanUpFiles: {cleanUpFiles.toString()}{" "}
+          </li>
+          <li
+            onClick={(e) =>
+              setFsaSettings({
+                ...fsaSettings,
+                autoSaveCollections: !autoSaveCollections,
+              })
+            }
+          >
+            autoSaveCollections: {autoSaveCollections.toString()}{" "}
+          </li>
+          <li>lastScanned: {formatDate(lastScanned)}</li>
+          <li>sessionStarted: {formatDate(sessionStarted)}</li>
+          <li>
+            scanInterval:{" "}
+            <input
+              onChange={(e) => changeScanTime(e.target.value)}
+              type="number"
+              name=""
+              id=""
+              value={scanTime}
+              step='10'
+              onBlur={(e) =>
+                setFsaSettings({
+                  ...fsaSettings,
+                  scanInterval: parseInt(e.target.value, 10),
+                })
+              }
+            />
+          </li>
+        </ul>
+      </div>
+      <ExcludedFolders />
     </div>
   );
 }

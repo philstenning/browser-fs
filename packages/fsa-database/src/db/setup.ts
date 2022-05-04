@@ -7,11 +7,14 @@ import {
   fsaCollection,
   fsaError,
   fsaSetting,
+  fsaExcludedFolder,
   createSetting,
   saveSetting,
-  saveState, initialDbState
+  saveState,
 } from "../../";
 import { getCurrentState } from "../models/state";
+
+import {FoldersToExcludeFromScanning} from 'fsa-browser'
 
 class FsaDb extends Dexie {
   files!: Dexie.Table<fsaFile, string>;
@@ -21,6 +24,7 @@ class FsaDb extends Dexie {
   state!: Dexie.Table<fsaState, number>;
   errors!: Dexie.Table<fsaError, number>;
   settings!: Dexie.Table<fsaSetting, number>;
+  excludedFolders!: Dexie.Table<fsaExcludedFolder, number>;
   constructor() {
     super("fsa-database");
     const db = this;
@@ -34,6 +38,7 @@ class FsaDb extends Dexie {
       state: `++id,currentDirectoryId,currentFileId,currentCollectionId`,
       errors: `++id,type,success`,
       settings: `++id`,
+      excludedFolders: `++id,name`,
     });
   }
 }
@@ -42,16 +47,15 @@ const db = new FsaDb();
 async function initializeDatabase(fileTypes: string[]) {
   console.time("initializeDb");
 
-
-  await saveState(await getCurrentState())
+  await saveState(await getCurrentState());
   await createFileTypesIfNotExist(fileTypes);
-
+  
   const setting = await createSetting(false);
   if (setting) {
     setting.sessionStarted = Date.now();
     await saveSetting(setting);
   }
-
+  await createExcludedFoldersIfNotExist();
   await resetPermissionsOnAllDirectories();
 
   // see how long it has taken.
@@ -59,6 +63,20 @@ async function initializeDatabase(fileTypes: string[]) {
 }
 
 export { db, initializeDatabase };
+
+async function createExcludedFoldersIfNotExist() {
+  const excludedFolders = await db.excludedFolders.count();
+  if (!excludedFolders) {
+    for(const name of FoldersToExcludeFromScanning)  {
+       try {
+        await   db.excludedFolders.add({name})
+       } catch (error) {
+         console.error(`Error adding excluded folder names ${error}`)
+       }
+    }
+
+  }
+}
 
 async function createFileTypesIfNotExist(fileTypes: string[]) {
   try {

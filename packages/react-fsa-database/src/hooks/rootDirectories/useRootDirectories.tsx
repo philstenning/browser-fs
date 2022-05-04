@@ -5,12 +5,11 @@ import {
   useLiveQuery,
   deleteRootDirectoryAndFiles,
   rootDirHasFilesInCollections,
+  addRootDirectory
 } from "fsa-database";
-import { useAddRootDirectory } from "../rootDirectories/useAddRootDirectory";
-// import second from "serialize-javascript";
-// import   from "";
+
 export function useRootDirectories() {
-  const { addRootDirectory } = useAddRootDirectory();
+
 
   const [rootDirectories, setRootDirectories] = useState<fsaDirectory[]>([]);
 

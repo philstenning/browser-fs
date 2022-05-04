@@ -1,9 +1,8 @@
-import { db } from "../../db/setup";
+import { db, getExcludedFoldersList } from "../../";
 import {
   checkPermissionsOfHandle,
   scanLocalDrive,
   VirtualFileSystemEntry,
-  FoldersToExcludeFromScanning,
 } from "fsa-browser";
 import { createDirectory } from "../directories/createDirectory";
 import { createFile, saveFile, bytesToSize } from "../files";
@@ -56,17 +55,20 @@ export async function reScanRootDirectories() {
     }
 
     // let the user know we are scanning this dir.
-     currentDir.isScanning=true
-     currentDir.scanFinished=false
-     currentDir.readPermission='true'
-     await db.directories.put(currentDir)
+    currentDir.isScanning = true;
+    currentDir.scanFinished = false;
+    currentDir.readPermission = "true";
+    await db.directories.put(currentDir);
+
+    // directories we don't want to scan.
+    const excludedFolders = await getExcludedFoldersList();
 
     //👍 call scanLocalDrive for  handle
     const virtualFileSystemEntry = await scanLocalDrive(
       currentDir.handle,
       fileExtensions,
       100,
-      FoldersToExcludeFromScanning
+      excludedFolders
     );
 
     await checkVirtualFileSystemEntry(
@@ -125,11 +127,10 @@ export async function reScanRootDirectories() {
     // current root dir
     await updateDirectoryForRootDir(currentDir);
 
-
     // update ui status.
-    currentDir.isScanning=false
-    currentDir.scanFinished=true
-     db.directories.put(currentDir)
+    currentDir.isScanning = false;
+    currentDir.scanFinished = true;
+    db.directories.put(currentDir);
   }
 
   console.timeEnd("reScanDirectories");
