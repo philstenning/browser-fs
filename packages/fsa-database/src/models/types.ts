@@ -101,3 +101,9 @@ export interface fsaSetting {
   scanInterval: number; // default is 0 or none.
   lastScanned: number;
 }
+
+
+export interface fsaExcludedFolder {
+  id?:number;
+  name:string;
+}

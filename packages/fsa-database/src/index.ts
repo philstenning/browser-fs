@@ -3,6 +3,7 @@ export {
   deleteRootDirectoryAndFiles,
   reScanRootDirectories,
   rootDirHasFilesInCollections,
+  addRootDirectory,
 } from "./models/rootDirectories";
 
 export {
@@ -52,7 +53,13 @@ export {
   loadDatabase,
 } from "./db";
 
-export {getFileTypeNames} from './models/fileTypes/getFileTypeNames'
+export { getFileTypeNames } from "./models/fileTypes/getFileTypeNames";
+
+export {
+  addExcludedFolderName,
+  deleteExcludedFolderName,
+  getExcludedFoldersList,
+} from "./models/excludedFolders";
 
 export * from "./models/state";
 
