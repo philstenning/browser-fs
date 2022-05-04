@@ -17,7 +17,6 @@ export async function rescanRootDirectories() {
   await rescan();
   await updateSettingLastScanned();
   await saveState({ ...state, isScanning: false });
-  // console.log("scanning finished");
 }
 
 /**

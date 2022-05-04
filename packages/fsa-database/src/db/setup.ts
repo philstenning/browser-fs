@@ -16,7 +16,7 @@ import { getCurrentState } from "../models/state";
 
 import {FoldersToExcludeFromScanning} from 'fsa-browser'
 
-class FsaDb extends Dexie {
+export class FsaDb extends Dexie {
   files!: Dexie.Table<fsaFile, string>;
   directories!: Dexie.Table<fsaDirectory, string>;
   userCollections!: Dexie.Table<fsaCollection, string>;
