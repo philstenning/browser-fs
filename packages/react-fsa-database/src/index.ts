@@ -19,7 +19,6 @@ export {
 
 export {
   useRootDirectories,
-  useReScanRootDirectories,
 } from "./hooks/rootDirectories";
 
 export {useExcludedFolders} from './hooks/excludedFolders/useExcludedFolders'

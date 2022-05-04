@@ -3,14 +3,12 @@ import {
   db,
   fsaDirectory,
   useLiveQuery,
-  deleteRootDirectoryAndFiles,
-  rootDirHasFilesInCollections,
-  addRootDirectory
+  deleteRootDirectory,
+  rescanRootDirectories,
+  addRootDirectory,
 } from "fsa-database";
 
 export function useRootDirectories() {
-
-
   const [rootDirectories, setRootDirectories] = useState<fsaDirectory[]>([]);
 
   const rootDirectoriesQuery = useLiveQuery(() =>
@@ -32,14 +30,10 @@ export function useRootDirectories() {
     };
   }, [rootDirectoriesQuery]);
 
-  const deleteRootDirectory = async (dir: fsaDirectory) => {
-    const hasCollections = await rootDirHasFilesInCollections(dir.id);
-    if (hasCollections) {
-      console.error("TODO: have collections don't delete");
-      // return;
-    }
-
-    deleteRootDirectoryAndFiles(dir);
+  return {
+    rootDirectories,
+    deleteRootDirectory,
+    addRootDirectory,
+    rescanRootDirectories,
   };
-  return { rootDirectories, deleteRootDirectory, addRootDirectory };
 }

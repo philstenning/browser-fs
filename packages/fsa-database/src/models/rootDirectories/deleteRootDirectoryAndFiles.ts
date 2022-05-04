@@ -1,11 +1,19 @@
-import { fsaDirectory } from "../types";
-import { deleteRootFolderFiles } from "../files";
-import { db } from "../../db/setup";
-import {selectPreviouslySelectedRootDir} from './selectPreviouslySelectedRootDir'
+import {
+  db,
+  fsaDirectory,
+  deleteRootFolderFiles,
+  rootDirHasFilesInCollections,
+} from "../../";
+import { selectPreviouslySelectedRootDir } from "./selectPreviouslySelectedRootDir";
 
-
-export async function deleteRootDirectoryAndFiles(dir: fsaDirectory) {
+export async function deleteRootDirectory(dir: fsaDirectory) {
   if (!dir.id) return false;
+
+  const hasCollections = await rootDirHasFilesInCollections(dir.id);
+  if (hasCollections) {
+    console.warn("TODO: have collections don't delete");
+  }
+
   try {
     const hasDeletedFiles = await deleteRootFolderFiles(dir.id);
     if (hasDeletedFiles) {
@@ -21,4 +29,3 @@ export async function deleteRootDirectoryAndFiles(dir: fsaDirectory) {
   }
   return false;
 }
-

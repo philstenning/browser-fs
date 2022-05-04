@@ -5,21 +5,19 @@ import {
   fsaState,
   useLiveQuery,
   initialDbState,
-  createInitialSetting,
-
   setCurrentCollectionId,
   setCurrentDirectoryId,
   setCurrentFileId,
-  setCurrentRootDirectoryId
+  setCurrentRootDirectoryId,
 } from "fsa-database";
-
 
 type FsaDbContextType = {
   dbState: fsaState;
-  setCurrentDirectoryId: (id: string ) => void;
-  setCurrentRootDirectoryId: (id: string ) => void;
-  setCurrentCollectionId: (id: string ) => void;
+  setCurrentDirectoryId: (id: string) => void;
+  setCurrentRootDirectoryId: (id: string) => void;
+  setCurrentCollectionId: (id: string) => void;
   setCurrentFileId: (id: string) => void;
+  isScanning:boolean
 };
 
 const FsaDbContext = createContext<FsaDbContextType | null>(null);
@@ -43,9 +41,10 @@ function FsaDbContextProvider({
   fileExtensionsForApp = ["stl", "gcode", "3mf", "jpg"],
 }: Props) {
   const [dbState, setDbState] = useState<fsaState>(initialDbState);
-  const currentDbState = useLiveQuery(() => db.state.toCollection().last());
-  const settings =
-    useLiveQuery(() => db.settings.toCollection().last())
+  const [isScanning, setIsReScanning] = useState(false);
+
+  const currentState = useLiveQuery(() => db.state.toCollection().last());
+  const settings = useLiveQuery(() => db.settings.toCollection().last());
   // const { scanInterval } = settings;
 
   /**
@@ -56,16 +55,33 @@ function FsaDbContextProvider({
     await initializeDatabase(fileExtensionsForApp);
   }
 
+
+ // use to set the scanning state.
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      if (currentState) {
+        if (isScanning !== currentState.isScanning) {
+          setIsReScanning(currentState.isScanning);
+        }
+      }
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [currentState]);
+
+
   // run at start up
   useEffect(() => {
     getInitialData();
   }, []);
 
   useEffect(() => {
-    if (currentDbState) {
-      setDbState(currentDbState);
+    if (currentState) {
+      setDbState(currentState);
     }
-  }, [currentDbState]);
+  }, [currentState]);
 
   //set re-scan timer.
   // useEffect(() => {
@@ -89,6 +105,7 @@ function FsaDbContextProvider({
         setCurrentDirectoryId,
         setCurrentFileId,
         setCurrentRootDirectoryId,
+        isScanning
       }}
     >
       {children}

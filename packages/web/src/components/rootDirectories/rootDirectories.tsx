@@ -1,39 +1,18 @@
-import { useState, useEffect, useRef } from "react";
-import {
-  useRootDirectories,
-  useFsaDbContext,
-  useReScanRootDirectories,
-} from "react-fsa-database";
+import { useRootDirectories, useFsaDbContext } from "react-fsa-database";
+import { fsaDirectory, rescanRootDirectories } from "fsa-database";
+
+// icons
 import { ImSpinner6 } from "react-icons/im";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
-import { fsaDirectory } from "fsa-database";
 import { BiTrash } from "react-icons/bi";
 //@ts-ignore
 import styles from "./rootDirectories.module.css";
 
 const RootDirectories = () => {
-  // const [scanning, setScanning] = useState(false);
   const { rootDirectories, addRootDirectory, deleteRootDirectory } =
     useRootDirectories();
-  // const ref = useRef(null);
-  const { isScanning, reScanRootDirectories } = useReScanRootDirectories();
-  const { dbState, setCurrentRootDirectoryId } = useFsaDbContext();
 
-  // useEffect(() => {
-  //   //  clean up if unmounted.
-  //   let isSubscribed = true;
-  //   if (isSubscribed) {
-  //     if (isScanning) {
-  //       setScanning(true);
-  //     } else {
-  //       setScanning(false);
-  //     }
-  //   }
-  //   return () => {
-  //     setScanning(false);
-  //     isSubscribed = false;
-  //   };
-  // }, [isScanning]);
+  const { dbState, setCurrentRootDirectoryId, isScanning } = useFsaDbContext();
 
   return (
     <div data-testid="rootDirectories">
@@ -65,7 +44,7 @@ const RootDirectories = () => {
         <button onClick={addRootDirectory} disabled={isScanning}>
           {!isScanning ? "Add Root Directory" : "Scanning Drive"}
         </button>
-        <button disabled={isScanning} onClick={reScanRootDirectories}>
+        <button disabled={isScanning} onClick={rescanRootDirectories}>
           ReScan Root Directories
         </button>
       </div>
@@ -104,7 +83,5 @@ function ScanningContent({ dir, scanning, index }: Props) {
     }
   }
 
-  // if (started && finished) return "✔️";
-  // if(scanning )return <span><ImSpinner6 /> pending...</span> ;
   return <span data-cy={`rootDirHasPermission-${index}`}>✔️</span>;
 }
