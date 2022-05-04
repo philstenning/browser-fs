@@ -46,7 +46,7 @@ const useCollections = () => {
       if (col) setCurrentCollectionId(col.id);
       // If there is none left
     } else if (count === 0) {
-      setCurrentCollectionId(null);
+      setCurrentCollectionId('');
     }
   };
 
