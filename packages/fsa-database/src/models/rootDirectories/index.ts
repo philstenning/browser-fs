@@ -1,5 +1,5 @@
 export {createRootDirectory} from './createRootDirectory'
-export {deleteRootDirectoryAndFiles} from './deleteRootDirectoryAndFiles'
-export { reScanRootDirectories } from "./reScanRootDirectories";
+export {deleteRootDirectory} from './deleteRootDirectoryAndFiles'
+export { rescanRootDirectories } from "./rescanRootDirectories";
 export { rootDirHasFilesInCollections } from "./rootDirHasFilesInCollections";
 export { addRootDirectory } from "./addRootDirectory";

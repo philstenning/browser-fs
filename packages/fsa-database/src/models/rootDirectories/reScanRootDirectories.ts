@@ -1,4 +1,4 @@
-import { db, getExcludedFoldersList } from "../../";
+import { db, getExcludedFoldersList } from "../..";
 import {
   checkPermissionsOfHandle,
   scanLocalDrive,
@@ -8,11 +8,22 @@ import { createDirectory } from "../directories/createDirectory";
 import { createFile, saveFile, bytesToSize } from "../files";
 import { removeFileFromAllCollection } from "../collections";
 import { fsaDirectory } from "../types";
+import { saveState, getCurrentState } from "../state";
+import { updateSettingLastScanned } from "../settings";
+
+export async function rescanRootDirectories() {
+  const state = await getCurrentState();
+  await saveState({ ...state, isScanning: true });
+  await rescan();
+  await updateSettingLastScanned();
+  await saveState({ ...state, isScanning: false });
+  // console.log("scanning finished");
+}
 
 /**
  * Re-scan all the root directories we have in the db.
  */
-export async function reScanRootDirectories() {
+async function rescan() {
   const lastChecked = Date.now();
 
   // get root all dirs

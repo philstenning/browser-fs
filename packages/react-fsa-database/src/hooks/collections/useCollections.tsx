@@ -58,7 +58,7 @@ const useCollections = () => {
     if (!added) {
       console.log('file not added to collection...')
       return;}
-      console.log('file added to collection...')
+      // console.log('file added to collection...')
     // set the passed collection to the current collection if it isn't already.
     if (collection && dbState.currentCollectionId !== collection.id)
       setCurrentCollectionId(collection.id);
