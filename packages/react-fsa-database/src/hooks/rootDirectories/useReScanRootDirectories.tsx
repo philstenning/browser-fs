@@ -8,15 +8,21 @@ import {
 } from "fsa-database";
 
 export function useReScanRootDirectories() {
-  const [isReScanning, setIsReScanning] = useState(false);
+  const [isScanning, setIsReScanning] = useState(false);
   const state = useLiveQuery(() => db.state.toCollection().last());
 
   useEffect(() => {
-    if (state) {
-      if (isReScanning !== state.isScanning) {
-        setIsReScanning(state.isScanning);
+    let isMounted = true;
+    if (isMounted) {
+      if (state) {
+        if (isScanning !== state.isScanning) {
+          setIsReScanning(state.isScanning);
+        }
       }
     }
+    return () => {
+      isMounted = false;
+    };
   }, [state]);
 
   const reScanRootDirectories = async () => {
@@ -24,10 +30,9 @@ export function useReScanRootDirectories() {
       await saveState({ ...state, isScanning: true });
       await reScan();
       await updateSettingLastScanned();
-      setIsReScanning(false);
       await saveState({ ...state, isScanning: false });
-      console.log('scanning finished')
+      // console.log("scanning finished");
     }
   };
-  return { isReScanning, reScanRootDirectories };
+  return { isScanning, reScanRootDirectories };
 }

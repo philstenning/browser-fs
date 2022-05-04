@@ -12,28 +12,28 @@ import { BiTrash } from "react-icons/bi";
 import styles from "./rootDirectories.module.css";
 
 const RootDirectories = () => {
-  const [scanning, setScanning] = useState(false);
-  const { isScanning, rootDirectories, addRootDirectory, deleteRootDirectory } =
+  // const [scanning, setScanning] = useState(false);
+  const { rootDirectories, addRootDirectory, deleteRootDirectory } =
     useRootDirectories();
-  const ref = useRef(null);
-  const { isReScanning, reScanRootDirectories } = useReScanRootDirectories();
+  // const ref = useRef(null);
+  const { isScanning, reScanRootDirectories } = useReScanRootDirectories();
   const { dbState, setCurrentRootDirectoryId } = useFsaDbContext();
 
-  useEffect(() => {
-    //  clean up if unmounted.
-    let isSubscribed = true;
-    if (isSubscribed) {
-      if (isReScanning || isScanning) {
-        setScanning(true);
-      } else {
-        setScanning(false);
-      }
-    }
-    return () => {
-      setScanning(false);
-      isSubscribed = false;
-    };
-  }, [isScanning, isReScanning]);
+  // useEffect(() => {
+  //   //  clean up if unmounted.
+  //   let isSubscribed = true;
+  //   if (isSubscribed) {
+  //     if (isScanning) {
+  //       setScanning(true);
+  //     } else {
+  //       setScanning(false);
+  //     }
+  //   }
+  //   return () => {
+  //     setScanning(false);
+  //     isSubscribed = false;
+  //   };
+  // }, [isScanning]);
 
   return (
     <div data-testid="rootDirectories">
@@ -57,15 +57,15 @@ const RootDirectories = () => {
                 <BiTrash />
               </button>
               <span data-cy={`selectRootDir_${dir.name}`}>{dir.name} </span>
-              <ScanningContent dir={dir} scanning={scanning} index={index} />
+              <ScanningContent dir={dir} scanning={isScanning} index={index} />
             </li>
           ))}
       </ul>
       <div className={styles.btnGroup}>
-        <button onClick={addRootDirectory} disabled={scanning}>
-          {!scanning ? "Add Root Directory" : "Scanning Drive"}
+        <button onClick={addRootDirectory} disabled={isScanning}>
+          {!isScanning ? "Add Root Directory" : "Scanning Drive"}
         </button>
-        <button disabled={scanning} onClick={reScanRootDirectories}>
+        <button disabled={isScanning} onClick={reScanRootDirectories}>
           ReScan Root Directories
         </button>
       </div>

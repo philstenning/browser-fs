@@ -6,14 +6,20 @@ import {
   useLiveQuery,
   initialDbState,
   createInitialSetting,
+
+  setCurrentCollectionId,
+  setCurrentDirectoryId,
+  setCurrentFileId,
+  setCurrentRootDirectoryId
 } from "fsa-database";
+
 
 type FsaDbContextType = {
   dbState: fsaState;
-  setCurrentDirectoryId: (idOrNull: string | null) => void;
-  setCurrentRootDirectoryId: (idOrNull: string | null) => void;
-  setCurrentCollectionId: (idOrNull: string | null) => void;
-  setCurrentFileId: (idOrNull: string | null) => void;
+  setCurrentDirectoryId: (id: string ) => void;
+  setCurrentRootDirectoryId: (id: string ) => void;
+  setCurrentCollectionId: (id: string ) => void;
+  setCurrentFileId: (id: string) => void;
 };
 
 const FsaDbContext = createContext<FsaDbContextType | null>(null);
@@ -39,31 +45,8 @@ function FsaDbContextProvider({
   const [dbState, setDbState] = useState<fsaState>(initialDbState);
   const currentDbState = useLiveQuery(() => db.state.toCollection().last());
   const settings =
-    useLiveQuery(() => db.settings.toCollection().last()) ??
-    createInitialSetting();
-  const { scanInterval } = settings;
-  const saveState = async (state: fsaState) => {
-    delete state.id;
-    await db.state.add(state);
-  };
-
-  const setCurrentDirectoryId = async (idOrNull: string | null) => {
-    if (dbState.currentDirectoryId === idOrNull) return;
-    await saveState({ ...dbState, currentDirectoryId: idOrNull });
-  };
-  const setCurrentRootDirectoryId = async (idOrNull: string | null) => {
-    // only update if changed.
-    if (dbState.currentRootDirectoryId === idOrNull) return;
-    await saveState({ ...dbState, currentRootDirectoryId: idOrNull });
-  };
-  const setCurrentFileId = async (idOrNull: string | null) => {
-    if (dbState.currentFileId === idOrNull) return;
-    await saveState({ ...dbState, currentFileId: idOrNull });
-  };
-  const setCurrentCollectionId = async (idOrNull: string | null) => {
-    if (dbState.currentCollectionId === idOrNull) return;
-    await saveState({ ...dbState, currentCollectionId: idOrNull });
-  };
+    useLiveQuery(() => db.settings.toCollection().last())
+  // const { scanInterval } = settings;
 
   /**
    * if this is the first time the db has been opened
@@ -85,18 +68,18 @@ function FsaDbContextProvider({
   }, [currentDbState]);
 
   //set re-scan timer.
-  useEffect(() => {
-    if (scanInterval > 0) {
-      console.log(`rescan set to ${scanInterval} ${scanInterval===1?'min':'mins'}`);
-      const timer = setInterval(() => {
-      }, scanInterval * 600);
-      return () => {
-        clearInterval(timer);
-      };
-    }else{
-      console.log('rescan off')
-    }
-  }, [scanInterval]);
+  // useEffect(() => {
+  //   if (scanInterval > 0) {
+  //     console.log(`rescan set to ${scanInterval} ${scanInterval===1?'min':'mins'}`);
+  //     const timer = setInterval(() => {
+  //     }, scanInterval * 600);
+  //     return () => {
+  //       clearInterval(timer);
+  //     };
+  //   }else{
+  //     console.log('rescan off')
+  //   }
+  // }, [scanInterval]);
 
   return (
     <FsaDbContext.Provider

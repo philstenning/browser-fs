@@ -52,7 +52,9 @@ export {
   loadDatabase,
 } from "./db";
 
-export { initialDbState, saveState } from "./models/state";
+export {getFileTypeNames} from './models/fileTypes/getFileTypeNames'
+
+export * from "./models/state";
 
 export { useLiveQuery } from "dexie-react-hooks";
 export * from "./models/types";
