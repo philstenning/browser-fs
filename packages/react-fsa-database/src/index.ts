@@ -1,27 +1,37 @@
-// context
-export { FsaDbContextProvider, useFsaDbContext } from "./context/dbContext";
-
-export type { FsaDbContextType } from "./context/dbContext";
-
-// re-export from fsa-browser
-export type {
+import type {
   VirtualFileSystemEntry,
   VirtualRootDirectoryType,
-} from "fsa-browser";
-
-// Hooks
-export * from "./hooks/fileTypes";
-export {
+} from 'fsa-browser'
+import type { FsaDbContextType } from './context/dbContext'
+import { FsaDbContextProvider, useFsaDbContext } from './context/dbContext'
+import { useFileTypes, useFileTypesNames } from './hooks/fileTypes'
+import {
   useRootFileList,
   useDirectoryFiles,
   useFindDuplicateFiles,
-} from "./hooks/files";
+} from './hooks/files'
+import { useRootDirectories } from './hooks/rootDirectories'
+import { useExcludedFolders } from './hooks/excludedFolders/useExcludedFolders'
+import { useDirectories } from './hooks/directories/useDirectories'
+import { useCollections } from './hooks/collections/useCollections'
+import { useSettings } from './hooks/settings/useSettings'
 
+export type {
+  VirtualFileSystemEntry,
+  VirtualRootDirectoryType,
+  FsaDbContextType,
+}
 export {
+  FsaDbContextProvider,
+  useFsaDbContext,
+  useFileTypes,
+  useFileTypesNames,
+  useRootFileList,
+  useDirectoryFiles,
+  useFindDuplicateFiles,
   useRootDirectories,
-} from "./hooks/rootDirectories";
-
-export {useExcludedFolders} from './hooks/excludedFolders/useExcludedFolders'
-export { useDirectories } from "./hooks/directories/useDirectories";
-export { useCollections } from "./hooks/collections/useCollections";
-export {useSettings}from './hooks/settings/useSettings'
+  useExcludedFolders,
+  useDirectories,
+  useCollections,
+  useSettings,
+}

@@ -11,7 +11,12 @@ import { fsaCollection } from "../types";
 export async function updateCollection(collection: fsaCollection) {
   // if any other changes lets save again
   collection.updated = Date.now();
-  const id = await db.userCollections.put(collection);
-  if (id === collection.id) return true;
+  try{
+
+    const id = await db.userCollections.put(collection);
+    if (id === collection.id) return true;
+  }catch(error){
+    console.error(`Error updating User Collection ${error}`)
+  }
   return false;
 }

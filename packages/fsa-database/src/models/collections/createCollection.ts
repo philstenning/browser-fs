@@ -1,5 +1,9 @@
-import { db } from "../../db/setup";
-import { fsaCollection, fsaCollectionFile } from "../types";
+import {
+  db,
+  fsaCollection,
+  fsaCollectionFile,
+  setCurrentCollectionId,
+} from "../../";
 import { v4 as uuid } from "uuid";
 export async function createCollection(
   name: string,
@@ -37,7 +41,8 @@ export async function createCollection(
   }
 
   const id = await db.userCollections.add(collection);
-  return await db.userCollections.get(id);
+  await setCurrentCollectionId(id)
+  return collection
 }
 
 // if name is foo => foo_1

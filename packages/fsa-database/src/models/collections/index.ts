@@ -1,4 +1,6 @@
 export { addFileToCollection } from "./addFileToCollection";
+export { findLastUsedCollection } from "./findLastUsedCollection";
+export { findLastUsedCollectionOrCreatNew } from "./findLastUsedCollectionOrCreatNew";
 export { createCollection } from "./createCollection";
 export { deleteCollection } from "./deleteCollection";
 export { updateCollection } from "./updateCollection";

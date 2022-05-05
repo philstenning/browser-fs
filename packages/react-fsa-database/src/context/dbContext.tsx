@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, useEffect } from "react";
+import React, { useState, useContext, createContext, useEffect } from 'react'
 import {
   db,
   initializeDatabase,
@@ -9,79 +9,78 @@ import {
   setCurrentDirectoryId,
   setCurrentFileId,
   setCurrentRootDirectoryId,
-} from "fsa-database";
+} from 'fsa-database'
 
-type FsaDbContextType = {
-  dbState: fsaState;
-  setCurrentDirectoryId: (id: string) => void;
-  setCurrentRootDirectoryId: (id: string) => void;
-  setCurrentCollectionId: (id: string) => void;
-  setCurrentFileId: (id: string) => void;
-  isScanning:boolean
-};
+export type FsaDbContextType = {
+  dbState: fsaState
+  setCurrentDirectoryId: (id: string) => void
+  setCurrentRootDirectoryId: (id: string) => void
+  setCurrentCollectionId: (id: string) => void
+  setCurrentFileId: (id: string) => void
+  isScanning: boolean
+}
 
-const FsaDbContext = createContext<FsaDbContextType | null>(null);
+const FsaDbContext = createContext<FsaDbContextType | null>(null)
 
-function useFsaDbContext() {
-  return useContext(FsaDbContext) as FsaDbContextType;
+export function useFsaDbContext() {
+  return useContext(FsaDbContext) as FsaDbContextType
 }
 
 type Props = {
-  children: React.ReactNode;
-  fileExtensionsForApp?: string[];
-};
+  children: React.ReactNode
+  fileExtensionsForApp?: string[]
+}
 
 /**
  *
  * @param param0
  * @returns
  */
-function FsaDbContextProvider({
+export function FsaDbContextProvider({
   children,
-  fileExtensionsForApp = ["stl", "gcode", "3mf", "jpg"],
+  fileExtensionsForApp = ['stl', 'gcode', '3mf', 'jpg'],
 }: Props) {
-  const [dbState, setDbState] = useState<fsaState>(initialDbState);
-  const [isScanning, setIsReScanning] = useState(false);
+  const [dbState, setDbState] = useState<fsaState>(initialDbState)
+  const [isScanning, setIsReScanning] = useState(false)
 
-  const currentState = useLiveQuery(() => db.state.toCollection().last());
-  const settings = useLiveQuery(() => db.settings.toCollection().last());
+  const currentState = useLiveQuery(() => db.state.toCollection().last())
+  // const settings = useLiveQuery(() => db.settings.toCollection().last())
   // const { scanInterval } = settings;
 
   /**
+   *
    * if this is the first time the db has been opened
    *  we need to add some fileTypes
    **/
   async function getInitialData(): Promise<void> {
-    await initializeDatabase(fileExtensionsForApp);
+    await initializeDatabase(fileExtensionsForApp)
   }
 
-
- // use to set the scanning state.
+  // use to set the scanning state.
   useEffect(() => {
-    let isMounted = true;
+    let isMounted = true
     if (isMounted) {
       if (currentState) {
         if (isScanning !== currentState.isScanning) {
-          setIsReScanning(currentState.isScanning);
+          setIsReScanning(currentState.isScanning)
         }
       }
     }
     return () => {
-      isMounted = false;
-    };
-  }, [currentState]);
-
+      isMounted = false
+    }
+  }, [currentState])
 
   // run at start up
   useEffect(() => {
-    getInitialData();
-  }, []);
+    getInitialData()
+  }, [])
 
   useEffect(() => {
     if (currentState) {
-      setDbState(currentState);
+      setDbState(currentState)
     }
-  }, [currentState]);
+  }, [currentState])
 
   //set re-scan timer.
   // useEffect(() => {
@@ -105,13 +104,13 @@ function FsaDbContextProvider({
         setCurrentDirectoryId,
         setCurrentFileId,
         setCurrentRootDirectoryId,
-        isScanning
+        isScanning,
       }}
     >
       {children}
     </FsaDbContext.Provider>
-  );
+  )
 }
 
-export { FsaDbContextProvider, useFsaDbContext };
-export type { FsaDbContextType };
+// export { FsaDbContextProvider, useFsaDbContext };
+// export type { FsaDbContextType };

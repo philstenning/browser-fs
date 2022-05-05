@@ -27,16 +27,12 @@ describe("Files Tests", () => {
   
   /* ==== Test Created with Cypress Studio ==== */
   it("should have id when added to collection", function () {
-    /* ==== Generated with Cypress Studio ==== */
+    cy.log(`creates a default collection as there is not one already.`) 
     cy.get('[data-testid="filesForRootDirListItem-0"]').click();
     cy.get('[test-cy="selectedFile"]  > li')
     .first()
     .should("have.text", "body.3mf");
     
-    cy.get('[data-cy="filesCollections"]').should('have.text', "0")
-
-    cy.get('[data-cy="addCollectionButton"]').click();
-    cy.get('[data-testid="filesForRootDirListItem-0"]').click();
     cy.get('[data-cy="filesCollections"]').should('have.text', "1")
 
     cy.get('[data-cy="addCollectionButton"]').click();
@@ -46,6 +42,10 @@ describe("Files Tests", () => {
     cy.get('[data-cy="addCollectionButton"]').click();
     cy.get('[data-testid="filesForRootDirListItem-0"]').click();
     cy.get('[data-cy="filesCollections"]').should('have.text', "3")
+
+    cy.get('[data-cy="addCollectionButton"]').click();
+    cy.get('[data-testid="filesForRootDirListItem-0"]').click();
+    cy.get('[data-cy="filesCollections"]').should('have.text', "4")
 
   
   });

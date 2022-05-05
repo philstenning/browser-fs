@@ -32,6 +32,8 @@ export {
   removeAllFilesFromCollection,
   removeFileFromCollectionsSavedLocation,
   saveCollectionToFileSystem,
+  findLastUsedCollection,
+  findLastUsedCollectionOrCreatNew,
 } from "./models/collections/";
 
 export {
@@ -51,7 +53,8 @@ export {
   importDatabase,
   fetchDatabase,
   loadDatabase,
-  resetDatabase,deleteDatabase
+  resetDatabase,
+  deleteDatabase,
 } from "./db";
 
 export { getFileTypeNames } from "./models/fileTypes/getFileTypeNames";
