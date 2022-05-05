@@ -1,2 +1,2 @@
-export * from "./useFileTypes";
-export * from "./useFileTypesNames";
+export * from './useFileTypes'
+export * from './useFileTypesNames'

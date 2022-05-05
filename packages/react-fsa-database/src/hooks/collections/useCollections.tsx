@@ -11,58 +11,112 @@ import {
   fsaFile,
   fsaCollectionFile,
   saveCollectionToFileSystem,
-} from "fsa-database";
-import { useFsaDbContext } from "../../context/dbContext";
+} from 'fsa-database'
+import { useFsaDbContext } from '../../context/dbContext'
+
+async function getCurrentState() {
+  return (await db.state.toCollection().last()) ?? null
+}
+
+async function getCurrentCollection() {
+  const state = await getCurrentState()
+  if (!state?.currentCollectionId) return false
+
+  try {
+    const collection = await db.userCollections.get(state?.currentCollectionId)
+    if (collection) return collection
+  } catch (error) {
+    console.error(`Error getting current Collection ${error}`)
+  }
+  return false
+}
+
+/**
+ * get the items/files of the currently selected collection
+ * @returns
+ */
+function getItems() {
+  const list = useLiveQuery(async () => {
+    // get state
+    const state = await db.state.toCollection().last()
+    if (!state?.currentCollectionId) return
+    // get current collection
+    const collection = await db.userCollections.get(state?.currentCollectionId)
+    if (collection) {
+      // get the files
+      const files =
+        (await db.files
+          .where('id')
+          .anyOf(collection.files.map((f) => f.fileId))
+          .toArray()) ?? []
+
+      // add order from the collection.
+      files.forEach((f) => {
+        const match = collection.files.filter((c) => c.fileId === f.id)[0]
+
+        f = { ...f, order: match.order ?? 0, name: match.name }
+        // f.order = match.order ?? 0
+        // f.name = match.name
+      })
+      // sort asc order
+      return files.sort((a, b) => a.order - b.order)
+    }
+    return []
+  })
+  return list ?? []
+}
 
 const useCollections = () => {
   const collections =
     useLiveQuery(() =>
-      db.userCollections.orderBy("created").reverse().toArray()
-    ) ?? [];
-    
-  const { setCurrentCollectionId, dbState } = useFsaDbContext();
+      db.userCollections.orderBy('created').reverse().toArray()
+    ) ?? []
 
-  const addCollection = async (
+  const { setCurrentCollectionId, dbState } = useFsaDbContext()
+
+  async function addCollection(
     name: string,
     files: fsaCollectionFile[] = [],
-    description = "",
-    creator: string = "",
+    description = '',
+    creator: string = '',
     tags: string[] = []
-  ) => {
-    const res = await createCollection(name, files, description, creator, tags);
+  ) {
+    const res = await createCollection(name, files, description, creator, tags)
     if (res) {
-      setCurrentCollectionId(res.id);
-      return true;
+      setCurrentCollectionId(res.id)
+      return true
     }
-  };
+    return false
+  }
 
   const removeCollection = async (collection: fsaCollection) => {
-    const res = await deleteCollection(collection);
-    if (!res) return;
+    const res = await deleteCollection(collection)
+    if (!res) return
     // if we only have one left set it as current.
-    const count = await db.userCollections.count();
+    const count = await db.userCollections.count()
     if (count === 1) {
-      const col = await db.userCollections.toCollection().first();
-      if (col) setCurrentCollectionId(col.id);
+      const col = await db.userCollections.toCollection().first()
+      if (col) setCurrentCollectionId(col.id)
       // If there is none left
     } else if (count === 0) {
-      setCurrentCollectionId('');
+      setCurrentCollectionId('')
     }
-  };
+  }
 
   const addFileToCollection = async (
     file: fsaFile,
     collection?: fsaCollection
   ) => {
-    const added = await fsaAddFileToCollection(file, collection);
+    const added = await fsaAddFileToCollection(file, collection)
     if (!added) {
       console.log('file not added to collection...')
-      return;}
-      // console.log('file added to collection...')
+      return
+    }
+    // console.log('file added to collection...')
     // set the passed collection to the current collection if it isn't already.
     if (collection && dbState.currentCollectionId !== collection.id)
-      setCurrentCollectionId(collection.id);
-  };
+      setCurrentCollectionId(collection.id)
+  }
 
   const removeFileFromCollection = async (
     file: fsaFile,
@@ -72,29 +126,29 @@ const useCollections = () => {
     // we assume we want to remove it from
     // the current selected collection
     if (!collection) {
-      const _collection = await getCurrentCollection();
-      if (_collection) {
-        await fsaRemoveFileFromCollection(_collection, file);
+      const col = await getCurrentCollection()
+      if (col) {
+        await fsaRemoveFileFromCollection(col, file)
       }
-      return;
+      return
     }
-    await fsaRemoveFileFromCollection(collection, file);
-  };
+    await fsaRemoveFileFromCollection(collection, file)
+  }
 
-  const currentCollectionItems = getItems();
+  const currentCollectionItems = getItems()
 
   const cloneCollection = async (
     collection: fsaCollection,
-    name: string = "copy"
+    name: string = 'copy'
   ) => {
-    if (name === "copy") name = `${collection.name}_copy`;
-    const { files, description, creator, tags } = collection;
+    if (name === 'copy') name = `${collection.name}_copy`
+    const { files, description, creator, tags } = collection
     const clone =
-      (await createCollection(name, files, description, creator, tags)) ?? null;
-    if (!clone) return false;
-    setCurrentCollectionId(clone.id);
-    return clone;
-  };
+      (await createCollection(name, files, description, creator, tags)) ?? null
+    if (!clone) return false
+    setCurrentCollectionId(clone.id)
+    return clone
+  }
 
   return {
     collections,
@@ -107,52 +161,7 @@ const useCollections = () => {
     cloneCollection,
     removeAllFilesFromCollection,
     saveCollectionToFileSystem,
-  };
-};
-
-async function getCurrentState() {
-  return (await db.state.toCollection().last()) ?? null;
+  }
 }
 
-async function getCurrentCollection() {
-  const state = await getCurrentState();
-  if (!state?.currentCollectionId) return;
-  const collection = await db.userCollections.get(state?.currentCollectionId);
-  if (!collection) return null;
-  return collection;
-}
-/**
- * get the items/files of the currently selected collection
- * @returns
- */
-function getItems() {
-  const list = useLiveQuery(async () => {
-    // get state
-    const state = await db.state.toCollection().last();
-    if (!state?.currentCollectionId) return;
-    // get current collection
-    const collection = await db.userCollections.get(state?.currentCollectionId);
-    if (collection) {
-      // get the files
-      const files =
-        (await db.files
-          .where("id")
-          .anyOf(collection.files.map((f) => f.fileId))
-          .toArray()) ?? [];
-
-      // add order from the collection.
-      files.forEach((f) => {
-        const match = collection.files.filter((c) => c.fileId === f.id)[0];
-        f.order = match.order ?? 0
-        f.name= match.name
-       
-      });
-      // sort asc order
-      return files.sort((a, b) => a.order - b.order);
-    }
-    return [];
-  });
-  return list ?? [];
-}
-
-export { useCollections };
+export { useCollections }

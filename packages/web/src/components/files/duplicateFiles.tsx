@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useFindDuplicateFiles, } from "react-fsa-database";
+import React, { useState } from "react";
+import { useFindDuplicateFiles } from "react-fsa-database";
 import { db, useLiveQuery } from "fsa-database";
 import { IDuplicateFiles } from "react-fsa-database/src/hooks/files";
 
@@ -22,7 +22,7 @@ function DuplicateFiles() {
       <FileList file={filtered} allFiles={duplicateFiles} />
       <ul data-testid="dupFileGroupList">
         {duplicateFiles &&
-          duplicateFiles.map((f,index) => (
+          duplicateFiles.map((f, index) => (
             <li
               key={f.id}
               onClick={(e) => handleClick(e, f)}
@@ -43,22 +43,23 @@ type Props = {
   allFiles: IDuplicateFiles[];
 };
 
-const FileList = ({ file}: Props) => {
-    const { toggleHidden } = useFindDuplicateFiles(true);
-  const filtered = useLiveQuery(async () => {
-      if(file){
-          
-          return (await db.files.where("name").equals(file.name).toArray()).filter(f=>f.hidden==='false')
+const FileList = ({ file }: Props) => {
+  const { toggleHidden } = useFindDuplicateFiles(true);
+  const filtered =
+    useLiveQuery(async () => {
+      if (file) {
+        return (
+          await db.files.where("name").equals(file.name).toArray()
+        ).filter((f) => f.hidden === "false");
       }
-     
-  },[file])??[]
+    }, [file]) ?? [];
 
   return (
     <div>
       <h5>Ids of duplicate files</h5>
       <ul data-testid="dupFileList">
         {filtered.length > 1 &&
-          filtered.map((f,index) => (
+          filtered.map((f, index) => (
             <li
               key={f.id}
               onClick={() => toggleHidden(f)}

@@ -1,3 +1,4 @@
+import React from 'react'
 import { fsaFile } from "fsa-database";
 import { useCollections, useFsaDbContext } from "react-fsa-database";
 //@ts-ignore

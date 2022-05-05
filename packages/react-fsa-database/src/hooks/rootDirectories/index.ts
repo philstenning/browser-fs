@@ -1,1 +1,1 @@
-export { useRootDirectories } from "./useRootDirectories";
+export { useRootDirectories } from './useRootDirectories'

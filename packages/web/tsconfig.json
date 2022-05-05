@@ -16,7 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
      "types": [
-      "wicg-file-system-access",
+      // "wicg-file-system-access",
       "cypress",
     ]
   },

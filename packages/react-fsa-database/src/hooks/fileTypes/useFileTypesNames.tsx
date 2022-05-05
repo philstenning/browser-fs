@@ -1,4 +1,4 @@
-import { db, useLiveQuery } from "fsa-database";
+import { db, useLiveQuery } from 'fsa-database'
 
 /**
  *
@@ -8,9 +8,9 @@ function useFileTypesNames() {
   const fileTypesNames =
     useLiveQuery(() =>
       db.fileTypes.toArray().then((ft) => ft.map((ft) => ft.name))
-    ) ?? [];
+    ) ?? []
 
-  return fileTypesNames;
+  return fileTypesNames
 }
 
-export { useFileTypesNames };
+export { useFileTypesNames }
