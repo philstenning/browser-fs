@@ -5,3 +5,4 @@ export { deleteRootFolderFiles } from "./deleteRootFolderFiles";
 export { saveFile } from "./saveFile";
 export { saveFiles } from "./saveFiles";
 export { updateFile } from "./updateFile";
+export { createUniqueNameForFile }from './createUniqueNameForFile'

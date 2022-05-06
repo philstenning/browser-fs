@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import {
   db,
   fsaCollection,
@@ -51,15 +52,18 @@ function getItems() {
           .toArray()) ?? []
 
       // add order from the collection.
+      const orderedFiles: fsaFile[] = []
       files.forEach((f) => {
         const match = collection.files.filter((c) => c.fileId === f.id)[0]
-
-        f = { ...f, order: match.order ?? 0, name: match.name }
-        // f.order = match.order ?? 0
-        // f.name = match.name
+        orderedFiles.push({
+          ...f,
+          order: match.order ?? 0,
+          name: match.name,
+        })
       })
       // sort asc order
-      return files.sort((a, b) => a.order - b.order)
+      // eslint-disable-next-line consistent-return
+      return orderedFiles.sort((a, b) => a.order - b.order)
     }
     return []
   })
@@ -109,7 +113,7 @@ const useCollections = () => {
   ) => {
     const added = await fsaAddFileToCollection(file, collection)
     if (!added) {
-      console.log('file not added to collection...')
+      // console.log('file not added to collection...')
       return
     }
     // console.log('file added to collection...')
@@ -141,10 +145,12 @@ const useCollections = () => {
     collection: fsaCollection,
     name: string = 'copy'
   ) => {
-    if (name === 'copy') name = `${collection.name}_copy`
+    let newName = name
+    if (name === 'copy') newName = `${collection.name}_copy`
     const { files, description, creator, tags } = collection
     const clone =
-      (await createCollection(name, files, description, creator, tags)) ?? null
+      (await createCollection(newName, files, description, creator, tags)) ??
+      null
     if (!clone) return false
     setCurrentCollectionId(clone.id)
     return clone
