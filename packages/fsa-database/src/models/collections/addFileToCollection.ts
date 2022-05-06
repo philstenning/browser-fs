@@ -1,88 +1,88 @@
-import {
-  fsaCollection,
-  fsaFile,
-  fsaCollectionFile,
-} from "../../";
-import { putCollectionAndFile, findLastUsedCollectionOrCreatNew} from "./";
-import { getFileExtension, getFileNameWithoutExtension } from "../../utils";
-
+import { fsaCollection, fsaFile, fsaCollectionFile } from '../../'
+import { putCollectionAndFile, findLastUsedCollectionOrCreatNew } from './'
+import { getFileExtension, getFileNameWithoutExtension } from '../../utils'
+import { createUniqueNameForFile } from '../files'
 export async function addFileToCollection(
   file: fsaFile,
   collection?: fsaCollection
 ) {
-  if (!file.id) return false;
+  if (!file.id) return false
   // if we don't pass in a collection
   // try and retrieve one from the state.
   if (!collection) {
-    const col = await findLastUsedCollectionOrCreatNew();
+    const col = await findLastUsedCollectionOrCreatNew()
     if (col) {
-      collection = col;
-    } else return;
+      collection = col
+    } else return
   }
 
+  const uniqueFileName = await createUniqueNameForFile(file)
+  const uniqueNamedFile: fsaFile = {...file, uniqueName:uniqueFileName}
+
+
   // create file
-  const collectionFile: fsaCollectionFile = createCollectionFile(file);
+  const collectionFile: fsaCollectionFile =
+    createCollectionFile(uniqueNamedFile)
 
   // check if file with same id exists already
   for (const f of collection.files) {
     if (f.fileId === collectionFile.fileId) {
-      console.log(`This file is already in the collection. ${f.name}`);
-      return true;
+      // console.log(`This file is already in the collection. ${f.name}`)
+      return true
     }
   }
 
   // check for same name and rename if it does
-  collectionFile.name = checkIfFileWithSameNameExists(file.name, collection);
+  // collectionFile.name = checkIfFileWithSameNameExists(file.name, collection);
+  
   // increment all current file orders
-  collection.files.map((f) => ({ ...f, order: f.order++ }));
+  collection.files.map((f) => ({ ...f, order: f.order++ }))
   // now add at order 0
-  collection.files.push(collectionFile);
-  file.userCollectionIds.push(collection.id);
-  return await putCollectionAndFile(collection, file);
+  collection.files.push(collectionFile)
+  uniqueNamedFile.userCollectionIds.push(collection.id)
+  return await putCollectionAndFile(collection, uniqueNamedFile)
 }
-
-
 
 function createCollectionFile(file: fsaFile): fsaCollectionFile {
   return {
     fileId: file.id,
     added: Date.now(),
     order: 0,
-    name: file.name,
-  };
+    name: file.uniqueName ?? file.name
+  }
 }
 
 function checkIfFileWithSameNameExists(
   fileName: string,
   collection: fsaCollection,
-  substituteString: string = "__duplicate"
+  substituteString: string = '__duplicate'
 ) {
-  let counter = 0;
-  let fileNameWithoutExt = getFileNameWithoutExtension(fileName);
-  const ext = getFileExtension(fileName);
+  let counter = 0
+  let fileNameWithoutExt = getFileNameWithoutExtension(fileName)
+  const ext = getFileExtension(fileName)
 
   // match all occurrences of the string
-  const test = `${substituteString}\([1-9]\)+`;
-  const re = new RegExp(test, "gi");
+  const test = `${substituteString}\([1-9]\)+`
+  const re = new RegExp(test, 'gi')
 
-  const match = fileNameWithoutExt.match(re);
+  const match = fileNameWithoutExt.match(re)
 
   // if it already has a suffix remove it.
   if (match) {
     const withoutIndex = fileNameWithoutExt.lastIndexOf(
       match[match?.length - 1]
-    );
-    fileNameWithoutExt = fileNameWithoutExt.substring(0, withoutIndex);
+    )
+    fileNameWithoutExt = fileNameWithoutExt.substring(0, withoutIndex)
   }
 
-  let tempName = fileNameWithoutExt;
+  let tempName = fileNameWithoutExt
   while (
     collection.files.filter(
-      (f) => f.name.substring(0, f.name.indexOf(".")) === tempName
+      (f) => f.name.substring(0, f.name.indexOf('.')) === tempName
     ).length > 0
   ) {
-    counter++;
-    tempName = `${fileNameWithoutExt}__duplicate(${counter})`;
+    counter++
+    tempName = `${fileNameWithoutExt}__duplicate(${counter})`
   }
-  return `${tempName}${ext}`;
+  return `${tempName}${ext}`
 }

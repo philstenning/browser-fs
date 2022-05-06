@@ -3,7 +3,7 @@ import { fsaFile } from "../types";
 
 export async function saveFile(file: fsaFile) {
   try {
-    const id = await db.files.add(file);
+    const id = await db.files.put(file);
     file.id = id;
     return file;
   } catch (e) {

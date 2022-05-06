@@ -22,6 +22,7 @@ export default function currentFile() {
       <h4>Current Selected File</h4>
       <ul test-cy="selectedFile">
         <li>{file.name}</li>
+        <li>uniqueName: {file.uniqueName}</li>
         <li>hidden: {file.hidden}</li>
         <li>
           collections{" "}

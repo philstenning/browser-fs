@@ -39,7 +39,7 @@ function CollectionItems() {
               onClick={(e) => setCurrentItem(e, item.id)}
               data-cy={`collectionItem-${index}`}
             >
-              {item.order} {item.name}
+              {item.order} {item.uniqueName}
             </span>
             <button
               onClick={(e) => removeItem(e, item)}
