@@ -52,6 +52,8 @@ function createCollectionFile(file: fsaFile): fsaCollectionFile {
   }
 }
 
+
+/* now has been made obsolete by  createUniqueNameForFile()  */
 function checkIfFileWithSameNameExists(
   fileName: string,
   collection: fsaCollection,

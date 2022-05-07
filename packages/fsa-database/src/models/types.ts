@@ -103,7 +103,7 @@ export interface fsaSetting {
   lastScanned: number
 }
 
-export interface fsaExcludedFolder {
+export interface fsaExcludedDirectory {
   id?: number
   name: string
 }

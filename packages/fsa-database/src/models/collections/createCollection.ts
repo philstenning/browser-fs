@@ -2,17 +2,18 @@ import {
   db,
   fsaCollection,
   fsaCollectionFile,
-  setCurrentCollectionId,
-} from "../../";
-import { v4 as uuid } from "uuid";
+  setCurrentCollectionId
+} from '../../'
+import { v4 as uuid } from 'uuid'
+
 export async function createCollection(
   name: string,
   files: fsaCollectionFile[] = [],
-  description = "",
-  creator: string = "",
+  description = '',
+  creator: string = '',
   tags: string[] = []
 ): Promise<fsaCollection | undefined> {
-  const createdAt = Date.now();
+  const createdAt = Date.now()
   const collection: fsaCollection = {
     id: uuid(),
     created: createdAt,
@@ -22,25 +23,25 @@ export async function createCollection(
     files,
     tags,
     description,
-    saveToFileSystem: false,
-  };
-  name = name.trim();
+    saveToFileSystem: false
+  }
+  name = name.trim()
   if (name.length < 1) {
-    name = "collection";
-    collection.name = name;
+    name = 'collection'
+    collection.name = name
   }
 
   // can not have duplicate names
-  const count = await db.userCollections.where("name").equals(name).count();
+  const count = await db.userCollections.where('name').equals(name).count()
   // console.log({count})
   if (count > 0) {
-    const res = await appendCollectionName(name);
+    const res = await appendCollectionName(name)
     if (res) {
-      collection.name = res;
+      collection.name = res
     }
   }
 
-  const id = await db.userCollections.add(collection);
+  const id = await db.userCollections.add(collection)
   await setCurrentCollectionId(id)
   return collection
 }
@@ -48,14 +49,14 @@ export async function createCollection(
 // if name is foo => foo_1
 // if name is foo_1 => foo_2
 async function appendCollectionName(name: string) {
-  let count = 1;
-  let suffix = 0;
+  let count = 1
+  let suffix = 0
   while (count > 0) {
-    suffix++;
+    suffix++
     count = await db.userCollections
-      .where("name")
+      .where('name')
       .equals(`${name}_${suffix}`)
-      .count();
+      .count()
   }
-  return `${name}_${suffix}`;
+  return `${name}_${suffix}`
 }

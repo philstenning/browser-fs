@@ -7,7 +7,7 @@ import {
   fsaCollection,
   fsaError,
   fsaSetting,
-  fsaExcludedFolder,
+  fsaExcludedDirectory,
   createSetting,
   saveSetting,
   saveState
@@ -24,7 +24,7 @@ export class FsaDb extends Dexie {
   state!: Dexie.Table<fsaState, number>
   errors!: Dexie.Table<fsaError, number>
   settings!: Dexie.Table<fsaSetting, number>
-  excludedFolders!: Dexie.Table<fsaExcludedFolder, number>
+  excludedDirectories!: Dexie.Table<fsaExcludedDirectory, number>
   constructor() {
     super('fsa-database')
     const db = this
@@ -38,7 +38,7 @@ export class FsaDb extends Dexie {
       state: `++id,currentDirectoryId,currentFileId,currentCollectionId`,
       errors: `++id,type,success`,
       settings: `++id`,
-      excludedFolders: `++id,name`
+      excludedDirectories: `++id,name`
     })
   }
 }
@@ -65,11 +65,11 @@ async function initializeDatabase(fileTypes: string[]) {
 export { db, initializeDatabase }
 
 async function createExcludedFoldersIfNotExist() {
-  const excludedFolders = await db.excludedFolders.count()
+  const excludedFolders = await db.excludedDirectories.count()
   if (!excludedFolders) {
     for (const name of FoldersToExcludeFromScanning) {
       try {
-        await db.excludedFolders.add({ name })
+        await db.excludedDirectories.add({ name })
       } catch (error) {
         console.error(`Error adding excluded folder names ${error}`)
       }

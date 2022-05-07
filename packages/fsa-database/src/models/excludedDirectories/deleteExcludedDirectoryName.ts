@@ -1,0 +1,16 @@
+import { db} from "../../db";
+
+/**
+ * Returns true if the excluded name has been removed from the database
+ * @param {number} id 
+ * @returns {Promise<boolean>} A Promise of true or false when fulfilled
+ */
+export async function deleteExcludedDirectoryName(id: number): Promise<boolean> {
+  try {
+  await db.excludedFolders.delete(id)
+  return true
+  } catch (error) {
+    console.error(`Error deleting excluded folderName with id:${id} ${error}`);
+  }
+  return false
+}

@@ -8,7 +8,7 @@ import {
   getFileTypeNames,
   setCurrentRootDirectoryId
 } from "../../";
-import { getExcludedFoldersList } from "../excludedFolders";
+import { getExcludedDirectoriesList } from '../excludedDirectories'
 
 /**
  * Opens the window.showDirectoryPicker and allows
@@ -35,7 +35,7 @@ import { getExcludedFoldersList } from "../excludedFolders";
    // extensions we want.
    const fileExtensions = await getFileTypeNames(); 
    // directories we don't want to scan.
-   const excludedFolders = await getExcludedFoldersList();
+   const excludedFolders = await getExcludedDirectoriesList()
    // scan drive for folders and files
    const data = await scanLocalDrive(
      virtualDir.handle,
