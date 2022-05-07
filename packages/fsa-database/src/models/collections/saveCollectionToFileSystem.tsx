@@ -1,8 +1,9 @@
 import { db } from '../../db/setup'
 import { fsaCollection, fsaFile } from '../types'
 import { checkPermissionsOfHandle } from 'fsa-browser'
-import { updatePermissionsForRootDirAndChildren } from './updatePermissionsForRootDirAndChildren'
-export async function saveCollectionToFileSystem(collectionId: string) {
+import updatePermissionsForRootDirAndChildren from './updatePermissionsForRootDirAndChildren'
+
+export default async function saveCollectionToFileSystem(collectionId: string) {
   const collection = await getCollectionsSavedLocationHandle(collectionId)
   if (!collection || !collection.handle) return false
 

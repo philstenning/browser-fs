@@ -1,7 +1,6 @@
-import { db } from "../../db/setup";
-import { fsaCollection } from "../types";
-import { removeAllFilesFromCollection } from "./removeAllFilesFromCollection";
-
+import { db } from '../../db/setup'
+import { fsaCollection } from '../types'
+import removeAllFilesFromCollection from './removeAllFilesFromCollection'
 
 /**
  * Remove the id from the files.userCollections prop
@@ -9,11 +8,9 @@ import { removeAllFilesFromCollection } from "./removeAllFilesFromCollection";
  * @param collection
  * @returns
  */
-export async function deleteCollection(collection: fsaCollection) {
-  if (!collection.id) return false;
-  await removeAllFilesFromCollection(collection.id);
-  await db.userCollections.delete(collection.id);
-  return false;
+export default async function deleteCollection(collection: fsaCollection) {
+  if (!collection.id) return false
+  await removeAllFilesFromCollection(collection.id)
+  await db.userCollections.delete(collection.id)
+  return false
 }
-
-

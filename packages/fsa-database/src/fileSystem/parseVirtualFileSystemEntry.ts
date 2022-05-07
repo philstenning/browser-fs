@@ -1,6 +1,6 @@
 import type { VirtualFileSystemEntry } from "fsa-browser";
 import { db, fsaDirectory, createDirectory } from "../index";
-import { saveFile, createFile } from "./files";
+import { saveFile, createFile } from "../models/files";
 /**
  * When passed a valid  virtualFileSystemEntry from fsa-browser scanLocalDrive()
  * we convert it into folders and files and save to the database.
@@ -9,7 +9,7 @@ import { saveFile, createFile } from "./files";
  * @param virtualFileSystemEntry
  * @returns true if complected successfully, false if not.
  */
-export async function parseVirtualFileSystemEntry(
+export default async function parseVirtualFileSystemEntry(
   virtualFileSystemEntry: VirtualFileSystemEntry,
   rootId: string,
   parentId: string

@@ -6,7 +6,7 @@ import {
 } from '../../'
 import { v4 as uuid } from 'uuid'
 
-export async function createCollection(
+export default async function createCollection(
   name: string,
   files: fsaCollectionFile[] = [],
   description = '',

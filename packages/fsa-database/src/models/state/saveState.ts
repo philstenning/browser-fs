@@ -1,6 +1,6 @@
 import { db, fsaState } from "../../";
 
-export async function saveState(state: fsaState) {
+export default async function saveState(state: fsaState) {
   try {
     delete state.id;
     const id = await db.state.add(state);

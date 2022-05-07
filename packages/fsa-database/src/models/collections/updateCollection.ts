@@ -8,7 +8,7 @@ import { fsaCollection } from "../types";
  * @param collection
  * @returns
  */
-export async function updateCollection(collection: fsaCollection) {
+export default async function updateCollection(collection: fsaCollection) {
   // if any other changes lets save again
   collection.updated = Date.now();
   try{

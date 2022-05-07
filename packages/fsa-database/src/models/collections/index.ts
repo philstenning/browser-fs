@@ -1,14 +1,30 @@
-export { addFileToCollection } from "./addFileToCollection";
-export { findLastUsedCollection } from "./findLastUsedCollection";
-export { findLastUsedCollectionOrCreatNew } from "./findLastUsedCollectionOrCreatNew";
-export { createCollection } from "./createCollection";
-export { deleteCollection } from "./deleteCollection";
-export { updateCollection } from "./updateCollection";
-export { putCollectionAndFile } from "./putCollectionAndFile";
+import addFileToCollection from './addFileToCollection'
+import findLastUsedCollection from './findLastUsedCollection'
+import findLastUsedCollectionOrCreatNew from './findLastUsedCollectionOrCreatNew'
+import createCollection from './createCollection'
+import deleteCollection from './deleteCollection'
+import updateCollection from './updateCollection'
+import putCollectionAndFile from './putCollectionAndFile'
+import removeFileFromCollection from './removeFileFromCollection'
+import removeFileFromAllCollection from './removeFileFromAllCollection'
+import removeAllFilesFromCollection from './removeAllFilesFromCollection'
+import saveCollectionToFileSystem from './saveCollectionToFileSystem'
+import removeFileFromCollectionsSavedLocation from './removeFileFromCollectionsSavedLocation'
+import updatePermissionsForRootDirAndChildren from './updatePermissionsForRootDirAndChildren'
+
+// export all the functions
 export {
+  addFileToCollection,
+  findLastUsedCollection,
+  findLastUsedCollectionOrCreatNew,
+  createCollection,
+  deleteCollection,
+  updateCollection,
+  putCollectionAndFile,
   removeFileFromCollection,
   removeFileFromAllCollection,
-} from "./removeFileFromCollection";
-export { removeAllFilesFromCollection } from "./removeAllFilesFromCollection";
-export { saveCollectionToFileSystem } from "./saveCollectionToFileSystem";
-export { removeFileFromCollectionsSavedLocation } from "./removeFileFromCollectionsSavedLocation";
+  removeAllFilesFromCollection,
+  saveCollectionToFileSystem,
+  removeFileFromCollectionsSavedLocation,
+  updatePermissionsForRootDirAndChildren
+}

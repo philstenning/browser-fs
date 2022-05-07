@@ -5,9 +5,9 @@ import { db} from "../../db";
  * @param {number} id 
  * @returns {Promise<boolean>} A Promise of true or false when fulfilled
  */
-export async function deleteExcludedDirectoryName(id: number): Promise<boolean> {
+export default async function deleteExcludedDirectoryName(id: number): Promise<boolean> {
   try {
-  await db.excludedFolders.delete(id)
+  await db.excludedDirectories.delete(id)
   return true
   } catch (error) {
     console.error(`Error deleting excluded folderName with id:${id} ${error}`);

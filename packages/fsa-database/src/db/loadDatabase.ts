@@ -1,17 +1,18 @@
 import { importInto } from "dexie-export-import";
 import { ImportProgress } from "dexie-export-import/dist/import";
-import { db, resetPermissionsOnAllDirectories } from "./setup";
+import { db } from "./setup";
+import resetPermissionsOnAllDirectories from './resetPermissionsOnAllDirectories'
 
-export const loadDatabase = async (file: File) => {
+export default async function loadDatabase(file: File) {
   try {
     await importInto(db, file, {
       clearTablesBeforeImport: true,
-      progressCallback: loadingFinished,
-    });
+      progressCallback: loadingFinished
+    })
 
-      await resetPermissionsOnAllDirectories();
+    await resetPermissionsOnAllDirectories()
   } catch (error) {
-    console.error(`Error loading database ${error}`);
+    console.error(`Error loading database ${error}`)
   }
 };
 

@@ -1,7 +1,7 @@
 import { db } from '../..'
 import { fsaFile } from '../types'
 import { getFileNameWithoutExtension, getFileExtension } from '../../utils'
-import { saveFile } from './saveFile'
+
 
 /**
  * Creates a unique name for the a file in the database.
@@ -13,7 +13,7 @@ import { saveFile } from './saveFile'
  * @param {fsaFile} file
  * @returns {string} Unique File name
  */
-export async function createUniqueNameForFile(file: fsaFile): Promise<string> {
+export default async function createUniqueNameForFile(file: fsaFile): Promise<string> {
   const { name, id } = file
   // we have already given it one exit
   if (!!file.uniqueName) {

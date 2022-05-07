@@ -77,7 +77,11 @@ export function FsaDbContextProvider({
   }, [])
 
   useEffect(() => {
-    if (currentState) {
+    if (
+      currentState &&
+      !!currentState.currentCollectionId && // handle a null value
+      !!currentState.currentFileId // handle a null value
+    ) {
       setDbState(currentState)
     }
   }, [currentState])

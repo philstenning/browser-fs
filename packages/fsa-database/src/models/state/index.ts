@@ -1,9 +1,19 @@
-export { initialDbState } from "./initialState";
-export { saveState } from "./saveState";
-export { getCurrentState, getCurrentStateWithOutId } from "./getCurrentState";
+import { initialDbState } from './initialState'
+import saveState from './saveState'
+import getCurrentState from './getCurrentState'
+import getCurrentStateWithOutId from './getCurrentStateWithOutId'
+import setCurrentCollectionId from './setCurrentCollectionId'
+import setCurrentDirectoryId from './setCurrentDirectoryId'
+import setCurrentFileId from './setCurrentFileId'
+import setCurrentRootDirectoryId from './setCurrentDirectoryId'
+
 export {
-  setCurrentDirectoryId,
+  initialDbState,
+  saveState,
+  getCurrentState,
   setCurrentCollectionId,
+  setCurrentDirectoryId,
   setCurrentFileId,
   setCurrentRootDirectoryId,
-} from "./setCurrentState";
+  getCurrentStateWithOutId
+}

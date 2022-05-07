@@ -1,7 +1,7 @@
 import { db } from "../../db/setup";
 import { fsaFile } from "../types";
 
-export async function saveFile(file: fsaFile) {
+export default async function saveFile(file: fsaFile) {
   try {
     const id = await db.files.put(file);
     file.id = id;
