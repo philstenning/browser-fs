@@ -11,7 +11,7 @@ import {
   useFindDuplicateFiles,
 } from './hooks/files'
 import { useRootDirectories } from './hooks/rootDirectories'
-import { useExcludedFolders } from './hooks/excludedFolders/useExcludedFolders'
+import { useExcludedDirectories } from './hooks/excludedDirectories/useExcludedDirectories'
 import { useDirectories } from './hooks/directories/useDirectories'
 import { useCollections } from './hooks/collections/useCollections'
 import { useSettings } from './hooks/settings/useSettings'
@@ -30,7 +30,7 @@ export {
   useDirectoryFiles,
   useFindDuplicateFiles,
   useRootDirectories,
-  useExcludedFolders,
+  useExcludedDirectories,
   useDirectories,
   useCollections,
   useSettings,

@@ -1,4 +1,4 @@
-import { db, getExcludedFoldersList } from "../..";
+import { db, getExcludedDirectoriesList } from '../..'
 import {
   checkPermissionsOfHandle,
   scanLocalDrive,
@@ -71,7 +71,7 @@ async function rescan() {
     await db.directories.put(currentDir);
 
     // directories we don't want to scan.
-    const excludedFolders = await getExcludedFoldersList();
+    const excludedFolders = await getExcludedDirectoriesList()
 
     //👍 call scanLocalDrive for  handle
     const virtualFileSystemEntry = await scanLocalDrive(

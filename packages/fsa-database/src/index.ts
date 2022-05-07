@@ -3,14 +3,14 @@ export {
   deleteRootDirectory,
   rescanRootDirectories,
   rootDirHasFilesInCollections,
-  addRootDirectory,
-} from "./models/rootDirectories";
+  addRootDirectory
+} from './models/rootDirectories'
 
 export {
   createDirectory,
   checkDirectoryForFilesInCollections,
-  hideDirectoryAndFiles,
-} from "./models/directories";
+  hideDirectoryAndFiles
+} from './models/directories'
 
 export {
   createFile,
@@ -19,8 +19,8 @@ export {
   deleteRootFolderFiles,
   saveFile,
   saveFiles,
-  updateFile,
-} from "./models/files";
+  updateFile
+} from './models/files'
 
 export {
   addFileToCollection,
@@ -33,8 +33,8 @@ export {
   removeFileFromCollectionsSavedLocation,
   saveCollectionToFileSystem,
   findLastUsedCollection,
-  findLastUsedCollectionOrCreatNew,
-} from "./models/collections/";
+  findLastUsedCollectionOrCreatNew
+} from './models/collections/'
 
 export {
   createInitialSetting,
@@ -42,10 +42,10 @@ export {
   getCurrentSetting,
   saveSetting,
   updateSetting,
-  updateSettingLastScanned,
-} from "./models/settings";
+  updateSettingLastScanned
+} from './models/settings'
 
-export { parseVirtualFileSystemEntry } from "./models/parseVirtualFsaEntry";
+export { parseVirtualFileSystemEntry } from './models/parseVirtualFsaEntry'
 export {
   db,
   initializeDatabase,
@@ -54,20 +54,20 @@ export {
   fetchDatabase,
   loadDatabase,
   resetDatabase,
-  deleteDatabase,
-} from "./db";
+  deleteDatabase
+} from './db'
 
-export { getFileTypeNames } from "./models/fileTypes/getFileTypeNames";
+export { getFileTypeNames } from './models/fileTypes/getFileTypeNames'
 
 export {
-  addExcludedFolderName,
-  deleteExcludedFolderName,
-  getExcludedFoldersList,
-} from "./models/excludedFolders";
+  addExcludedDirectoryName,
+  deleteExcludedDirectoryName,
+  getExcludedDirectoriesList
+} from './models/excludedDirectories'
 
-export * from "./models/state";
+export * from './models/state'
 
-export { useLiveQuery } from "dexie-react-hooks";
-export * from "./models/types";
+export { useLiveQuery } from 'dexie-react-hooks'
+export * from './models/types'
 
 // export { DbError } from "./models/errors/dbError";
