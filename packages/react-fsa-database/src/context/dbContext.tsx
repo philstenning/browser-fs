@@ -1,4 +1,12 @@
-import React, { useState, useContext, createContext, useEffect } from 'react'
+/* eslint-disable no-unused-vars */
+import React, {
+  useState,
+  useContext,
+  createContext,
+  useEffect,
+  useMemo,
+  useCallback,
+} from 'react'
 import {
   db,
   initializeDatabase,
@@ -8,7 +16,7 @@ import {
   setCurrentCollectionId as setColId,
   setCurrentDirectoryId as setDirId,
   setCurrentFileId as setFileId,
-  setCurrentRootDirectoryId as setRoodDirId,
+  setCurrentRootDirectoryId as setRoodId,
 } from 'fsa-database'
 
 export type FsaDbContextType = {
@@ -72,7 +80,6 @@ export function FsaDbContextProvider({
 
   // run at start up
   useEffect(() => {
-    console.log('#######  rendered')
     getInitialData()
   }, [])
 
@@ -85,13 +92,6 @@ export function FsaDbContextProvider({
       setDbState(currentState)
     }
   }, [currentState])
-
-  const setCurrentCollectionId = (id: string) => setColId(id)
-  const setCurrentDirectoryId = (id: string) => setDirId(id)
-  const setCurrentRootDirectoryId = (id: string) => {
-    console.log('dddd')
-    setRoodDirId(id)}
-  const setCurrentFileId = (id: string) => setFileId(id)
 
   // set re-scan timer.
   // useEffect(() => {
@@ -107,21 +107,30 @@ export function FsaDbContextProvider({
   //   }
   // }, [scanInterval]);
 
-  return (
-    <FsaDbContext.Provider
-      value={{
-        dbState,
-        setCurrentCollectionId,
-        setCurrentDirectoryId,
-        setCurrentFileId,
-        setCurrentRootDirectoryId,
-        isScanning,
-      }}
-    >
-      {children}
-    </FsaDbContext.Provider>
-  )
-}
+  const setCurrentRootDirectoryId = useCallback((id: string) => {
+    setRoodId(id)
+  }, [])
+  const setCurrentCollectionId = useCallback((id: string) => {
+    setColId(id)
+  }, [])
+  const setCurrentDirectoryId = useCallback((id: string) => {
+    setDirId(id)
+  }, [])
+  const setCurrentFileId = useCallback((id: string) => {
+    setFileId(id)
+  }, [])
 
-// export { FsaDbContextProvider, useFsaDbContext };
-// export type { FsaDbContextType };
+  const state = useMemo(
+    () => ({
+      dbState,
+      setCurrentCollectionId,
+      setCurrentDirectoryId,
+      setCurrentFileId,
+      setCurrentRootDirectoryId,
+      isScanning,
+    }),
+    [dbState, isScanning]
+  )
+
+  return <FsaDbContext.Provider value={state}>{children}</FsaDbContext.Provider>
+}

@@ -17,9 +17,6 @@ function useDirectories() {
   const directoriesForRootDirectory = useLiveQuery(async () => {
     const currentRoot = await db.state.toCollection().last()
     if (currentRoot && currentRoot.currentRootDirectoryId) {
-      // const search = showHidden
-      //   ? { rootId: currentRoot.currentRootDirectoryId, hidden: "false" }
-      //   : { rootId: currentRoot.currentRootDirectoryId };
       if (showHidden) {
         const res = await db.directories
           .where('rootId')
@@ -27,13 +24,16 @@ function useDirectories() {
           .toArray()
         return res
       }
-      return (
+      const res = (
         await db.directories
           .where('rootId')
           .equals(currentRoot.currentRootDirectoryId)
           .toArray()
       ).filter((d) => d.hidden === 'false')
+      return res
     }
+    // if we get here return an empty array
+    return []
   }, [showHidden])
 
   const hideDirectory = hideDirectoryAndFiles

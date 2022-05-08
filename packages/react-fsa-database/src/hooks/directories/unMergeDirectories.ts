@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { fsaDirectory, db } from 'fsa-database'
 
 export async function unMergeDirectories(rootDir: fsaDirectory) {

@@ -1,5 +1,25 @@
 import { db, fsaFile, useLiveQuery, updateFile } from 'fsa-database'
 
+export interface IDuplicateFiles {
+  id: number
+  name: string
+  count: number
+  fileIds: string[]
+}
+
+const unHideAllForFileName = async (fileName: string, rootId: string = '') => {
+  const files = await db.files.where('name').equals(fileName).toArray()
+  const updatedFiles: fsaFile[] = []
+  if (rootId === '') {
+    files.forEach((f) => updatedFiles.push({ ...f, hidden: 'false' }))
+  } else {
+    files
+      .filter((f) => f.rootId === rootId)
+      .forEach((f) => updatedFiles.push({ ...f, hidden: 'false' }))
+  }
+  await db.files.bulkPut(updatedFiles)
+}
+
 export function useFindDuplicateFiles(showHidden = false, rootId = '') {
   const duplicateFiles =
     useLiveQuery(async () => {
@@ -29,36 +49,21 @@ export function useFindDuplicateFiles(showHidden = false, rootId = '') {
     }, [rootId, showHidden]) ?? []
 
   const hideFile = async (file: fsaFile) => {
-    file.hidden = 'false'
-    return await updateFile(file)
+    const hasSaved = await updateFile({ ...file, hidden: 'false' })
+    return hasSaved
   }
 
   const unHideFile = async (file: fsaFile) => {
-    file.hidden = 'true'
-    return await updateFile(file)
+    const hasUpdated = await updateFile({ ...file, hidden: 'true' })
+    return hasUpdated
   }
 
   const toggleHidden = async (file: fsaFile) => {
-    if (file.hidden === 'false') {
-      return await unHideFile(file)
-    }
-    return await hideFile(file)
-  }
-
-  const unHideAllForFileName = async (
-    fileName: string,
-    rootId: string = ''
-  ) => {
-    const files = await db.files.where('name').equals(fileName).toArray()
-    if (rootId === '') {
-      files.forEach((f) => (f.hidden = 'false'))
-      await db.files.bulkPut(files)
-      return
-    }
-    files
-      .filter((f) => f.rootId === rootId)
-      .forEach((f) => (f.hidden = 'false'))
-    await db.files.bulkPut(files)
+    const hasToggled = await updateFile({
+      ...file,
+      hidden: file.hidden === 'true' ? 'false' : 'true',
+    })
+    return hasToggled
   }
 
   return {
@@ -68,11 +73,4 @@ export function useFindDuplicateFiles(showHidden = false, rootId = '') {
     unHideFile,
     unHideAllForFileName,
   }
-}
-
-export interface IDuplicateFiles {
-  id: number
-  name: string
-  count: number
-  fileIds: string[]
 }

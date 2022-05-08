@@ -1,4 +1,5 @@
-import { fsaDirectory, db, fsaFile } from 'fsa-database'
+/* eslint-disable no-await-in-loop */
+import { fsaDirectory, db } from 'fsa-database'
 
 export async function mergeToParentDir(
   directory: fsaDirectory,
@@ -14,14 +15,16 @@ export async function mergeToParentDir(
         parentDir = await db.directories.get(directory.rootId)
       } else {
         // or get parent dir
-        if (directory.parentId)
-          parentDir = await db.directories.get(directory.parentId)
+        // eslint-disable-next-line no-lonely-if
+        if (directory.parentId) {
+          parentDir = await db.directories.get(directory?.parentId)
+        }
       }
       if (!parentDir) return false
 
       // check if it is hidden if it is get it's parent recursive
       // if we have got to root then exit also.
-      if ((parentDir.hidden = 'false' || parentDir.isRoot)) {
+      if (parentDir.hidden === 'false' || parentDir.isRoot) {
         useThisDir = true
       }
     }
@@ -32,35 +35,27 @@ export async function mergeToParentDir(
 
     // change the parent id to the new parent id // leave initParent as set.
     await db.transaction('rw', db.directories, db.files, async () => {
-
-      // const filesToUpdate:fsaFile[]=[]
-      // const dirsToUpdate:fsaDirectory[]=[]
-      // const pzfdirsToUpdate:fsaDirectory[]=[]
-      
-
       for (const f of files) {
         if (!f || !parentDir) break
 
         f.parentId = parentDir.id
         await db.files.put(f)
-          //  filesToUpdate.push(f)
+        //  filesToUpdate.push(f)
         // we need these later, so store them
         const ids = directory.fileIds
 
-        // remove file ids from old parent dir
-        directory.fileCount = 0
-        directory.fileIds = []
-        await db.directories.put(directory)
+        // remove file ids from old parent dir and update it.
+        await db.directories.put({ ...directory, fileCount: 0, fileIds: [] })
         // dirsToUpdate.push(directory)
         // add file ids to new parent dir
         parentDir.fileIds = [...parentDir.fileIds, ...ids]
         parentDir.fileCount = parentDir.fileIds.length
 
         await db.directories.put(parentDir)
-
       }
     })
   } catch (err) {
     console.error(`error merging directory to parent ${directory.name} ${err}`)
   }
+  return false
 }

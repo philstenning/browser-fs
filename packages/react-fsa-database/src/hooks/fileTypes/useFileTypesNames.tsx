@@ -7,7 +7,7 @@ import { db, useLiveQuery } from 'fsa-database'
 function useFileTypesNames() {
   const fileTypesNames =
     useLiveQuery(() =>
-      db.fileTypes.toArray().then((ft) => ft.map((ft) => ft.name))
+      db.fileTypes.toArray().then((ft) => ft.map((ft2) => ft2.name))
     ) ?? []
 
   return fileTypesNames

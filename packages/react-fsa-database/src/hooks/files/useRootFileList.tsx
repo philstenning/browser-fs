@@ -22,7 +22,7 @@ function useRootFileList(
   function filterByRootDirOnly() {
     const list = useLiveQuery(async () => {
       const state = await db.state.toCollection().last()
-      if (!state?.currentRootDirectoryId) return
+      if (!state?.currentRootDirectoryId) return []
       const files = await db.files
         .where('rootId')
         .equals(state?.currentRootDirectoryId)

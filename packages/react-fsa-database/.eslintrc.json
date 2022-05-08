@@ -26,6 +26,7 @@
     "import/prefer-default-export":0,
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
      "react/require-default-props":0,
+     "no-restricted-syntax": "off",
     // "no-unused-vars": "error",
     "linebreak-style": "off",
     "spaced-comment": ["error", "always"],
