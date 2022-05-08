@@ -1,8 +1,20 @@
-export { createFile ,bytesToSize } from "./createFile";
-export { deleteFile } from "./deleteFile";
-export { deleteFiles } from "./deleteFiles";
-export { deleteRootFolderFiles } from "./deleteRootFolderFiles";
-export { saveFile } from "./saveFile";
-export { saveFiles } from "./saveFiles";
-export { updateFile } from "./updateFile";
-export { createUniqueNameForFile }from './createUniqueNameForFile'
+import createFile from './createFile'
+import createUniqueNameForFile from './createUniqueNameForFile'
+import deleteFile from './deleteFile'
+import deleteFiles from './deleteFiles'
+import deleteRootFolderFiles from './deleteRootFolderFiles'
+import saveFile from './saveFile'
+import saveFiles from './saveFiles'
+import updateFile from './updateFile'
+
+// export all functions
+export {
+  createFile,
+  deleteFile,
+  createUniqueNameForFile,
+  deleteFiles,
+  deleteRootFolderFiles,
+  saveFile,
+  saveFiles,
+  updateFile
+}

@@ -1,12 +1,12 @@
 import {
   fsaDirectory,
   db,
-  checkDirectoryForFilesInCollections,
-} from "../../index";
+  checkDirectoryForFilesInCollections
+} from '../../index'
 
-export async function hideDirectoryAndFiles(
+export default async function hideDirectoryAndFiles(
   directory: fsaDirectory,
-  hide: "true" | "false" = "true",
+  hide: 'true' | 'false' = 'true',
   checkForFilesInCollections = true
 ) {
   // if files are in collections they will still be set to hidden
@@ -15,25 +15,25 @@ export async function hideDirectoryAndFiles(
     checkForFilesInCollections &&
     (await checkDirectoryForFilesInCollections(directory)).hasCollections
   ) {
-    return false;
+    return false
   }
-  await db.transaction("rw", db.directories, db.files, async () => {
+  await db.transaction('rw', db.directories, db.files, async () => {
     try {
-      const files = await db.files.bulkGet(directory.fileIds);
+      const files = await db.files.bulkGet(directory.fileIds)
       for (const file of files) {
-        if (!file) return;
-        file.hidden = hide;
-        await db.files.put(file);
+        if (!file) return
+        file.hidden = hide
+        await db.files.put(file)
       }
 
-      directory.hidden = hide;
-      await db.directories.put(directory);
+      directory.hidden = hide
+      await db.directories.put(directory)
     } catch (e) {
       console.error(
         `error hiding directory and it's files. ${directory.name} ${e}`
-      );
-      return false;
+      )
+      return false
     }
-  });
-  return true;
+  })
+  return true
 }

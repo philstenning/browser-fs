@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import { useExcludedDirectories } from 'react-fsa-database'
 export default function ExcludedFolders() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('')
   const {
     excludedDirectories,
     addExcludedDirectoryName,
@@ -10,9 +10,9 @@ export default function ExcludedFolders() {
 
   const handleClick = () => {
     addExcludedDirectoryName(text)
-    setText("");
-  };
-  
+    setText('')
+  }
+
   return (
     <div>
       <h3>Excluded Folders</h3>
@@ -29,17 +29,16 @@ export default function ExcludedFolders() {
         <button onClick={handleClick}>Add</button>
       </div>
 
-      
       <ul>
         {excludedDirectories.map((ef) => (
           <li key={ef.id}>
-            {ef.name}{" "}
+            {ef.name}{' '}
             <button onClick={() => deleteExcludedDirectoryName(ef.id)}>
               delete
-            </button>{" "}
+            </button>{' '}
           </li>
         ))}
       </ul>
     </div>
-  );
+  )
 }

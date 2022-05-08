@@ -1,3 +1,9 @@
-export { addExcludedDirectoryName } from './addExcludedDirectories'
-export { deleteExcludedDirectoryName } from './deleteExcludedDirectoryName'
-export { getExcludedDirectoriesList } from './getExcludedDirectoriesList'
+import addExcludedDirectoryName from './addExcludedDirectories'
+import deleteExcludedDirectoryName from './deleteExcludedDirectoryName'
+import getExcludedDirectoriesList from './getExcludedDirectoriesList'
+
+export {
+  addExcludedDirectoryName,
+  deleteExcludedDirectoryName,
+  getExcludedDirectoriesList
+}

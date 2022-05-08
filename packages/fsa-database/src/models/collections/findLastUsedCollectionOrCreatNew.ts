@@ -6,7 +6,7 @@ import {
   setCurrentCollectionId,
 } from "../../";
 
-export async function findLastUsedCollectionOrCreatNew(
+export default async function findLastUsedCollectionOrCreatNew(
   nameIfNotExit: string = "collection"
 ) {
   let collection: fsaCollection | undefined;

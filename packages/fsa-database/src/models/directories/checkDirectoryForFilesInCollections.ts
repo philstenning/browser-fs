@@ -1,6 +1,6 @@
 import { db, fsaDirectory } from "../../index";
 
-export async function checkDirectoryForFilesInCollections(dir: fsaDirectory) {
+export default  async function checkDirectoryForFilesInCollections(dir: fsaDirectory) {
   let counter = 0;
   let hasCollections = false;
   await db.files

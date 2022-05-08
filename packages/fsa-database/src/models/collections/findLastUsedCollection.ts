@@ -1,6 +1,6 @@
 import { db } from "../../db/setup";
 
-export async function findLastUsedCollection() {
+export default async function findLastUsedCollection() {
   // filter state to not empty
   try {
     const filteredState = await db.state

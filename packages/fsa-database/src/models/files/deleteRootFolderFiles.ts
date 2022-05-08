@@ -1,6 +1,7 @@
 import { db } from "../../db/setup";
 import {removeFileFromAllCollection} from '../collections'
-export async function deleteRootFolderFiles(rootId: string) {
+
+export default async function deleteRootFolderFiles(rootId: string) {
   try {
     const files = await db.files.where('rootId').equals(rootId).toArray()
 

@@ -1,3 +1,9 @@
-export { createDirectory } from "./createDirectory";
-export {checkDirectoryForFilesInCollections } from './checkDirectoryForFilesInCollections'
-export {hideDirectoryAndFiles } from './hideDirectoryAndFiles'
+import createDirectory from './createDirectory'
+import checkDirectoryForFilesInCollections from './checkDirectoryForFilesInCollections'
+import hideDirectoryAndFiles from './hideDirectoryAndFiles'
+
+export {
+  createDirectory,
+  checkDirectoryForFilesInCollections,
+  hideDirectoryAndFiles
+}

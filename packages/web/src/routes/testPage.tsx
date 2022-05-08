@@ -1,3 +1,4 @@
+import React from 'react'
 import FileTypes from "../components/files/fileTypes";
 import FileList from "../components/files/filesForRootDir";
 import RootDir from "../components/rootDirectories/rootDirectories";

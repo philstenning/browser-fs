@@ -1,7 +1,7 @@
 import { db } from "../../db/setup";
-import { fsaCollection, fsaFile } from "../types";
+import { fsaCollection, fsaFile  } from "../types";
 
-export async function putCollectionAndFile(collection: fsaCollection, file: fsaFile) {
+export default async function putCollectionAndFile(collection: fsaCollection, file: fsaFile) {
   try {
     const updatedAt = Date.now();
     collection.updated = updatedAt;

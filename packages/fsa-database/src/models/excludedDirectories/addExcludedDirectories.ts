@@ -1,6 +1,6 @@
 import { db, fsaExcludedDirectory } from '../../'
 
-export async function addExcludedDirectoryName(name: string) {
+export default async function addExcludedDirectoryName(name: string) {
   name = name.trim()
   try {
     const hasName = await db.excludedDirectories.where({ name }).count()

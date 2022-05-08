@@ -5,10 +5,10 @@ import {
   fsaState,
   useLiveQuery,
   initialDbState,
-  setCurrentCollectionId,
-  setCurrentDirectoryId,
-  setCurrentFileId,
-  setCurrentRootDirectoryId,
+  setCurrentCollectionId as setColId,
+  setCurrentDirectoryId as setDirId,
+  setCurrentFileId as setFileId,
+  setCurrentRootDirectoryId as setRoodDirId,
 } from 'fsa-database'
 
 export type FsaDbContextType = {
@@ -48,7 +48,6 @@ export function FsaDbContextProvider({
   // const { scanInterval } = settings;
 
   /**
-   *
    * if this is the first time the db has been opened
    *  we need to add some fileTypes
    **/
@@ -56,7 +55,7 @@ export function FsaDbContextProvider({
     await initializeDatabase(fileExtensionsForApp)
   }
 
-  // use to set the scanning state.
+  /* use to set the scanning state. */
   useEffect(() => {
     let isMounted = true
     if (isMounted) {
@@ -73,16 +72,28 @@ export function FsaDbContextProvider({
 
   // run at start up
   useEffect(() => {
+    console.log('#######  rendered')
     getInitialData()
   }, [])
 
   useEffect(() => {
-    if (currentState) {
+    if (
+      currentState &&
+      !!currentState.currentCollectionId && // handle a null value
+      !!currentState.currentFileId // handle a null value
+    ) {
       setDbState(currentState)
     }
   }, [currentState])
 
-  //set re-scan timer.
+  const setCurrentCollectionId = (id: string) => setColId(id)
+  const setCurrentDirectoryId = (id: string) => setDirId(id)
+  const setCurrentRootDirectoryId = (id: string) => {
+    console.log('dddd')
+    setRoodDirId(id)}
+  const setCurrentFileId = (id: string) => setFileId(id)
+
+  // set re-scan timer.
   // useEffect(() => {
   //   if (scanInterval > 0) {
   //     console.log(`rescan set to ${scanInterval} ${scanInterval===1?'min':'mins'}`);

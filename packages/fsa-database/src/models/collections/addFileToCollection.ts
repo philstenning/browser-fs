@@ -2,7 +2,9 @@ import { fsaCollection, fsaFile, fsaCollectionFile } from '../../'
 import { putCollectionAndFile, findLastUsedCollectionOrCreatNew } from './'
 import { getFileExtension, getFileNameWithoutExtension } from '../../utils'
 import { createUniqueNameForFile } from '../files'
-export async function addFileToCollection(
+
+
+export default async function addFileToCollection(
   file: fsaFile,
   collection?: fsaCollection
 ) {

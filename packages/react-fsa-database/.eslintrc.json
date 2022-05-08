@@ -28,7 +28,8 @@
      "react/require-default-props":0,
     // "no-unused-vars": "error",
     "linebreak-style": "off",
-
+    "spaced-comment": ["error", "always"],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
     "prettier/prettier": "error"
   },
   "settings": {
