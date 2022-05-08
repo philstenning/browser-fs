@@ -5,7 +5,7 @@ import getCurrentStateWithOutId from './getCurrentStateWithOutId'
 import setCurrentCollectionId from './setCurrentCollectionId'
 import setCurrentDirectoryId from './setCurrentDirectoryId'
 import setCurrentFileId from './setCurrentFileId'
-import setCurrentRootDirectoryId from './setCurrentDirectoryId'
+import setCurrentRootDirectoryId from './setCurrentRootDirectoryId'
 
 export {
   initialDbState,

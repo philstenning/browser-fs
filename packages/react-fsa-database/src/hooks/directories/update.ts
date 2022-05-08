@@ -11,6 +11,6 @@ export async function update(directory: fsaDirectory) {
     if (dirId === directory.id) return true
   } catch (e) {
     console.error(`error updating directory ${directory.name} ${e}`)
-    return false
   }
+  return false
 }

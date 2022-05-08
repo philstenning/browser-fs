@@ -75,7 +75,7 @@ import getCurrentStateWithOutId from './models/state/getCurrentStateWithOutId'
 import setCurrentCollectionId from './models/state/setCurrentCollectionId'
 import setCurrentDirectoryId from './models/state/setCurrentDirectoryId'
 import setCurrentFileId from './models/state/setCurrentFileId'
-import setCurrentRootDirectoryId from './models/state/setCurrentDirectoryId'
+import setCurrentRootDirectoryId from './models/state/setCurrentRootDirectoryId'
 //types
 import {
   fsaCollection,

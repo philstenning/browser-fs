@@ -21,10 +21,11 @@ function useDirectories() {
       //   ? { rootId: currentRoot.currentRootDirectoryId, hidden: "false" }
       //   : { rootId: currentRoot.currentRootDirectoryId };
       if (showHidden) {
-        return await db.directories
+        const res = await db.directories
           .where('rootId')
           .equals(currentRoot.currentRootDirectoryId)
           .toArray()
+        return res
       }
       return (
         await db.directories

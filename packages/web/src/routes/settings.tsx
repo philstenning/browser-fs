@@ -1,10 +1,7 @@
-import React from 'react'
-//@ts-ignore
-import { useState, useEffect } from 'react'
+import React,{ useState, useEffect } from 'react'
 //@ts-ignore
 import styles from './settings.module.css'
 import { useSettings } from 'react-fsa-database'
-
 import ExcludedFolders from '../components/excludedDirectories/excludedDirectories'
 
 export default function Settings() {
@@ -82,6 +79,7 @@ export default function Settings() {
         </ul>
       </div>
       <ExcludedFolders />
+     
     </div>
   )
 }
