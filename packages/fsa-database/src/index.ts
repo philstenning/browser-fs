@@ -8,6 +8,8 @@ import initializeDatabase from './db/initializeDatabase'
 import loadDatabase from './db/loadDatabase'
 import resetDatabase from './db/resetDatabase'
 
+// ##############  MODELS ##############
+
 // collections
 import addFileToCollection from './models/collections/addFileToCollection'
 import findLastUsedCollection from './models/collections/findLastUsedCollection'
@@ -76,6 +78,11 @@ import setCurrentCollectionId from './models/state/setCurrentCollectionId'
 import setCurrentDirectoryId from './models/state/setCurrentDirectoryId'
 import setCurrentFileId from './models/state/setCurrentFileId'
 import setCurrentRootDirectoryId from './models/state/setCurrentRootDirectoryId'
+
+// ############## END OF MODELS ##############
+
+import dragAddFilesToDirectory from './drag/dragAddFilesToDirectory'
+
 //types
 import {
   fsaCollection,
@@ -169,7 +176,8 @@ export {
   setCurrentRootDirectoryId,
   getCurrentStateWithOutId,
   // utils
-
+  // drag
+  dragAddFilesToDirectory,
   // fileSystem
   parseVirtualFileSystemEntry,
   // reexports from library's
@@ -187,4 +195,3 @@ export type {
   fsaSetting,
   fsaState
 }
-

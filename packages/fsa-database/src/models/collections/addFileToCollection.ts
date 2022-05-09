@@ -88,5 +88,5 @@ function checkIfFileWithSameNameExists(
     counter++
     tempName = `${fileNameWithoutExt}__duplicate(${counter})`
   }
-  return `${tempName}${ext}`
+  return `${tempName}.${ext}`
 }

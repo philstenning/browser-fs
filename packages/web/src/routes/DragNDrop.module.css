@@ -1,0 +1,15 @@
+.container{
+
+    width: 100vw;
+}
+.dropZone {
+    box-sizing: border-box;
+    margin: var(--size-8);
+  min-height: clamp(100px, 50vh, 500px);
+  border: dotted hotpink 5px ;
+  border-radius: var(--radius-4);
+  padding: var(--size-3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

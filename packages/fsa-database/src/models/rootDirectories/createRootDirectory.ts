@@ -2,7 +2,7 @@ import { fsaDirectory } from '../types'
 import { db } from '../../db/setup'
 
 import createDirectory from '../directories/createDirectory'
-
+import {rootDirectoryAlreadyExists} from './'
 export default async function createRootDirectory(
   handle: FileSystemDirectoryHandle,
   creator: string = 'user'
@@ -19,9 +19,9 @@ export default async function createRootDirectory(
     'true'
   )
   // console.log({ directory });
-  const test = await directoryAlreadyExists(directory)
+  const test = await rootDirectoryAlreadyExists(directory.name)
 
-  if (!test) {
+  if (!!test) {
     console.error(
       `A root directory with name: "${directory.name}" already exits in db.`
     )
@@ -43,10 +43,4 @@ export default async function createRootDirectory(
   }
 }
 
-async function directoryAlreadyExists(dir: fsaDirectory) {
-  const dirs = await db.directories
-    .where({ isRoot: 'true', name: dir.name })
-    .count()
-  if (dirs === 0) return true
-  return false
-}
+

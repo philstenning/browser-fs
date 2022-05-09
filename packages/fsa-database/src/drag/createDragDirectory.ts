@@ -1,0 +1,24 @@
+import { db, createDirectory, fsaDirectory } from '../'
+import { rootDirectoryAlreadyExists } from '../models/rootDirectories'
+import { v4 as uuid } from 'uuid'
+
+export default async function createDragDirectory(name: string = 'localDrag') {
+  const handle: FileSystemDirectoryHandle = {
+    name
+  } as FileSystemDirectoryHandle
+  const id = uuid()
+  const dir = createDirectory(handle, 'local', true, id,null)
+
+  // can't have multiple dirs with the same name.
+  const exists = await rootDirectoryAlreadyExists(dir.name)
+  if (exists) return false
+  
+  // updated dir
+  const updated: fsaDirectory = { ...dir, isLocal: true }
+  // add to database
+  const dirId = await db.directories.add(updated)
+  if (dirId) {
+    return updated
+  }
+  return false
+}

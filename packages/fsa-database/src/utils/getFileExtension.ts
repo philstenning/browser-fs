@@ -1,3 +1,3 @@
 export default function getFileExtension(name: string) {
-  return name.substring(name.lastIndexOf('.'), name.length)
+  return name.substring(name.lastIndexOf('.') + 1, name.length)
 }

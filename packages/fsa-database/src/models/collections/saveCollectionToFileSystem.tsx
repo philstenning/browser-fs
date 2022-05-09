@@ -24,14 +24,22 @@ export default async function saveCollectionToFileSystem(collectionId: string) {
       // without warning you. so check for it.
 
       try {
-        const f = await file.handle.getFile()
         // create new file handle for the directory
         const newFileHandel = await collection.handle.getFileHandle(file.name, {
           create: true
         })
         const writable = await newFileHandel.createWritable()
-        // copy file to new file location.
-        await writable.write(f)
+
+        // if it is a file on the users local file system
+        if (file.handle?.name) {
+          await writable.write(await file.handle.getFile())
+
+          // or a file from drag'n'drop / input
+        } else if (file.blob) {
+          await writable.write(file.blob)
+        }
+
+        // close  the stream.
         await writable.close()
       } catch (e) {
         console.error(
@@ -69,12 +77,14 @@ async function getRootIdPermissions(files: (fsaFile | undefined)[]) {
 
   for (const id of ids) {
     const rootDir = await db.directories.get(id)
-    if (rootDir) {
+    if (rootDir && !rootDir.isLocal) {
       console.log(
         `checking the root dir permission ${rootDir.name}  id: ${rootDir.id}`
       )
       const hasPermission = await checkPermissionsOfHandle(rootDir?.handle)
-      updatePermissionsForRootDirAndChildren(rootDir.id, true)
+      if (hasPermission) {
+        await updatePermissionsForRootDirAndChildren(rootDir.id, true)
+      }
     }
   }
 }
