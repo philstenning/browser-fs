@@ -1,51 +1,37 @@
-import { db ,setCurrentRootDirectoryId,setCurrentDirectoryId} from '../'
-
-import { createDragDirectory } from './'
-import { createFile } from '../models/files'
-import { getFileExtension, bytesToSize } from '../utils'
+import { db, setCurrentRootDirectoryId, setCurrentDirectoryId } from '../'
 import { fsaDirectory } from '../models/types'
+
+import getDragDirectoryById from './getDragDirectoryById'
+import createDragFile from './createDragFile'
+import getDragDirectoryByName from './getDragDirectoryByName'
 
 export default async function dragAddFilesToDirectory(
   files: FileList,
+  name: string,
   dirId?: string
 ) {
-  // to save the files we need a directory.
-  const directory = await getDirectory(dirId)
+  // browsers that do not support file system access api
+  // firefox etc.
+  // dragAddFilesToDirectoryLegacy()
+
+  // find or create the directory for new files.
+  let directory: fsaDirectory | false = false
+  if (dirId) {
+    // dirId takes president over name.
+    directory = await getDragDirectoryById(dirId)
+  } else if (name) {
+    directory = await getDragDirectoryByName(name)
+  }
   if (!directory) return
 
   //  fileIds will be added to the directory.fileIds
-  const { fileIds } = directory
+  // retrieve the current values
+  const { fileIds, id } = directory
   for (const file of files) {
-    console.log(`${file.name}  ${!!file.type ? file.type : 'unknown type'}`)
-
-    // console.log({ file })
-    const { id } = directory
-    const tempFile = await createFile(
-      {} as FileSystemFileHandle,
-      id,
-      id,
-      'local',
-      getFileExtension(file.name),
-      file.name,
-      '',
-      false,
-      []
-    )
-    try {
-      const res = await db.files.add({
-        ...tempFile,
-        blob: file,
-        size: bytesToSize(file.size),
-      })
-      // add id to list for directoryIds
-      if (res) {
-        fileIds.push(res)
-      }
-    } catch (error) {
-      console.error(`oh no it failed....${typeof file}`)
-    }
+    const maybeFileId = await createDragFile(id, file)
+    if (maybeFileId) fileIds.push(maybeFileId)
   }
-
+  // now update the directory with the count and fieldIds
   const updatedDir: fsaDirectory = {
     ...directory,
     fileIds,
@@ -60,31 +46,4 @@ export default async function dragAddFilesToDirectory(
   }
 }
 
-async function getDirectory(dirId?: string) {
-  if (!dirId) {
-    try {
-      const dir = await db.directories
-        .where({ isRoot: 'true', name: 'testDrag' })
-        .first()
-      if (dir) return dir
-    } catch (error) {
-      console.log(`Error getting Directory for drag and drop ${error}`)
-    }
 
-    const dir = await createDragDirectory('testDrag')
-    console.log('dd', { dir })
-    if (dir) {
-      return dir
-    } else {
-      return false
-    }
-  } else {
-    console.log('have id', dirId)
-    const dir = await db.directories.get(dirId)
-    if (dir) {
-      return dir
-    } else {
-      return false
-    }
-  }
-}

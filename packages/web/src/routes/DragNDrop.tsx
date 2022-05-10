@@ -8,9 +8,9 @@ export default function DragNDrop() {
   const dragDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     const filesList = e.dataTransfer.files
-    const fitems = e.dataTransfer.items
+    const fItems = e.dataTransfer.items
 
-    for (const item of fitems) {
+    for (const item of fItems) {
       console.log(item.type)
       console.log(item.kind)
       console.log(item.webkitGetAsEntry().isDirectory ? 'dir' : 'file')
@@ -26,13 +26,12 @@ export default function DragNDrop() {
         `${wk.fullPath} Root: ${wk.filesystem.root.fullPath} ${wk.name}`
       )
       if (item.webkitGetAsEntry().isDirectory) {
-
         // @ts-ignore // createReader is no longer in ts
         // use getAsFileSystemHandle() instead
         const reader = wk.createReader() as FileSystemDirectoryReader
         reader.readEntries((entries) => {
           for (const entry of entries) {
-            console.log(entry.name) 
+            console.log(entry.name)
           }
         })
         console.log(reader)
