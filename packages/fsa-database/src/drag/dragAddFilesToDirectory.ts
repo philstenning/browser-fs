@@ -6,7 +6,7 @@ import createDragFile from './createDragFile'
 import getDragDirectoryByName from './getDragDirectoryByName'
 
 export default async function dragAddFilesToDirectory(
-  files: FileList,
+  files: File[],
   name: string,
   dirId?: string
 ) {
@@ -22,7 +22,7 @@ export default async function dragAddFilesToDirectory(
   } else if (name) {
     directory = await getDragDirectoryByName(name)
   }
-  if (!directory) return
+  if (!directory) return 
 
   //  fileIds will be added to the directory.fileIds
   // retrieve the current values

@@ -36,9 +36,10 @@ export default async function createFile(
   let size = '0 mb'
   if (handle?.name) {
     size = bytesToSize((await handle.getFile()).size)
-  } else {
-    console.log('no handle no size')
-  }
+  } 
+
+
+  
   const createdAt = Date.now()
   const file: fsaFile = {
     id: uuid(),

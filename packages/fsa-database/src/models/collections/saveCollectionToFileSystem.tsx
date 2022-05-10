@@ -77,6 +77,7 @@ async function getRootIdPermissions(files: (fsaFile | undefined)[]) {
 
   for (const id of ids) {
     const rootDir = await db.directories.get(id)
+    // if the dir is a local/in indexDb we don't check.
     if (rootDir && !rootDir.isLocal) {
       console.log(
         `checking the root dir permission ${rootDir.name}  id: ${rootDir.id}`

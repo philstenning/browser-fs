@@ -2,7 +2,7 @@ import { db, getExcludedDirectoriesList } from '../..'
 import {
   checkPermissionsOfHandle,
   scanLocalDrive,
-  VirtualFileSystemEntry
+  VirtualFileSystemEntry,
 } from 'fsa-browser'
 import createDirectory from '../directories/createDirectory'
 import { createFile, saveFile } from '../files'
@@ -26,9 +26,10 @@ export default async function rescanRootDirectories() {
 async function rescan() {
   const lastChecked = Date.now()
 
-  // get root all dirs
-
-  const rootDirs = await db.directories.where('isRoot').equals('true').toArray()
+  // get root all dirs and remove the dirs that are local
+  const rootDirs = (
+    await db.directories.where('isRoot').equals('true').toArray()
+  ).filter((dir) => dir.isLocal === false)
 
   // get the file extensions we want to look for.
   const fileExtensions = (await db.fileTypes.toArray()).map((t) => t.name)

@@ -14,7 +14,7 @@ export default async function createDragDirectory(
     name,
   } as FileSystemDirectoryHandle
   const id = uuid()
-  const dir = createDirectory(handle, 'local', true, id, null)
+  const dir = createDirectory(handle, '/', true, id, id, [], 0, 'user', 'true')
 
   // can't have multiple dirs with the same name.
   const exists = await rootDirectoryAlreadyExists(dir.name)

@@ -4,6 +4,7 @@ import rescanRootDirectories from './rescanRootDirectories'
 import rootDirHasFilesInCollections from './rootDirHasFilesInCollections'
 import rootDirectoryAlreadyExists from './rootDirectoryAlreadyExists'
 import addRootDirectory from './addRootDirectory'
+import selectRootDirectory from './selectRootDirectory'
 
 export {
   addRootDirectory,
@@ -11,5 +12,6 @@ export {
   deleteRootDirectory,
   rescanRootDirectories,
   rootDirHasFilesInCollections,
-  rootDirectoryAlreadyExists
+  rootDirectoryAlreadyExists,
+  selectRootDirectory,
 }

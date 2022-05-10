@@ -60,7 +60,7 @@ import createRootDirectory from './models/rootDirectories/createRootDirectory'
 import deleteRootDirectory from './models/rootDirectories/deleteRootDirectoryAndFiles'
 import rescanRootDirectories from './models/rootDirectories/rescanRootDirectories'
 import rootDirHasFilesInCollections from './models/rootDirectories/rootDirHasFilesInCollections'
-
+import selectRootDirectory from './models/rootDirectories/selectRootDirectory'
 // settings
 import createSetting from './models/settings/createSetting'
 import createInitialSetting from './models/settings/createInitialSetting'
@@ -159,6 +159,7 @@ export {
   deleteRootDirectory,
   rescanRootDirectories,
   rootDirHasFilesInCollections,
+  selectRootDirectory,
   // settings
   createSetting,
   createInitialSetting,

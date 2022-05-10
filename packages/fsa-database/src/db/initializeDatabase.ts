@@ -5,8 +5,8 @@ import resetPermissionsOnAllDirectories from './resetPermissionsOnAllDirectories
 
 export default async function initializeDatabase(fileTypes: string[]) {
   console.time('initializeDb')
-
-  await saveState(await getCurrentState())
+  const state = await getCurrentState()
+  await saveState({...state,isScanning:false})
   await createFileTypesIfNotExist(fileTypes)
 
   const setting = await createSetting(false)
