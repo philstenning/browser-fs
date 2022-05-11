@@ -10,23 +10,15 @@ import style from './DragNDrop.module.css'
 export default function DragNDrop() {
   const dragDrop = async (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
-    const filesList = e.dataTransfer.files
-    
+    // const filesList = e.dataTransfer.files
     const dataTransferItemList = e.dataTransfer.items
+
     // console.log(dataTransferItemList.length)
     await saveDragItems(dataTransferItemList)
     // #################
     // if (item.webkitGetAsEntry().isDirectory) {
     //   // @ts-ignore // createReader is no longer in ts
-    //   // use getAsFileSystemHandle() instead
-    //   const reader = wk.createReader() as FileSystemDirectoryReader
-    //   reader.readEntries((entries) => {
-    //     for (const entry of entries) {
-    //       console.log(entry.name)
-    //     }
-    //   })
-    //   console.log(reader)
-    // }
+   
   }
   const dragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()

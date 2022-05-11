@@ -11,7 +11,8 @@ export default async function createDragDirectory(
   name: string = 'localDrag',
   path = '/',
   isRoot = true,
-  save=false
+  rootId: string = '',
+  save = false
 ): Promise<fsaDirectory | false> {
   const handle: FileSystemDirectoryHandle = {
     name,
@@ -22,7 +23,7 @@ export default async function createDragDirectory(
     handle,
     path,
     isRoot,
-    id,
+    rootId === '' ? id : rootId,
     id,
     [],
     0,
@@ -35,8 +36,8 @@ export default async function createDragDirectory(
     if (exists) return false
   }
   const updated: fsaDirectory = { ...dir, isLocal: true }
-  
-  if(save){
+
+  if (save) {
     try {
       await db.directories.add(updated)
     } catch (error) {

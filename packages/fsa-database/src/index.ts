@@ -94,7 +94,10 @@ import {
   fsaState,
 } from './models/types'
 
-// utils - these are private
+// utils
+import bytesToSize from './utils/bytesToSize'
+import getFileExtension from './utils/getFileExtension'
+import getFileNameWithoutExtension from './utils/getFileNameWithoutExtension'
 
 // drag
 import createDragDirectory from './drag/createDragDirectory'
@@ -183,6 +186,9 @@ export {
   setCurrentRootDirectoryId,
   getCurrentStateWithOutId,
   // utils
+  bytesToSize,
+  getFileExtension,
+  getFileNameWithoutExtension,
   //drag
   createDragDirectory,
   createDragFile,
