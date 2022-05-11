@@ -17,7 +17,7 @@ import bytesToSize from '../../utils/bytesToSize'
  * @param { string } description
  * @param { string } imageUrl
  * @param { string[] } userCollectionIds
- * @returns {Promise<fsaFile>}  When resolved, a fsaFile 
+ * @returns {Promise<fsaFile>}  When resolved, a fsaFile
  */
 export default async function createFile(
   handle: FileSystemFileHandle,
@@ -36,10 +36,8 @@ export default async function createFile(
   let size = '0 mb'
   if (handle?.name) {
     size = bytesToSize((await handle.getFile()).size)
-  } 
+  }
 
-
-  
   const createdAt = Date.now()
   const file: fsaFile = {
     id: uuid(),

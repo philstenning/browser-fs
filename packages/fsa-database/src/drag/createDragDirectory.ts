@@ -8,24 +8,42 @@ import { v4 as uuid } from 'uuid'
  * @returns {Promise<fsaDirectory| false>} A promise that resolves to a newly created fsaDirectory or false if it did not compleat.
  */
 export default async function createDragDirectory(
-  name: string = 'localDrag'
+  name: string = 'localDrag',
+  path = '/',
+  isRoot = true,
+  save=false
 ): Promise<fsaDirectory | false> {
   const handle: FileSystemDirectoryHandle = {
     name,
   } as FileSystemDirectoryHandle
   const id = uuid()
-  const dir = createDirectory(handle, '/', true, id, id, [], 0, 'user', 'true')
 
+  const dir = createDirectory(
+    handle,
+    path,
+    isRoot,
+    id,
+    id,
+    [],
+    0,
+    'user',
+    'true'
+  )
   // can't have multiple dirs with the same name.
-  const exists = await rootDirectoryAlreadyExists(dir.name)
-  if (exists) return false
-
-  // updated dir
-  const updated: fsaDirectory = { ...dir, isLocal: true }
-  // add to database
-  const dirId = await db.directories.add(updated)
-  if (dirId) {
-    return updated
+  if (isRoot) {
+    const exists = await rootDirectoryAlreadyExists(dir.name)
+    if (exists) return false
   }
-  return false
+  const updated: fsaDirectory = { ...dir, isLocal: true }
+  
+  if(save){
+    try {
+      await db.directories.add(updated)
+    } catch (error) {
+      console.error(`Error saving directory.`)
+      return false
+    }
+  }
+  // updated dir
+  return updated
 }

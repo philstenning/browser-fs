@@ -1,11 +1,16 @@
-import { db, createFile } from '../'
+import { db, createFile, fsaFile } from '../'
 import { getFileExtension, bytesToSize } from '../utils'
 
-async function createDragFile(id: string, file: File) {
+async function createDragFile(
+  parentId: string,
+  rootId: string,
+  file: File,
+  save = false
+) {
   const tempFile = await createFile(
     {} as FileSystemFileHandle,
-    id,
-    id,
+    parentId,
+    rootId,
     'local',
     getFileExtension(file.name),
     file.name,
@@ -13,18 +18,23 @@ async function createDragFile(id: string, file: File) {
     false,
     []
   )
-  try {
-    const res = await db.files.add({
-      ...tempFile,
-      blob: file,
-      size: bytesToSize(file.size),
-    })
-    // add id to list for directoryIds
-    if (res) {
-      return res
+  const updatedFile: fsaFile = {
+    ...tempFile,
+    blob: file,
+    size: bytesToSize(file.size),
+  }
+  if (save) {
+    try {
+      const res = await db.files.add(updatedFile)
+      // add id to list for directoryIds
+      if (res) {
+        return updatedFile
+      }
+    } catch (error) {
+      console.error(`oh no it failed....${typeof file}`)
     }
-  } catch (error) {
-    console.error(`oh no it failed....${typeof file}`)
+  } else {
+    return updatedFile
   }
   return false
 }

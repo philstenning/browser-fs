@@ -81,8 +81,6 @@ import setCurrentRootDirectoryId from './models/state/setCurrentRootDirectoryId'
 
 // ############## END OF MODELS ##############
 
-import dragAddFilesToDirectory from './drag/dragAddFilesToDirectory'
-
 //types
 import {
   fsaCollection,
@@ -93,10 +91,18 @@ import {
   fsaFile,
   fsaFileType,
   fsaSetting,
-  fsaState
+  fsaState,
 } from './models/types'
 
 // utils - these are private
+
+// drag
+import createDragDirectory from './drag/createDragDirectory'
+import createDragFile from './drag/createDragFile'
+import dragAddFilesToDirectory from './drag/dragAddFilesToDirectory'
+import dragAddFilesToDirectoryLegacy from './drag/dragAddFilesToDirectoryLegacy'
+import getDragDirectoryById from './drag/getDragDirectoryById'
+import getDragDirectoryByName from './drag/getDragDirectoryByName'
 
 // fileSystem
 import parseVirtualFileSystemEntry from './fileSystem/parseVirtualFileSystemEntry'
@@ -177,12 +183,17 @@ export {
   setCurrentRootDirectoryId,
   getCurrentStateWithOutId,
   // utils
-  // drag
+  //drag
+  createDragDirectory,
+  createDragFile,
   dragAddFilesToDirectory,
+  dragAddFilesToDirectoryLegacy,
+  getDragDirectoryById,
+  getDragDirectoryByName,
   // fileSystem
   parseVirtualFileSystemEntry,
   // reexports from library's
-  useLiveQuery
+  useLiveQuery,
 }
 
 export type {
@@ -194,5 +205,5 @@ export type {
   fsaFile,
   fsaFileType,
   fsaSetting,
-  fsaState
+  fsaState,
 }

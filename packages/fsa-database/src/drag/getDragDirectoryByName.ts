@@ -19,15 +19,7 @@ async function getDragDirectoryByName(
   } catch (error) {
     console.log(`Error getting Directory for drag and drop ${error}`)
   }
-
-  // no default directory exists so create a new one.
-  const dir = await createDragDirectory(name)
-  console.log('dd', { dir })
-  if (dir) {
-    return dir // return the new dir
-  } else {
-    return false
-  }
+  return false
 }
 
 export default getDragDirectoryByName
