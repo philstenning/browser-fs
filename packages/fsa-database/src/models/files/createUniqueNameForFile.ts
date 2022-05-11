@@ -61,7 +61,7 @@ export default async function createUniqueNameForFile(file: fsaFile): Promise<st
   }
 
   // we now have the unique file name.
-  const newUniqueName = `${nameWithoutExt}__duplicate(${counter})${getFileExtension(
+  const newUniqueName = `${nameWithoutExt}__duplicate(${counter}).${getFileExtension(
     name
   )}` 
 

@@ -1,7 +1,7 @@
-// import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 //@ts-ignore
-import style from "./header.module.css";
+import style from './header.module.css'
 function Header() {
   return (
     <header className={style.header}>
@@ -34,10 +34,19 @@ function Header() {
               Settings
             </Link>
           </li>
+          <li className={style.mainNav__link}>
+            <Link
+              className={style.mainNav__link}
+              to="/dnd"
+              data-test-cy="dndPageLink"
+            >
+              DragNDrop
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header

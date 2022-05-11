@@ -5,7 +5,7 @@ import {
   useLiveQuery,
   deleteRootDirectory,
   rescanRootDirectories,
-  addRootDirectory,
+  selectRootDirectory as addRootDirectory,
 } from 'fsa-database'
 
 export function useRootDirectories() {

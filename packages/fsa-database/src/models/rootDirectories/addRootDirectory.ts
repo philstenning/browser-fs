@@ -1,35 +1,37 @@
-import { selectRootDirectoryOnLocalDrive, scanLocalDrive } from 'fsa-browser'
+import {
+  selectRootDirectoryOnLocalDrive,
+  scanLocalDrive,
+  VirtualRootDirectoryType,
+} from 'fsa-browser'
 import {
   createRootDirectory,
   db,
   saveState,
   fsaDirectory,
   getFileTypeNames,
-  setCurrentRootDirectoryId
+  setCurrentRootDirectoryId,
 } from '../../'
 import { getExcludedDirectoriesList } from '../excludedDirectories'
 import parseVirtualFileSystemEntry from '../../fileSystem/parseVirtualFileSystemEntry'
 /**
- * Opens the window.showDirectoryPicker and allows
- * user to select a folder to scan for files.
- * once selected it saves the entry to the database and
- * adds it to the state object rootDbDirectories
- * then set it as the currentDirectory
+ * Creates a root directory in the database from a virtualRootDirectory object
+ * @param {VirtualRootDirectoryType} virtualRootDirectory
  */
-export default async function addRootDirectory() {
-  const virtualDir = await selectRootDirectoryOnLocalDrive()
-  if (!virtualDir) return
+export default async function addRootDirectory(
+  virtualRootDirectory: VirtualRootDirectoryType
+) {
+  if (!virtualRootDirectory) return
 
   const state = await db.state.toCollection().last()
   if (!state) return
 
   // save to db
-  const dir = await createRootDirectory(virtualDir.handle)
+  const dir = await createRootDirectory(virtualRootDirectory.handle)
   if (!dir || !dir.id) return
 
   // toggle on scanning
   await saveState({ ...state, isScanning: true })
-  setDirectoryIsScanning(true, dir)
+  await setDirectoryIsScanning(true, dir)
 
   // extensions we want.
   const fileExtensions = await getFileTypeNames()
@@ -37,21 +39,21 @@ export default async function addRootDirectory() {
   const excludedFolders = await getExcludedDirectoriesList()
   // scan drive for folders and files
   const data = await scanLocalDrive(
-    virtualDir.handle,
+    virtualRootDirectory.handle,
     fileExtensions,
     100,
     excludedFolders
   )
   if (!data.id) return
-  await parseVirtualFileSystemEntry(data, dir.id, dir.id).then(() => {
-    if (state) saveState({ ...state, isScanning: false })
+  await parseVirtualFileSystemEntry(data, dir.id, dir.id).then(async () => {
+    if (state) await saveState({ ...state, isScanning: false })
   })
 
   // now set the current rootDir in dbState
-  setCurrentRootDirectoryId(dir.id)
+  await setCurrentRootDirectoryId(dir.id)
   // toggle off scanning
-  setDirectoryIsScanning(false, dir)
-  saveState({ ...state, isScanning: false })
+  await setDirectoryIsScanning(false, dir)
+  await saveState({ ...state, isScanning: false })
 }
 
 // set rootDir as scanning

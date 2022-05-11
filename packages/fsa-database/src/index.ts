@@ -8,6 +8,8 @@ import initializeDatabase from './db/initializeDatabase'
 import loadDatabase from './db/loadDatabase'
 import resetDatabase from './db/resetDatabase'
 
+// ##############  MODELS ##############
+
 // collections
 import addFileToCollection from './models/collections/addFileToCollection'
 import findLastUsedCollection from './models/collections/findLastUsedCollection'
@@ -58,7 +60,7 @@ import createRootDirectory from './models/rootDirectories/createRootDirectory'
 import deleteRootDirectory from './models/rootDirectories/deleteRootDirectoryAndFiles'
 import rescanRootDirectories from './models/rootDirectories/rescanRootDirectories'
 import rootDirHasFilesInCollections from './models/rootDirectories/rootDirHasFilesInCollections'
-
+import selectRootDirectory from './models/rootDirectories/selectRootDirectory'
 // settings
 import createSetting from './models/settings/createSetting'
 import createInitialSetting from './models/settings/createInitialSetting'
@@ -76,6 +78,9 @@ import setCurrentCollectionId from './models/state/setCurrentCollectionId'
 import setCurrentDirectoryId from './models/state/setCurrentDirectoryId'
 import setCurrentFileId from './models/state/setCurrentFileId'
 import setCurrentRootDirectoryId from './models/state/setCurrentRootDirectoryId'
+
+// ############## END OF MODELS ##############
+
 //types
 import {
   fsaCollection,
@@ -86,10 +91,21 @@ import {
   fsaFile,
   fsaFileType,
   fsaSetting,
-  fsaState
+  fsaState,
 } from './models/types'
 
-// utils - these are private
+// utils
+import bytesToSize from './utils/bytesToSize'
+import getFileExtension from './utils/getFileExtension'
+import getFileNameWithoutExtension from './utils/getFileNameWithoutExtension'
+
+// drag
+import createDragDirectory from './drag/createDragDirectory'
+import createDragFile from './drag/createDragFile'
+import dragAddFilesToDirectory from './drag/dragAddFilesToDirectory'
+import dragAddFilesToDirectoryLegacy from './drag/dragAddFilesToDirectoryLegacy'
+import getDragDirectoryById from './drag/getDragDirectoryById'
+import getDragDirectoryByName from './drag/getDragDirectoryByName'
 
 // fileSystem
 import parseVirtualFileSystemEntry from './fileSystem/parseVirtualFileSystemEntry'
@@ -152,6 +168,7 @@ export {
   deleteRootDirectory,
   rescanRootDirectories,
   rootDirHasFilesInCollections,
+  selectRootDirectory,
   // settings
   createSetting,
   createInitialSetting,
@@ -169,11 +186,20 @@ export {
   setCurrentRootDirectoryId,
   getCurrentStateWithOutId,
   // utils
-
+  bytesToSize,
+  getFileExtension,
+  getFileNameWithoutExtension,
+  //drag
+  createDragDirectory,
+  createDragFile,
+  dragAddFilesToDirectory,
+  dragAddFilesToDirectoryLegacy,
+  getDragDirectoryById,
+  getDragDirectoryByName,
   // fileSystem
   parseVirtualFileSystemEntry,
   // reexports from library's
-  useLiveQuery
+  useLiveQuery,
 }
 
 export type {
@@ -185,6 +211,5 @@ export type {
   fsaFile,
   fsaFileType,
   fsaSetting,
-  fsaState
+  fsaState,
 }
-

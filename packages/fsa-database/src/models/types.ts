@@ -20,7 +20,9 @@ export interface fsaDirectory extends fsaBase {
   lastChecked: number
   readPermission: 'true' | 'false'
   isScanning: boolean
-  scanFinished: boolean
+  scanFinished: boolean,
+  scanDepth:number,
+  isLocal:boolean
 }
 export interface fsaFile extends fsaBase {
   parentId: string
@@ -40,6 +42,7 @@ export interface fsaFile extends fsaBase {
   order: number
   hidden: 'true' | 'false'
   lastChecked: number
+  blob?:File
 }
 
 export interface fsaCollection extends fsaBase {

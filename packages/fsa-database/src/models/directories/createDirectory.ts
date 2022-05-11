@@ -34,7 +34,9 @@ export default function createDirectory(
     lastChecked: createdAt,
     readPermission,
     isScanning: false,
-    scanFinished: true
+    scanFinished: true,
+    scanDepth:100,
+    isLocal:false
   }
   return directory
 }
