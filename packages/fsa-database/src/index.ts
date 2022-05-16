@@ -92,6 +92,7 @@ import {
   fsaFileType,
   fsaSetting,
   fsaState,
+  fsaDataTransferItem,
 } from './models/types'
 
 // utils
@@ -100,12 +101,13 @@ import getFileExtension from './utils/getFileExtension'
 import getFileNameWithoutExtension from './utils/getFileNameWithoutExtension'
 
 // drag
-import createDragDirectory from './drag/createDragDirectory'
-import createDragFile from './drag/createDragFile'
-import dragAddFilesToDirectory from './drag/dragAddFilesToDirectory'
-import dragAddFilesToDirectoryLegacy from './drag/dragAddFilesToDirectoryLegacy'
-import getDragDirectoryById from './drag/getDragDirectoryById'
-import getDragDirectoryByName from './drag/getDragDirectoryByName'
+// import createDragDirectory from './drag/createDragDirectory'
+// import createDragFile from './drag/createDragFile'
+// import dragAddFilesToDirectory from './drag/dragAddFilesToDirectory'
+// import dragAddFilesToDirectoryLegacy from './drag/dragAddFilesToDirectoryLegacy'
+// import getDragDirectoryById from './drag/getDragDirectoryById'
+// import getDragDirectoryByName from './drag/getDragDirectoryByName'
+import saveDragItems from './drag/saveDragItems'
 
 // fileSystem
 import parseVirtualFileSystemEntry from './fileSystem/parseVirtualFileSystemEntry'
@@ -191,12 +193,13 @@ export {
   getFileExtension,
   getFileNameWithoutExtension,
   //drag
-  createDragDirectory,
-  createDragFile,
-  dragAddFilesToDirectory,
-  dragAddFilesToDirectoryLegacy,
-  getDragDirectoryById,
-  getDragDirectoryByName,
+  // createDragDirectory,
+  // createDragFile,
+  // dragAddFilesToDirectory,
+  // dragAddFilesToDirectoryLegacy,
+  // getDragDirectoryById,
+  // getDragDirectoryByName,
+  saveDragItems,
   // fileSystem
   parseVirtualFileSystemEntry,
   // reexports from library's
@@ -213,4 +216,5 @@ export type {
   fsaFileType,
   fsaSetting,
   fsaState,
+  fsaDataTransferItem
 }

@@ -12,7 +12,7 @@ export default async function createDragDirectory(
   path = '/',
   isRoot = true,
   rootId: string = '',
-  save = false
+  save = true
 ): Promise<fsaDirectory | false> {
   const handle: FileSystemDirectoryHandle = {
     name,
@@ -39,7 +39,6 @@ export default async function createDragDirectory(
 
   if (save) {
     try {
-      console.log('saveing dir:' , dir.name)
       await db.directories.put(updated)
     } catch (error) {
       console.error(`Error saving directory.`)
