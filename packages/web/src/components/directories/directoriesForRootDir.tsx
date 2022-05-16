@@ -16,6 +16,7 @@ const DirectoriesForRootDir = () => {
     mergeToParentDirectory,
     unMergeDirectories,
   } = useDirectories();
+
   const [filteredDirs, setFilteredDirs] = useState<fsaDirectory[]>([]);
 
   useEffect(() => {
@@ -28,6 +29,8 @@ const DirectoriesForRootDir = () => {
       setFilteredDirs(directoriesForRootDirectory);
     }
   }, [directoriesForRootDirectory, filter]);
+
+
 
   const hideDir = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -49,6 +52,7 @@ const DirectoriesForRootDir = () => {
     e.stopPropagation();
     mergeToParentDirectory(directory);
   };
+
   const unMergeParent = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     directory: fsaDirectory
@@ -56,10 +60,11 @@ const DirectoriesForRootDir = () => {
     e.stopPropagation();
     unMergeDirectories(directory);
   };
+
     return (
       <div data-testid="directoriesForRootDir">
         <h4>
-          Directories For RootDir (files {filteredDirs && filteredDirs.length})
+          Directories For RootDir ({filteredDirs && filteredDirs.length})
         </h4>
         <div className={styles.hideButtons}>
           <button data-testid="directoriesForRootDir_btnToggle" onClick={toggleHidden}>
