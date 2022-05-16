@@ -15,12 +15,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-     "types": [
-      // "wicg-file-system-access",
-      "cypress",
+    "types": [
+      "vite/client",
+      "cypress"
     ]
   },
-   "include": ["**/*.ts", "cypress/integration/collections.ts"],
-   "exclude": ["node_modules"],
+  "include": ["**/*.ts", "cypress/integration/collections.ts"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

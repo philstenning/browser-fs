@@ -78,7 +78,7 @@ import setCurrentCollectionId from './models/state/setCurrentCollectionId'
 import setCurrentDirectoryId from './models/state/setCurrentDirectoryId'
 import setCurrentFileId from './models/state/setCurrentFileId'
 import setCurrentRootDirectoryId from './models/state/setCurrentRootDirectoryId'
-
+import setIsScanning from './models/state/setIsScanning'
 // ############## END OF MODELS ##############
 
 //types
@@ -176,6 +176,7 @@ export {
   updateSetting,
   updateSettingLastScanned,
   saveSetting,
+  setIsScanning,
   // state
   initialDbState,
   saveState,

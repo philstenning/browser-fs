@@ -6,7 +6,7 @@ import setCurrentCollectionId from './setCurrentCollectionId'
 import setCurrentDirectoryId from './setCurrentDirectoryId'
 import setCurrentFileId from './setCurrentFileId'
 import setCurrentRootDirectoryId from './setCurrentRootDirectoryId'
-
+import setIsScanning from './setIsScanning'
 export {
   initialDbState,
   saveState,
@@ -15,5 +15,6 @@ export {
   setCurrentDirectoryId,
   setCurrentFileId,
   setCurrentRootDirectoryId,
-  getCurrentStateWithOutId
+  getCurrentStateWithOutId,
+  setIsScanning,
 }
