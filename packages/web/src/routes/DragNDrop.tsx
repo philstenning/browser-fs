@@ -2,7 +2,7 @@ import React from 'react'
 
 import RootDir from '../components/rootDirectories/rootDirectories'
 
-import saveDragItems from '../1_tempoary/saveDragItems'
+import {saveDragItems} from 'fsa-database'
 
 // import { useDropzone } from 'react-dropzone'
 // @ts-ignore
@@ -10,15 +10,8 @@ import style from './DragNDrop.module.css'
 export default function DragNDrop() {
   const dragDrop = async (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
-    // const filesList = e.dataTransfer.files
     const dataTransferItemList = e.dataTransfer.items
-
-    // console.log(dataTransferItemList.length)
     await saveDragItems(dataTransferItemList)
-    // #################
-    // if (item.webkitGetAsEntry().isDirectory) {
-    //   // @ts-ignore // createReader is no longer in ts
-   
   }
   const dragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
@@ -47,4 +40,3 @@ export default function DragNDrop() {
     </div>
   )
 }
-

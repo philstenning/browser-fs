@@ -7,7 +7,7 @@ import {
   fsaCollection,
   fsaError,
   fsaSetting,
-  fsaExcludedDirectory
+  fsaExcludedDirectory,
 } from '../../'
 
 export class FsaDb extends Dexie {
@@ -19,6 +19,7 @@ export class FsaDb extends Dexie {
   errors!: Dexie.Table<fsaError, number>
   settings!: Dexie.Table<fsaSetting, number>
   excludedDirectories!: Dexie.Table<fsaExcludedDirectory, number>
+
   constructor() {
     super('fsa-database')
     const db = this
@@ -32,7 +33,8 @@ export class FsaDb extends Dexie {
       state: `++id,currentDirectoryId,currentFileId,currentCollectionId`,
       errors: `++id,type,success`,
       settings: `++id`,
-      excludedDirectories: `++id,name`
+      excludedDirectories: `++id,name`,
+
     })
   }
 }

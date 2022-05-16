@@ -4,7 +4,9 @@ import dragAddFilesToDirectory from './dragAddFilesToDirectory'
 import dragAddFilesToDirectoryLegacy from './dragAddFilesToDirectoryLegacy'
 import getDragDirectoryById from './getDragDirectoryById'
 import getDragDirectoryByName from './getDragDirectoryByName'
-
+import processDragDirectories from './processDragDirectories'
+import getFile from './getFile'
+import readFileSystemDirectoryEntry from './readFileSystemDirectoryEntry'
 export {
   createDragDirectory,
   createDragFile,
@@ -12,4 +14,7 @@ export {
   dragAddFilesToDirectoryLegacy,
   getDragDirectoryById,
   getDragDirectoryByName,
+  processDragDirectories,
+  getFile,
+  readFileSystemDirectoryEntry
 }

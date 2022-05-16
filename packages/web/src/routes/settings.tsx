@@ -1,5 +1,6 @@
+
 import React,{ useState, useEffect } from 'react'
-//@ts-ignore
+
 import styles from './settings.module.css'
 import { useSettings } from 'react-fsa-database'
 import ExcludedFolders from '../components/excludedDirectories/excludedDirectories'
