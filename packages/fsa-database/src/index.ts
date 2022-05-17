@@ -92,7 +92,6 @@ import {
   fsaFileType,
   fsaSetting,
   fsaState,
-  fsaDataTransferItem,
 } from './models/types'
 
 // utils
@@ -215,6 +214,5 @@ export type {
   fsaFile,
   fsaFileType,
   fsaSetting,
-  fsaState,
-  fsaDataTransferItem
+  fsaState
 }
