@@ -7,7 +7,8 @@ export default function createInitialSetting() {
     sessionStarted: now,
     lastScanned: now,
     autoSaveCollections: false,
-    scanInterval: 0
+    scanInterval: 0,
+    allowDndFiles:false
   }
   return setting
 }

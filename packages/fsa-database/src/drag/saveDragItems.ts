@@ -3,8 +3,9 @@ import {
   processDragDirectories,
   dragAddFilesToDirectory,
   createDragDirectory,
-  readFileSystemDirectoryEntry
+  readFileSystemDirectoryEntry,
 } from './'
+import { getCurrentSetting } from '../models/settings'
 
 let doneCounter = 0
 
@@ -15,13 +16,14 @@ export default async function saveDragItems(
 ) {
   // console.time('startScan')
 
+
   const files: File[] = []
   const directories: DataTransferItem[] = []
 
   // sort the files from directories
   for (const item of dataTransferItemList) {
     // files
-    if (item.webkitGetAsEntry()?.isFile) {
+    if (item.webkitGetAsEntry()?.isFile ) {
       const file = item.getAsFile()
       if (file) files.push(file)
     }
@@ -32,13 +34,23 @@ export default async function saveDragItems(
   }
   // add the files to the database
   if (!!files.length) {
-    await dragAddFilesToDirectory(files, folderName)
+    
+    await Promise.all([
+      dragAddFilesToDirectory(files, folderName),
+      processDragDirectories(directories),
+    ])
+  }else{
+    
+
+    await processDragDirectories(directories)
+
   }
+
+ 
+ 
   // add the directories to the database
-  await processDragDirectories(directories)
   // console.log('⛷️App returned')
 }
-
 
 // process all the dirs recursively
 const processDirectoriesRecursively = (
@@ -63,7 +75,6 @@ const processDirectoriesRecursively = (
     resolve(true)
   })
 }
-
 
 export async function scanDirectoryLegacy(
   directory: FileSystemDirectoryEntry,
