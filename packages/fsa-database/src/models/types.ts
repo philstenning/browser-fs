@@ -104,6 +104,9 @@ export interface fsaSetting {
   autoSaveCollections: boolean
   scanInterval: number // default is 0 or none.
   lastScanned: number
+  // when adding with drag and drop whether 
+  // to add files to a new folder
+  allowDndFiles:boolean
 }
 
 export interface fsaExcludedDirectory {

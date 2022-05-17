@@ -5,17 +5,18 @@ import getDragDirectoryById from './getDragDirectoryById'
 import createDragFile from './createDragFile'
 import getDragDirectoryByName from './getDragDirectoryByName'
 import createDragDirectory from './createDragDirectory'
+import { getCurrentSetting } from '../models/settings'
+
 
 export default async function dragAddFilesToDirectory(
   files: File[],
   name: string,
   dirId?: string
 ) {
-  // browsers that do not support file system access api
-  // firefox etc.
-  // dragAddFilesToDirectoryLegacy()
+   // only proceed if allowDndFiles is true
+   if(!(await getCurrentSetting()).allowDndFiles) return 
 
-  // find or create the directory for new files.
+  // find  existing or create the directory for new files.
   let directory: fsaDirectory | false = false
   if (dirId) {
     // dirId takes president over name.
