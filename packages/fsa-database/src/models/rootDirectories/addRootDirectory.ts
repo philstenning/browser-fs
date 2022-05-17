@@ -49,11 +49,16 @@ export default async function addRootDirectory(
     if (state) await saveState({ ...state, isScanning: false })
   })
 
-  // now set the current rootDir in dbState
-  await setCurrentRootDirectoryId(dir.id)
+  
   // toggle off scanning
   await setDirectoryIsScanning(false, dir)
-  await saveState({ ...state, isScanning: false })
+  // update the state obj with current settings.
+  await saveState({
+    ...state,
+    isScanning: false,
+    currentDirectoryId: dir.id,
+    currentRootDirectoryId: dir.id,
+  })
 }
 
 // set rootDir as scanning
