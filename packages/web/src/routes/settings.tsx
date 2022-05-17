@@ -89,6 +89,20 @@ export default function Settings() {
               {fsaSettings.allowDndFiles.toString()}
             </span>{' '}
           </li>
+          <li>
+            Retain all root directories on db reset:{' '}
+            <span
+              onClick={() =>
+                setFsaSettings({
+                  ...fsaSettings,
+                  retainRootDirectoriesOnReset:
+                    !fsaSettings.retainRootDirectoriesOnReset
+                })
+              }
+            >
+              {fsaSettings.retainRootDirectoriesOnReset.toString()}
+            </span>
+          </li>
         </ul>
       </div>
       <ExcludedFolders />
