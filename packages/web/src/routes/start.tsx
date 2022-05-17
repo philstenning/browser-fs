@@ -1,13 +1,15 @@
+import React from 'react'
 import {
   importDatabase,
   exportDatabase,
   fetchDatabase,
   resetDatabase,
-  deleteDatabase,
-} from "fsa-database";
+  deleteDatabase
+} from 'fsa-database'
 
 //@ts-ignore
-import styles from "./start.module.css";
+import styles from './start.module.css'
+
 function Start() {
   return (
     <div className={styles.container}>
@@ -27,7 +29,7 @@ function Start() {
         delete
       </button>
     </div>
-  );
+  )
 }
 
-export default Start;
+export default Start
