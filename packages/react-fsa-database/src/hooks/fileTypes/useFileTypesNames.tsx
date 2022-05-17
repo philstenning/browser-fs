@@ -1,8 +1,7 @@
 import { db, useLiveQuery } from 'fsa-database'
 
 /**
- *
- * @returns array of fileType Names string[]
+ * Returns a array of fileType names
  */
 function useFileTypesNames() {
   const fileTypesNames =
@@ -13,4 +12,4 @@ function useFileTypesNames() {
   return fileTypesNames
 }
 
-export { useFileTypesNames }
+export default useFileTypesNames

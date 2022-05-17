@@ -13,7 +13,7 @@ import {
   fsaCollectionFile,
   saveCollectionToFileSystem,
 } from 'fsa-database'
-import { useFsaDbContext } from '../../context/dbContext'
+import useFsaDbContext from '../context/useFsaDbContext'
 
 async function getCurrentState() {
   return (await db.state.toCollection().last()) ?? null
@@ -170,4 +170,4 @@ const useCollections = () => {
   }
 }
 
-export { useCollections }
+export default useCollections

@@ -65,4 +65,4 @@ function useRootFileList(
   throw new Error('we should not be here...')
 }
 
-export { useRootFileList }
+export default useRootFileList

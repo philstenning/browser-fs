@@ -6,7 +6,7 @@ import {
   createInitialSetting,
 } from 'fsa-database'
 
-export function useSettings() {
+export default function useSettings() {
   const [fsaSettings, setSettings] = useState(createInitialSetting())
   const settings = useLiveQuery(async () => {
     const setting = await db.settings.toCollection().last()

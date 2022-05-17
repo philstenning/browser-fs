@@ -1,12 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, {
-  useState,
-  useContext,
-  createContext,
-  useEffect,
-  useMemo,
-  useCallback,
-} from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import {
   db,
   initializeDatabase,
@@ -18,6 +11,7 @@ import {
   setCurrentFileId as setFileId,
   setCurrentRootDirectoryId as setRoodId,
 } from 'fsa-database'
+import FsaDbContext from './FsaDbContext'
 
 export type FsaDbContextType = {
   dbState: fsaState
@@ -26,12 +20,6 @@ export type FsaDbContextType = {
   setCurrentCollectionId: (id: string) => void
   setCurrentFileId: (id: string) => void
   isScanning: boolean
-}
-
-const FsaDbContext = createContext<FsaDbContextType | null>(null)
-
-export function useFsaDbContext() {
-  return useContext(FsaDbContext) as FsaDbContextType
 }
 
 type Props = {
@@ -44,7 +32,7 @@ type Props = {
  * @param param0
  * @returns
  */
-export function FsaDbContextProvider({
+export default function FsaDbContextProvider({
   children,
   fileExtensionsForApp = ['stl', 'gcode', '3mf', 'jpg'],
 }: Props) {

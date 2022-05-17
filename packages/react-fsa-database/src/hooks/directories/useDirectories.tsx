@@ -4,11 +4,11 @@ import {
   fsaDirectory,
   useLiveQuery,
   hideDirectoryAndFiles,
+  mergeToParentDirectory,
+  unMergeDirectories,
+  updateDirectory,
 } from 'fsa-database'
-import { useFsaDbContext } from '../../context/dbContext'
-import { update } from './update'
-import { mergeToParentDir } from './mergeToParentDir'
-import { unMergeDirectories } from './unMergeDirectories'
+import useFsaDbContext from '../context/useFsaDbContext'
 
 function useDirectories() {
   const [showHidden, setShowHidden] = useState(true)
@@ -41,14 +41,10 @@ function useDirectories() {
   const unHideDirectory = (directory: fsaDirectory) =>
     hideDirectoryAndFiles(directory, 'false')
 
-  const updateDirectory = update
-
   const toggleHidden = () => {
     setShowHidden((cur) => !cur)
   }
-  const mergeToParentDirectory = async (directory: fsaDirectory) => {
-    await mergeToParentDir(directory)
-  }
+
   const mergeToRootDirectory = () => {
     throw new Error('not implemented error')
   }
@@ -65,4 +61,4 @@ function useDirectories() {
   }
 }
 
-export { useDirectories }
+export default useDirectories

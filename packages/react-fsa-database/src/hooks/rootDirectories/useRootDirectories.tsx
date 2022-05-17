@@ -8,7 +8,7 @@ import {
   selectRootDirectory as addRootDirectory,
 } from 'fsa-database'
 
-export function useRootDirectories() {
+export default function mergeToParentDirectory() {
   const [rootDirectories, setRootDirectories] = useState<fsaDirectory[]>([])
 
   const rootDirectoriesQuery = useLiveQuery(() =>

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useFindDuplicateFiles } from "react-fsa-database";
 import { db, useLiveQuery } from "fsa-database";
-import { IDuplicateFiles } from "react-fsa-database/src/hooks/files";
+import { DuplicateFile } from "react-fsa-database/src/hooks/files";
 
 //@ts-ignore
 import styles from "./duplicateFiles.module.css";
 
 function DuplicateFiles() {
-  const [filtered, setFiltered] = useState<IDuplicateFiles | null>(null);
+  const [filtered, setFiltered] = useState<DuplicateFile | null>(null);
   const { duplicateFiles, toggleHidden } = useFindDuplicateFiles(true);
 
   const handleClick = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    file: IDuplicateFiles
+    file: DuplicateFile
   ) => {
     setFiltered(file);
   };
@@ -37,10 +37,10 @@ function DuplicateFiles() {
 }
 
 export default DuplicateFiles;
-
+//TODO: add to library
 type Props = {
-  file: IDuplicateFiles;
-  allFiles: IDuplicateFiles[];
+  file: DuplicateFile;
+  allFiles: DuplicateFile[];
 };
 
 const FileList = ({ file }: Props) => {

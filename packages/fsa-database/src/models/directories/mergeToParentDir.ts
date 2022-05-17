@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
-import { fsaDirectory, db } from 'fsa-database'
+import { fsaDirectory, db } from '../../'
 
-export async function mergeToParentDir(
+export default async function mergeToParentDirectory(
   directory: fsaDirectory,
   toRoot: boolean = false
 ) {

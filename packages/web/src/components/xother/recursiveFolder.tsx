@@ -1,8 +1,9 @@
-import { VirtualFileSystemEntry } from "fsa-browser";
+import React from 'react'
+import { VirtualFileSystemEntry } from 'fsa-browser'
 //@ts-ignore
-import style from "./recursive-folder.module.css";
+import style from './recursive-folder.module.css'
 interface Props {
-  folder: VirtualFileSystemEntry;
+  folder: VirtualFileSystemEntry
 }
 export function RecursiveFolder({ folder }: Props) {
   return (
@@ -10,7 +11,7 @@ export function RecursiveFolder({ folder }: Props) {
       Folder: {folder.name}
       <ul className={style.none}>
         {folder.entries?.map((entry) => {
-          if (entry.kind === "file") {
+          if (entry.kind === 'file') {
             return (
               <li key={entry.id} className="bfl__file">
                 <span className={style.file}>
@@ -18,23 +19,23 @@ export function RecursiveFolder({ folder }: Props) {
                   {/* <pre>{entry.path}</pre>{" "} */}
                 </span>
               </li>
-            );
+            )
           } else {
-            return <RecursiveFolder key={entry.id} folder={entry} />;
+            return <RecursiveFolder key={entry.id} folder={entry} />
           }
         })}
       </ul>
     </li>
-  );
+  )
 }
 
 type VListProps = {
-  virtualEntry: VirtualFileSystemEntry;
-};
+  virtualEntry: VirtualFileSystemEntry
+}
 export function RecursiveUnorderedList({ virtualEntry }: VListProps) {
   return (
     <ul className={style.list} data-testid="recursiveUnorderedList">
       <RecursiveFolder folder={virtualEntry} />
     </ul>
-  );
+  )
 }
