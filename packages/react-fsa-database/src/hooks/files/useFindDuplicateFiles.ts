@@ -1,6 +1,6 @@
 import { db, fsaFile, useLiveQuery, updateFile } from 'fsa-database'
 
-export interface IDuplicateFiles {
+export interface DuplicateFile {
   id: number
   name: string
   count: number
@@ -20,7 +20,7 @@ const unHideAllForFileName = async (fileName: string, rootId: string = '') => {
   await db.files.bulkPut(updatedFiles)
 }
 
-export function useFindDuplicateFiles(showHidden = false, rootId = '') {
+export default function useFindDuplicateFiles(showHidden = false, rootId = '') {
   const duplicateFiles =
     useLiveQuery(async () => {
       let files: fsaFile[] = []
@@ -36,7 +36,7 @@ export function useFindDuplicateFiles(showHidden = false, rootId = '') {
       // reduce the files to distinct names only
       const distinctNames = new Set(files.map((n) => n.name))
       // create an array of new objects with a count field & ids
-      const objectWithCount: IDuplicateFiles[] = Array.from(distinctNames).map(
+      const objectWithCount: DuplicateFile[] = Array.from(distinctNames).map(
         (n, index) => ({
           id: index,
           name: n,

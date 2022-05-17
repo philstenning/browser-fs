@@ -2,7 +2,7 @@ import { db, getCurrentSetting } from "../../";
 import { fsaCollection, fsaFile } from "../types";
 import { mapCollectionNameToFileName } from "./saveCollectionToFileSystem";
 
-export default async function removeAllFilesFromCollection(collectionId: string) {
+export default async function  removeAllFilesFromCollection(collectionId: string) {
   const collection = await db.userCollections.get(collectionId);
   if (!collection) return;
 

@@ -14,7 +14,7 @@ const logProgress = (data: ImportProgress) => {
 /**
  * Gets the db from the server with fetch()
  * this is used for testing only as the file handles
- * do not serialize - this is should be stubbed in cypress
+ * do not serialize - this should be stubbed in cypress
  * and put in the fixtures directory.
  * @param {string}fileName
  */

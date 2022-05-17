@@ -13,4 +13,4 @@ function useDirectoryFiles() {
   return { directoryFiles }
 }
 
-export { useDirectoryFiles }
+export default useDirectoryFiles

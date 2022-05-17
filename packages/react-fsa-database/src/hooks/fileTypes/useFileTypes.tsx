@@ -29,4 +29,4 @@ function useFileTypes() {
   }
 }
 
-export { useFileTypes }
+export default useFileTypes

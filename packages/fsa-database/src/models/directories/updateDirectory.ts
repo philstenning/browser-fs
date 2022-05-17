@@ -1,6 +1,6 @@
-import { db, fsaDirectory } from 'fsa-database'
+import { db, fsaDirectory } from '../..'
 
-export async function update(directory: fsaDirectory) {
+export default async function updateDirectory(directory: fsaDirectory) {
   if (directory.name.length < 2 && directory.handle.name !== directory.name) {
     console.error(`error updating directory  name too short`)
     return false

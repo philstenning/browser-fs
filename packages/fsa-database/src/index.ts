@@ -1,4 +1,17 @@
-// db
+/*  --------- Types  ---------  */
+import {
+  fsaCollection,
+  fsaCollectionFile,
+  fsaDirectory,
+  fsaError,
+  fsaExcludedDirectory,
+  fsaFile,
+  fsaFileType,
+  fsaSetting,
+  fsaState,
+} from './models/types'
+
+/*  --------- database  ---------  */
 import { db } from './db/setup'
 import deleteDatabase from './db/deleteDatabase'
 import exportDatabase from './db/exportDatabase'
@@ -8,7 +21,7 @@ import initializeDatabase from './db/initializeDatabase'
 import loadDatabase from './db/loadDatabase'
 import resetDatabase from './db/resetDatabase'
 
-// ##############  MODELS ##############
+/*  --------- models  ---------  */
 
 // collections
 import addFileToCollection from './models/collections/addFileToCollection'
@@ -23,11 +36,13 @@ import removeAllFilesFromCollection from './models/collections/removeAllFilesFro
 import saveCollectionToFileSystem from './models/collections/saveCollectionToFileSystem'
 import removeFileFromCollectionsSavedLocation from './models/collections/removeFileFromCollectionsSavedLocation'
 import updatePermissionsForRootDirAndChildren from './models/collections/updatePermissionsForRootDirAndChildren'
-
 // directories
 import createDirectory from './models/directories/createDirectory'
 import checkDirectoryForFilesInCollections from './models/directories/checkDirectoryForFilesInCollections'
 import hideDirectoryAndFiles from './models/directories/hideDirectoryAndFiles'
+import mergeToParentDirectory from './models/directories/mergeToParentDir'
+import unMergeDirectories from './models/directories/unMergeDirectories'
+import updateDirectory from './models/directories/updateDirectory'
 
 // errors
 
@@ -79,10 +94,25 @@ import setCurrentDirectoryId from './models/state/setCurrentDirectoryId'
 import setCurrentFileId from './models/state/setCurrentFileId'
 import setCurrentRootDirectoryId from './models/state/setCurrentRootDirectoryId'
 import setIsScanning from './models/state/setIsScanning'
-// ############## END OF MODELS ##############
 
-//types
-import {
+/*  --------- other  ---------  */
+
+// utils
+import bytesToSize from './utils/bytesToSize'
+import getFileExtension from './utils/getFileExtension'
+import getFileNameWithoutExtension from './utils/getFileNameWithoutExtension'
+
+// drag
+import saveDragItems from './drag/saveDragItems'
+
+// fileSystem
+import checkHandlePermission from './fileSystem/checkHandlePermission'
+import parseVirtualFileSystemEntry from './fileSystem/parseVirtualFileSystemEntry'
+
+// re-exports from library's
+import { useLiveQuery } from 'dexie-react-hooks'
+
+export type {
   fsaCollection,
   fsaCollectionFile,
   fsaDirectory,
@@ -92,31 +122,10 @@ import {
   fsaFileType,
   fsaSetting,
   fsaState,
-} from './models/types'
-
-// utils
-import bytesToSize from './utils/bytesToSize'
-import getFileExtension from './utils/getFileExtension'
-import getFileNameWithoutExtension from './utils/getFileNameWithoutExtension'
-
-// drag
-// import createDragDirectory from './drag/createDragDirectory'
-// import createDragFile from './drag/createDragFile'
-// import dragAddFilesToDirectory from './drag/dragAddFilesToDirectory'
-// import dragAddFilesToDirectoryLegacy from './drag/dragAddFilesToDirectoryLegacy'
-// import getDragDirectoryById from './drag/getDragDirectoryById'
-// import getDragDirectoryByName from './drag/getDragDirectoryByName'
-import saveDragItems from './drag/saveDragItems'
-
-// fileSystem
-import parseVirtualFileSystemEntry from './fileSystem/parseVirtualFileSystemEntry'
-
-// reexports from library's
-import { useLiveQuery } from 'dexie-react-hooks'
-
+}
 // all exports
 export {
-  //db
+  /* -- database -- */
   db,
   initializeDatabase,
   exportDatabase,
@@ -125,6 +134,7 @@ export {
   loadDatabase,
   resetDatabase,
   deleteDatabase,
+  /* -- models  -- */
   // collections
   addFileToCollection,
   createCollection,
@@ -142,6 +152,9 @@ export {
   createDirectory,
   checkDirectoryForFilesInCollections,
   hideDirectoryAndFiles,
+  mergeToParentDirectory,
+  unMergeDirectories,
+  updateDirectory,
   // errors
   // excludedDirectories
   addExcludedDirectoryName,
@@ -187,32 +200,16 @@ export {
   setCurrentFileId,
   setCurrentRootDirectoryId,
   getCurrentStateWithOutId,
+  /* -- Other -- */
   // utils
   bytesToSize,
   getFileExtension,
   getFileNameWithoutExtension,
   //drag
-  // createDragDirectory,
-  // createDragFile,
-  // dragAddFilesToDirectory,
-  // dragAddFilesToDirectoryLegacy,
-  // getDragDirectoryById,
-  // getDragDirectoryByName,
   saveDragItems,
   // fileSystem
+  checkHandlePermission,
   parseVirtualFileSystemEntry,
-  // reexports from library's
+  // re-exports from library's
   useLiveQuery,
-}
-
-export type {
-  fsaCollection,
-  fsaCollectionFile,
-  fsaDirectory,
-  fsaError,
-  fsaExcludedDirectory,
-  fsaFile,
-  fsaFileType,
-  fsaSetting,
-  fsaState
 }

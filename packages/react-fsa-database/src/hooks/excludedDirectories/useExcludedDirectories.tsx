@@ -7,7 +7,7 @@ import {
   fsaExcludedDirectory,
 } from 'fsa-database'
 
-export function useExcludedDirectories() {
+export default function useExcludedDirectories() {
   const [excludedDirectories, setExcludedDirectories] = useState<
     fsaExcludedDirectory[]
   >([])

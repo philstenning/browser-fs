@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
-import { fsaDirectory, db } from 'fsa-database'
+import { fsaDirectory, db } from '../../'
 
-export async function unMergeDirectories(rootDir: fsaDirectory) {
+export default async function unMergeDirectories(rootDir: fsaDirectory) {
   await db.transaction('rw', db.directories, db.files, async () => {
     const files = await db.files.where('rootId').equals(rootDir.id).toArray()
 

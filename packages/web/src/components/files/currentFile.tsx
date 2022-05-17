@@ -1,21 +1,10 @@
 import React from 'react'
-import { useFsaDbContext } from "react-fsa-database";
-import { db, useLiveQuery } from "fsa-database";
+import {useCurrentFile} from 'react-fsa-database'
 
 export default function currentFile() {
-  const file = useLiveQuery(async () => {
-    const state = await db.state.toCollection().last();
-    if (state && !!state.currentFileId) {
-      // console.log(JSON.stringify(state));
+   
+  const file = useCurrentFile()
 
-      try {
-        return await db.files.get(state.currentFileId);
-      } catch (e) {
-        console.log(`error getting current file`);
-      }
-    }
-    return null;
-  });
   if (!file) return <div>null</div>;
   return (
     <div>
