@@ -8,7 +8,8 @@ export default function createInitialSetting() {
     lastScanned: now,
     autoSaveCollections: false,
     scanInterval: 0,
-    allowDndFiles:false
+    allowDndFiles:false,
+    retainRootDirectoriesOnReset:true
   }
   return setting
 }

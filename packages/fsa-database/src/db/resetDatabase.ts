@@ -3,17 +3,26 @@ import {
   initialDbState,
   saveState,
   saveSetting,
-  db
+  db,
 } from '../'
 
 export default async function resetDatabase() {
-  const settings = await getCurrentSetting()
-  await db.userCollections.clear()
-  await db.files.clear()
-  await db.directories.clear()
-  await db.settings.clear()
-  await db.errors.clear()
-  await db.state.clear()
-  await saveState(initialDbState)
-  await saveSetting(settings)
+  try {
+    const settings = await getCurrentSetting()
+    const dirs = await db.directories.where({ isRoot: 'true' }).toArray()
+
+    await db.userCollections.clear()
+    await db.files.clear()
+    await db.directories.clear()
+    await db.settings.clear()
+    await db.errors.clear()
+    await db.state.clear()
+    await saveState(initialDbState)
+    await saveSetting(settings)
+    if (settings.retainRootDirectoriesOnReset) {
+      await db.directories.bulkAdd(dirs)
+    }
+  } catch (error) {
+    console.error(`Error resetting the database: ${error}`)
+  }
 }

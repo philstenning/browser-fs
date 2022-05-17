@@ -107,6 +107,9 @@ export interface fsaSetting {
   // when adding with drag and drop whether 
   // to add files to a new folder
   allowDndFiles:boolean
+  // When resetting db retain all root Directories.
+  retainRootDirectoriesOnReset:boolean; 
+
 }
 
 export interface fsaExcludedDirectory {

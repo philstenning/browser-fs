@@ -5,7 +5,7 @@ import {
   createDragDirectory,
   readFileSystemDirectoryEntry,
 } from './'
-import { getCurrentSetting } from '../models/settings'
+
 
 let doneCounter = 0
 
