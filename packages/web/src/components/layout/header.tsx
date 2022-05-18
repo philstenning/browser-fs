@@ -1,12 +1,13 @@
 import React from 'react'
+import {fetchDatabase} from 'fsa-database'
 import { Link } from 'react-router-dom'
 //@ts-ignore
 import style from './header.module.css'
 function Header() {
   return (
     <header className={style.header}>
-      <nav>
-        <ul className={style.mainNav}>
+      <nav className={ style.nav}>
+        <ul className={style.mainList}>
           <li className={style.mainNav__link}>
             <Link
               className={style.mainNav__link}
@@ -44,6 +45,9 @@ function Header() {
             </Link>
           </li>
         </ul>
+        <button className={style.btn} id="request_btn" onClick={()=>fetchDatabase()}>
+        Reset Data
+        </button>
       </nav>
     </header>
   )

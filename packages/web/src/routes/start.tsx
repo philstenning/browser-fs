@@ -22,10 +22,10 @@ function Start() {
       <button id="request_btn" onClick={() => fetchDatabase()}>
         fetch
       </button>
-      <button id="request_btn" onClick={resetDatabase}>
+      <button id="reset_btn" onClick={resetDatabase}>
         Reset
       </button>
-      <button id="request_btn" onClick={deleteDatabase}>
+      <button id="delete_btn" onClick={deleteDatabase}>
         delete
       </button>
     </div>

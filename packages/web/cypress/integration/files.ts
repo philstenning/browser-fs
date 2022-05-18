@@ -1,15 +1,10 @@
 /* ==== Test Created with Cypress Studio ==== */
-
-import data from "../fixtures/fsaDb.json";
+import resetDb from '../custom/resetDb'
 
 describe("Files Tests", () => {
   beforeEach(() => {
     //Reset the Database
-    cy.visit("/");
-    cy.intercept("testing/fsaDb.data", data);
-    cy.get("#request_btn").click();
-    //go to the Test view page.
-    cy.get('[data-test-cy="TestPageLink"]').click();
+    resetDb()
   });
 
   /* ==== Test Created with Cypress Studio ==== */
