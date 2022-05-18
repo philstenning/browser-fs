@@ -2,10 +2,15 @@
   background: var(--grape-9);
   padding-block: var(--size-3);
 }
-
-.mainNav {
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 1rem;
+}
+.mainList {
   display: flex;
   gap: var(--size-3);
+  padding: 0;
 }
 
 .mainNav__item {
@@ -19,9 +24,17 @@
   &:visited {
     color: var(--grape-0);
   }
-  
-  &:hover{
-    
+
+  &:hover {
     color: var(--grape-2);
+  }
+}
+.btn {
+  background-color: inherit;
+  background-color: var(--grape-7);
+  color: white;
+padding-block: 0;
+  &:hover{
+
   }
 }

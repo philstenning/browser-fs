@@ -1,14 +1,16 @@
 import data from "../fixtures/fsaDb.json";
-
+import resetDb from '../custom/resetDb'
 
     before(() => {
       //Reset the Database
-      cy.visit('/')
-      cy.wait(500)
-      cy.intercept('testing/fsaDb.data', data)
-      cy.get('#request_btn').click()
-      //go to the Test view page.
-      cy.get('[data-test-cy="TestPageLink"]').click()
+      // cy.visit('/')
+      // cy.wait(500)
+      // cy.intercept('testing/fsaDb.data', data)
+      // cy.get('#request_btn').click()
+      // //go to the Test view page.
+      // cy.get('[data-test-cy="TestPageLink"]').click()
+      //Reset the Database
+      resetDb()
     })
 
 describe(`add default collection if it there is't one already`, () => {

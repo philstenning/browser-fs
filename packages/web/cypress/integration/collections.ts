@@ -1,25 +1,23 @@
-import data from '../fixtures/fsaDb.json'
+import resetDb from '../custom/resetDb'
 
 describe('Collection Tests', () => {
   beforeEach(() => {
     //Reset the Database
-    cy.visit('/')
-    cy.intercept('testing/fsaDb.data', data)
-    cy.get('#request_btn').click()
-    //go to the Test view page.
-    cy.get('[data-test-cy="TestPageLink"]').click()
+    resetDb()
   })
 
   it('adds an item to the collection at the top of the list', () => {
-    cy.get('[data-cy="selectRootDir_root_1"]').click();
-    cy.get('[data-testid="filesForRootDirListItem-3"]').click();
-    cy.get('[data-testid="filesForRootDirListItem-4"]').click();
-    cy.get('[data-testid="filesForRootDirListItem-7"]').click();
-    cy.get('[data-testid="filesForRootDirListItem-8"]').click();
+    cy.get('[data-cy="selectRootDir_root_1"]').click()
+    cy.get('[data-testid="filesForRootDirListItem-3"]').click()
+    cy.get('[data-testid="filesForRootDirListItem-4"]').click()
+    cy.get('[data-testid="filesForRootDirListItem-7"]').click()
+    cy.get('[data-testid="filesForRootDirListItem-8"]').click()
     cy.get('[data-cy="collectionItem-3"]').click()
-    cy.get('[data-testid="filesForRootDirListItem-6"]').click();
-    cy.get('[data-cy="currentCollection"] > li').should('have.length',5)
-    cy.get('[data-cy="currentCollection"] > li').first().should('have.class', 'active') 
+    cy.get('[data-testid="filesForRootDirListItem-6"]').click()
+    cy.get('[data-cy="currentCollection"] > li').should('have.length', 5)
+    cy.get('[data-cy="currentCollection"] > li')
+      .first()
+      .should('have.class', 'active')
   })
 
   it('should remove all files from collections when root directories are deleted', () => {
