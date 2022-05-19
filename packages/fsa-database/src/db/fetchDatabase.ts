@@ -21,6 +21,7 @@ const logProgress = (data: ImportProgress) => {
 export default async function fetchDatabase(
   fileName: string = 'testing/fsaDb.json'
 ) {
+  console.time('FetchAndUpdateDb')
   const request = new Request(fileName)
 
   try {
@@ -33,6 +34,7 @@ export default async function fetchDatabase(
       })
       await resetPermissionsOnAllDirectories()
     }
+    console.timeEnd('FetchAndUpdateDb')
   } catch (error) {
     console.error(`Error fetching database ${error}`)
   }
