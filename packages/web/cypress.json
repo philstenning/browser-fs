@@ -3,5 +3,9 @@
   "baseUrl": "http://localhost:6007",
   "$schema": "https://on.cypress.io/cypress.schema.json",
   "viewportWidth": 1000,
-  "viewportHeight": 700
+  "viewportHeight": 700,
+  "retries": {
+    "runMode": 2,
+    "openMode": 2
+  }
 }

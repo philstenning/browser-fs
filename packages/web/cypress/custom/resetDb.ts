@@ -6,5 +6,5 @@ export default function resetDb() {
   cy.get('#request_btn').click()
   //go to the Test view page.
 //   cy.get('[data-test-cy="TestPageLink"]').click()
-cy.wait(500)
+cy.wait(300)
 }
