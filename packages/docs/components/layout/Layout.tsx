@@ -1,9 +1,14 @@
-import Header from './header'
+import Header from './Header'
 
-function Layout() {
+type Props = {
+  children: React.ReactNode
+}
+
+function Layout({ children }: Props) {
   return (
     <div>
-        <Header/>
+      <Header />
+      {children}
     </div>
   )
 }

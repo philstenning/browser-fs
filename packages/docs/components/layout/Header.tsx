@@ -1,7 +1,5 @@
-
-
-function Layout(){
-    return <div>layout</div>
+function Header() {
+  return <div>header</div>
 }
 
-export default Layout
+export default Header
