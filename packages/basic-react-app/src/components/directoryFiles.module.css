@@ -1,0 +1,31 @@
+.container {
+    
+    padding-block: .5rem;
+  max-height: 100%;
+  width: 100%;
+  /* border: solid; */
+  overflow-y: scroll;
+  /* overflow: hidden; */
+}
+.header{
+    text-align: center;
+}
+.list {
+    width: 100%;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+.listItem {
+    overflow:hidden;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: .5rem;
+  font-size: 0.9em;
+  border: solid 1px;
+  border-radius: 5px;
+  font-size: .7rem;
+  cursor: pointer;
+}

@@ -1,0 +1,51 @@
+:root, *{
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: hsl(0, 6%, 14%);
+  --fg: hsl(0, 100%, 94%);
+  --selected: hsl(330, 100%, 58%);
+  
+}
+body{
+  height: 100vh;
+  max-height: 100vh;
+  overflow:hidden;
+  
+  padding: 0;
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--fg);
+  /* border: solid lightcoral 4px; */
+}
+
+body :where(ul, li ,h1,h2,h3) {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  
+}
+
+.app {
+  /* padding: .5em; */
+  display: grid;
+  grid-template-columns: minmax(200px,20vw) 1fr;
+  grid-template-rows: 100vh;
+}
+
+.left-column{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20vh 1fr 20vh;
+}
+
+.right-column{
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.selected {
+  color: var(--selected);
+}
