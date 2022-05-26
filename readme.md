@@ -1,5 +1,6 @@
 # fsa-database
 
+Create collections of files from your local drive for use in the browser.
 
 ## Overview
 
