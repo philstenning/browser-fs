@@ -1,17 +1,20 @@
 import { fsaCollection } from 'fsa-database'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useCollections, useFsaDbContext } from 'react-fsa-database'
 import styles from './directories.module.css'
 
 function Collections() {
-  const {  collections } = useCollections()
-  const { dbState } = useFsaDbContext()
+  const { collections, addCollection } = useCollections()
+  const { dbState, setCurrentCollectionId } = useFsaDbContext()
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Collections</h2>
+      <button onClick={() => addCollection('My Collection')}>Add</button>
       <ul className={styles.list}>
         {collections.map((col) => (
           <ListItem
+           key={col.id}
+            select={setCurrentCollectionId}
             isSelected={dbState.currentCollectionId === col.id}
             col={col}
           />
@@ -24,18 +27,37 @@ function Collections() {
 type Props = {
   col: fsaCollection
   isSelected: boolean
+  select: (id: string) => void
 }
 
-const ListItem = ({ col, isSelected }: Props) => {
-     const {  updateCollection } = useCollections()
-    const [name, setName] = useState(col.name)
+const ListItem = ({ col, isSelected, select }: Props) => {
+  const { updateCollection } = useCollections()
+  const [displayName, setDisplayName] = useState(col.name || '')
+  const [isDisabled, setIsDisabled] = useState(true)
+  const { name } = col
+  useEffect(() => {
+    console.log(name)
+  }, [name])
+  const handleBlur = () => {
+    updateCollection({ ...col, name: displayName })
+    setIsDisabled(true)
+  }
+
   return (
     <li
-      key={col.id}
+    
       className={`${styles.listItem} ${isSelected ? 'selected' : ''}`}
+      onClick={() => select(col.id)}
+      onDoubleClick={() => setIsDisabled(false)}
     >
-        
-      <input onBlur={(e)=>updateCollection({...col,name})} className={styles.input} type="text" value={name}  onChange={(e)=>setName(e.target.value)}/>
+      <input
+        onBlur={handleBlur}
+        className={styles.input}
+        type="text"
+        value={displayName}
+        onChange={(e) => setDisplayName(e.target.value)}
+        disabled={isDisabled}
+      />
     </li>
   )
 }
