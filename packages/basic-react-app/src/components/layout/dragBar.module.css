@@ -1,0 +1,46 @@
+.bar {
+  position: relative;
+  width: 2px;
+  height: 100%;
+  background-color: var(--grape-9);
+  cursor: inherit;
+  /* cursor: w-resize; */
+  cursor: ew-resize;
+  /* cursor: grabbing; */
+
+  &::after {
+    position: absolute;
+    width: 0;
+    background-color: var(--grape-9);
+    right: 0;
+    top: 0;
+    content: '';
+    /* transition: width 0.2s ease-in-out; */
+    height: 100%;
+  }
+
+  &:hover::after {
+    animation-name: grow;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+  }
+
+  &:-moz-drag-over {
+    cursor: context-menu;
+  }
+
+  /* &:hover{
+
+    } */
+}
+
+@keyframes grow {
+  from {
+    width: 0;
+  }
+
+  
+  to {
+    width: 4px;
+  }
+}

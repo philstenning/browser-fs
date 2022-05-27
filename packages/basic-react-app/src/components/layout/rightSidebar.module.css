@@ -1,0 +1,6 @@
+.container{
+    /* border: solid 1px; */
+    background-color: var(--gray-9);
+    color: var(--gray-3);
+    height: 100%;
+}

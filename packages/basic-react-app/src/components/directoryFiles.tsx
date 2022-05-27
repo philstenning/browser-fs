@@ -7,7 +7,7 @@ function DirectoryFiles() {
   const { setCurrentFileId, dbState } = useFsaDbContext()
   return (
     <div className={styles.container}>
-      <h2 className={styles.header}>Directory files</h2>
+      {/* <h2 className={styles.header}>Directory files</h2> */}
       <ul className={styles.list}>
         {directoryFiles.map((file) => (
           <li

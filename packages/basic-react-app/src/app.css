@@ -1,51 +1,52 @@
-:root, *{
+:root,
+* {
   box-sizing: border-box;
 }
 
 :root {
+  --left-sidebar: 20vw;
+  --right-sidebar: 20vw;
   --bg: hsl(0, 6%, 14%);
   --fg: hsl(0, 100%, 94%);
   --selected: hsl(330, 100%, 58%);
-  
 }
-body{
+body {
   height: 100vh;
   max-height: 100vh;
-  overflow:hidden;
-  
+  overflow: hidden;
+
   padding: 0;
   margin: 0;
   background-color: var(--bg);
   color: var(--fg);
-  /* border: solid lightcoral 4px; */
+  scrollbar-width: 8px;
 }
 
-body :where(ul, li ,h1,h2,h3) {
+body :where(ul, li, h1, h2, h3) {
   padding: 0;
   margin: 0;
   list-style: none;
-
-  
 }
 
 .app {
-  /* padding: .5em; */
-  display: grid;
-  grid-template-columns: minmax(200px,20vw) 1fr;
-  grid-template-rows: 100vh;
-}
-
-.left-column{
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 20vh 1fr 20vh;
-}
-
-.right-column{
-  display: grid;
-  grid-template-columns: 1fr;
+  height: 100vh;
+  overflow: hidden;
+  /* background-color: rgb(225, 38, 38); */
 }
 
 .selected {
   color: var(--selected);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: rgb(106, 87, 87);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgb(220, 83, 223);
+  background-color: ;
 }

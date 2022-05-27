@@ -9,7 +9,9 @@ function Collections() {
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Collections</h2>
-      <button onClick={() => addCollection('My Collection')}>Add</button>
+      <button
+      className={styles.btn}
+      onClick={() => addCollection('My Collection')}>Add</button>
       <ul className={styles.list}>
         {collections.map((col) => (
           <ListItem

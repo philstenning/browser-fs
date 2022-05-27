@@ -1,0 +1,28 @@
+.container{
+    height: 100%;
+    /* padding-top: .5rem; */
+    overflow: hidden;
+}
+
+.header{
+    position: fixed;
+    right: 0;
+    width: 70vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: ;
+    /* border-bottom: solid 1px #555; */
+}
+
+.tab{
+    background-color: #555;
+    opacity: .98;
+    padding: .5rem;
+    width: 40%;
+    border: solid 1px #555;
+    border-top: none;
+    border-radius:0px 0px 6px 6px ;
+    text-align: center;
+    cursor: pointer;
+}
