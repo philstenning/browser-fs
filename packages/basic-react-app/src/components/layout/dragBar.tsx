@@ -9,8 +9,9 @@ const DragBar = () => {
       // style={{ '--left-sidebar': '12vw' } as React.CSSProperties}
       className={styles.bar}
       // onDragStart={(e)=>console.log(e.clientX)}
-      onDrag={e=>console.log('end', e.clientX)}
+      // onDrag={(e) => console.log('dr', e.clientX)}
       draggable
+      onDragEnd={(e) => console.log('end', e.clientX)}
       // onMouseDown={(e)=>console.log([e.clientX])}
     >
       {' '}
