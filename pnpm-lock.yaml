@@ -210,7 +210,7 @@ importers:
       eslint-plugin-react-hooks: ^4.3.0
       fsa-browser: workspace:*
       fsa-database: workspace:*
-      open-props: ^1.3.7
+      open-props: ^1.3.16
       postcss: ^8.4.6
       postcss-combine-duplicated-selectors: ^10.0.3
       postcss-custom-media: ^8.0.0
@@ -2262,7 +2262,7 @@ packages:
     dependencies:
       confusing-browser-globals: 1.0.11
       eslint: 8.14.0
-      eslint-plugin-import: 2.26.0_rnfz7akqr4wjw2qkn2c5k6phri
+      eslint-plugin-import: 2.26.0_as7czvxgrvaa35lzxztolpnp5a
       object.assign: 4.1.2
       object.entries: 1.1.5
       semver: 6.3.0
@@ -2280,7 +2280,7 @@ packages:
     dependencies:
       eslint: 8.14.0
       eslint-config-airbnb-base: 15.0.0_myxbwluo6p3kuxjcyp342zygci
-      eslint-plugin-import: 2.26.0_rnfz7akqr4wjw2qkn2c5k6phri
+      eslint-plugin-import: 2.26.0_as7czvxgrvaa35lzxztolpnp5a
       eslint-plugin-jsx-a11y: 6.5.1_eslint@8.14.0
       eslint-plugin-react: 7.29.4_eslint@8.14.0
       eslint-plugin-react-hooks: 4.5.0_eslint@8.14.0

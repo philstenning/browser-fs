@@ -1,23 +1,25 @@
 .bar {
   /* position: relative; */
-  width: 4px;
+  width: 10px;
   height: 100%;
-  border-right: solid 2px  var(--grape-9);
-  background-color: var(--gray-9);
+  border-right: solid 0 var(--grape-9);
+  background-color: var(--grape-9);
   cursor: inherit;
-  /* cursor: w-resize; */
-  /* cursor: grabbing; */
   cursor: ew-resize;
   transition: border-right .1s ease-out;
 
   &:hover {
-     border-right: solid 4px  var(--grape-9);
-
-
+    /* border-right: solid 6px  var(--green-9); */
+      background-color: var(--green-9);
   }
 
+  &:active{
+    cursor: grabbing  ;
+  }
+  
 }
 
+/* 
 @keyframes grow {
   from {
     width: 2px;
@@ -27,4 +29,4 @@
   to {
     width: 4px;
   }
-}
+} */
