@@ -9,19 +9,20 @@ import Display from './components/display'
 
 import DragBar from './components/layout/dragBar'
 import './app.css'
-
+import Grid from './components/layout/grid'
 import Layout from './components/layout/layout'
 function App() {
   return (
     <div className="app">
       <FsaDbContextProvider
         fileExtensionsForApp={['gcode', '.3mf', 'jpg', 'stl']}>
-       <Layout>
+       {/* <Layout>
          <LeftSidebar/>
          <DragBar/>
          <Display/>
          <RightSidebar/>
-       </Layout>
+       </Layout> */}
+       <Grid/>
 
   
         
