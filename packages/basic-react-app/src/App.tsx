@@ -22,7 +22,11 @@ function App() {
          <Display/>
          <RightSidebar/>
        </Layout> */}
-       <Grid/>
+       <Grid>
+         <div>one</div>
+         <div>two</div>
+         <div>three</div>
+       </Grid>
 
   
         

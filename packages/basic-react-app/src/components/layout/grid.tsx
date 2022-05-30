@@ -1,17 +1,33 @@
 import { useState, CSSProperties } from 'react'
 
 import styles from './grid.module.css'
-function Grid() {
+
+type ResizableGrid = {
+  children: React.ReactNode[]
+}
+
+function Grid({ children }: ResizableGrid) {
   const [leftPanel, setLeftPanel] = useState(250)
+  const [rightPanel, setRightPanel] = useState(250)
+  const [currentPanel, setCurrentPanel] = useState(0)
   const [isResizing, setIsResizing] = useState(false)
 
+  const handleResize = (isResizing: boolean, currentPanel: number) => {
+    setCurrentPanel(currentPanel)
+    setIsResizing(isResizing)
+  }
+
   const resize = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation()
+    e.preventDefault()
     if (isResizing) {
       setLeftPanel(e.clientX)
-      //   console.log(e.clientX)
     }
   }
+
   const resizeFinish = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation()
+    e.preventDefault()
     if (isResizing) {
       setLeftPanel(e.clientX)
       setIsResizing(false)
@@ -21,18 +37,23 @@ function Grid() {
   return (
     <div
       className={styles.container}
-      style={{ '--left-panel': `${leftPanel}px` } as CSSProperties}
-      //   onMouseDown={() => setIsResizing(true)}
+      style={
+        {
+          '--left-panel': `${leftPanel}px`,
+          '--right-panel': `${rightPanel}px`,
+        } as CSSProperties
+      }
       onMouseMove={resize}
       onMouseUp={resizeFinish}
-      onDragEnd={resizeFinish}
-      // onMouseMove={e=>console.log(e.clientX)}
     >
-      <div>one</div>
-      <Divider setIsResizing={setIsResizing} />
-      <div>one</div>
-      {/* <Divider setIsResizing={setIsResizing} /> */}
-      <div>one</div>
+      {children.map((child, index) => (
+        <>
+          {child}
+          {children.length - index > 1 && (
+            <Divider setIsResizing={setIsResizing} id={1} />
+          )}
+        </>
+      ))}
     </div>
   )
 }
@@ -40,21 +61,22 @@ function Grid() {
 export default Grid
 
 type Props = {
-  setIsResizing: React.Dispatch<React.SetStateAction<boolean>>
+  id: number
+  // setIsResizing: React.Dispatch<React.SetStateAction<boolean>>
+  handleResize:()=>void
 }
 
-const Divider = ({ setIsResizing }: Props) => {
-  const [isSelected, setIsSelected] = useState(false)
+const Divider = ({ setIsResizing, id }: Props) => {
   const handleMouseEvent = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.stopPropagation()
+    e.preventDefault()
     setIsResizing(true)
   }
   return (
-    <div
-      onMouseDown={handleMouseEvent}
-      className={styles.divider}
-    ></div>
+    <div onMouseDown={handleMouseEvent} className={styles.divider}>
+      {id.toString()}
+    </div>
   )
 }
