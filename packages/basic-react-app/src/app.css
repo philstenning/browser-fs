@@ -13,11 +13,10 @@
 
 body {
   height: 100vh;
+  margin: 0;
+  padding: 0;
   max-height: 100vh;
   overflow: hidden;
-
-  padding: 0;
-  margin: 0;
   background-color: var(--bg);
   color: var(--fg);
   scrollbar-width: 8px;
@@ -32,6 +31,7 @@ body :where(ul, li, h1, h2, h3) {
 .app {
   height: 100vh;
   overflow: hidden;
+
   /* background-color: rgb(225, 38, 38); */
 }
 
@@ -42,12 +42,51 @@ body :where(ul, li, h1, h2, h3) {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   border-radius: 4px;
-  background-color: rgb(106, 87, 87);
+  background-color: rgb(106 87 87);
 }
+
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background-color: rgb(220, 83, 223);
+  background-color: rgb(220 83 223);
   background-color: ;
 }
+
+.spacer {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+.btn-group {
+  display: flex;
+  width: fit-content;
+  gap: .5rem;
+}
+
+
+.card-wrapper{
+  overflow-y: auto;
+  height: 100%;
+  /* padding-inline: 1rem; */
+  /* border: solid; */
+}
+
+.cards {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr));
+  height:max-content;
+  /* border: solid; */
+  /* overflow-y: scroll; */
+}
+
+.card {
+  /* min-width: 100px;
+  max-width: 200px; */
+  background-color: var(--grape-9);
+  aspect-ratio: 1 / 1;
+}
+
