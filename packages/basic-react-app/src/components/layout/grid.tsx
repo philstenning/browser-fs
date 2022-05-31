@@ -60,8 +60,8 @@ function ResizableHorizontalGrid({
 
   /** Called on this grid for resizing */
   const resizeMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation()
-    e.preventDefault()
+    // e.stopPropagation()
+    // e.preventDefault()
     resize(e.clientX)
   }
 
@@ -94,8 +94,6 @@ function ResizableHorizontalGrid({
   }
 
   const resizeFinish = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation()
-    e.preventDefault()
     if (isResizing) {
       setIsResizing(false)
     }
@@ -108,6 +106,7 @@ function ResizableHorizontalGrid({
     const offset = gridRef.current?.offsetLeft ?? 0
     const mousePosition = e.clientX
     const zero = offset - mousePosition
+
     if (mousePosition === zero || mousePosition >= gridWidth + offset) {
       setIsResizing(false)
     }
@@ -117,12 +116,12 @@ function ResizableHorizontalGrid({
   const gridStyle = () => {
     const threeColumn = {
       gridTemplateColumns: `${panelWidths[0]}px ${
-        collapseLeft ? '0' : 'calc(0.5rem + 5px)'
-      } 1fr ${collapseRight ? '0' : 'calc(0.5rem + 5px)'} ${panelWidths[1]}px`,
+        collapseLeft ? '0' : '2px'
+      } 1fr ${collapseRight ? '0' : '2px'} ${panelWidths[1]}px`,
     }
     const twoColumn = {
       gridTemplateColumns: `${panelWidths[0]}px ${
-        collapseLeft ? '0' : 'calc(0.5rem + 5px)'
+        collapseLeft ? '0' : '2px'
       } 1fr`,
     }
     return (children.length >= 3 ? threeColumn : twoColumn) as CSSProperties

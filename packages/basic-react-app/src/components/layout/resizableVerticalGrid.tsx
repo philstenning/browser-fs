@@ -5,17 +5,24 @@ type ResizableGrid = {
   minHeight?: number
   collapseTop?: boolean
   collapseBottom?: boolean
+  initialHeight?: string
 }
 
-function ResizableVerticalGrid({ children, minHeight = 100 }: ResizableGrid) {
-  const [panelHeight, setPanelHight] = useState([minHeight, minHeight])
+function ResizableVerticalGrid({
+  children,
+  minHeight = 100,
+  initialHeight = '1fr',
+  collapseTop=false,
+  collapseBottom=false,
+}: ResizableGrid) {
+  const [panelHeight, setPanelHight] = useState([-1, 0])
   const [isResizing, setIsResizing] = useState(false)
   const gridRef = useRef<HTMLDivElement>(null)
 
   /** Called on this grid for resizing */
   const resizeMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation()
-    e.preventDefault()
+    // e.stopPropagation()
+    // e.preventDefault()
     //  console.log(e.clientY)
     resize(e.clientY)
   }
@@ -27,22 +34,21 @@ function ResizableVerticalGrid({ children, minHeight = 100 }: ResizableGrid) {
     const minTop = topOffset + minHeight
     const minBottom = gridHeight - minHeight
 
-    
     let newPosition = mouseY - topOffset
     if (newPosition < minHeight) newPosition = minHeight
-    if (newPosition > minBottom){
-console.log('first')
-        newPosition = minBottom
-    } 
+    if (newPosition > minBottom) {
+      console.log('first')
+      newPosition = minBottom
+    }
 
-    console.log({minTop} , {minBottom}, gridHeight,{mouseY}, newPosition, {topOffset})
+    // console.log({minTop} , {minBottom}, gridHeight,{mouseY}, newPosition, {topOffset})
     // console.log(topOffset, gridHeight, newPosition)
     setPanelHight([newPosition, newPosition])
   }
 
   const resizeFinish = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation()
-    e.preventDefault()
+    // e.stopPropagation()
+    // e.preventDefault()
     if (isResizing) {
       setIsResizing(false)
     }
@@ -58,24 +64,32 @@ console.log('first')
     }
   }
 
+  const gridStyle = () => {
+    if (panelHeight[0] === -1) {
+      return {
+        gridTemplateRows: `${45}% 5px 1fr`,
+      }
+    }
+
+    if(collapseTop|| collapseBottom){
+        return { gridTemplateRows: `1fr` }
+    }
+    return { gridTemplateRows:`${panelHeight[0]}px 5px 1fr`}
+  }
+
   return (
     <div
       ref={gridRef}
       className={styles.container}
-      style={{ gridTemplateRows: `${panelHeight[0]}px 5px 1fr` }}
+      style={gridStyle()}
       onMouseMove={resizeMouse}
       onMouseUp={resizeFinish}
       onMouseLeave={handleLeave}
     >
-        <div className={styles.content}>
-
-      {children.length > 0 && children[0]}
-        </div>
-      <Divider setIsResizing={setIsResizing} />
-      <div  className={styles.content}>
-
-      {children.length > 1 && children[1]}
-      </div>
+      {children.length > 0 && !collapseTop && children[0]}
+      {!collapseTop &&
+        (!collapseBottom && <Divider setIsResizing={setIsResizing}  resize={resize}/>)}
+      {!collapseBottom && children.length > 1 && children[1]}
     </div>
   )
 }
@@ -83,21 +97,18 @@ console.log('first')
 type DividerProps = {
   setIsResizing: React.Dispatch<React.SetStateAction<boolean>>
   isCollapsed?: boolean
+  resize: (mouseY: number) => void
 }
 
-function Divider({ setIsResizing, isCollapsed = false }: DividerProps) {
-  const handleMouseEvent = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.stopPropagation()
-    e.preventDefault()
-    setIsResizing(true)
-  }
+function Divider({ setIsResizing, isCollapsed = false,resize }: DividerProps) {
 
   return (
     <div
       className={isCollapsed ? '' : styles.divider}
-      onMouseDown={handleMouseEvent}
+      onMouseDown={() => setIsResizing(true)}
+      onTouchStart={() => setIsResizing(true)}
+      onTouchEnd={() => setIsResizing(false)}
+      onTouchMove={(e) => resize(e.nativeEvent.touches[0].clientY)}
     ></div>
   )
 }
