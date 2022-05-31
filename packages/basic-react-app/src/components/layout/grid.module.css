@@ -1,17 +1,12 @@
 .container {
   width: 100%;
-  height: 95vh;
+  height: 100%;
   box-sizing: border-box;
   max-height: 100%;
   display: grid;
-  grid-template-columns: var(--left-panel) 5px 1fr 5px var(--right-panel);
   overflow: hidden;
-  /* gap: .5rem; */
-  /* border: solid; */
 
-  &:active {
-    /* cursor: ew-resize; */
-  }
+  /* grid-template-columns: var(--left-panel) 5px 1fr 5px var(--right-panel); */
 }
 
 .divider {

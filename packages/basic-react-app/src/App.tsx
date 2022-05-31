@@ -13,8 +13,8 @@ import './app.css'
 import Grid from './components/layout/grid'
 // import Layout from './components/layout/layout'
 function App() {
-  const [leftPanelIsCollapsed, setLeftPanelIsCollapsed] = useState(true)
-  const [rightPanelIsCollapsed, setRightPanelIsCollapsed] = useState(true)
+  const [leftPanelIsCollapsed, setLeftPanelIsCollapsed] = useState(false)
+  const [rightPanelIsCollapsed, setRightPanelIsCollapsed] = useState(false)
   return (
     <div className="app">
       <FsaDbContextProvider
