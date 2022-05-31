@@ -5,26 +5,36 @@
   max-height: 100%;
   display: grid;
   overflow: hidden;
+  grid-template-columns: 1fr;
 
-  /* grid-template-columns: var(--left-panel) 5px 1fr 5px var(--right-panel); */
+  /* border: solid; */
+
+  /* grid-template-rows: 1fr 1fr; */
+
+}
+
+.content{
+ overflow-y: auto;
+ 
 }
 
 .divider {
   background-color: var(--green-3);
-  width: 5px;
-  /* margin-inline: 0.25rem; */
-  height: 100%;
+  width: 100%;
+  
+  /* margin-block: 0.25rem; */
+  height: 5px;
 
-  /* border-inline: solid var(--gray-9) 2px; */
+  /* border-block: solid var(--gray-9) 2px; */
   opacity: 0.3;
   transition: all 0.2s ease-in-out;
   overflow: hidden;
 
   &:hover {
     opacity: 0.5;
-    cursor: ew-resize;
+    cursor: ns-resize;
     background-color: var(--gray-6);
 
-    /* border-inline: solid var(--gray-9) 0; */
+    /* border-block: solid var(--gray-9) 0; */
   }
 }
