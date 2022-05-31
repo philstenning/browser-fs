@@ -1,0 +1,9 @@
+{
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "order/order": ["custom-properties", "declarations","rules"],
+    "order/properties-order": ["width", "height", "padding"],
+    "selector-class-pattern": null
+  },
+  "extends": ["stylelint-config-standard", "stylelint-config-prettier"]
+}
