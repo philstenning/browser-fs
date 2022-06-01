@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import styles from './resizableVerticalGrid.module.css'
 type ResizableGrid = {
   children: React.ReactNode[]
@@ -12,18 +12,19 @@ function ResizableVerticalGrid({
   children,
   minHeight = 100,
   initialHeight = '1fr',
-  collapseTop=false,
-  collapseBottom=false,
+  collapseTop = false,
+  collapseBottom = false,
 }: ResizableGrid) {
-  const [panelHeight, setPanelHight] = useState([-1, 0])
+  const [panelHeight, setPanelHeight] = useState(
+    collapseBottom || collapseTop ? -2 : -1
+  )
+  const [storedPanelHeight, setStoredHeight] = useState(0)
+
   const [isResizing, setIsResizing] = useState(false)
   const gridRef = useRef<HTMLDivElement>(null)
 
   /** Called on this grid for resizing */
   const resizeMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    // e.stopPropagation()
-    // e.preventDefault()
-    //  console.log(e.clientY)
     resize(e.clientY)
   }
 
@@ -31,24 +32,17 @@ function ResizableVerticalGrid({
     if (!isResizing) return
     const gridHeight = gridRef.current?.clientHeight ?? 0
     const topOffset = gridRef.current?.offsetTop ?? 0
-    const minTop = topOffset + minHeight
     const minBottom = gridHeight - minHeight
 
     let newPosition = mouseY - topOffset
     if (newPosition < minHeight) newPosition = minHeight
     if (newPosition > minBottom) {
-      console.log('first')
       newPosition = minBottom
     }
-
-    // console.log({minTop} , {minBottom}, gridHeight,{mouseY}, newPosition, {topOffset})
-    // console.log(topOffset, gridHeight, newPosition)
-    setPanelHight([newPosition, newPosition])
+    setPanelHeight(newPosition)
   }
 
   const resizeFinish = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    // e.stopPropagation()
-    // e.preventDefault()
     if (isResizing) {
       setIsResizing(false)
     }
@@ -65,17 +59,39 @@ function ResizableVerticalGrid({
   }
 
   const gridStyle = () => {
-    if (panelHeight[0] === -1) {
+    // initially set to -1 on render
+    if (panelHeight === -1) {
       return {
-        gridTemplateRows: `${45}% 5px 1fr`,
+        gridTemplateRows: `calc(50% - 2px) 5px 1fr`,
       }
     }
-
-    if(collapseTop|| collapseBottom){
-        return { gridTemplateRows: `1fr` }
+    // if any are collapsed show single cell
+    if (collapseTop || collapseBottom) {
+      return { gridTemplateRows: `1fr` }
     }
-    return { gridTemplateRows:`${panelHeight[0]}px 5px 1fr`}
+    // split at the stored value.
+    return { gridTemplateRows: `${panelHeight}px 5px 1fr` }
   }
+
+  useEffect(() => {
+    const gridHeight = gridRef.current?.clientHeight ?? 1
+
+    // initial render panelHeight is -1 or -2 if collapsed
+    // we can set storedPanelHeight to 50% of gridHeight
+    if (panelHeight < 0) {
+      setStoredHeight(gridHeight / 2)
+    }
+    if (collapseBottom || collapseTop) {
+      // storedPanelHeight initial value is 0
+      if (storedPanelHeight === 0) {
+        setStoredHeight(gridHeight / 2)
+      } else {
+        setStoredHeight(panelHeight)
+      }
+    } else if (panelHeight > 0) {
+      setPanelHeight(storedPanelHeight)
+    }
+  }, [collapseBottom, collapseTop])
 
   return (
     <div
@@ -87,8 +103,9 @@ function ResizableVerticalGrid({
       onMouseLeave={handleLeave}
     >
       {children.length > 0 && !collapseTop && children[0]}
-      {!collapseTop &&
-        (!collapseBottom && <Divider setIsResizing={setIsResizing}  resize={resize}/>)}
+      {!collapseTop && !collapseBottom && (
+        <Divider setIsResizing={setIsResizing} resize={resize} />
+      )}
       {!collapseBottom && children.length > 1 && children[1]}
     </div>
   )
@@ -100,8 +117,7 @@ type DividerProps = {
   resize: (mouseY: number) => void
 }
 
-function Divider({ setIsResizing, isCollapsed = false,resize }: DividerProps) {
-
+function Divider({ setIsResizing, isCollapsed = false, resize }: DividerProps) {
   return (
     <div
       className={isCollapsed ? '' : styles.divider}

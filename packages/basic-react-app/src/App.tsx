@@ -44,7 +44,7 @@ function App() {
             <button
               onClick={() => setTopPanelIsCollapsed((current) => !current)}
             >
-              Collapse Top
+              Collapse Top {topPanelIsCollapsed.toString()}
             </button>
             <button
               onClick={() => setBottomPanelIsCollapsed((current) => !current)}
@@ -78,7 +78,7 @@ function App() {
               collapseBottom={bottomPanelIsCollapsed}
             >
               <Cards />
-              <div>
+              <div  style={{overflowY:'auto', }}>
                 <h3>Content bottom</h3>
                 <h4>{topPanelIsCollapsed.toString()}</h4>
                 <h4>{bottomPanelIsCollapsed.toString()}</h4>
