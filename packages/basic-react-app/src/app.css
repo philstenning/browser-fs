@@ -41,12 +41,12 @@ body :where(ul, li, h1, h2, h3) {
 
 ::-webkit-scrollbar-track {
   border-radius: 4px;
-  background-color: rgb(106 87 87);
+  background-color: var(--gray-6);
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background-color: rgb(220 83 223);
+  background-color: var(--gray-7);
   background-color: ;
 }
 
