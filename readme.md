@@ -4,8 +4,29 @@ Create collections of files from your local drive for use in the browser.
 
 ## Overview
 
-Use fsa-database to recursively scan your local drive for files of a any given extension
-save them to the browsers indexDB, then create collections of them for further use within your app.
+Use fsa-database to recursively scan your local drive for files of a any given extension and save them to the browsers indexDB, then create collections from them for further use within your app
+
+### Concepts 
+
+
+___
+
+- [fsa-database](#fsa-database)
+  - [Overview](#overview)
+    - [Concepts](#concepts)
+  - [Getting Stated](#getting-stated)
+  - [Getting Stated with React](#getting-stated-with-react)
+    - [Add a Root Directory](#add-a-root-directory)
+  - [Features](#features)
+    - [Files and Directories](#files-and-directories)
+    - [Collections](#collections)
+    - [State](#state)
+  - [Browser Compatibility](#browser-compatibility)
+  - [Options](#options)
+  - [Settings](#settings)
+  - [TypeScript](#typescript)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 This is a monorepo containing the following packages / projects:
 
@@ -72,10 +93,73 @@ fsa-database uses the File System Access API to scan a local drive for files wit
 ### Collections
 
 The user can create collections and then add/remove any file  from the database to it, then save the whole collection back to almost any location on their local drive. Collections once saved for the first time, can then be updated/deleted in a similar manner that you would have in a regular native app. 
+
+### State
+
+Built in state management, if needed, is stored in the database so after page reloads, the state of the app can be quickly restored, this state is also available across browser tabs. 
 ___
 ## Browser Compatibility
 
 The File System Access API is [not available in all browsers](https://caniuse.com/?search=File%20System%20Access%20API) so a fallback is provided for users not using the supported features of API, this works by storing the file with its meta data in the indexDB so we can use it from within the app.
+
+## Options
+
+```ts
+// list of folders that are not scanned. 
+excludedFolders: string[]  = [
+  "node_modules",
+  "programFiles",
+  "junk",
+  ".git",
+  ".changeset",
+  "bin",
+  "__pycache__",
+]
+
+  
+```
+```ts 
+// list of extensions to scan for 
+fileTypes: string[] = ['jpg','png','gif']
+
+```
+```ts
+// How deep you want to scan
+maxDepth: number = 10
+```
+
+## Settings
+
+```ts
+fsaSetting {
+  id?: number
+
+  // set internally when browser session starts
+  sessionStarted: number
+
+  // when files are removed from a collection,
+  // or a collection is deleted
+  // removed files  from local disk also
+  cleanUpFiles: boolean
+
+  // when a file is added to collection
+  // save to disk
+  autoSaveCollections: boolean
+
+  scanInterval: number // default is 0 or none.
+  
+  // time the user last scanned for file changes.
+  lastScanned: number
+
+  // when adding with drag and drop whether 
+  // to add files to a new folder
+  allowDndFiles: boolean
+
+  // When resetting db retain all root Directories.
+  retainRootDirectoriesOnReset: boolean; 
+
+}
+```
 
 ## TypeScript
 Fully written with TypeScript
