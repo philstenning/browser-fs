@@ -10,9 +10,10 @@
   "dependencies": {
     "fsa-database": "workspace:*",
     "open-props": "^1.3.7",
-    "react": "^18.0.0",
+    "react": "^18.1.0",
     "react-dom": "^18.0.0",
-    "react-fsa-database": "workspace:*"
+    "react-fsa-database": "workspace:*",
+    "react-resizable-collapsible-grid": "^1.3.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

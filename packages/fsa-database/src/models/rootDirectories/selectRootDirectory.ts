@@ -1,7 +1,5 @@
 import {
-  selectRootDirectoryOnLocalDrive,
-  scanLocalDrive,
-  VirtualRootDirectoryType,
+  selectRootDirectoryOnLocalDrive
 } from 'fsa-browser'
 import addRootDirectory from './addRootDirectory'
 

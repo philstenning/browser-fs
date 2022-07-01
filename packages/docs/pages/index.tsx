@@ -1,14 +1,23 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import {
+  ResizableHorizontalGrid,
+  ResizableVerticalGrid
+} from 'react-resizable-collapsible-grid'
+
+// import Head from 'next/head'
+// import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import Layout from '../components/layout/layout'
+// import Layout from '../components/layout/layout'
+
+import  'react-resizable-collapsible-grid/dist/css/index.css'
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
-     <Layout>
+     <ResizableHorizontalGrid >
        <div>ok</div>
-     </Layout>
+       <div>ok</div>
+       <div>ok</div>
+     </ResizableHorizontalGrid>
     </div>
   )
 }
