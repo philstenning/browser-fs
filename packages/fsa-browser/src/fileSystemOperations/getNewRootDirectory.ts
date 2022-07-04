@@ -1,5 +1,5 @@
-import { VirtualRootDirectoryType } from "../virtualRootDirectories/types";
-import md5 from 'md5'
+import type { VirtualRootDirectoryType } from "../virtualRootDirectories/";
+import {v4 as uuid} from 'uuid'
 
 /**
  * Select a Directory (this will be known as the root directory) on 
@@ -47,7 +47,7 @@ export  function createVirtualRootDirectory(
   // the id uses the current time to generate a unique id,
   // as we could have multiple folders with the same name.
   const folder: VirtualRootDirectoryType = {
-    id: md5(name + createdAt.toISOString()),
+    id: uuid(),
     handle: dirHandle,
     created: createdAt,
     updated: createdAt,

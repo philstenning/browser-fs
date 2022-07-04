@@ -1,7 +1,7 @@
-import md5 from "md5";
-import { FoldersToExcludeFromScanning } from "../excludedFolders";
-import { VirtualFileSystemEntry } from "./types";
-import { checkPermissionsOfHandle } from "./handlePermissionsCheck";
+import { v4 as uuid } from 'uuid'
+import { FoldersToExcludeFromScanning } from '../excludedFolders'
+import type { VirtualFileSystemEntry } from '../fileSystemOperations/types'
+import { checkPermissionsOfHandle } from './handlePermissionsCheck'
 
 /**
  * From the point of entry we scan the local drive recursively for Directories
@@ -15,14 +15,13 @@ import { checkPermissionsOfHandle } from "./handlePermissionsCheck";
  */
 async function scanLocalDrive(
   directoryHandle: FileSystemDirectoryHandle,
-  fileTypes = ['jpg','png','gif'],
+  fileTypes = ['jpg', 'png', 'gif'],
   maxDepth = 10,
   excludedFolders: string[] = FoldersToExcludeFromScanning
 ) {
-
   // console.log(` scanning Root Directory for ${JSON.stringify(fileTypes)}`)
   // create the root object
-  const root = createVirtualFileSystemEntry(directoryHandle);
+  const root = createVirtualFileSystemEntry(directoryHandle)
 
   // scan the rest of the directory
   const entries = await scanLocalDriveRecursively(
@@ -30,10 +29,10 @@ async function scanLocalDrive(
     fileTypes,
     maxDepth,
     excludedFolders
-  );
+  )
   // add the the result of the scan to the root entries.
-  root.entries = entries;
-  return root;
+  root.entries = entries
+  return root
 }
 
 /**
@@ -50,27 +49,27 @@ async function scanLocalDrive(
  */
 async function scanLocalDriveRecursively(
   directoryHandle: FileSystemDirectoryHandle,
-  fileTypes = ["3mf", "stl"],
+  fileTypes = ['3mf', 'stl'],
   maxDepth = 5,
   excludedFolders: string[] = FoldersToExcludeFromScanning,
   _depth = 0,
-  _path = ""
+  _path = ''
 ) {
-  const res = await checkPermissionsOfHandle(directoryHandle);
-  if (!res) return [];
-  const directoryContent: VirtualFileSystemEntry[] = [];
+  const res = await checkPermissionsOfHandle(directoryHandle)
+  if (!res) return []
+  const directoryContent: VirtualFileSystemEntry[] = []
   for await (const entry of directoryHandle.values()) {
-    const name = entry.name.toLowerCase();
-    if (entry.kind === "file") {
+    const name = entry.name.toLowerCase()
+    if (entry.kind === 'file') {
       // Create VirtualFileSystemEntry object from file
       const virtualFile = createVirtualFileSystemHandleFromFile(
         entry,
         _path,
         _depth,
         fileTypes
-      );
+      )
       if (virtualFile) {
-        directoryContent.push(virtualFile);
+        directoryContent.push(virtualFile)
       }
     } else {
       // check to see if the current Directory is in the list
@@ -88,31 +87,31 @@ async function scanLocalDriveRecursively(
             excludedFolders,
             _depth + 1,
             `${_path}/${entry.name}`
-          );
+          )
 
           const folder = createVirtualFileSystemEntry(
             entry,
             `${_path}/${entry.name}`,
             _depth,
-            "",
+            '',
             entryContent
-          );
-          directoryContent.push(folder);
+          )
+          directoryContent.push(folder)
         } else {
           // we don't want to scan recursively
           const folder = createVirtualFileSystemEntry(
             entry,
             `${_path}/${entry.name}`,
             _depth,
-            "",
+            '',
             []
-          );
-          directoryContent.push(folder);
+          )
+          directoryContent.push(folder)
         }
       }
     }
   }
-  return directoryContent;
+  return directoryContent
 }
 
 function createVirtualFileSystemHandleFromFile(
@@ -121,29 +120,29 @@ function createVirtualFileSystemHandleFromFile(
   depth: number,
   fileTypes: string[]
 ) {
-  const { name } = handle;
+  const { name } = handle
   // get the file extension
-  const fileExtension = name.slice(((name.lastIndexOf(".") - 1) >>> 0) + 2);
+  const fileExtension = name.slice(((name.lastIndexOf('.') - 1) >>> 0) + 2)
   // check if current file has the the requested extension.
-  if (!fileTypes.includes(fileExtension)) return null;
+  if (!fileTypes.includes(fileExtension)) return null
   const file = createVirtualFileSystemEntry(
     handle,
     `${path}/${name}`,
     depth,
     fileExtension
-  );
-  return file;
+  )
+  return file
 }
 
 function createVirtualFileSystemEntry(
   handle: FileSystemDirectoryHandle | FileSystemFileHandle,
-  path = "",
+  path = '',
   depth = 0,
-  extension = "",
+  extension = '',
   entries: VirtualFileSystemEntry[] = []
 ): VirtualFileSystemEntry {
   return {
-    id: md5(`${handle.name}${path}`),
+    id: uuid(),
     name: handle.name,
     depth,
     path,
@@ -151,8 +150,8 @@ function createVirtualFileSystemEntry(
     handle,
     extension,
     entries,
-    hasReadPermission: true,
-  };
+    hasReadPermission: true
+  }
 }
 
-export { scanLocalDrive };
+export { scanLocalDrive }

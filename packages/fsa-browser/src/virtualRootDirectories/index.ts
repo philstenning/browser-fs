@@ -1,11 +1,26 @@
-export { saveVirtualRootDirectory } from "./save";
-export {
+
+import type {RootDirOrderType, VirtualRootDirectoryType} from './types'
+
+import { saveVirtualRootDirectory } from './save'
+import {
   deleteAllVirtualRootDirectories,
-  deleteVirtualRootDirectory,
-} from "./delete";
-export {updateVirtualRootDirectory} from './update'
-export {
+  deleteVirtualRootDirectory
+} from './delete'
+import { updateVirtualRootDirectory } from './update'
+import {
   getAllVirtualRootDirectories,
   getAllVirtualRootDirectoriesAndCheckPermissions,
   orderDirectoriesByDate
-} from "./get";
+} from './get'
+
+
+export type { RootDirOrderType, VirtualRootDirectoryType }
+export {
+  deleteAllVirtualRootDirectories,
+  deleteVirtualRootDirectory,
+  getAllVirtualRootDirectories,
+  getAllVirtualRootDirectoriesAndCheckPermissions,
+  orderDirectoriesByDate,
+  saveVirtualRootDirectory,
+  updateVirtualRootDirectory
+}
