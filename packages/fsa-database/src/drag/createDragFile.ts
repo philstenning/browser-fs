@@ -1,6 +1,7 @@
-import { db, createFile, fsaFile } from '../'
+import { fsaFile } from '../models/types'
+import { createFile} from '../models/files/'
 import { getFileExtension, bytesToSize } from '../utils'
-
+import { db } from '../db/setup'
 async function createDragFile(
   parentId: string,
   rootId: string,

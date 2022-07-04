@@ -1,4 +1,6 @@
-import { db, createDirectory, fsaDirectory } from '../'
+import { fsaDirectory } from '../models/types'
+import { db } from '../db/setup'
+import createDirectory from '../models/directories/createDirectory'
 import { rootDirectoryAlreadyExists } from '../models/rootDirectories'
 import { v4 as uuid } from 'uuid'
 
@@ -35,7 +37,7 @@ export default async function createDragDirectory(
     const exists = await rootDirectoryAlreadyExists(dir.name)
     if (exists) return false
   }
-  const updated: fsaDirectory = { ...dir, isLocal: true ,isScanning:true}
+  const updated: fsaDirectory = { ...dir, isLocal: true, isScanning: true }
 
   if (save) {
     try {

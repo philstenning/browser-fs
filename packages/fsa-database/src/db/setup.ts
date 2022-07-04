@@ -8,7 +8,7 @@ import {
   fsaError,
   fsaSetting,
   fsaExcludedDirectory,
-} from '../../'
+} from '../'
 
 export class FsaDb extends Dexie {
   files!: Dexie.Table<fsaFile, string>

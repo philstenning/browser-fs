@@ -1,4 +1,4 @@
-import { db, fsaDirectory, setIsScanning } from '../../'
+import { db, fsaDirectory, setIsScanning } from '../'
 import {
   processDragDirectories,
   dragAddFilesToDirectory,

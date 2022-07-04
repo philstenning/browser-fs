@@ -1,4 +1,4 @@
-import { db } from './'
+import { db } from './setup'
 
 export default async function resetPermissionsOnAllDirectories() {
   try {

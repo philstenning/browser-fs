@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["wicg-file-system-access"],
+    // "types": ["wicg-file-system-access", "fs-browser"],
     "outDir": "dist",
     "declaration": true,
     "strictPropertyInitialization": false,
