@@ -149,7 +149,6 @@ importers:
       '@types/wicg-file-system-access': ^2020.9.5
       dexie: ^3.2.1
       dexie-export-import: ^1.0.3
-      dexie-observable: ^3.0.0-beta.11
       dexie-react-hooks: ^1.1.1
       fsa-browser: workspace:*
       prettier: ^2.6.2
@@ -158,15 +157,12 @@ importers:
       rollup: ^2.75.7
       rollup-plugin-copy: ^3.4.0
       rollup-plugin-dts: ^4.2.2
-      rollup-plugin-filesize: ^9.1.2
-      rollup-plugin-peer-deps-external: ^2.2.4
       rollup-plugin-terser: ^7.0.2
       typescript: ^4.6.3
       uuid: ^8.3.2
     dependencies:
       dexie: 3.2.1
       dexie-export-import: 1.0.3_dexie@3.2.1
-      dexie-observable: 3.0.0-beta.11_dexie@3.2.1
       dexie-react-hooks: 1.1.1_6hwsmw3blqbkpky3urjsk2bi4e
       fsa-browser: link:../fsa-browser
       react: 18.0.0
@@ -183,8 +179,6 @@ importers:
       rollup: 2.75.7
       rollup-plugin-copy: 3.4.0
       rollup-plugin-dts: 4.2.2_i2xh4vonrskkyoggjt45flfb4i
-      rollup-plugin-filesize: 9.1.2
-      rollup-plugin-peer-deps-external: 2.2.4_rollup@2.75.7
       rollup-plugin-terser: 7.0.2_rollup@2.75.7
       typescript: 4.6.3
 
@@ -2352,14 +2346,6 @@ packages:
     resolution: {integrity: sha512-oun27bUUEaeOfSZ8Cv3Nvj5s0LeANYBYQ7ROpF/3Zg1X/IALUnrX0hk5ZUMlYC3s99kFHimXX57ac5AlOdMzWw==}
     peerDependencies:
       dexie: ^3.0.0 || ^2.0.4
-    dependencies:
-      dexie: 3.2.1
-    dev: false
-
-  /dexie-observable/3.0.0-beta.11_dexie@3.2.1:
-    resolution: {integrity: sha512-mKwSYy54Kj73Njp3Rs+GoldLxyDJK1LF7niBkZxSenGAlBCXB5RxafH2Mg6Ay0B1pLlDYvJCWH31s88/Uz0WSg==}
-    peerDependencies:
-      dexie: ^3.0.2
     dependencies:
       dexie: 3.2.1
     dev: false

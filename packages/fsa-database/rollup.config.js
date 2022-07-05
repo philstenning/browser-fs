@@ -4,29 +4,19 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import dts from 'rollup-plugin-dts'
 import { terser } from 'rollup-plugin-terser'
-
 const packageJson = require('./package.json')
 
 export default defineConfig([
   {
     input: 'src/index.ts',
-    output: [
-      { file: packageJson.module, format: 'esm', sourcemap: true },
-    ],
+    output: [{ file: packageJson.main, format: 'esm', sourcemap: true }],
     plugins: [
       nodeResolve(),
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
       terser(),
     ],
-    external: [
-      'dexie',
-      'dexie-export-import',
-      'dexie-react-hooks',
-      'fsa-browser',
-      'react',
-      'uuid',
-    ],
+    external: ['dexie', 'dexie-export-import', 'fsa-browser', 'uuid','react'],
   },
   {
     input: 'src/index.ts',
