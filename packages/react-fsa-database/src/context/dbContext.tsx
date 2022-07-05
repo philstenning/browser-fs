@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
+import {useLiveQuery} from 'dexie-react-hooks'
 import {
   db,
   initializeDatabase,
   fsaState,
-  useLiveQuery,
+
   initialDbState,
   setCurrentCollectionId as setColId,
   setCurrentDirectoryId as setDirId,

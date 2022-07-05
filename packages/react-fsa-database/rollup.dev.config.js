@@ -3,7 +3,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import dts from 'rollup-plugin-dts'
-import { terser } from 'rollup-plugin-terser'
+
 const packageJson = require('./package.json')
 
 export default defineConfig([
@@ -14,9 +14,15 @@ export default defineConfig([
       nodeResolve(),
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
-      terser(),
     ],
-    external: ['dexie', 'dexie-export-import', 'uuid'],
+    external: [
+      'dexie',
+      'dexie-export-import',
+      'dexie-react-hooks',
+      'uuid',
+      'react',
+      'react-dom',
+    ],
   },
   {
     input: 'src/index.ts',
@@ -25,4 +31,4 @@ export default defineConfig([
   },
 ])
 
-//  pnpm i -D rollup @rollup/plugin-node-resolve @rollup/plugin-commonjs rollup-plugin-dts rollup-plugin-terser @rollup/plugin-typescript rollup-plugin-peer-deps-external rollup-plugin-filesize rollup-plugin-copy
+//  pnpm i -D rollup @rollup/plugin-node-resolve @rollup/plugin-commonjs rollup-plugin-dts rollup-plugin-terser

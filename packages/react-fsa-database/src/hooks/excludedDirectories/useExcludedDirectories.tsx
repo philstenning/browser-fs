@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useLiveQuery } from 'dexie-react-hooks'
 import {
   addExcludedDirectoryName,
   deleteExcludedDirectoryName,
   db,
-  useLiveQuery,
   fsaExcludedDirectory,
 } from 'fsa-database'
 

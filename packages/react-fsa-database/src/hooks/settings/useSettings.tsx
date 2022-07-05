@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
+import { useLiveQuery } from 'dexie-react-hooks'
 import {
-  useLiveQuery,
   db,
   updateSetting,
   createInitialSetting,

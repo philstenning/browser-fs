@@ -9,17 +9,16 @@
   ],
   "scripts": {
     "clean": "rimraf dist/  && rimraf types/",
-    "watch": "rollup -c --watch ",
-    "build": "rollup -c"
+    "build": "rollup -c && rimraf dist/dist",
+    "build:dev": "rollup -c rollup.dev.config.js",
+    "build:watch": "rollup -c rollup.dev.config.js --watch"
   },
   "author": "philstenning",
   "license": "ISC",
   "dependencies": {
     "dexie": "^3.2.1",
     "dexie-export-import": "^1.0.3",
-    "dexie-react-hooks": "^1.1.1",
     "fsa-browser": "workspace:*",
-    "react": "^18.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

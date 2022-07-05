@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build:test": "tsc && vite build",
     "preview": "vite preview",
     "test": "pnpm cypress open",
     "cy:test": "cypress run  ",

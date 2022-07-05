@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
+import { useLiveQuery } from 'dexie-react-hooks'
 import {
   db,
   fsaCollection,
-  useLiveQuery,
   createCollection,
   deleteCollection,
   addFileToCollection as fsaAddFileToCollection,

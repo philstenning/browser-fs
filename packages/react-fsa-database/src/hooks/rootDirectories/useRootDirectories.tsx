@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
+import { useLiveQuery } from 'dexie-react-hooks'
 import {
   db,
   fsaDirectory,
-  useLiveQuery,
   deleteRootDirectory,
   rescanRootDirectories,
   selectRootDirectory as addRootDirectory,

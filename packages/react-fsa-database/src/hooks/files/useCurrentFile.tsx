@@ -1,5 +1,5 @@
-import { db, useLiveQuery } from 'fsa-database'
-
+import { useLiveQuery } from 'dexie-react-hooks'
+import { db} from 'fsa-database'
 export default function useCurrentFile() {
   const file = useLiveQuery(async () => {
     const state = await db.state.toCollection().last()

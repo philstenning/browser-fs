@@ -1,5 +1,5 @@
-import { db, fsaFile, useLiveQuery, updateFile } from 'fsa-database'
-
+import { db, fsaFile, updateFile } from 'fsa-database'
+import { useLiveQuery } from 'dexie-react-hooks'
 export interface DuplicateFile {
   id: number
   name: string
