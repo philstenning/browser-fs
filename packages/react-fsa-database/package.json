@@ -10,7 +10,8 @@
   "scripts": {
     "clean": "rimraf dist/  && rimraf types/",
     "build": "rollup -c",
-    "watch": "rollup -c --watch ",
+    "build:dev": "rollup -c rollup.dev.config.js",
+    "build:watch": "rollup -c rollup.dev.config.js --watch",
     "lint": "eslint ./src --ext .ts,.tsx"
   },
   "author": "philstenning",
@@ -48,6 +49,9 @@
     "typescript": "^4.6.3"
   }
 }
+
+
+
 
 
 

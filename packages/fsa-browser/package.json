@@ -10,10 +10,9 @@
   ],
   "scripts": {
     "clean": "rimraf dist/  && rimraf types/",
-    "build": "pnpm build:rollup && pnpm build:cleanup",
-    "watch": "tsc -w ",
-    "build:rollup": " rollup -c",
-    "build:cleanup": "rimraf dist/cjs/types && rimraf dist/esm/types"
+    "build": "rollup -c && rimraf dist/**/types/",
+    "build:dev": "rollup -c rollup.dev.config.js",
+    "build:watch": "rollup -c rollup.dev.config.js --watch"
   },
   "author": "philstenning",
   "license": "ISC",

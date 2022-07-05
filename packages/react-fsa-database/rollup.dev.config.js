@@ -18,10 +18,10 @@ export default defineConfig([
       // terser(),
     ],
     external: [
-      'dexie',
-      'dexie-export-import',
+      // 'dexie',
+      // 'dexie-export-import',
       'fsa-browser',
-      'uuid',
+      // 'uuid',
       'react',
       // 'react-dom',
       // 'jsxRuntime',
@@ -31,7 +31,6 @@ export default defineConfig([
     input: 'src/index.ts',
     output: [{ file: 'dist/index.d.ts', format: 'esm' }],
     plugins: [dts()],
-    external: [/\.css$/],
   },
 ])
 

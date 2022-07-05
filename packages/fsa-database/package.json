@@ -9,8 +9,9 @@
   ],
   "scripts": {
     "clean": "rimraf dist/  && rimraf types/",
-    "watch": "rollup -c --watch ",
-    "build": "rollup -c && rimraf dist/dist"
+    "build": "rollup -c && rimraf dist/dist",
+    "build:dev": "rollup -c rollup.dev.config.js",
+    "build:watch": "rollup -c rollup.dev.config.js --watch"
   },
   "author": "philstenning",
   "license": "ISC",
