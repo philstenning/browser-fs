@@ -16,7 +16,7 @@ export default defineConfig([
       typescript({ tsconfig: './tsconfig.json' }),
       // terser(),
     ],
-    external: ['dexie', 'dexie-export-import','dexie-react-hooks', 'uuid','react'],
+    external: ['dexie', 'dexie-export-import', 'uuid'],
   },
   {
     input: 'src/index.ts',

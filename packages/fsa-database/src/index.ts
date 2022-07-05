@@ -109,8 +109,6 @@ import saveDragItems from './drag/saveDragItems'
 import checkHandlePermission from './fileSystem/checkHandlePermission'
 import parseVirtualFileSystemEntry from './fileSystem/parseVirtualFileSystemEntry'
 
-// re-exports from library's
-import { useLiveQuery } from 'dexie-react-hooks'
 
 export type {
   fsaCollection,
@@ -210,6 +208,4 @@ export {
   // fileSystem
   checkHandlePermission,
   parseVirtualFileSystemEntry,
-  // re-exports from library's
-  useLiveQuery,
 }
