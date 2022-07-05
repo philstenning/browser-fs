@@ -1,18 +1,11 @@
-import {
-  selectRootDirectoryOnLocalDrive,
-  scanLocalDrive,
-  VirtualRootDirectoryType,
-} from 'fsa-browser'
-import {
-  createRootDirectory,
-  db,
-  saveState,
-  fsaDirectory,
-  getFileTypeNames,
-  setCurrentRootDirectoryId,
-} from '../../'
+import { scanLocalDrive, VirtualRootDirectoryType } from 'fsa-browser'
+import { fsaDirectory } from '../types'
+import { db } from '@db/setup'
+import { getFileTypeNames } from '@filesType/index'
+import saveState from '@state/saveState'
+import  createRootDirectory  from '@rootDir/createRootDirectory'
 import { getExcludedDirectoriesList } from '../excludedDirectories'
-import parseVirtualFileSystemEntry from '../../fileSystem/parseVirtualFileSystemEntry'
+import parseVirtualFileSystemEntry from '@fileSystem/parseVirtualFileSystemEntry'
 /**
  * Creates a root directory in the database from a virtualRootDirectory object
  * @param {VirtualRootDirectoryType} virtualRootDirectory
@@ -49,7 +42,6 @@ export default async function addRootDirectory(
     if (state) await saveState({ ...state, isScanning: false })
   })
 
-  
   // toggle off scanning
   await setDirectoryIsScanning(false, dir)
   // update the state obj with current settings.

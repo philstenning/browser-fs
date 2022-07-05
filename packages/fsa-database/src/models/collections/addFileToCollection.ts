@@ -1,8 +1,9 @@
-import { fsaCollection, fsaFile, fsaCollectionFile } from '../../'
-import { putCollectionAndFile, findLastUsedCollectionOrCreatNew } from './'
-import { getFileExtension, getFileNameWithoutExtension } from '../../utils'
-import { createUniqueNameForFile } from '../files'
-
+import { fsaCollection, fsaFile, fsaCollectionFile } from '../types'
+import findLastUsedCollectionOrCreatNew from '@collections/findLastUsedCollectionOrCreatNew'
+import putCollectionAndFile from './putCollectionAndFile'
+import getFileExtension from '@utils/getFileExtension'
+import getFileNameWithoutExtension from '@utils/getFileNameWithoutExtension'
+import createUniqueNameForFile from '@files/createUniqueNameForFile'
 
 export default async function addFileToCollection(
   file: fsaFile,
@@ -19,8 +20,7 @@ export default async function addFileToCollection(
   }
 
   const uniqueFileName = await createUniqueNameForFile(file)
-  const uniqueNamedFile: fsaFile = {...file, uniqueName:uniqueFileName}
-
+  const uniqueNamedFile: fsaFile = { ...file, uniqueName: uniqueFileName }
 
   // create file
   const collectionFile: fsaCollectionFile =
@@ -36,7 +36,7 @@ export default async function addFileToCollection(
 
   // check for same name and rename if it does
   // collectionFile.name = checkIfFileWithSameNameExists(file.name, collection);
-  
+
   // increment all current file orders
   collection.files.map((f) => ({ ...f, order: f.order++ }))
   // now add at order 0
@@ -50,10 +50,9 @@ function createCollectionFile(file: fsaFile): fsaCollectionFile {
     fileId: file.id,
     added: Date.now(),
     order: 0,
-    name: file.uniqueName ?? file.name
+    name: file.uniqueName ?? file.name,
   }
 }
-
 
 /* now has been made obsolete by  createUniqueNameForFile()  */
 function checkIfFileWithSameNameExists(

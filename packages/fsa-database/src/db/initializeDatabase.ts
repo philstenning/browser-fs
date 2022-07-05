@@ -1,4 +1,8 @@
-import { fsaFileType, createSetting, saveSetting, saveState, db } from '../../'
+import createSetting from '../models/settings/createSetting'
+import { db } from '../db/setup'
+import saveSetting from '../models/settings/saveSetting'
+import saveState from '../models/state/saveState'
+import { fsaFileType } from '../models/types'
 import { getCurrentState } from '../models/state'
 import { FoldersToExcludeFromScanning } from 'fsa-browser'
 import resetPermissionsOnAllDirectories from './resetPermissionsOnAllDirectories'
@@ -6,7 +10,7 @@ import resetPermissionsOnAllDirectories from './resetPermissionsOnAllDirectories
 export default async function initializeDatabase(fileTypes: string[]) {
   console.time('initializeDb')
   const state = await getCurrentState()
-  await saveState({...state,isScanning:false})
+  await saveState({ ...state, isScanning: false })
   await createFileTypesIfNotExist(fileTypes)
 
   const setting = await createSetting(false)

@@ -1,6 +1,6 @@
-import { saveSetting, fsaSetting } from '../../'
+import { fsaSetting } from '../types'
+import saveSetting from '@settings/saveSetting'
 import getCurrentSetting from './getCurrentSetting'
-
 
 export default async function createSetting(
   save: boolean = true,

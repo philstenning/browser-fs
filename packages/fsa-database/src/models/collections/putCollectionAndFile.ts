@@ -1,4 +1,4 @@
-import { db } from "../../db/setup";
+import { db } from "@db/setup";
 import { fsaCollection, fsaFile  } from "../types";
 
 export default async function putCollectionAndFile(collection: fsaCollection, file: fsaFile) {

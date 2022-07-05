@@ -1,10 +1,8 @@
-import {
-  getCurrentSetting,
-  initialDbState,
-  saveState,
-  saveSetting,
-  db,
-} from '../'
+import saveSetting from '../models/settings/saveSetting'
+import saveState from '../models/state/saveState'
+import getCurrentSetting from '../models/settings/getCurrentSetting'
+import { initialDbState } from '../models/state/initialState'
+import { db } from './setup'
 
 export default async function resetDatabase() {
   try {

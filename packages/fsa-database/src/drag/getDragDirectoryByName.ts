@@ -1,6 +1,5 @@
-import { createDragDirectory } from './'
-import { db, fsaDirectory } from '../'
-
+import { fsaDirectory } from '../models/types'
+import { db } from '../db/setup'
 /**
  * Looks for the root directory of the name param, if it can't be
  * found it creates it with that name.

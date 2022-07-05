@@ -1,20 +1,20 @@
-import { db, setCurrentRootDirectoryId, setCurrentDirectoryId } from '../'
+import setCurrentRootDirectoryId from '../models/state/setCurrentRootDirectoryId'
+import { db } from '../db/setup'
 import { fsaDirectory, fsaFile } from '../models/types'
-
+import setCurrentDirectoryId from '../models/state/setCurrentDirectoryId'
 import getDragDirectoryById from './getDragDirectoryById'
 import createDragFile from './createDragFile'
 import getDragDirectoryByName from './getDragDirectoryByName'
 import createDragDirectory from './createDragDirectory'
 import { getCurrentSetting } from '../models/settings'
 
-
 export default async function dragAddFilesToDirectory(
   files: File[],
   name: string,
   dirId?: string
 ) {
-   // only proceed if allowDndFiles is true
-   if(!(await getCurrentSetting()).allowDndFiles) return 
+  // only proceed if allowDndFiles is true
+  if (!(await getCurrentSetting()).allowDndFiles) return
 
   // find  existing or create the directory for new files.
   let directory: fsaDirectory | false = false

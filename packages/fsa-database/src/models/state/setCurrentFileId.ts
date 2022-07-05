@@ -1,4 +1,5 @@
-import { saveState, getCurrentStateWithOutId } from './'
+import getCurrentStateWithOutId from '@state/getCurrentStateWithOutId'
+import saveState from '@state/saveState'
 
 export default async function setCurrentFileId(id = 'null') {
   if (id.length < 3) id = 'null'

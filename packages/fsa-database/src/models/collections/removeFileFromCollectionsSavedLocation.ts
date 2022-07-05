@@ -1,6 +1,6 @@
-import { getCurrentSetting } from "../../";
-import { fsaCollection, fsaFile } from "../types";
 import { checkPermissionsOfHandle } from "fsa-browser";
+import { fsaCollection, fsaFile } from "../types";
+import getCurrentSetting from "@settings/getCurrentSetting";
 
 export default async function removeFileFromCollectionsSavedLocation(
   file: fsaFile,

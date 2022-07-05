@@ -1,4 +1,5 @@
-import { db, fsaDirectory } from "../../index";
+import {  fsaDirectory } from "../types";
+import { db } from "@db/setup";
 
 export default  async function checkDirectoryForFilesInCollections(dir: fsaDirectory) {
   let counter = 0;

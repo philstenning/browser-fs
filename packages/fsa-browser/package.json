@@ -17,7 +17,6 @@
   "author": "philstenning",
   "license": "ISC",
   "dependencies": {
-    "@types/uuid": "^8.3.4",
     "idb-keyval": "^6.1.0",
     "uuid": "^8.3.2"
   },
@@ -25,7 +24,7 @@
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.3",
-    "@types/md5": "^2.3.2",
+    "@types/uuid": "^8.3.4",
     "@types/wicg-file-system-access": "^2020.9.5",
     "rimraf": "^3.0.2",
     "rollup": "^2.75.7",

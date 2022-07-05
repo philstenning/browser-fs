@@ -1,9 +1,9 @@
-import {
-  db,
-  fsaDirectory,
-  deleteRootFolderFiles,
-  rootDirHasFilesInCollections
-} from '../../'
+import { fsaDirectory } from '../types'
+import rootDirHasFilesInCollections from '@rootDir/rootDirHasFilesInCollections'
+import deleteRootFolderFiles from '@files/deleteRootFolderFiles'
+
+import { db } from '@db/setup'
+
 import selectPreviouslySelectedRootDir from './selectPreviouslySelectedRootDir'
 
 export default async function deleteRootDirectory(dir: fsaDirectory) {

@@ -1,5 +1,5 @@
-import { db, fsaExcludedDirectory } from '../../'
-
+import { fsaExcludedDirectory } from '../types'
+import { db } from '@db/setup'
 export default async function addExcludedDirectoryName(name: string) {
   name = name.trim()
   try {

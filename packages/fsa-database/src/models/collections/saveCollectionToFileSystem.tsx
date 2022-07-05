@@ -1,6 +1,6 @@
-import { db } from '../../db/setup'
-import { fsaCollection, fsaFile } from '../types'
 import { checkPermissionsOfHandle } from 'fsa-browser'
+import { db } from '@db/setup'
+import { fsaCollection, fsaFile } from '../types'
 import updatePermissionsForRootDirAndChildren from './updatePermissionsForRootDirAndChildren'
 
 export default async function saveCollectionToFileSystem(collectionId: string) {

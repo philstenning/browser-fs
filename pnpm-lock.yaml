@@ -107,7 +107,6 @@ importers:
       '@rollup/plugin-commonjs': ^22.0.1
       '@rollup/plugin-node-resolve': ^13.3.0
       '@rollup/plugin-typescript': ^8.3.3
-      '@types/md5': ^2.3.2
       '@types/uuid': ^8.3.4
       '@types/wicg-file-system-access': ^2020.9.5
       idb-keyval: ^6.1.0
@@ -122,14 +121,13 @@ importers:
       typescript: ^4.6.3
       uuid: ^8.3.2
     dependencies:
-      '@types/uuid': 8.3.4
       idb-keyval: 6.1.0
       uuid: 8.3.2
     devDependencies:
       '@rollup/plugin-commonjs': 22.0.1_rollup@2.75.7
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.75.7
       '@rollup/plugin-typescript': 8.3.3_pwvlf5vwwbhdhahhgmumhyra6u
-      '@types/md5': 2.3.2
+      '@types/uuid': 8.3.4
       '@types/wicg-file-system-access': 2020.9.5
       rimraf: 3.0.2
       rollup: 2.75.7
@@ -143,6 +141,9 @@ importers:
 
   packages/fsa-database:
     specifiers:
+      '@rollup/plugin-commonjs': ^22.0.1
+      '@rollup/plugin-node-resolve': ^13.3.0
+      '@rollup/plugin-typescript': ^8.3.3
       '@types/react': ^17.0.33
       '@types/uuid': ^8.3.4
       '@types/wicg-file-system-access': ^2020.9.5
@@ -153,6 +154,13 @@ importers:
       fsa-browser: workspace:*
       prettier: ^2.6.2
       react: ^18.0.0
+      rimraf: ^3.0.2
+      rollup: ^2.75.7
+      rollup-plugin-copy: ^3.4.0
+      rollup-plugin-dts: ^4.2.2
+      rollup-plugin-filesize: ^9.1.2
+      rollup-plugin-peer-deps-external: ^2.2.4
+      rollup-plugin-terser: ^7.0.2
       typescript: ^4.6.3
       uuid: ^8.3.2
     dependencies:
@@ -164,10 +172,20 @@ importers:
       react: 18.0.0
       uuid: 8.3.2
     devDependencies:
+      '@rollup/plugin-commonjs': 22.0.1_rollup@2.75.7
+      '@rollup/plugin-node-resolve': 13.3.0_rollup@2.75.7
+      '@rollup/plugin-typescript': 8.3.3_i2xh4vonrskkyoggjt45flfb4i
       '@types/react': 17.0.44
       '@types/uuid': 8.3.4
       '@types/wicg-file-system-access': 2020.9.5
       prettier: 2.6.2
+      rimraf: 3.0.2
+      rollup: 2.75.7
+      rollup-plugin-copy: 3.4.0
+      rollup-plugin-dts: 4.2.2_i2xh4vonrskkyoggjt45flfb4i
+      rollup-plugin-filesize: 9.1.2
+      rollup-plugin-peer-deps-external: 2.2.4_rollup@2.75.7
+      rollup-plugin-terser: 7.0.2_rollup@2.75.7
       typescript: 4.6.3
 
   packages/react-fsa-database:
@@ -927,6 +945,23 @@ packages:
       rollup: 2.75.7
     dev: true
 
+  /@rollup/plugin-typescript/8.3.3_i2xh4vonrskkyoggjt45flfb4i:
+    resolution: {integrity: sha512-55L9SyiYu3r/JtqdjhwcwaECXP7JeJ9h1Sg1VWRJKIutla2MdZQodTgcCNybXLMCnqpNLEhS2vGENww98L1npg==}
+    engines: {node: '>=8.0.0'}
+    peerDependencies:
+      rollup: ^2.14.0
+      tslib: '*'
+      typescript: '>=3.7.0'
+    peerDependenciesMeta:
+      tslib:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.75.7
+      resolve: 1.22.0
+      rollup: 2.75.7
+      typescript: 4.6.3
+    dev: true
+
   /@rollup/plugin-typescript/8.3.3_pwvlf5vwwbhdhahhgmumhyra6u:
     resolution: {integrity: sha512-55L9SyiYu3r/JtqdjhwcwaECXP7JeJ9h1Sg1VWRJKIutla2MdZQodTgcCNybXLMCnqpNLEhS2vGENww98L1npg==}
     engines: {node: '>=8.0.0'}
@@ -1044,10 +1079,6 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/md5/2.3.2:
-    resolution: {integrity: sha512-v+JFDu96+UYJ3/UWzB0mEglIS//MZXgRaJ4ubUPwOM0gvLc/kcQ3TWNYwENEK7/EcXGQVrW8h/XqednSjBd/Og==}
-    dev: true
-
   /@types/minimatch/3.0.5:
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
     dev: true
@@ -1133,6 +1164,7 @@ packages:
 
   /@types/uuid/8.3.4:
     resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
+    dev: true
 
   /@types/wicg-file-system-access/2020.9.5:
     resolution: {integrity: sha512-UYK244awtmcUYQfs7FR8710MJcefL2WvkyHMjA8yJzxd1mo0Gfn88sRZ1Bls7hiUhA2w7ne1gpJ9T5g3G0wOyA==}

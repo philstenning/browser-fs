@@ -1,6 +1,6 @@
 
 import { fsaFile } from '../types'
-import { deleteFile } from './'
+import deleteFile  from '@files/deleteFile'
 export default async function deleteFiles(files: fsaFile[]) {
   if (!files.length) return false
   try {
