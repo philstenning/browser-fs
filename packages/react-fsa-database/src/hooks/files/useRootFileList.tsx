@@ -1,5 +1,5 @@
-import { db, useLiveQuery } from 'fsa-database'
-
+import { db } from 'fsa-database'
+import { useLiveQuery } from 'dexie-react-hooks'
 function useRootFileList(
   filterBySelectedFileTypes: boolean = true,
   filterByRootDirectory: boolean = true

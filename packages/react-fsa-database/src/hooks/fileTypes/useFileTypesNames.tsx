@@ -1,5 +1,5 @@
-import { db, useLiveQuery } from 'fsa-database'
-
+import { db } from 'fsa-database'
+import { useLiveQuery } from 'dexie-react-hooks'
 /**
  * Returns a array of fileType names
  */

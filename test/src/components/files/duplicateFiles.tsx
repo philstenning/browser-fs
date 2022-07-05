@@ -1,21 +1,22 @@
-import React, { useState } from "react";
-import { useFindDuplicateFiles } from "react-fsa-database";
-import { db, useLiveQuery } from "fsa-database";
-import { DuplicateFile } from "react-fsa-database/src/hooks/files";
+import React, { useState } from 'react'
+import { useFindDuplicateFiles } from 'react-fsa-database'
+import { db } from 'fsa-database'
+import { useLiveQuery } from 'dexie-react-hooks'
+import { DuplicateFile } from 'react-fsa-database/src/hooks/files'
 
 //@ts-ignore
-import styles from "./duplicateFiles.module.css";
+import styles from './duplicateFiles.module.css'
 
 function DuplicateFiles() {
-  const [filtered, setFiltered] = useState<DuplicateFile | null>(null);
-  const { duplicateFiles, toggleHidden } = useFindDuplicateFiles(true);
+  const [filtered, setFiltered] = useState<DuplicateFile | null>(null)
+  const { duplicateFiles, toggleHidden } = useFindDuplicateFiles(true)
 
   const handleClick = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
     file: DuplicateFile
   ) => {
-    setFiltered(file);
-  };
+    setFiltered(file)
+  }
 
   return (
     <div data-testid="duplicateFiles">
@@ -28,31 +29,31 @@ function DuplicateFiles() {
               onClick={(e) => handleClick(e, f)}
               data-testid={`dupFileListItem-${index}`}
             >
-              {f.name} ({f.count}){" "}
+              {f.name} ({f.count}){' '}
             </li>
           ))}
       </ul>
     </div>
-  );
+  )
 }
 
-export default DuplicateFiles;
+export default DuplicateFiles
 //TODO: add to library
 type Props = {
-  file: DuplicateFile;
-  allFiles: DuplicateFile[];
-};
+  file: DuplicateFile
+  allFiles: DuplicateFile[]
+}
 
 const FileList = ({ file }: Props) => {
-  const { toggleHidden } = useFindDuplicateFiles(true);
+  const { toggleHidden } = useFindDuplicateFiles(true)
   const filtered =
     useLiveQuery(async () => {
       if (file) {
         return (
-          await db.files.where("name").equals(file.name).toArray()
-        ).filter((f) => f.hidden === "false");
+          await db.files.where('name').equals(file.name).toArray()
+        ).filter((f) => f.hidden === 'false')
       }
-    }, [file]) ?? [];
+    }, [file]) ?? []
 
   return (
     <div>
@@ -70,5 +71,5 @@ const FileList = ({ file }: Props) => {
           ))}
       </ul>
     </div>
-  );
-};
+  )
+}

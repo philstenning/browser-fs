@@ -187,8 +187,12 @@ importers:
       '@types/filesystem': ^0.0.32
       '@types/react': ^18.0.8
       '@types/react-dom': ^17.0.10
+      '@types/uuid': ^8.3.4
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
+      dexie: ^3.2.1
+      dexie-export-import: ^1.0.3
+      dexie-react-hooks: ^1.1.1
       eslint: ^7.32.0 || ^8.2.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-prettier: ^8.5.0
@@ -210,10 +214,16 @@ importers:
       rollup-plugin-dts: ^4.2.2
       rollup-plugin-terser: ^7.0.2
       typescript: ^4.6.3
+      uuid: ^8.3.2
     dependencies:
+      '@types/uuid': 8.3.4
+      dexie: 3.2.1
+      dexie-export-import: 1.0.3_dexie@3.2.1
+      dexie-react-hooks: 1.1.1_jt3wvx4qj52ohfhpuzzvfr44ca
       fsa-database: link:../fsa-database
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
+      uuid: 8.3.2
     devDependencies:
       '@rollup/plugin-commonjs': 22.0.1_rollup@2.75.7
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.75.7
@@ -1113,7 +1123,6 @@ packages:
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
-    dev: true
 
   /@types/react-dom/17.0.15:
     resolution: {integrity: sha512-Tr9VU9DvNoHDWlmecmcsE5ZZiUkYx+nKBzum4Oxe1K0yJVyBlfbq7H3eXjxXqJczBKqPGq3EgfTru4MgKb9+Yw==}
@@ -1149,7 +1158,6 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.0.11
-    dev: true
 
   /@types/resolve/1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
@@ -1159,7 +1167,6 @@ packages:
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
-    dev: true
 
   /@types/sinonjs__fake-timers/8.1.1:
     resolution: {integrity: sha512-0kSuKjAS0TrGLJ0M/+8MaFkGsQhZpB6pxOmvS3K8FYI72K//YmdfoW9X2qPsAKh1mkwxGD5zib9s1FIFed6E8g==}
@@ -1171,7 +1178,6 @@ packages:
 
   /@types/uuid/8.3.4:
     resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
-    dev: true
 
   /@types/wicg-file-system-access/2020.9.5:
     resolution: {integrity: sha512-UYK244awtmcUYQfs7FR8710MJcefL2WvkyHMjA8yJzxd1mo0Gfn88sRZ1Bls7hiUhA2w7ne1gpJ9T5g3G0wOyA==}
@@ -2174,7 +2180,6 @@ packages:
 
   /csstype/3.0.11:
     resolution: {integrity: sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==}
-    dev: true
 
   /cypress/9.6.0:
     resolution: {integrity: sha512-nNwt9eBQmSENamwa8LxvggXksfyzpyYaQ7lNBLgks3XZ6dPE/6BCQFBzeAyAPt/bNXfH3tKPkAyhiAZPYkWoEg==}
@@ -2362,6 +2367,18 @@ packages:
       dexie: ^3.0.0 || ^2.0.4
     dependencies:
       dexie: 3.2.1
+    dev: false
+
+  /dexie-react-hooks/1.1.1_jt3wvx4qj52ohfhpuzzvfr44ca:
+    resolution: {integrity: sha512-Cam5JP6PxHN564RvWEoe8cqLhosW0O4CAZ9XEVYeGHJBa6KEJlOpd9CUpV3kmU9dm2MrW97/lk7qkf1xpij7gA==}
+    peerDependencies:
+      '@types/react': '>=16'
+      dexie: '>=3.1.0-alpha.1 <5.0.0'
+      react: '>=16'
+    dependencies:
+      '@types/react': 18.0.8
+      dexie: 3.2.1
+      react: 18.0.0
     dev: false
 
   /dexie/3.2.1:
