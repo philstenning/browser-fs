@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "rimraf dist/  && rimraf types/",
     "watch": "rollup -c --watch ",
-    "build": "rollup -c"
+    "build": "rollup -c && rimraf dist/dist"
   },
   "author": "philstenning",
   "license": "ISC",
