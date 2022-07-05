@@ -1,6 +1,6 @@
 import { fsaState } from '../types'
-import { db } from '../../db/setup'
-import { initialDbState } from '../state'
+import { db } from '@db/setup'
+import { initialDbState } from '../state/initialState'
 
 /**
  * looks at the db to find the last used

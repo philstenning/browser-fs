@@ -1,4 +1,4 @@
-import { db } from '../..'
+import { db } from '@db/setup'
 import { fsaFile } from '../types'
 import { getFileNameWithoutExtension, getFileExtension } from '../../utils'
 

@@ -2,7 +2,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "declaration": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+ 
   },
   "include": ["./src/index.ts"],
   "extends": "../../tsconfig.json"

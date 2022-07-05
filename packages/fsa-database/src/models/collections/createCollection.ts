@@ -1,10 +1,7 @@
-import {
-  db,
-  fsaCollection,
-  fsaCollectionFile,
-  setCurrentCollectionId
-} from '../../'
 import { v4 as uuid } from 'uuid'
+import { fsaCollection, fsaCollectionFile } from '../types'
+import setCurrentCollectionId from '@state/setCurrentCollectionId'
+import { db } from '@db/setup'
 
 export default async function createCollection(
   name: string,
@@ -23,7 +20,7 @@ export default async function createCollection(
     files,
     tags,
     description,
-    saveToFileSystem: false
+    saveToFileSystem: false,
   }
   name = name.trim()
   if (name.length < 1) {

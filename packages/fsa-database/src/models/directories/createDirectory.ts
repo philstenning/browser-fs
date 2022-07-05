@@ -1,5 +1,5 @@
-import { fsaDirectory } from '../types'
 import { v4 as uuid } from 'uuid'
+import { fsaDirectory } from '../types'
 
 export default function createDirectory(
   handle: FileSystemDirectoryHandle,

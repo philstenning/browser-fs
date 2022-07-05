@@ -1,5 +1,5 @@
-import { db, fsaDirectory } from '../'
-
+import { fsaDirectory } from '../models/types'
+import { db } from '../db/setup'
 /**
  * Gets the root directory by id.
  * @param { string} [dirId] The id of the root directory you want to return.

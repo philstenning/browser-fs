@@ -1,4 +1,5 @@
-import { db, getCurrentSetting } from "../../";
+import {db} from '@db/setup'
+import getCurrentSetting from "@settings/getCurrentSetting";
 import { fsaCollection, fsaFile } from "../types";
 import { mapCollectionNameToFileName } from "./saveCollectionToFileSystem";
 

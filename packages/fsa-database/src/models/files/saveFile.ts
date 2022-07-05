@@ -1,5 +1,5 @@
-import { db } from "../../db/setup";
 import { fsaFile } from "../types";
+import { db } from "@db/setup";
 
 export default async function saveFile(file: fsaFile) {
   try {

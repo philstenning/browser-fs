@@ -1,4 +1,4 @@
-import { db } from "../../db/setup";
+import { db } from "@db/setup";
 
 export default async function findLastUsedCollection() {
   // filter state to not empty

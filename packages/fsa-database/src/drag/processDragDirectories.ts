@@ -1,6 +1,9 @@
 import { createVirtualRootDirectory } from 'fsa-browser'
-import { setIsScanning, addRootDirectory } from '../'
-import { scanDirectoryLegacy } from './saveDragItems'
+import 
+  addRootDirectory
+ from '../models/rootDirectories/addRootDirectory'
+import setIsScanning from '../models/state/setIsScanning'
+import { scanDirectoryLegacy } from './scanDirectoryLegacy'
 
 export default async function processDragDirectories(
   directories: DataTransferItem[]

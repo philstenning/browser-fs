@@ -1,13 +1,14 @@
-import { db, fsaState } from "../../";
+import { fsaState } from '../types'
+import { db } from '@db/setup'
 
 export default async function saveState(state: fsaState) {
   try {
-    delete state.id;
-    const id = await db.state.add(state);
-    const newState: fsaState = { ...state, id };
-    return newState;
+    delete state.id
+    const id = await db.state.add(state)
+    const newState: fsaState = { ...state, id }
+    return newState
   } catch (e) {
-    console.error(`Error saving state ${e}`);
+    console.error(`Error saving state ${e}`)
   }
-  return false;
+  return false
 }

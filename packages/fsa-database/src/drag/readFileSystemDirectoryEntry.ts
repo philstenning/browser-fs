@@ -1,6 +1,8 @@
-import { fsaFile, getFileTypeNames, getFileExtension } from '.././'
-import {createDragFile, getFile} from './'
-
+import getFileTypeNames from '../models/fileTypes/getFileTypeNames'
+import getFileExtension from '../utils/getFileExtension'
+import { fsaFile } from '../models/types'
+import getFile from './getFile'
+import createDragFile from './createDragFile'
 
 type readFileSystemDirectoryEntryProp = {
   files: fsaFile[]
@@ -50,6 +52,5 @@ const readFileSystemDirectoryEntry = (
     })
   })
 }
-
 
 export default readFileSystemDirectoryEntry

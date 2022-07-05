@@ -1,4 +1,4 @@
-import { db } from '../../db'
+import { db } from '@db/setup'
 import updateSetting from './updateSetting'
 
 export default async function updateSettingLastScanned(

@@ -1,5 +1,6 @@
 import { fsaError } from "../types";
 import {db} from '../../db/setup'
+
 export class DbError implements fsaError{
   message: string;
   success: boolean;

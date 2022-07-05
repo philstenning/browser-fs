@@ -1,4 +1,5 @@
-import { db, fsaDirectory } from '../..'
+import { fsaDirectory } from '../types'
+import { db } from '@db/setup'
 
 export default async function updateDirectory(directory: fsaDirectory) {
   if (directory.name.length < 2 && directory.handle.name !== directory.name) {

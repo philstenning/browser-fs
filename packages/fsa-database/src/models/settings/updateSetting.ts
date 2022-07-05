@@ -1,4 +1,4 @@
-import { db } from '../../db'
+import { db } from '@db/setup'
 import { fsaSetting } from '../types'
 
 export default async function updateSetting(setting: fsaSetting) {
