@@ -6,7 +6,8 @@
     "removeComments": true,
     "sourceMap": true,
     "declarationDir": "types",
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "jsx": "react"
   },
   "include": ["./src/index.ts"],
   "extends": "../../tsconfig.json"
