@@ -1,0 +1,27 @@
+{
+  "presets": ["@babel/preset-typescript"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["."],
+        "alias": {
+          "@db": "./src/db",
+          "@drag": "./src/drag",
+          "@fileSystem": "./src/fileSystem",
+          "@collections": "./src/models/collections",
+          "@directories": "./src/models/directories",
+          "@excludedDirectories": "./src/models/excludedDirectories",
+          "@files": "./src/models/files",
+          "@filesType": "./src/models/fileTypes",
+          "@rootDir": "./src/models/rootDirectories",
+          "@state": "./src/models/state",
+          "@settings": "./src/models/settings",
+          "@utils": "./src/utils",
+          "@models": "./src/models"
+        }
+      }
+    ]
+  ]
+  //   "minified": true
+}

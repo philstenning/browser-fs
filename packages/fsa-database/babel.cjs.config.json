@@ -1,0 +1,12 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    [
+      "@babel/preset-typescript",
+      {
+        "modules": "commonjs"
+      }
+    ]
+  ],
+  "plugins": [["babel-plugin-tsconfig-paths"]]
+}

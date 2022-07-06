@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "dist/esm",
     "declaration": true,
     "skipLibCheck": true,
     "removeComments": true,
     "sourceMap": true,
-    "declarationDir": "types",
     "emitDeclarationOnly": true,
     "jsx": "react",
     "target": "ES2017"
