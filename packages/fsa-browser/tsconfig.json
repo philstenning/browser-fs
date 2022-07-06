@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "types": ["wicg-file-system-access"],
-      "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
@@ -21,9 +20,10 @@
     "declaration": true,
     "sourceMap": true,
     "declarationDir": "types",
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "target": "ES2017"
   },
-  "include": ["./src/index.ts"],
+  "include": ["./src/index.ts"]
   // "exclude": ["node_modules"],
   // "extends": "../../tsconfig.json"
 }

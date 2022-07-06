@@ -7,11 +7,11 @@
       "outputs": ["dist/**"]
     },
     "build:dev": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build:dev"],
       "outputs": ["dist/**"]
     },
     "test": {
-      "dependsOn": ["build"]
+      "dependsOn": ["build:dev"]
     },
     "clean": {},
     "build:examples": {
