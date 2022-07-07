@@ -2,22 +2,23 @@
   "name": "fsa-browser",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "types": "dist/esm/index.d.ts"
+  },
   "files": [
     "/dist"
   ],
   "scripts": {
-    "clean": "rimraf dist/  && rimraf types/",
-    "build:X": "rollup -c && rimraf dist/**/types/",
-    "build:dev": "rollup -c rollup.dev.config.js",
-    "build:watch": "rollup -c rollup.dev.config.js --watch",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build": "pnpm clean && concurrently pnpm:babel:*",
-    "babel:esm": "babel --config-file ./babel.config.json src --extensions .ts --out-dir dist/esm --source-maps",
-    "babel:cjs": "babel --config-file ./babel.cjs.config.json src --extensions .ts --out-dir dist/cjs --source-maps",
-    "babel:tsc": "tsc"
+    "clean": "rimraf dist/",
+    "clean:turbo": "rimraf .turbo",
+    "build:watch": "tsc --watch",
+    "build": "pnpm build:esm && pnpm build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "babel dist/esm --out-dir dist/cjs --source-maps"
   },
   "author": "philstenning",
   "license": "ISC",
@@ -45,5 +46,6 @@
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.4.0",
     "typescript": "^4.6.3"
-  },"browserslist": "> 0.25%, not dead"
+  },
+  "browserslist": "> 0.25%, not dead"
 }

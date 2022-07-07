@@ -1,7 +1,10 @@
 {
-
-
-  "presets": ["@babel/preset-typescript"]
-
-  //   "minified": true
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": "commonjs"
+      }
+    ]
+  ]
 }

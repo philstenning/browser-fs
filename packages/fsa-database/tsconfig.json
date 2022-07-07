@@ -1,10 +1,8 @@
 {
   "compilerOptions": {
     "types": ["wicg-file-system-access"],
-    "outDir": "dist/esm",
-    "declaration": true,
     "strictPropertyInitialization": false,
-    "skipLibCheck": true,
+    "moduleResolution": "node",
     "baseUrl": "src",
     "paths": {
       "@db/*": ["db/*"],
@@ -21,7 +19,7 @@
       "@utils/*": ["utils/*"],
       "@models/*": ["models/*"]
     },
-    "target": "ES2017"
+    "outDir": "dist/esm"
   },
   "include": ["./src/index.ts"],
   "extends": "../../tsconfig.json"

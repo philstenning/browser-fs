@@ -1,13 +1,8 @@
 {
   "compilerOptions": {
     "outDir": "dist/esm",
-    "declaration": true,
-    "skipLibCheck": true,
     "removeComments": true,
     "sourceMap": true,
-    "emitDeclarationOnly": true,
-    "jsx": "react",
-    "target": "ES2017"
   },
   "include": ["./src/index.ts"],
   "extends": "../../tsconfig.json"

@@ -2,22 +2,24 @@
   "name": "react-fsa-database",
   "version": "0.1.0",
   "description": "scan your local drive using the file system access api and store the results in a database",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "types": "dist/esm/index.d.ts"
+  },
   "files": [
     "/dist"
   ],
   "scripts": {
-    "clean": "rimraf dist/  && rimraf types/",
-    "build:X": "rollup -c rollup.config.js && rimraf dist/types",
-    "build:dev": "rollup -c rollup.dev.config.js",
+    "clean": "rimraf dist/",
+    "clean:turbo": "rimraf .turbo",
     "build:watch": "rollup -c rollup.dev.config.js --watch",
     "lint": "eslint ./src --ext .ts,.tsx",
-    "build": "pnpm clean && concurrently pnpm:babel:*",
-    "babel:esm": "babel --config-file ./babel.config.json src --extensions .ts --out-dir dist/esm --source-maps",
-    "babel:cjs": "babel --config-file ./babel.cjs.config.json src --extensions .ts --out-dir dist/cjs --source-maps",
-    "babel:tsc": "tsc"
+    "build": "pnpm build:esm && pnpm build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "babel dist/esm --out-dir dist/cjs --source-maps"
   },
   "author": "philstenning",
   "license": "ISC",
@@ -67,4 +69,6 @@
   },
   "browserslist": "> 0.25%, not dead"
 }
+
+
 

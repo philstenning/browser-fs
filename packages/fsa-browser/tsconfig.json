@@ -1,28 +1,12 @@
 {
   "compilerOptions": {
     "types": ["wicg-file-system-access"],
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "ES2020",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": false,
-    "jsx": "react",
-    "outDir": "dist/esm",
-    "removeComments": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "sourceMap": false,
-    "target": "ES2017"
+    "strictPropertyInitialization": false,
+    "outDir": "dist/esm"
+    // "baseUrl": "src",
+    // "paths": {
+    // },
   },
-  "include": ["./src/index.ts"]
-  // "exclude": ["node_modules"],
-  // "extends": "../../tsconfig.json"
+  "include": ["./src/index.ts"],
+  "extends": "../../tsconfig.json"
 }
