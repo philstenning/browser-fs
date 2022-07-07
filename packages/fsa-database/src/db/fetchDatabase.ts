@@ -6,7 +6,7 @@ import resetPermissionsOnAllDirectories from './resetPermissionsOnAllDirectories
 
 const logProgress = (data: ImportProgress) => {
   if (!!data.done) {
-    // console.log(` database import finished 👍`);
+    console.log(` database import finished 👍`);
   }
   return true
 }
