@@ -2,17 +2,23 @@
   "name": "fsa-browser",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/index.d.ts",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "types": "dist/esm/index.d.ts"
+  },
   "files": [
     "/dist"
   ],
   "scripts": {
-    "clean": "rimraf dist/  && rimraf types/",
-    "build": "rollup -c && rimraf dist/**/types/",
-    "build:dev": "rollup -c rollup.dev.config.js",
-    "build:watch": "rollup -c rollup.dev.config.js --watch"
+    "clean": "rimraf dist/",
+    "clean:turbo": "rimraf .turbo",
+    "build:watch": "tsc --watch",
+    "build": "pnpm build:esm && pnpm build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "babel dist/esm --out-dir dist/cjs --source-maps"
   },
   "author": "philstenning",
   "license": "ISC",
@@ -21,11 +27,16 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.3",
     "@types/uuid": "^8.3.4",
     "@types/wicg-file-system-access": "^2020.9.5",
+    "concurrently": "^7.2.2",
     "rimraf": "^3.0.2",
     "rollup": "^2.75.7",
     "rollup-plugin-copy": "^3.4.0",
@@ -35,5 +46,6 @@
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.4.0",
     "typescript": "^4.6.3"
-  }
+  },
+  "browserslist": "> 0.25%, not dead"
 }

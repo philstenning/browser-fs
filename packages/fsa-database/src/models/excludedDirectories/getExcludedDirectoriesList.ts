@@ -1,4 +1,4 @@
-import { db } from '@db/setup'
+import { db } from '../../db/setup'
 /**
  * Returns an array of the names of the directories that are excluded
  *  from the scanning process

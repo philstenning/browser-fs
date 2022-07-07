@@ -1,13 +1,9 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
-    "declaration": true,
-    "skipLibCheck": true,
+    "types": ["wicg-file-system-access"],
+    "outDir": "dist/esm",
     "removeComments": true,
     "sourceMap": true,
-    "declarationDir": "types",
-    "emitDeclarationOnly": true,
-    "jsx": "react"
   },
   "include": ["./src/index.ts"],
   "extends": "../../tsconfig.json"

@@ -1,11 +1,11 @@
 import { scanLocalDrive, VirtualRootDirectoryType } from 'fsa-browser'
 import { fsaDirectory } from '../types'
-import { db } from '@db/setup'
-import { getFileTypeNames } from '@filesType/index'
-import saveState from '@state/saveState'
-import  createRootDirectory  from '@rootDir/createRootDirectory'
+import { db } from '../../db/setup'
+import { getFileTypeNames } from '../fileTypes/index'
+import saveState from '../state/saveState'
+import  createRootDirectory  from '../rootDirectories/createRootDirectory'
 import { getExcludedDirectoriesList } from '../excludedDirectories'
-import parseVirtualFileSystemEntry from '@fileSystem/parseVirtualFileSystemEntry'
+import parseVirtualFileSystemEntry from '../../fileSystem/parseVirtualFileSystemEntry'
 /**
  * Creates a root directory in the database from a virtualRootDirectory object
  * @param {VirtualRootDirectoryType} virtualRootDirectory

@@ -1,4 +1,4 @@
-import { db} from "@db/setup";
+import { db } from '../../db/setup'
 
 /**
  * Returns true if the excluded name has been removed from the database

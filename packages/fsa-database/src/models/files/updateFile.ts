@@ -1,4 +1,4 @@
-import { db } from "@db/setup";
+import { db } from '../../db/setup'
 import { fsaFile } from "../types";
 
 export default async function updateFile(file: fsaFile) {

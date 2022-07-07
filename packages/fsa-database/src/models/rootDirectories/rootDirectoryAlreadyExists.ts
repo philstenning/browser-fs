@@ -1,5 +1,4 @@
-import { fsaDirectory } from '../types'
-import { db } from '@db/setup'
+import { db } from '../../db/setup'
 
 /**
  * Returns true if a root directory with the same name exists already

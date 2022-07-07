@@ -1,7 +1,6 @@
 import { fsaDirectory } from '../types'
-import checkDirectoryForFilesInCollections from '@directories/checkDirectoryForFilesInCollections'
-import { db } from '@db/setup'
-
+import checkDirectoryForFilesInCollections from './checkDirectoryForFilesInCollections'
+import { db } from '../../db/setup'
 export default async function hideDirectoryAndFiles(
   directory: fsaDirectory,
   hide: 'true' | 'false' = 'true',

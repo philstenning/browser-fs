@@ -1,10 +1,10 @@
+import dragAddFilesToDirectory from '../drag/dragAddFilesToDirectory'
+import processDragDirectories from './processDragDirectories'
 // import setIsScanning from '@state/setIsScanning'
 // import { fsaDirectory } from '../models/types'
 // import { db } from '@db/setup'
-import dragAddFilesToDirectory from '@drag/dragAddFilesToDirectory'
 // import createDragDirectory from '@drag/createDragDirectory'
 // import readFileSystemDirectoryEntry from './readFileSystemDirectoryEntry'
-import processDragDirectories from './processDragDirectories'
 
 // let doneCounter = 0
 

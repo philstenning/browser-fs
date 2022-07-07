@@ -1,29 +1,12 @@
 {
   "compilerOptions": {
     "types": ["wicg-file-system-access"],
-      "target": "ESNext",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": false,
-    "jsx": "react",
-    "outDir": "dist",
-    "removeComments": true,
-    "declaration": true,
-    "sourceMap": true,
-    "declarationDir": "types",
-    "emitDeclarationOnly": true
+    "strictPropertyInitialization": false,
+    "outDir": "dist/esm"
+    // "baseUrl": "src",
+    // "paths": {
+    // },
   },
   "include": ["./src/index.ts"],
-  // "exclude": ["node_modules"],
-  // "extends": "../../tsconfig.json"
+  "extends": "../../tsconfig.json"
 }

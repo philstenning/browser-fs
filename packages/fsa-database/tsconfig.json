@@ -1,26 +1,25 @@
 {
   "compilerOptions": {
-    // "types": ["wicg-file-system-access", "fs-browser"],
-    "outDir": "dist",
-    "declaration": true,
+    "types": ["wicg-file-system-access"],
     "strictPropertyInitialization": false,
-    "skipLibCheck": true,
+    "moduleResolution": "node",
     "baseUrl": "src",
-    "paths": {
-      "@db/*": ["db/*"],
-      "@drag/*": ["drag/*"],
-      "@fileSystem/*": ["fileSystem/*"],
-      "@collections/*": ["models/collections/*"],
-      "@directories/*": ["models/directories/*"],
-      "@excludedDirectories/*": ["models/excludedDirectories/*"],
-      "@files/*": ["models/files/*"],
-      "@filesType/*": ["models/fileTypes/*"],
-      "@rootDir/*": ["models/rootDirectories/*"],
-      "@state/*": ["models/state/*"],
-      "@settings/*": ["models/settings/*"],
-      "@utils/*": ["utils/*"],
-      "@models/*": ["models/*"]
-    }
+    // "paths": {
+    //   "@db/*": ["db/*"],
+    //   "@drag/*": ["drag/*"],
+    //   "@fileSystem/*": ["fileSystem/*"],
+    //   "@collections/*": ["models/collections/*"],
+    //   "@directories/*": ["models/directories/*"],
+    //   "@excludedDirectories/*": ["models/excludedDirectories/*"],
+    //   "@files/*": ["models/files/*"],
+    //   "@filesType/*": ["models/fileTypes/*"],
+    //   "@rootDir/*": ["models/rootDirectories/*"],
+    //   "@state/*": ["models/state/*"],
+    //   "@settings/*": ["models/settings/*"],
+    //   "@utils/*": ["utils/*"],
+    //   "@models/*": ["models/*"]
+    // },
+    "outDir": "dist/esm"
   },
   "include": ["./src/index.ts"],
   "extends": "../../tsconfig.json"

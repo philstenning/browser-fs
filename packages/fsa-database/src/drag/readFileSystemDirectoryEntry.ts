@@ -9,7 +9,6 @@ type readFileSystemDirectoryEntryProp = {
   directories: FileSystemDirectoryEntry[]
 }
 
-const filetypeNames = await getFileTypeNames()
 /**
  * Reads the directory  passed in  and returns an object containing
  * the containing files and directories.
@@ -22,14 +21,15 @@ const readFileSystemDirectoryEntry = (
   directory: FileSystemDirectoryEntry,
   parentId: string,
   rootId: string
-) => {
-  return new Promise<readFileSystemDirectoryEntryProp>((resolve) => {
-    const reader = directory.createReader()
-
-    const files: fsaFile[] = []
-    const directories: FileSystemDirectoryEntry[] = []
-
-    reader.readEntries(async (entry) => {
+  ) => {
+    return new Promise<readFileSystemDirectoryEntryProp>((resolve) => {
+      const reader = directory.createReader()
+      
+      const files: fsaFile[] = []
+      const directories: FileSystemDirectoryEntry[] = []
+      
+      reader.readEntries(async (entry) => {
+      const filetypeNames = await getFileTypeNames()
       for (const item of entry) {
         if (item.isFile) {
           // check for the file extensions that we want

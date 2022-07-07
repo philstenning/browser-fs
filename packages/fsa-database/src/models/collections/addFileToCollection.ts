@@ -1,9 +1,9 @@
 import { fsaCollection, fsaFile, fsaCollectionFile } from '../types'
-import findLastUsedCollectionOrCreatNew from '@collections/findLastUsedCollectionOrCreatNew'
+import findLastUsedCollectionOrCreatNew from './findLastUsedCollectionOrCreatNew'
 import putCollectionAndFile from './putCollectionAndFile'
-import getFileExtension from '@utils/getFileExtension'
-import getFileNameWithoutExtension from '@utils/getFileNameWithoutExtension'
-import createUniqueNameForFile from '@files/createUniqueNameForFile'
+import getFileExtension from '../../utils/getFileExtension'
+import getFileNameWithoutExtension from '../../utils/getFileNameWithoutExtension'
+import createUniqueNameForFile from '../files/createUniqueNameForFile'
 
 export default async function addFileToCollection(
   file: fsaFile,

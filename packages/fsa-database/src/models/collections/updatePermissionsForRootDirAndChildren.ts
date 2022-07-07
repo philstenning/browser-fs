@@ -1,4 +1,4 @@
-import { db } from '@db/setup'
+import { db } from '../../db/setup'
 import { fsaDirectory } from '../types'
 
 /**

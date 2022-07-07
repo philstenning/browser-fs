@@ -1,5 +1,5 @@
 import { fsaState } from '../types'
-import { db } from '@db/setup'
+import { db } from '../../db/setup'
 
 export default async function saveState(state: fsaState) {
   try {
