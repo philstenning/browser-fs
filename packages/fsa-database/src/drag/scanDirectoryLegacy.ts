@@ -1,7 +1,7 @@
-import setIsScanning from '@state/setIsScanning'
+import setIsScanning from '../models/state/setIsScanning'
 import { fsaDirectory } from '../models/types'
-import { db } from '@db/setup'
-import createDragDirectory from '@drag/createDragDirectory'
+import { db } from '../db/setup'
+import createDragDirectory from '../drag/createDragDirectory'
 import readFileSystemDirectoryEntry from './readFileSystemDirectoryEntry'
 
 let doneCounter = 0

@@ -1,8 +1,8 @@
 import { fsaCollection } from '../types'
-import { db } from '@db/setup'
-import findLastUsedCollection from '@collections/findLastUsedCollection'
-import createCollection from '@collections/createCollection'
-import setCurrentCollectionId from '@state/setCurrentDirectoryId'
+import { db } from '../../db/setup'
+import findLastUsedCollection from './findLastUsedCollection'
+import createCollection from './createCollection'
+import setCurrentCollectionId from '../state/setCurrentDirectoryId'
 
 export default async function findLastUsedCollectionOrCreatNew(
   nameIfNotExit: string = 'collection'

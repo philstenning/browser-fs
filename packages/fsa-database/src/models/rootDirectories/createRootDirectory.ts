@@ -1,7 +1,7 @@
 import { fsaDirectory } from '../types'
-import { db } from '@db/setup'
-import createDirectory from '@directories/createDirectory'
-import rootDirectoryAlreadyExists from '@rootDir/rootDirectoryAlreadyExists'
+import { db } from '../../db/setup'
+import createDirectory from '../directories/createDirectory'
+import rootDirectoryAlreadyExists from './rootDirectoryAlreadyExists'
 
 export default async function createRootDirectory(
   handle: FileSystemDirectoryHandle,

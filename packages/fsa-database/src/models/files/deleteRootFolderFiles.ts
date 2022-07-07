@@ -1,5 +1,5 @@
-import { db } from '@db/setup'
-import removeFileFromAllCollection from '@collections/removeFileFromAllCollection'
+import { db } from '../../db/setup'
+import removeFileFromAllCollection from '../collections/removeFileFromAllCollection'
 
 export default async function deleteRootFolderFiles(rootId: string) {
   try {

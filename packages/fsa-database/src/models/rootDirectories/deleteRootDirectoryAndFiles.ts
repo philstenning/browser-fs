@@ -1,8 +1,7 @@
 import { fsaDirectory } from '../types'
-import rootDirHasFilesInCollections from '@rootDir/rootDirHasFilesInCollections'
-import deleteRootFolderFiles from '@files/deleteRootFolderFiles'
-
-import { db } from '@db/setup'
+import rootDirHasFilesInCollections from './rootDirHasFilesInCollections'
+import deleteRootFolderFiles from '../files/deleteRootFolderFiles'
+import { db } from '../../db/setup'
 
 import selectPreviouslySelectedRootDir from './selectPreviouslySelectedRootDir'
 

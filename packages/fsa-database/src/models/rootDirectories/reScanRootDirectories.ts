@@ -4,15 +4,15 @@ import {
   VirtualFileSystemEntry,
 } from 'fsa-browser'
 
-import {  getExcludedDirectoriesList } from '@excludedDirectories/index'
-import { db } from '@db/setup'
-import createDirectory from '@directories/createDirectory'
+import   getExcludedDirectoriesList from '../excludedDirectories/getExcludedDirectoriesList'
+import { db } from '../../db/setup'
+import createDirectory from '../directories/createDirectory'
 import { createFile, saveFile } from '../files'
-import  removeFileFromAllCollection  from '@collections/removeFileFromAllCollection'
+import  removeFileFromAllCollection  from '../collections/removeFileFromAllCollection'
 import { fsaDirectory } from '../types'
 import { saveState, getCurrentState } from '../state'
-import { updateSettingLastScanned } from '@settings/index'
-import bytesToSize from '@utils/bytesToSize'
+import { updateSettingLastScanned } from '../settings/index'
+import bytesToSize from '../../utils/bytesToSize'
 
 export default async function rescanRootDirectories() {
   const state = await getCurrentState()

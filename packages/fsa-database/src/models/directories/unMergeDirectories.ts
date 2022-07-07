@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import { fsaDirectory } from '../types'
-import { db } from '@db/setup'
+import { db } from '../../db/setup'
 
 export default async function unMergeDirectories(rootDir: fsaDirectory) {
   await db.transaction('rw', db.directories, db.files, async () => {

@@ -1,4 +1,4 @@
-import dragAddFilesToDirectory from '@drag/dragAddFilesToDirectory'
+import dragAddFilesToDirectory from '../drag/dragAddFilesToDirectory'
 import processDragDirectories from './processDragDirectories'
 // import setIsScanning from '@state/setIsScanning'
 // import { fsaDirectory } from '../models/types'

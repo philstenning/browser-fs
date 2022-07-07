@@ -1,4 +1,4 @@
-import { db } from "@db/setup";
+import { db } from '../../db/setup'
 import { fsaFile } from "../types";
 import {removeFileFromAllCollection} from '../collections'
 export default async function deleteFile(file: fsaFile) {

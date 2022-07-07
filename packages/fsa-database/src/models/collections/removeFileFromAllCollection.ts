@@ -1,5 +1,5 @@
 import { fsaFile } from '../types'
-import { db } from '@db/setup'
+import { db } from '../../db/setup'
 import removeFileFromCollection from './removeFileFromCollection'
 
 export default async function removeFileFromAllCollection(file: fsaFile) {

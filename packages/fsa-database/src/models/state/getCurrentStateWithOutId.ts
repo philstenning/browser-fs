@@ -1,4 +1,4 @@
-import { initialDbState } from '@state/initialState'
+import { initialDbState } from './initialState'
 import getCurrentState from './getCurrentState'
 
 export default async function getCurrentStateWithOutId() {

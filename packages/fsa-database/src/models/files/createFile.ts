@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import { fsaFile } from '../types'
-import bytesToSize from '@utils/bytesToSize'
+import bytesToSize from '../../utils/bytesToSize'
 
 /**
  * A fsaFile factory function used to create each file as it

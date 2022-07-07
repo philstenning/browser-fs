@@ -221,6 +221,7 @@ importers:
       '@types/react': ^18.0.8
       '@types/react-dom': ^17.0.10
       '@types/uuid': ^8.3.4
+      '@types/wicg-file-system-access': ^2020.9.5
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       concurrently: ^7.2.2
@@ -270,6 +271,7 @@ importers:
       '@types/filesystem': 0.0.32
       '@types/react': 18.0.8
       '@types/react-dom': 17.0.15
+      '@types/wicg-file-system-access': 2020.9.5
       '@typescript-eslint/eslint-plugin': 5.22.0_szzptt27eny3r5lrdnhfpbaahi
       '@typescript-eslint/parser': 5.22.0_5wsz2tb7zzudmaqxfve53vbauu
       concurrently: 7.2.2

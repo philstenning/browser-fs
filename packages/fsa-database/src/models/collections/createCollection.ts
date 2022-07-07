@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import { fsaCollection, fsaCollectionFile } from '../types'
-import setCurrentCollectionId from '@state/setCurrentCollectionId'
-import { db } from '@db/setup'
+import setCurrentCollectionId from '../state/setCurrentCollectionId'
+import { db } from '../../db/setup'
 
 export default async function createCollection(
   name: string,

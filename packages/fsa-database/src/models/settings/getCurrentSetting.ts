@@ -1,4 +1,4 @@
-import { db } from '@db/setup'
+import { db } from '../../db/setup'
 import createInitialSetting from './createInitialSetting'
 
 export default async function getCurrentSetting() {

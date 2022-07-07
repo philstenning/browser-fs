@@ -1,5 +1,5 @@
-import { db } from '@db/setup'
-import { initialDbState } from '@state/initialState'
+import { db } from '../../db/setup'
+import { initialDbState } from './initialState'
 
 export default async function getCurrentState() {
   try {
