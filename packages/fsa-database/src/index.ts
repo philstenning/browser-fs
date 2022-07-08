@@ -73,7 +73,7 @@ import toggleFileTypeHidden from './models/fileTypes/toggleFileTypeHidden'
 import addRootDirectory from './models/rootDirectories/addRootDirectory'
 import createRootDirectory from './models/rootDirectories/createRootDirectory'
 import deleteRootDirectory from './models/rootDirectories/deleteRootDirectoryAndFiles'
-import rescanRootDirectories from './models/rootDirectories/rescanRootDirectories'
+import rescanRootDirectories from './models/rootDirectories/reScanRootDirectories'
 import rootDirHasFilesInCollections from './models/rootDirectories/rootDirHasFilesInCollections'
 import selectRootDirectory from './models/rootDirectories/selectRootDirectory'
 // settings
