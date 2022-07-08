@@ -7,8 +7,8 @@
       "outputs": ["dist/**"]
     },
     "build:docs": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [],
+      "outputs": ["test/dist/**"]
     },
     "build:test": {
       "dependsOn": ["build"],
