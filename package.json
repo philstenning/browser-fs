@@ -9,10 +9,8 @@
   },
   "scripts": {
     "clean": "pnpm -r clean",
-    "dev": "turbo run build:dev",
-    "watch": "pnpm -r clean &&  pnpm -r  --parallel build:watch",
+    "dev": "pnpm -filter fsa-browser-test dev",
     "build": "turbo run build",
-    "build:dev": "turbo run build:dev",
     "test": "turbo run test"
   },
   "repository": {

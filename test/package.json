@@ -1,10 +1,10 @@
 {
-  "name": "fsa-browser-web",
+  "name": "fsa-browser-test",
   "private": true,
   "version": "0.1.0",
   "scripts": {
     "dev": "vite",
-    "ts":"tsc",
+    "ts": "tsc",
     "build:test": "tsc && vite build",
     "preview": "vite preview",
     "test": "pnpm cypress open",
