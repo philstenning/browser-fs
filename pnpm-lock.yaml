@@ -290,6 +290,7 @@ importers:
       react-fsa-database: workspace:*
       react-icons: ^4.3.1
       react-router-dom: ^6.2.1
+      rimraf: ^3.0.2
       start-server-and-test: ^1.14.0
       typescript: ^4.6.3
       vite: ^2.9.13
@@ -330,6 +331,7 @@ importers:
       postcss-modules: 4.3.1_postcss@8.4.14
       postcss-nesting: 10.1.4_postcss@8.4.14
       postcss-sorting: 7.0.1_postcss@8.4.14
+      rimraf: 3.0.2
       start-server-and-test: 1.14.0
       typescript: 4.7.4
       vite: 2.9.13
@@ -3676,7 +3678,7 @@ packages:
     dependencies:
       confusing-browser-globals: 1.0.11
       eslint: 8.14.0
-      eslint-plugin-import: 2.26.0_rnfz7akqr4wjw2qkn2c5k6phri
+      eslint-plugin-import: 2.26.0_as7czvxgrvaa35lzxztolpnp5a
       object.assign: 4.1.2
       object.entries: 1.1.5
       semver: 6.3.0
@@ -3694,7 +3696,7 @@ packages:
     dependencies:
       eslint: 8.14.0
       eslint-config-airbnb-base: 15.0.0_myxbwluo6p3kuxjcyp342zygci
-      eslint-plugin-import: 2.26.0_rnfz7akqr4wjw2qkn2c5k6phri
+      eslint-plugin-import: 2.26.0_as7czvxgrvaa35lzxztolpnp5a
       eslint-plugin-jsx-a11y: 6.5.1_eslint@8.14.0
       eslint-plugin-react: 7.29.4_eslint@8.14.0
       eslint-plugin-react-hooks: 4.5.0_eslint@8.14.0

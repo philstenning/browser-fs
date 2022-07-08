@@ -11,7 +11,10 @@
     "clean": "pnpm -r clean",
     "dev": "pnpm -filter fsa-browser-test dev",
     "build": "turbo run build",
-    "test": "turbo run test"
+    "build:docs": "turbo run build:docs",
+    "test": "turbo run test",
+    "docs:publish": "pnpm --filter docs demo",
+    "preview": "pnpm --filter fsa-browser-test preview "
   },
   "repository": {
     "type": "git",
