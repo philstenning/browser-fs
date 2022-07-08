@@ -1,20 +1,17 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Start from '../../routes/start'
-import TestPage from "../../routes/testPage";
+import TestPage from '../../routes/testPage'
 import Settings from '../../routes/settings'
-import Layout from "./Layout";
+import Layout from './Layout'
 import DragNDrop from '../../routes/DragNDrop'
-import {
-
-  FsaDbContextProvider,
-} from "react-fsa-database";
+import { FsaDbContextProvider } from 'react-fsa-database'
 
 function App() {
   return (
     <FsaDbContextProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.VITE_DEPLOY_HOST?.toString()}>
         <Routes>
           {/*  pages are wrapped in the  Layout component. */}
           <Route path="/" element={<Layout />}>
@@ -29,9 +26,11 @@ function App() {
         </Routes>
       </BrowserRouter>
     </FsaDbContextProvider>
-  );
+  )
 }
 
-export default App;  
+export default App
 //  <RootDirectoryProvider  InitialRootDirectoryOrder="asc">
-{/* </RootDirectoryProvider>  */}
+{
+  /* </RootDirectoryProvider>  */
+}
