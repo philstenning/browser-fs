@@ -20,6 +20,8 @@ import importDatabase from './db/importDatabase'
 import initializeDatabase from './db/initializeDatabase'
 import loadDatabase from './db/loadDatabase'
 import resetDatabase from './db/resetDatabase'
+import exportDatabase2 from './db/export2'
+import importDb2 from './db/importDatabase2'
 
 /*  --------- models  ---------  */
 
@@ -132,6 +134,8 @@ export {
   loadDatabase,
   resetDatabase,
   deleteDatabase,
+  exportDatabase2,
+  importDb2,
   /* -- models  -- */
   // collections
   addFileToCollection,
@@ -209,3 +213,4 @@ export {
   checkHandlePermission,
   parseVirtualFileSystemEntry,
 }
+

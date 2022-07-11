@@ -4,7 +4,8 @@ import {
   exportDatabase,
   fetchDatabase,
   resetDatabase,
-  deleteDatabase
+  deleteDatabase,
+  exportDatabase2,importDb2
 } from 'fsa-database'
 
 //@ts-ignore
@@ -27,6 +28,12 @@ function Start() {
       </button>
       <button id="delete_btn" onClick={deleteDatabase}>
         delete
+      </button>
+      <button id="export2_btn" onClick={exportDatabase2}>
+        expoer2
+      </button>
+      <button id="export2_btn" onClick={importDb2}>
+        import 2
       </button>
     </div>
   )

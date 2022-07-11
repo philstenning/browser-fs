@@ -25,6 +25,7 @@
     "dexie": "^3.2.1",
     "dexie-export-import": "^1.0.3",
     "fsa-browser": "workspace:*",
+    "indexeddb-export-import": "^2.1.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -46,4 +47,3 @@
   },
   "browserslist": "> 0.25%, not dead"
 }
-

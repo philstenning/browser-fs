@@ -149,6 +149,7 @@ importers:
       dexie: ^3.2.1
       dexie-export-import: ^1.0.3
       fsa-browser: workspace:*
+      indexeddb-export-import: ^2.1.5
       prettier: ^2.6.2
       rimraf: ^3.0.2
       tsc-alias: ^1.6.11
@@ -158,6 +159,7 @@ importers:
       dexie: 3.2.1
       dexie-export-import: 1.0.3_dexie@3.2.1
       fsa-browser: link:../fsa-browser
+      indexeddb-export-import: 2.1.5
       uuid: 8.3.2
     devDependencies:
       '@babel/cli': 7.18.6_@babel+core@7.18.6
@@ -4733,6 +4735,11 @@ packages:
     resolution: {integrity: sha512-EdDDZu4A2OyIK7Lr/2zG+w5jmbuk1DVBnEwREQvBzspBJkCEbRa8GxU1lghYcaGJCnRWibjDXlq779X1/y5xwg==}
     engines: {node: '>=8'}
     dev: true
+
+  /indexeddb-export-import/2.1.5:
+    resolution: {integrity: sha512-gS6gVzFTDuT+r7KyZ3yrzflC8HfktezxAGyImCpICGX5WemMhBLnGaZMkZ0KYj+9hwVAM3dmXMTYy/NvtKAFlQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /inflight/1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}

@@ -3,10 +3,9 @@ import { ImportProgress } from 'dexie-export-import/dist/import'
 import { db } from './setup'
 import resetPermissionsOnAllDirectories from './resetPermissionsOnAllDirectories'
 
-
 const logProgress = (data: ImportProgress) => {
   if (!!data.done) {
-    console.log(` database import finished 👍`);
+    console.log(` database import finished 👍`)
   }
   return true
 }
@@ -30,8 +29,9 @@ export default async function fetchDatabase(
       const blob = await response.blob()
       await importInto(db, blob, {
         clearTablesBeforeImport: true,
-        progressCallback: logProgress
+        progressCallback: logProgress,
       })
+     
       await resetPermissionsOnAllDirectories()
     }
     console.timeEnd('FetchAndUpdateDb')
@@ -39,3 +39,4 @@ export default async function fetchDatabase(
     console.error(`Error fetching database ${error}`)
   }
 }
+
