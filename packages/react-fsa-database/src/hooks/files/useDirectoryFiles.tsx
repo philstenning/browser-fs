@@ -1,6 +1,6 @@
 import { db, fsaFile } from 'fsa-database'
 import { useLiveQuery } from 'dexie-react-hooks'
-function useDirectoryFiles() {
+function useCurrentDirectory() {
   const directoryFiles =
     useLiveQuery<fsaFile[]>(async () => {
       const state = await db.state.toCollection().last()
@@ -13,4 +13,4 @@ function useDirectoryFiles() {
   return { directoryFiles }
 }
 
-export default useDirectoryFiles
+export default useCurrentDirectory

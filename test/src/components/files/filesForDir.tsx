@@ -1,10 +1,10 @@
 import { fsaFile } from "fsa-database";
 import React from "react";
-import { useDirectoryFiles, useFsaDbContext } from "react-fsa-database";
+import { useCurrentDirectory, useFsaDbContext } from 'react-fsa-database'
 
 function FilesForDir() {
   const { dbState, setCurrentFileId } = useFsaDbContext();
-  const { directoryFiles } = useDirectoryFiles();
+  const { directoryFiles } = useCurrentDirectory()
 
   const handleSetCurrentFile = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,

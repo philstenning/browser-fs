@@ -15,7 +15,7 @@ import useDirectories from './hooks/directories/useDirectories'
 import useExcludedDirectories from './hooks/excludedDirectories/useExcludedDirectories'
 // files
 import useCurrentFile from './hooks/files/useCurrentFile'
-import useDirectoryFiles from './hooks/files/useDirectoryFiles'
+import useCurrentDirectory from './hooks/files/useDirectoryFiles'
 import useFindDuplicateFiles from './hooks/files/useFindDuplicateFiles'
 import useRootFileList from './hooks/files/useRootFileList'
 // fileTypes
@@ -32,7 +32,7 @@ export {
   useFsaDbContext,
   // files
   useCurrentFile,
-  useDirectoryFiles,
+  useCurrentDirectory,
   useFindDuplicateFiles,
   useRootFileList,
   // file types
