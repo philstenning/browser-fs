@@ -1,14 +1,6 @@
 import dragAddFilesToDirectory from '../drag/dragAddFilesToDirectory'
 import processDragDirectories from './processDragDirectories'
-// import setIsScanning from '@state/setIsScanning'
-// import { fsaDirectory } from '../models/types'
-// import { db } from '@db/setup'
-// import createDragDirectory from '@drag/createDragDirectory'
-// import readFileSystemDirectoryEntry from './readFileSystemDirectoryEntry'
 
-// let doneCounter = 0
-
-//
 export default async function saveDragItems(
   dataTransferItemList: DataTransferItemList,
   folderName: string = 'user Files'
