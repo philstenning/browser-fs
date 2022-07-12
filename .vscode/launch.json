@@ -8,14 +8,14 @@
             "name": "Launch Edge",
             "request": "launch",
             "type": "pwa-msedge",
-            "url": "http://localhost:6007",
+            "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}/packages/web/src"
         },
         {
             "type": "pwa-chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:6007",
+            "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}/packages/web",
             
         }
