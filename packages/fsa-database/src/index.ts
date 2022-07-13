@@ -69,6 +69,9 @@ import hideFileType from './models/fileTypes/hideFileType'
 import showFileType from './models/fileTypes/showFileType'
 import toggleFileTypeHidden from './models/fileTypes/toggleFileTypeHidden'
 
+// legacyInput
+import saveLegacyInputFiles from './legacyInput/saveLegacyInputFiles'
+
 // rootDirectories
 import addRootDirectory from './models/rootDirectories/addRootDirectory'
 import createRootDirectory from './models/rootDirectories/createRootDirectory'
@@ -108,7 +111,6 @@ import saveDragItems from './drag/saveDragItems'
 // fileSystem
 import checkHandlePermission from './fileSystem/checkHandlePermission'
 import parseVirtualFileSystemEntry from './fileSystem/parseVirtualFileSystemEntry'
-
 
 export type {
   fsaCollection,
@@ -174,6 +176,8 @@ export {
   hideFileType,
   showFileType,
   toggleFileTypeHidden,
+  // legacyInput
+  saveLegacyInputFiles,
   // rootDirectories
   addRootDirectory,
   createRootDirectory,
