@@ -9,10 +9,10 @@
     "preview": "vite preview",
     "build:docs": "tsc && vite build",
     "build:test": "tsc && vite build",
-    "test": "pnpm cypress open",
-    "cy:test": "cypress run  ",
-    "cy:run": "CYPRESS_BASE_URL=http://localhost:4173 cypress run",
-    "cy:ci": "start-server-and-test preview http://localhost:4173/ cy:run"
+    "test": "pnpm cy:ci",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --config baseUrl=http://localhost:4173/browser-fs/ ",
+    "cy:ci": "start-server-and-test preview http://localhost:4173/browser-fs/ cy:run"
   },
   "browserslist": [
     "defaults"
