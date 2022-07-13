@@ -16,6 +16,7 @@
     "fsa-database",
     "react-fsa-database",
     "docs",
-    "Library all"
+    "Library all",
+    "test"
   ]
 }

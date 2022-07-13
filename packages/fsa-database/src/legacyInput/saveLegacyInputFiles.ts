@@ -1,5 +1,5 @@
 import { db } from '../db/setup'
-import { fsaDirectory } from 'models/types'
+import { fsaDirectory } from '../models/types'
 import createLegacyDirectory from './createLegacyDirectory'
 import createLegacyFile from './createLegacyFile'
 import createLegacyFileList from './createLegacyFileList'
