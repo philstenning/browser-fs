@@ -7,9 +7,7 @@ export type LegacyFileListItem = {
   depth: number
 }
 
-export type LegacyFileList = LegacyFileListItem[]
-
-export default function createLegacyFileListItem(file: File, rootId = '', parentId = '') {
+function createLegacyFileListItem(file: File, rootId = '', parentId = '') {
   const pathArray = file.webkitRelativePath.split('/')
 
   // if in root directory = '/'
@@ -38,23 +36,4 @@ export default function createLegacyFileListItem(file: File, rootId = '', parent
   return tempFileListItem
 }
 
-
-function createLegacyFileList(fileList: FileList) {
-  // add all fileList items to the legacyFileList
-  for (const file of fileList) {
-    const legacyFileListItem = createLegacyFileListItem(file, rootDir.id)
-    legacyFileList.push(legacyFileListItem)
-    const { depth, directories } = legacyFileListItem
-
-    if (depth > maxDirectoryDepth) maxDirectoryDepth = depth
-
-    // add all the legacyFileListItem directories, even if they don't
-    // have files in them this is needed for directory tree.
-    directories.forEach((d) => DirectoryList.add(d))
-  }
-}
-
-
-
-
-
+export default createLegacyFileListItem

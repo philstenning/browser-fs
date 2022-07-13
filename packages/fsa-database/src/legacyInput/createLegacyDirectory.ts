@@ -14,7 +14,6 @@ export default async function createLegacyDirectory(
   const handle = {
     name,
   } as FileSystemDirectoryHandle
-  //   const id = uuid()
 
   const isRoot = rootId === '' ? true : false
   const dir = createDirectory(
@@ -31,14 +30,14 @@ export default async function createLegacyDirectory(
     const exists = await rootDirectoryAlreadyExists(dir.name)
     if (exists) return false
   }
-  //
+
   const updated: fsaDirectory = {
     ...dir,
     isLocal: true,
     isScanning: true,
     scanFinished: false,
+    readPermission:isRoot?'true':'false'
   }
-  console.log({ updated })
   try {
     await db.directories.put(updated)
   } catch (error) {
@@ -46,6 +45,6 @@ export default async function createLegacyDirectory(
     return false
   }
 
-  // updated dir
+
   return updated
 }

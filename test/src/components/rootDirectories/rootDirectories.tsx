@@ -52,14 +52,15 @@ const RootDirectories = () => {
       </ul>
       <div className={styles.btnGroup}>
         {/* {!('showDirectoryPicker' in window) && ( */}
-          <input
-            type="file"
-            // @ts-ignore - this is  needed.
-            webkitdirectory=""
-            directory='true'
-            // multiple
-            onChange={ saveFiles}
-          />
+        <input
+          type="file"
+          // @ts-ignore - this is  needed.
+          webkitdirectory=""
+          directory="true"
+          // multiple
+          onChange={saveFiles}
+          disabled={isScanning}
+        />
         {/* )} */}
         <button onClick={addRootDirectory} disabled={isScanning}>
           {!isScanning ? 'Add Root Directory' : 'Scanning Drive'}

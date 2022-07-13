@@ -2,12 +2,10 @@ import { db } from '../db/setup'
 import { fsaDirectory } from 'models/types'
 import createLegacyDirectory from './createLegacyDirectory'
 import createLegacyFile from './createLegacyFile'
-import createLegacyFileListItem, {
-  LegacyFileList,
-} from './createLegacyFileListItem'
+import createLegacyFileList from './createLegacyFileList'
 import setCurrentRootDirectoryId from '../models/state/setCurrentRootDirectoryId'
 import updateFileIdsForDirectory from '../models/directories/updateFileIdsForDirectory'
-
+import isScanning from '../models/state/setIsScanning'
 type TempDir = {
   name: string
   path: string
@@ -22,37 +20,30 @@ type DirectoryEntry = {
   depth: number
   dir: fsaDirectory
 }
-
+/**
+ * when a user clicks a input type=file element, the files are processed and
+ * a compleat directory tree is created from the list in the database.
+ * Note the file/blob is copied to the database so you will end up with large
+ * database table for the files so use the FSA api instead this is for browsers
+ * that do not support FSA access.
+ * @param fileList
+ * @returns
+ */
 export default async function saveLegacyInputFiles(fileList: FileList | null) {
   if (!fileList || fileList.length === 0) return
-  const legacyFileList: LegacyFileList = []
-
+  await isScanning(true)
   // any file will have the same root dir name but go with the  first.
   const rootDirName = fileList[0].webkitRelativePath.split('/')[0]
 
   // create the root dir.
   const rootDir = await createLegacyDirectory(rootDirName, rootDirName)
-  if (!rootDir) return
-
-  // create list of dirs
-  // use Set to make them unique.
-  const DirectoryList = new Set<string>()
-
-  // store the most deeply nested directory depth
-  let maxDirectoryDepth = 0
-
-  // add all fileList items to the legacyFileList
-  for (const file of fileList) {
-    const legacyFileListItem = createLegacyFileListItem(file, rootDir.id)
-    legacyFileList.push(legacyFileListItem)
-    const { depth, directories } = legacyFileListItem
-
-    if (depth > maxDirectoryDepth) maxDirectoryDepth = depth
-
-    // add all the legacyFileListItem directories, even if they don't
-    // have files in them this is needed for directory tree.
-    directories.forEach((d) => DirectoryList.add(d))
+  if (!rootDir) {
+    await isScanning(false)
+    return
   }
+
+  const { DirectoryList, legacyFileList, maxDirectoryDepth } =
+    createLegacyFileList(fileList, rootDir.id)
 
   const tempDirs: TempDir[] = []
 
@@ -117,15 +108,21 @@ export default async function saveLegacyInputFiles(fileList: FileList | null) {
     )
   }
 
-  // count files for dir
+  // count files for each directory and update them.
   for (const dirItem of directoryEntry) {
-    // console.log('\n\n-------------\nid of item: ', dirItem.dir.id)
-    await updateFileIdsForDirectory(dirItem.dir.id)
+    if (dirItem.dir.isRoot) {
+      // we don't want to update the scanning notifications. 
+      await updateFileIdsForDirectory(dirItem.dir.id,true,false)
+    } else {
+      await updateFileIdsForDirectory(dirItem.dir.id)
+    }
   }
   await setCurrentRootDirectoryId(rootDir.id)
   await db.directories.put({
     ...rootDir,
     isScanning: false,
     scanFinished: true,
+    readPermission: 'false',
   })
+  await isScanning(false)
 }
