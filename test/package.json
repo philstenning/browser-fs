@@ -10,7 +10,7 @@
     "build:docs": "tsc && vite build",
     "build:test": "tsc && vite build",
     "test": "pnpm cy:ci",
-    "cy:open": "cypress open",
+    "cy:open": "cypress open --e2e",
     "cy:run": "cypress run --config baseUrl=http://localhost:4173/browser-fs/ ",
     "cy:ci": "start-server-and-test preview http://localhost:4173/browser-fs/ cy:run"
   },

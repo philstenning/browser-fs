@@ -20,7 +20,7 @@
       "cypress","node"
     ]
   },
-  "include": ["src/**/*.t*", "cypress/**/*.ts", "vite.config.ts"],
+  "include": ["src/**/*.t*", "cypress/**/*.ts", "vite.config.ts", "cypress/support/component.tsx"],
   // "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
