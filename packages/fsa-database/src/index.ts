@@ -10,7 +10,7 @@ import {
   fsaSetting,
   fsaState,
 } from './models/types'
-
+import type { fsaBrowserStorage } from './utils/browserStorage'
 /*  --------- database  ---------  */
 import { db } from './db/setup'
 import deleteDatabase from './db/deleteDatabase'
@@ -104,7 +104,7 @@ import setIsScanning from './models/state/setIsScanning'
 import bytesToSize from './utils/bytesToSize'
 import getFileExtension from './utils/getFileExtension'
 import getFileNameWithoutExtension from './utils/getFileNameWithoutExtension'
-
+import checkBrowserStorage from './utils/browserStorage'
 // drag
 import saveDragItems from './drag/saveDragItems'
 
@@ -122,6 +122,7 @@ export type {
   fsaFileType,
   fsaSetting,
   fsaState,
+  fsaBrowserStorage
 }
 // all exports
 export {
@@ -207,6 +208,7 @@ export {
   bytesToSize,
   getFileExtension,
   getFileNameWithoutExtension,
+  checkBrowserStorage,
   //drag
   saveDragItems,
   // fileSystem

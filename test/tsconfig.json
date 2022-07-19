@@ -17,11 +17,20 @@
     "jsx": "react-jsx",
     "types": [
       "vite/client",
-      "cypress","node"
+      "cypress",
+      "node",
+      "react",
+      "react-dom",
+      "sinon"
     ],
     "baseUrl": "."
   },
-  "include": ["src/**/*.t*", "cypress/**/*.ts", "vite.config.ts", "cypress/support/component.tsx"],
+  "include": [
+    "src/**/*.t*",
+    "cypress/**/*.ts",
+    "vite.config.ts",
+    "cypress/support/component.tsx"
+  ],
   // "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
