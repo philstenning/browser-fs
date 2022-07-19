@@ -15,9 +15,6 @@ function App() {
         <Routes>
           {/*  pages are wrapped in the  Layout component. */}
           <Route path="/" element={<Layout />}>
-            {/* <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/db" element={<Db />} /> */}
             <Route path="/settings" element={<Settings />} />
             <Route path="/provider" element={<TestPage />} />
             <Route path="/dnd" element={<DragNDrop />} />

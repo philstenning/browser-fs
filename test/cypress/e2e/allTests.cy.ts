@@ -1,0 +1,6 @@
+import './addDefaultCollectionIfNotExist.cy'
+import './bugs.cy'
+import './collections.cy'
+import './fileTypes.cy'
+import './files.cy'
+import './notify.cy'
