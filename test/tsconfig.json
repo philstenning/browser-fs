@@ -18,7 +18,8 @@
     "types": [
       "vite/client",
       "cypress","node"
-    ]
+    ],
+    "baseUrl": "."
   },
   "include": ["src/**/*.t*", "cypress/**/*.ts", "vite.config.ts", "cypress/support/component.tsx"],
   // "exclude": ["node_modules"],
