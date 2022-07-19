@@ -9,13 +9,19 @@ import DirectoriesForRootDir from "../components/directories/directoriesForRootD
 import FilesForDir from "../components/files/filesForDir";
 import DuplicateFiles from "../components/files/duplicateFiles";
 import CurrentFile from '../components/files/currentFile'
+import StorageAvailable from '../components/storage/storageAvailable'
+
 //@ts-ignore // don't know why but vscode ts can't find it???
 import styles from "./testPage.module.css";
 const TestPage = () => {
   return (
     <div data-testid="testPage">
       <div className={styles.split} data-testid="dbProviderSplit__left">
+        <div>
+
         <RootDir />
+        <StorageAvailable/>
+        </div>
         <CurrentState />
       </div>
       <div className={styles.split}>
