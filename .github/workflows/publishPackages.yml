@@ -34,7 +34,7 @@ jobs:
           run_install: true
       
       - name: build
-        run: pmpm build
+        run: pnpm build
 
       - name: Creating .npmrc
         run: |
