@@ -1,4 +1,4 @@
-import { checkPermissionsOfHandle } from 'fsa-browser'
+import { checkPermissionsOfHandle } from '@philstenning/fsa-browser'
 import { fsaFile } from '../models/types'
 import { db } from '../db/setup'
 

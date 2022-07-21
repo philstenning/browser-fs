@@ -9,25 +9,30 @@
   },
   "scripts": {
     "clean": "pnpm -r clean",
+    "changeset": "changeset add",
+    "cy": "pnpm --filter fsa-browser-test cy:open",
     "dev": "pnpm -filter fsa-browser-test dev",
     "build": "turbo run build",
     "build:docs": "turbo run build:docs",
     "test": "turbo run test",
     "docs:publish": "pnpm --filter docs demo",
     "preview": "pnpm --filter fsa-browser-test preview ",
-    "cy": "pnpm --filter fsa-browser-test cy:open"
+    "release": "pnpm build && changeset publish",
+    "version": "changeset version"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/philstenning/browser-fs.git"
   },
-  "author": "",
+  "author": "philstenning",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/philstenning/browser-fs/issues"
   },
   "homepage": "https://github.com/philstenning/browser-fs#readme",
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.5",
+    "@changesets/cli": "^2.23.2",
     "@types/node": "^18.0.4",
     "rimraf": "^3.0.2",
     "turbo": "^1.3.1"

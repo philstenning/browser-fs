@@ -1,4 +1,4 @@
-import { checkPermissionsOfHandle } from 'fsa-browser'
+import { checkPermissionsOfHandle } from '@philstenning/fsa-browser'
 import { db } from '../../db/setup'
 import { fsaCollection, fsaFile } from '../types'
 import updatePermissionsForRootDirAndChildren from './updatePermissionsForRootDirAndChildren'
@@ -26,7 +26,7 @@ export default async function saveCollectionToFileSystem(collectionId: string) {
       try {
         // create new file handle for the directory
         const newFileHandel = await collection.handle.getFileHandle(file.name, {
-          create: true
+          create: true,
         })
         const writable = await newFileHandel.createWritable()
 
@@ -128,7 +128,7 @@ async function checkForCollectionDirectoryHandle(collection: fsaCollection) {
   try {
     // get the handle or create if not exists.
     collection.handle = await parentHandle.getDirectoryHandle(collection.name, {
-      create: true
+      create: true,
     })
     return true
   } catch (e) {

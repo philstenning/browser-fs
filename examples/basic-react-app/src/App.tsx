@@ -1,4 +1,4 @@
-import { FsaDbContextProvider } from 'react-fsa-database'
+import { FsaDbContextProvider } from '@philstenning/react-fsa-database'
 import { useState } from 'react'
 
 import './app.css'
@@ -17,9 +17,8 @@ function App() {
       >
         <ResizableHorizontalGrid>
           <div>one</div>
-         <Cards/>
-         <Cards/>
-          
+          <Cards />
+          <Cards />
         </ResizableHorizontalGrid>
       </FsaDbContextProvider>
     </div>

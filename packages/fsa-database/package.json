@@ -1,6 +1,6 @@
 {
-  "name": "fsa-database",
-  "version": "0.1.0",
+  "name": "@philstenning/fsa-database",
+  "version": "0.0.0",
   "description": "Adds a database using dixie to the project",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -24,7 +24,7 @@
   "dependencies": {
     "dexie": "^3.2.1",
     "dexie-export-import": "^1.0.3",
-    "fsa-browser": "workspace:*",
+    "@philstenning/fsa-browser": "workspace:*",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -44,6 +44,14 @@
     "tsc-alias": "^1.6.11",
     "typescript": "^4.7.4"
   },
-  "browserslist": "> 0.25%, not dead"
+  "browserslist": "> 0.25%, not dead",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philstenning/browser-fs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/philstenning/browser-fs/issues"
+  },
+  "homepage": "https://github.com/philstenning/browser-fs/packages/fsa-database#readme"
 }
 

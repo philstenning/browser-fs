@@ -1,12 +1,16 @@
-import { fsaDirectory } from "fsa-database";
-import React, { useState, useEffect } from "react";
-import { useFsaDbContext, useDirectories } from "react-fsa-database";
+import { fsaDirectory } from '@philstenning/fsa-database'
+import React, { useState, useEffect } from 'react'
+import {
+  useFsaDbContext,
+  useDirectories
+} from '@philstenning/react-fsa-database'
 
 //@ts-ignore
-import styles from "./directoriesForRootDir.module.css";
+import styles from './directoriesForRootDir.module.css'
+
 const DirectoriesForRootDir = () => {
-  const [filter, setFilter] = useState("");
-  const { dbState } = useFsaDbContext();
+  const [filter, setFilter] = useState('')
+  const { dbState } = useFsaDbContext()
   const {
     directoriesForRootDirectory,
     setCurrentDirectoryId,
@@ -14,113 +18,114 @@ const DirectoriesForRootDir = () => {
     hideDirectory,
     toggleHidden,
     mergeToParentDirectory,
-    unMergeDirectories,
-  } = useDirectories();
+    unMergeDirectories
+  } = useDirectories()
 
-  const [filteredDirs, setFilteredDirs] = useState<fsaDirectory[]>([]);
+  const [filteredDirs, setFilteredDirs] = useState<fsaDirectory[]>([])
 
   useEffect(() => {
-    if (directoriesForRootDirectory && filter.length) {
-      const result = directoriesForRootDirectory.filter((d) =>
-        d.name.includes(filter) && d.depth < 2
-      );
-      setFilteredDirs(result);
-    } else {
-      setFilteredDirs(directoriesForRootDirectory);
+    if (directoriesForRootDirectory) {
+      if (filter.length) {
+        const result = directoriesForRootDirectory.filter(
+          (d) => d.name.includes(filter) && d.depth < 2
+        )
+        setFilteredDirs(result)
+      } else {
+        setFilteredDirs(directoriesForRootDirectory)
+      }
     }
-  }, [directoriesForRootDirectory, filter]);
-
-
+  }, [directoriesForRootDirectory, filter])
 
   const hideDir = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     directory: fsaDirectory
   ) => {
-    e.stopPropagation();
+    e.stopPropagation()
 
-    if (directory.hidden === "false") {
-      await hideDirectory(directory);
-      return;
+    if (directory.hidden === 'false') {
+      await hideDirectory(directory)
+      return
     }
-    await unHideDirectory(directory);
-  };
+    await unHideDirectory(directory)
+  }
 
   const mergeParent = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     directory: fsaDirectory
   ) => {
-    e.stopPropagation();
-    mergeToParentDirectory(directory);
-  };
+    e.stopPropagation()
+    mergeToParentDirectory(directory)
+  }
 
   const unMergeParent = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     directory: fsaDirectory
   ) => {
-    e.stopPropagation();
-    unMergeDirectories(directory);
-  };
+    e.stopPropagation()
+    unMergeDirectories(directory)
+  }
 
-    return (
-      <div data-testid="directoriesForRootDir">
-        <h4>
-          Directories For RootDir ({filteredDirs && filteredDirs.length})
-        </h4>
-        <div className={styles.hideButtons}>
-          <button data-testid="directoriesForRootDir_btnToggle" onClick={toggleHidden}>
-            Toggle Hidden
-          </button>
-          <button data-test-id="directoriesForRootDir_btnUnHideAll">UnHide All</button>
-        </div>
-        <input
-          className={styles.filter}
-          type="search"
-          autoComplete="off"
-          name="filter"
-          id="dfr_filter"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
-        <ul>
-          {filteredDirs?.map((dir, index) => (
-            // list Item
-            <li
-              data-test-id={`dfr_listItem_${index}`}
-              className={dbState.currentDirectoryId === dir.id ? "active" : ""}
-              onClick={() => setCurrentDirectoryId(dir.id)}
-              key={dir.id}
-            >
-              {" "}
-              {index} {dir.name} ({dir.fileCount}){" "}
-              <button
-                data-test-id={`dfr_btn_hide_${index}`}
-                onClick={(e) => hideDir(e, dir)}
-              >
-                {dir.hidden === "false" ? "hide" : "show"}
-              </button>{" "}
-              {dir.isRoot === "false" && (
-                <button
-                  data-test-id={`dfr_btn_merge_${index}`}
-                  onClick={(e) => mergeParent(e, dir)}
-                >
-                  merge parent
-                </button>
-              )}
-              {dir.isRoot === "true" && (
-                <button onClick={(e) => unMergeParent(e, dir)}>
-                  UnMergeAll
-                </button>
-              )}
-            </li>
-
-            //  end of list Item
-          ))}
-        </ul>
+  return (
+    <div data-testid="directoriesForRootDir">
+      <h4>Directories For RootDir ({filteredDirs && filteredDirs.length})</h4>
+      <div className={styles.hideButtons}>
+        <button
+          data-testid="directoriesForRootDir_btnToggle"
+          onClick={toggleHidden}
+        >
+          Toggle Hidden
+        </button>
+        <button data-test-id="directoriesForRootDir_btnUnHideAll">
+          UnHide All
+        </button>
       </div>
-    );
-};
+      <input
+        className={styles.filter}
+        type="search"
+        autoComplete="off"
+        name="filter"
+        id="dfr_filter"
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      />
+      <ul>
+        {filteredDirs?.map((dir, index) => (
+          // list Item
+          <li
+            data-test-id={`dfr_listItem_${index}`}
+            className={dbState.currentDirectoryId === dir.id ? 'active' : ''}
+            onClick={() => setCurrentDirectoryId(dir.id)}
+            key={dir.id}
+          >
+            {' '}
+            {index} {dir.name} ({dir.fileCount}){' '}
+            <button
+              data-test-id={`dfr_btn_hide_${index}`}
+              onClick={(e) => hideDir(e, dir)}
+            >
+              {dir.hidden === 'false' ? 'hide' : 'show'}
+            </button>{' '}
+            {dir.isRoot === 'false' && (
+              <button
+                data-test-id={`dfr_btn_merge_${index}`}
+                onClick={(e) => mergeParent(e, dir)}
+              >
+                merge parent
+              </button>
+            )}
+            {dir.isRoot === 'true' && (
+              <button onClick={(e) => unMergeParent(e, dir)}>UnMergeAll</button>
+            )}
+          </li>
 
-export default DirectoriesForRootDir;
+          //  end of list Item
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+export default DirectoriesForRootDir
 
 // function ListItem(
 //   dbState: fsaState,

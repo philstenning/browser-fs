@@ -4,7 +4,7 @@ import saveSetting from '../models/settings/saveSetting'
 import saveState from '../models/state/saveState'
 import { fsaFileType } from '../models/types'
 import { getCurrentState } from '../models/state'
-import { FoldersToExcludeFromScanning } from 'fsa-browser'
+import { FoldersToExcludeFromScanning } from '@philstenning/fsa-browser'
 import resetPermissionsOnAllDirectories from './resetPermissionsOnAllDirectories'
 
 export default async function initializeDatabase(fileTypes: string[]) {

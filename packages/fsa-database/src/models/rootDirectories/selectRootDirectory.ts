@@ -1,6 +1,4 @@
-import {
-  selectRootDirectoryOnLocalDrive
-} from 'fsa-browser'
+import { selectRootDirectoryOnLocalDrive } from '@philstenning/fsa-browser'
 import addRootDirectory from './addRootDirectory'
 
 export default async function selectRootDirectory() {

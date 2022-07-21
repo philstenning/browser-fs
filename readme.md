@@ -59,7 +59,7 @@ Add context provider to your app
 // app.tsx
 // file extensions can be either '.md' or 'md'
 
-import {FsaDbContextProvider} from "react-fsa-database";
+import {FsaDbContextProvider} from "@philstenning/react-fsa-database";
 
 function App() {
   return (

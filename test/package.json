@@ -19,15 +19,15 @@
     "defaults"
   ],
   "dependencies": {
+    "@philstenning/fsa-browser": "workspace:*",
+    "@philstenning/fsa-database": "workspace:*",
+    "@philstenning/react-fsa-database": "workspace:*",
     "@szhsin/react-menu": "^3.0.0",
     "dexie": "^3.2.1",
     "dexie-react-hooks": "^1.1.1",
-    "fsa-browser": "workspace:*",
-    "fsa-database": "workspace:*",
     "postcss-import-ext-glob": "^2.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-fsa-database": "workspace:*",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1"
   },
@@ -36,6 +36,7 @@
     "@types/react": "^17.0.44",
     "@types/react-dom": "^17.0.10",
     "@types/sinon": "^10.0.12",
+    "@types/wicg-file-system-access": "^2020.9.5",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
     "@vitejs/plugin-react": "^1.3.2",

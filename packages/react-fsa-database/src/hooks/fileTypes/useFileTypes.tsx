@@ -1,4 +1,9 @@
-import { db, fsaFileType, addFileType, deleteFileType } from 'fsa-database'
+import {
+  db,
+  fsaFileType,
+  addFileType,
+  deleteFileType,
+} from '@philstenning/fsa-database'
 import { useLiveQuery } from 'dexie-react-hooks'
 
 function useFileTypes() {

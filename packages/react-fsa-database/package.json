@@ -1,6 +1,6 @@
 {
-  "name": "react-fsa-database",
-  "version": "0.1.0",
+  "name": "@philstenning/react-fsa-database",
+  "version": "0.0.0",
   "description": "scan your local drive using the file system access api and store the results in a database",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -23,11 +23,11 @@
   "author": "philstenning",
   "license": "ISC",
   "dependencies": {
+    "@philstenning/fsa-database": "workspace:*",
     "@types/uuid": "^8.3.4",
     "dexie": "^3.2.1",
     "dexie-export-import": "^1.0.3",
     "dexie-react-hooks": "^1.1.1",
-    "fsa-database": "workspace:*",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "uuid": "^8.3.2"
@@ -62,5 +62,13 @@
     "tslib": "^2.4.0",
     "typescript": "^4.7.4"
   },
-  "browserslist": "> 0.25%, not dead"
+  "browserslist": "> 0.25%, not dead",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philstenning/browser-fs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/philstenning/browser-fs/issues"
+  },
+  "homepage": "https://github.com/philstenning/browser-fs/packages/react-fsa-browser#readme"
 }

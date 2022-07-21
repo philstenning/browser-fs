@@ -1,5 +1,8 @@
-import { fsaDirectory } from 'fsa-database'
-import { useDirectories, useFsaDbContext } from 'react-fsa-database'
+import { fsaDirectory } from '@philstenning/fsa-database'
+import {
+  useDirectories,
+  useFsaDbContext,
+} from '@philstenning/react-fsa-database'
 
 import styles from './directories.module.css'
 
@@ -8,14 +11,13 @@ function Directories() {
     useDirectories()
   const { dbState } = useFsaDbContext()
   const { currentDirectoryId } = dbState
- 
+
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Directories</h2>
-      <ul className={styles.list} >
+      <ul className={styles.list}>
         {directoriesForRootDirectory?.map((dir) => (
           <ListItem
-            
             key={dir.id}
             dir={dir}
             selected={currentDirectoryId === dir.id}
@@ -38,7 +40,7 @@ const ListItem = ({ dir, selected }: Props) => {
   return (
     <li
       onClick={() => setCurrentDirectoryId(dir.id)}
-      className={`${selected?'selected':''} ${styles.listItem}`}
+      className={`${selected ? 'selected' : ''} ${styles.listItem}`}
     >
       {dir.name} - {dir.fileCount}
     </li>

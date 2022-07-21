@@ -2,7 +2,7 @@ import React from 'react'
 
 import RootDir from '../components/rootDirectories/rootDirectories'
 
-import {saveDragItems} from 'fsa-database'
+import { saveDragItems } from '@philstenning/fsa-database'
 
 // import { useDropzone } from 'react-dropzone'
 // @ts-ignore

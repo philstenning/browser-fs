@@ -1,4 +1,4 @@
-import { checkPermissionsOfHandle } from "fsa-browser";
+import { checkPermissionsOfHandle } from '@philstenning/fsa-browser'
 import { fsaCollection, fsaFile } from "../types";
 import getCurrentSetting from "../settings/getCurrentSetting";
 

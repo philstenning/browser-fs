@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useExcludedDirectories } from 'react-fsa-database'
+import { useExcludedDirectories } from '@philstenning/react-fsa-database'
 export default function ExcludedFolders() {
   const [text, setText] = useState('')
   const {

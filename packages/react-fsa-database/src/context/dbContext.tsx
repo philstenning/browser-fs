@@ -1,17 +1,16 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
-import {useLiveQuery} from 'dexie-react-hooks'
+import { useLiveQuery } from 'dexie-react-hooks'
 import {
   db,
   initializeDatabase,
   fsaState,
-
   initialDbState,
   setCurrentCollectionId as setColId,
   setCurrentDirectoryId as setDirId,
   setCurrentFileId as setFileId,
   setCurrentRootDirectoryId as setRoodId,
-} from 'fsa-database'
+} from '@philstenning/fsa-database'
 import FsaDbContext from './FsaDbContext'
 
 export type FsaDbContextType = {

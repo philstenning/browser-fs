@@ -6,7 +6,7 @@ import TestPage from '../../routes/testPage'
 import Settings from '../../routes/settings'
 import Layout from './Layout'
 import DragNDrop from '../../routes/DragNDrop'
-import { FsaDbContextProvider } from 'react-fsa-database'
+import { FsaDbContextProvider } from '@philstenning/react-fsa-database'
 
 function App() {
   return (

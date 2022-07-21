@@ -18,5 +18,7 @@
     "docs",
     "Library all",
     "test"
-  ]
+  ],
+  "search.useIgnoreFiles": true,
+  "search.useParentIgnoreFiles": false
 }
