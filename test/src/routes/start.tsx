@@ -5,7 +5,7 @@ import {
   fetchDatabase,
   resetDatabase,
   deleteDatabase
-} from 'fsa-database'
+} from '@philstenning/fsa-database'
 
 //@ts-ignore
 import styles from './start.module.css'

@@ -3,3 +3,5 @@ describe('foo.cy.ts', () => {
     // cy.mount()
   })
 })
+
+export {}

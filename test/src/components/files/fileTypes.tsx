@@ -1,45 +1,45 @@
-import React from "react";
-import { fsaFileType } from "fsa-database";
-import { useFileTypes } from "react-fsa-database";
+import React from 'react'
+import { fsaFileType } from '@philstenning/fsa-database'
+import { useFileTypes } from '@philstenning/react-fsa-database'
 //@ts-ignore
-import styles from "./fileTypes.module.css";
+import styles from './fileTypes.module.css'
 
 const FileTypes = () => {
   const { fileTypes, toggleSelectedFileType, deleteFileType, addFileType } =
-    useFileTypes();
+    useFileTypes()
 
   const handleToggle = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
     fileType: fsaFileType
   ) => {
-    e.stopPropagation();
-    toggleSelectedFileType(fileType);
-  };
+    e.stopPropagation()
+    toggleSelectedFileType(fileType)
+  }
 
   return (
     <div className={styles.container} data-testid="fileTypes">
       <h3 className={styles.header}>File Types</h3>
       <div className={styles.fileTypes__button_group}>
         <button
-          onClick={() => addFileType("stl")}
+          onClick={() => addFileType('stl')}
           data-testid="fileTypes_addStl"
         >
           Add Stl
         </button>
         <button
-          onClick={() => addFileType("3mf")}
+          onClick={() => addFileType('3mf')}
           data-testid="fileTypes_add3mf"
         >
           Add 3mf
         </button>
         <button
-          onClick={() => addFileType("gcode")}
+          onClick={() => addFileType('gcode')}
           data-testid="fileTypes_addGcode"
         >
           Add gcode
         </button>
         <button
-          onClick={() => addFileType("png")}
+          onClick={() => addFileType('png')}
           data-testid="fileTypes_addPng"
         >
           Add png
@@ -62,7 +62,7 @@ const FileTypes = () => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default FileTypes;
+export default FileTypes

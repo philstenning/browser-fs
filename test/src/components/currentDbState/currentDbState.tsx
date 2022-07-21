@@ -1,13 +1,14 @@
-import React from "react";
-import { useFsaDbContext } from "react-fsa-database";
+import React from 'react'
+import { useFsaDbContext } from '@philstenning/react-fsa-database'
 function CurrentState() {
-  const { dbState } = useFsaDbContext();
+  const { dbState } = useFsaDbContext()
   const {
     currentCollectionId,
     currentDirectoryId,
     currentRootDirectoryId,
-    currentFileId,isScanning
-  } = dbState;
+    currentFileId,
+    isScanning
+  } = dbState
   return (
     <ul data-testid="currentDbState">
       <li data-testid="currentDbState_collection">
@@ -20,14 +21,14 @@ function CurrentState() {
         RootDirectory: {currentRootDirectoryId}
       </li>
       <li data-testid="currentDbState_rootDir">
-        isScanning: {isScanning?'true':'false'}
+        isScanning: {isScanning ? 'true' : 'false'}
       </li>
       <li data-testid="currentDbState_file">File: {currentFileId}</li>
       <li data-testid="currentDbState_id">
-        id: {dbState.id?.toString() ?? "null"}
+        id: {dbState.id?.toString() ?? 'null'}
       </li>
     </ul>
-  );
+  )
 }
 
-export default CurrentState;
+export default CurrentState

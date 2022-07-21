@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { useFindDuplicateFiles } from 'react-fsa-database'
-import { db } from 'fsa-database'
+import { useFindDuplicateFiles } from '@philstenning/react-fsa-database'
+import { db } from '@philstenning/fsa-database'
 import { useLiveQuery } from 'dexie-react-hooks'
-import { DuplicateFile } from 'react-fsa-database/src/hooks/files'
+import { DuplicateFile } from '@philstenning/react-fsa-database/src/hooks/files'
 
 //@ts-ignore
 import styles from './duplicateFiles.module.css'
@@ -20,7 +20,7 @@ function DuplicateFiles() {
 
   return (
     <div data-testid="duplicateFiles">
-      <FileList file={filtered} allFiles={duplicateFiles} />
+    {filtered && <FileList file={filtered} allFiles={duplicateFiles} />}  
       <ul data-testid="dupFileGroupList">
         {duplicateFiles &&
           duplicateFiles.map((f, index) => (

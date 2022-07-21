@@ -1,18 +1,18 @@
 {
   "name": "basic-react-app",
-  "private": true,
   "version": "0.0.0",
+  "private":"true",
   "scripts": {
     "dev": "vite",
     "build:examples": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "fsa-database": "workspace:*",
+    "@philstenning/fsa-database": "workspace:*",
+    "@philstenning/react-fsa-database": "workspace:*",
     "open-props": "^1.3.7",
     "react": "^18.1.0",
     "react-dom": "^18.0.0",
-    "react-fsa-database": "workspace:*",
     "react-resizable-collapsible-grid": "^1.3.3"
   },
   "devDependencies": {

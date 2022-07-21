@@ -1,6 +1,6 @@
-import type { VirtualFileSystemEntry } from 'fsa-browser'
+import type { VirtualFileSystemEntry } from '@philstenning/fsa-browser'
 import createDirectory from '../models/directories/createDirectory'
-import { fsaDirectory} from '../models/types'
+import { fsaDirectory } from '../models/types'
 import { db } from '../db/setup'
 import { saveFile, createFile } from '../models/files'
 /**

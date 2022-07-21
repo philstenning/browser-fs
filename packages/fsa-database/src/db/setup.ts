@@ -34,7 +34,6 @@ export class FsaDb extends Dexie {
       errors: `++id,type,success`,
       settings: `++id`,
       excludedDirectories: `++id,name`,
-
     })
   }
 }

@@ -3,8 +3,8 @@ import {
   useRootFileList,
   useCollections,
   useFsaDbContext
-} from 'react-fsa-database'
-import { fsaFile, checkHandlePermission } from 'fsa-database'
+} from '@philstenning/react-fsa-database'
+import { fsaFile, checkHandlePermission } from '@philstenning/fsa-database'
 //@ts-ignore
 import styles from './filesForRootDir.module.css'
 

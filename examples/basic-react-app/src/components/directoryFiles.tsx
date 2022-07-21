@@ -1,8 +1,12 @@
-import { useDirectoryFiles, useFsaDbContext , useCollections} from 'react-fsa-database'
+import {
+  useDirectoryFiles,
+  useFsaDbContext,
+  useCollections,
+} from '@philstenning/react-fsa-database'
 import styles from './directoryFiles.module.css'
 
 function DirectoryFiles() {
-    const {addFileToCollection} = useCollections()
+  const { addFileToCollection } = useCollections()
   const { directoryFiles } = useDirectoryFiles()
   const { setCurrentFileId, dbState } = useFsaDbContext()
   return (
@@ -11,7 +15,7 @@ function DirectoryFiles() {
       <ul className={styles.list}>
         {directoryFiles.map((file) => (
           <li
-          key={file.id}
+            key={file.id}
             onClick={() => setCurrentFileId(file.id)}
             className={`${styles.listItem} ${
               dbState.currentFileId === file.id ? 'selected' : ''

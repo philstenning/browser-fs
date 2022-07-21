@@ -4,7 +4,7 @@ import {
   db,
   updateSetting,
   createInitialSetting,
-} from 'fsa-database'
+} from '@philstenning/fsa-database'
 
 export default function useSettings() {
   const [fsaSettings, setSettings] = useState(createInitialSetting())

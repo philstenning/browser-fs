@@ -1,11 +1,18 @@
 import React from 'react'
-import { useRootDirectories, useFsaDbContext } from 'react-fsa-database'
-import { fsaDirectory, rescanRootDirectories, saveLegacyInputFiles } from 'fsa-database'
+import {
+  useRootDirectories,
+  useFsaDbContext
+} from '@philstenning/react-fsa-database'
+import {
+  fsaDirectory,
+  rescanRootDirectories,
+  saveLegacyInputFiles
+} from '@philstenning/fsa-database'
 
 // icons
 import { ImSpinner6 } from 'react-icons/im'
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5'
-import {  BiTrash } from 'react-icons/bi'
+import { BiTrash } from 'react-icons/bi'
 //@ts-ignore
 import styles from './rootDirectories.module.css'
 
@@ -14,13 +21,12 @@ const RootDirectories = () => {
     useRootDirectories()
 
   const { dbState, setCurrentRootDirectoryId, isScanning } = useFsaDbContext()
-  
+
   const saveFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-    
     // console.log(e.target.files)
-    if(e.target.files){
+    if (e.target.files) {
       // saveDragItems(e.target.files)
-     saveLegacyInputFiles(e.target.files)
+      saveLegacyInputFiles(e.target.files)
     }
   }
 

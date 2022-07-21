@@ -12,7 +12,7 @@ import {
   fsaFile,
   fsaCollectionFile,
   saveCollectionToFileSystem,
-} from 'fsa-database'
+} from '@philstenning/fsa-database'
 import useFsaDbContext from '../context/useFsaDbContext'
 
 async function getCurrentState() {

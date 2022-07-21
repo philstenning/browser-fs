@@ -1,6 +1,9 @@
-import { fsaCollection } from 'fsa-database'
+import { fsaCollection } from '@philstenning/fsa-database'
 import { useEffect, useState } from 'react'
-import { useCollections, useFsaDbContext } from 'react-fsa-database'
+import {
+  useCollections,
+  useFsaDbContext,
+} from '@philstenning/react-fsa-database'
 import styles from './directories.module.css'
 
 function Collections() {
@@ -10,12 +13,15 @@ function Collections() {
     <div className={styles.container}>
       <h2 className={styles.header}>Collections</h2>
       <button
-      className={styles.btn}
-      onClick={() => addCollection('My Collection')}>Add</button>
+        className={styles.btn}
+        onClick={() => addCollection('My Collection')}
+      >
+        Add
+      </button>
       <ul className={styles.list}>
         {collections.map((col) => (
           <ListItem
-           key={col.id}
+            key={col.id}
             select={setCurrentCollectionId}
             isSelected={dbState.currentCollectionId === col.id}
             col={col}
@@ -47,7 +53,6 @@ const ListItem = ({ col, isSelected, select }: Props) => {
 
   return (
     <li
-    
       className={`${styles.listItem} ${isSelected ? 'selected' : ''}`}
       onClick={() => select(col.id)}
       onDoubleClick={() => setIsDisabled(false)}

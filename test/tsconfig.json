@@ -21,7 +21,8 @@
       "node",
       "react",
       "react-dom",
-      "sinon"
+      "sinon",
+      "wicg-file-system-access"
     ],
     "baseUrl": "."
   },
@@ -29,7 +30,8 @@
     "src/**/*.t*",
     "cypress/**/*.ts",
     "vite.config.ts",
-    "cypress/support/component.tsx"
+    "cypress/support/component.tsx",
+    "wicg-file-system-access"
   ],
   // "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]

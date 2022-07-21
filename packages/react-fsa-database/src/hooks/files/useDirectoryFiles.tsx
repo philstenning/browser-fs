@@ -1,4 +1,4 @@
-import { db, fsaFile } from 'fsa-database'
+import { db, fsaFile } from '@philstenning/fsa-database'
 import { useLiveQuery } from 'dexie-react-hooks'
 function useCurrentDirectory() {
   const directoryFiles =

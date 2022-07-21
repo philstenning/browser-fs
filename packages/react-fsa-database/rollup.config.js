@@ -14,7 +14,7 @@ export default defineConfig([
       nodeResolve(),
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
-      terser()
+      terser(),
     ],
     external: [
       'dexie',
@@ -23,7 +23,7 @@ export default defineConfig([
       'uuid',
       'react',
       'react-dom',
-      'fsa-database'
+      '@philstenning/fsa-database',
     ],
   },
   {

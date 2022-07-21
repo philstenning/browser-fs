@@ -5,7 +5,7 @@ import {
   deleteExcludedDirectoryName,
   db,
   fsaExcludedDirectory,
-} from 'fsa-database'
+} from '@philstenning/fsa-database'
 
 export default function useExcludedDirectories() {
   const [excludedDirectories, setExcludedDirectories] = useState<

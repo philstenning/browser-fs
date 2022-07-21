@@ -1,28 +1,31 @@
-import React, { useState } from "react";
-import { useCollections, useFsaDbContext } from "react-fsa-database";
-import { fsaCollection } from "fsa-database";
+import React, { useState } from 'react'
+import {
+  useCollections,
+  useFsaDbContext
+} from '@philstenning/react-fsa-database'
+import { fsaCollection } from '@philstenning/fsa-database'
 //@ts-ignore
-import styles from "./collectionsList.module.css";
+import styles from './collectionsList.module.css'
 function CollectionList() {
   const {
     collections,
     removeAllFilesFromCollection,
     removeCollection,
     cloneCollection,
-    saveCollectionToFileSystem,
-  } = useCollections();
+    saveCollectionToFileSystem
+  } = useCollections()
 
-  const { dbState, setCurrentCollectionId } = useFsaDbContext();
+  const { dbState, setCurrentCollectionId } = useFsaDbContext()
 
   const clearCollection = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     collection: fsaCollection
   ) => {
-    e.stopPropagation();
+    e.stopPropagation()
 
-    removeAllFilesFromCollection(collection.id);
-    setCurrentCollectionId(collection.id);
-  };
+    removeAllFilesFromCollection(collection.id)
+    setCurrentCollectionId(collection.id)
+  }
 
   return (
     <div>
@@ -32,7 +35,7 @@ function CollectionList() {
         {collections.map((col, index) => (
           <li
             className={
-              col.id === dbState.currentCollectionId ? styles.active : ""
+              col.id === dbState.currentCollectionId ? styles.active : ''
             }
             key={col.id}
           >
@@ -47,8 +50,8 @@ function CollectionList() {
               </span>
               <button
                 onClick={(e) => {
-                  e.stopPropagation();
-                  clearCollection(e, col);
+                  e.stopPropagation()
+                  clearCollection(e, col)
                 }}
                 data-cy={`clearCollection-${index}`}
               >
@@ -56,8 +59,8 @@ function CollectionList() {
               </button>
               <button
                 onClick={(e) => {
-                  e.stopPropagation();
-                  removeCollection(col);
+                  e.stopPropagation()
+                  removeCollection(col)
                 }}
                 data-cy={`deleteCollection-${index}`}
               >
@@ -65,8 +68,8 @@ function CollectionList() {
               </button>
               <button
                 onClick={(e) => {
-                  e.stopPropagation();
-                  cloneCollection(col);
+                  e.stopPropagation()
+                  cloneCollection(col)
                 }}
                 data-cy={`copyCollection-${index}`}
               >
@@ -83,14 +86,14 @@ function CollectionList() {
         ))}
       </ul>
     </div>
-  );
+  )
 }
 
-export default CollectionList;
+export default CollectionList
 
 function Add() {
-  const { addCollection } = useCollections();
-  const [collectionName, setCollectionName] = useState("");
+  const { addCollection } = useCollections()
+  const [collectionName, setCollectionName] = useState('')
 
   return (
     <form className={styles.form}>
@@ -99,21 +102,20 @@ function Add() {
         type="search"
         name="addCollectionInput"
         id="addCollectionInput"
-        
         onChange={(e) => setCollectionName(e.target.value)}
         value={collectionName}
         autoComplete="off"
       />
       <button
         onClick={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          addCollection(collectionName);
+          e.stopPropagation()
+          e.preventDefault()
+          addCollection(collectionName)
         }}
         data-cy={`addCollectionButton`}
       >
         Add
       </button>
     </form>
-  );
+  )
 }
