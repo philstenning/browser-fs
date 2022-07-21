@@ -17,8 +17,8 @@
     "test": "turbo run test",
     "docs:publish": "pnpm --filter docs demo",
     "preview": "pnpm --filter fsa-browser-test preview ",
-    "release": "pnpm build && changeset publish",
-    "version": "changeset version"
+    "release": "changeset publish",
+    "changeset:version": "changeset version"
   },
   "repository": {
     "type": "git",
