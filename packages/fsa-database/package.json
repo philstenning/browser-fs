@@ -1,6 +1,6 @@
 {
   "name": "@philstenning/fsa-database",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Adds a database using dixie to the project",
   "main": "src/index.ts",
   "module": "src/index.ts",
