@@ -1,5 +1,6 @@
+import React from 'react'
 import {
-  useDirectoryFiles,
+  useDirectories,
   useFsaDbContext,
   useCollections,
 } from '@philstenning/react-fsa-database'
@@ -7,13 +8,13 @@ import styles from './directoryFiles.module.css'
 
 function DirectoryFiles() {
   const { addFileToCollection } = useCollections()
-  const { directoryFiles } = useDirectoryFiles()
+  // const { directoryFiles } = useDirectories()
   const { setCurrentFileId, dbState } = useFsaDbContext()
   return (
     <div className={styles.container}>
       {/* <h2 className={styles.header}>Directory files</h2> */}
       <ul className={styles.list}>
-        {directoryFiles.map((file) => (
+        {/* {directoryFiles.map((file) => (
           <li
             key={file.id}
             onClick={() => setCurrentFileId(file.id)}
@@ -24,10 +25,11 @@ function DirectoryFiles() {
             <span> {file.name}</span>
             <button onClick={() => addFileToCollection(file)}>Add</button>
           </li>
-        ))}
+        ))} */}
       </ul>
     </div>
   )
 }
 
 export default DirectoryFiles
+

@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   useRootDirectories,
   useFsaDbContext,
@@ -31,3 +32,4 @@ function RootDirectories() {
 }
 
 export default RootDirectories
+

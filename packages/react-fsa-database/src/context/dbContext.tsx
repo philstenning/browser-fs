@@ -1,5 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useMemo, useCallback } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  PropsWithChildren,
+  ReactElement,
+} from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
 import {
   db,
@@ -22,20 +29,30 @@ export type FsaDbContextType = {
   isScanning: boolean
 }
 
-type Props = {
+export interface FsaDbContextProviderProps {
   children: React.ReactNode
+  /**
+   * @defaultValue ['svg', 'png', 'jpg']
+   */
   fileExtensionsForApp?: string[]
 }
 
 /**
  *
- * @param param0
- * @returns
+ * Context provider for fsa-database
+ *
+ * ```tsx
+ * <FsaDbContextProvider fileExtensionsForApp={['stl', 'gcode', 'pdf', 'jpg']}>
+ *     <h5>My Title</h5>
+ *     <p>My content</p>
+ * </FsaDbContextProvider>
+ * ```
+ * @category Context Provider
  */
 export default function FsaDbContextProvider({
   children,
-  fileExtensionsForApp = ['stl', 'gcode', '3mf', 'jpg'],
-}: Props) {
+  fileExtensionsForApp = ['svg', 'png', 'jpg'],
+}: PropsWithChildren<FsaDbContextProviderProps>): ReactElement {
   const [dbState, setDbState] = useState<fsaState>(initialDbState)
   const [isScanning, setIsReScanning] = useState(false)
 
@@ -122,3 +139,5 @@ export default function FsaDbContextProvider({
 
   return <FsaDbContext.Provider value={state}>{children}</FsaDbContext.Provider>
 }
+
+

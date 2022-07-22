@@ -5,78 +5,38 @@ import {
   fsaCollection,
   createCollection,
   deleteCollection,
-  addFileToCollection as fsaAddFileToCollection,
-  removeFileFromCollection as fsaRemoveFileFromCollection,
   updateCollection,
-  removeAllFilesFromCollection,
-  fsaFile,
   fsaCollectionFile,
   saveCollectionToFileSystem,
 } from '@philstenning/fsa-database'
 import useFsaDbContext from '../context/useFsaDbContext'
 
-async function getCurrentState() {
-  return (await db.state.toCollection().last()) ?? null
-}
-
-async function getCurrentCollection() {
-  const state = await getCurrentState()
-  if (!state?.currentCollectionId) return false
-
-  try {
-    const collection = await db.userCollections.get(state?.currentCollectionId)
-    if (collection) return collection
-  } catch (error) {
-    console.error(`Error getting current Collection ${error}`)
-  }
-  return false
-}
-
 /**
- * get the items/files of the currently selected collection
- * @returns
+ *
+ * A Hook for using collections
+ *
+ * @example
+ * ```tsx
+ * function MyCollectionsComponent(){
+ *   const {  collections, addCollection, removeCollection} = useCollections()
+ *   return(
+ *     <div></div>
+ *   )
+ * }
+ * ```
+ *
+ *
+ *
+ * @category Hooks
+ *
  */
-function getItems() {
-  const list = useLiveQuery(async () => {
-    // get state
-    const state = await db.state.toCollection().last()
-    if (!state?.currentCollectionId) return
-    // get current collection
-    const collection = await db.userCollections.get(state?.currentCollectionId)
-    if (collection) {
-      // get the files
-      const files =
-        (await db.files
-          .where('id')
-          .anyOf(collection.files.map((f) => f.fileId))
-          .toArray()) ?? []
-
-      // add order from the collection.
-      const orderedFiles: fsaFile[] = []
-      files.forEach((f) => {
-        const match = collection.files.filter((c) => c.fileId === f.id)[0]
-        orderedFiles.push({
-          ...f,
-          order: match.order ?? 0,
-          name: match.name,
-        })
-      })
-      // sort asc order
-      // eslint-disable-next-line consistent-return
-      return orderedFiles.sort((a, b) => a.order - b.order)
-    }
-    return []
-  })
-  return list ?? []
-}
-
 const useCollections = () => {
   const collections =
     useLiveQuery(() =>
       db.userCollections.orderBy('created').reverse().toArray()
     ) ?? []
 
-  const { setCurrentCollectionId, dbState } = useFsaDbContext()
+  const { setCurrentCollectionId } = useFsaDbContext()
 
   async function addCollection(
     name: string,
@@ -107,39 +67,7 @@ const useCollections = () => {
     }
   }
 
-  const addFileToCollection = async (
-    file: fsaFile,
-    collection?: fsaCollection
-  ) => {
-    const added = await fsaAddFileToCollection(file, collection)
-    if (!added) {
-      // console.log('file not added to collection...')
-      return
-    }
-    // console.log('file added to collection...')
-    // set the passed collection to the current collection if it isn't already.
-    if (collection && dbState.currentCollectionId !== collection.id)
-      setCurrentCollectionId(collection.id)
-  }
-
-  const removeFileFromCollection = async (
-    file: fsaFile,
-    collection?: fsaCollection
-  ) => {
-    // if we don't have a collection
-    // we assume we want to remove it from
-    // the current selected collection
-    if (!collection) {
-      const col = await getCurrentCollection()
-      if (col) {
-        await fsaRemoveFileFromCollection(col, file)
-      }
-      return
-    }
-    await fsaRemoveFileFromCollection(collection, file)
-  }
-
-  const currentCollectionItems = getItems()
+  // const currentCollectionItems = getItems()
 
   const cloneCollection = async (
     collection: fsaCollection,
@@ -160,14 +88,12 @@ const useCollections = () => {
     collections,
     addCollection,
     removeCollection,
-    addFileToCollection,
-    removeFileFromCollection,
+
     updateCollection,
-    currentCollectionItems,
     cloneCollection,
-    removeAllFilesFromCollection,
     saveCollectionToFileSystem,
   }
 }
 
 export default useCollections
+

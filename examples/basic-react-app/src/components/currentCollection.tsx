@@ -1,3 +1,4 @@
+import React from 'react'
 function CurrentCollection() {
   return (
     <div>
@@ -7,3 +8,4 @@ function CurrentCollection() {
 }
 
 export default CurrentCollection
+

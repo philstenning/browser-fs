@@ -30,6 +30,7 @@ import findLastUsedCollectionOrCreatNew from './models/collections/findLastUsedC
 import createCollection from './models/collections/createCollection'
 import deleteCollection from './models/collections/deleteCollection'
 import updateCollection from './models/collections/updateCollection'
+import getCurrentCollection from './models/collections/getCurrentCollection'
 import removeFileFromCollection from './models/collections/removeFileFromCollection'
 import removeFileFromAllCollection from './models/collections/removeFileFromAllCollection'
 import removeAllFilesFromCollection from './models/collections/removeAllFilesFromCollection'
@@ -141,6 +142,7 @@ export {
   createCollection,
   deleteCollection,
   updateCollection,
+  getCurrentCollection,
   removeFileFromCollection,
   removeFileFromAllCollection,
   removeAllFilesFromCollection,

@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './rightSidebar.module.css'
 function RightSidebar() {
   return (
@@ -9,3 +10,4 @@ function RightSidebar() {
 }
 
 export default RightSidebar
+

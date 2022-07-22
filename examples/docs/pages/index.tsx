@@ -1,3 +1,4 @@
+import React from 'react'
 import type { NextPage } from 'next'
 import {
   ResizableHorizontalGrid,
@@ -9,15 +10,15 @@ import {
 import styles from '../styles/Home.module.css'
 // import Layout from '../components/layout/layout'
 
-import  'react-resizable-collapsible-grid/dist/index.css'
+import 'react-resizable-collapsible-grid/dist/index.css'
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
-     <ResizableHorizontalGrid >
-       <div>ok</div>
-       <div>ok</div>
-       <div>ok</div>
-     </ResizableHorizontalGrid>
+      <ResizableHorizontalGrid>
+        <div>ok</div>
+        <div>ok</div>
+        <div>ok</div>
+      </ResizableHorizontalGrid>
     </div>
   )
 }

@@ -1,5 +1,8 @@
 /*  --------- Types  ---------  */
-import type { FsaDbContextType } from './context/dbContext'
+import type {
+  FsaDbContextType,
+  FsaDbContextProviderProps,
+} from './context/dbContext'
 
 /*  --------- Context  ---------  */
 import FsaDbContextProvider from './context/dbContext'
@@ -9,6 +12,7 @@ import FsaDbContextProvider from './context/dbContext'
 import useFsaDbContext from './hooks/context/useFsaDbContext'
 // collections
 import useCollections from './hooks/collections/useCollections'
+import useCollectionFiles from './hooks/collections/useCollectionFiles'
 // directories
 import useDirectories from './hooks/directories/useDirectories'
 // excluded directories
@@ -28,6 +32,7 @@ import useSettings from './hooks/settings/useSettings'
 
 export {
   // context
+
   FsaDbContextProvider,
   useFsaDbContext,
   // files
@@ -43,7 +48,9 @@ export {
   useExcludedDirectories,
   useDirectories,
   useCollections,
+  useCollectionFiles,
   useSettings,
 }
 
-export type { FsaDbContextType }
+export type { FsaDbContextProviderProps, FsaDbContextType }
+

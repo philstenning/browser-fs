@@ -1,3 +1,4 @@
+import React from 'react'
 import TestComponent from './testComponent'
 
 describe('<TestComponent>', () => {

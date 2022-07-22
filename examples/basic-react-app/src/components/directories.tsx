@@ -1,3 +1,4 @@
+import React from 'react'
 import { fsaDirectory } from '@philstenning/fsa-database'
 import {
   useDirectories,
@@ -46,3 +47,4 @@ const ListItem = ({ dir, selected }: Props) => {
     </li>
   )
 }
+

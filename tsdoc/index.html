@@ -1,0 +1,167 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>browser-fsa</title><meta name="description" content="Documentation for browser-fsa"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">browser-fsa</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<div class="container container-main">
+<div class="col-8 col-content">
+<div class="tsd-page-title">
+<h2>browser-fsa</h2></div>
+<div class="tsd-panel tsd-typography">
+<a href="#fsa-database" id="fsa-database" style="color: inherit; text-decoration: none;">
+  <h1>fsa-database</h1>
+</a>
+<p>Create collections of files from your local drive for use in the browser.</p>
+
+<a href="#overview" id="overview" style="color: inherit; text-decoration: none;">
+  <h2>Overview</h2>
+</a>
+<p>Use fsa-database to recursively scan your local drive for files of a any given extension and save them to the browsers indexDB, then create collections from them for further use within your app</p>
+
+<a href="#concepts" id="concepts" style="color: inherit; text-decoration: none;">
+  <h3>Concepts</h3>
+</a>
+<hr>
+<ul>
+<li><a href="#fsa-database">fsa-database</a><ul>
+<li><a href="#overview">Overview</a><ul>
+<li><a href="#concepts">Concepts</a></li>
+</ul>
+</li>
+<li><a href="#getting-stated">Getting Stated</a></li>
+<li><a href="#getting-stated-with-react">Getting Stated with React</a><ul>
+<li><a href="#add-a-root-directory">Add a Root Directory</a></li>
+</ul>
+</li>
+<li><a href="#features">Features</a><ul>
+<li><a href="#files-and-directories">Files and Directories</a></li>
+<li><a href="#collections">Collections</a></li>
+<li><a href="#state">State</a></li>
+</ul>
+</li>
+<li><a href="#browser-compatibility">Browser Compatibility</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#settings">Settings</a></li>
+<li><a href="#typescript">TypeScript</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+<p>This is a monorepo containing the following packages / projects:</p>
+<ol>
+<li>fsa-browser - base package this will be removed and all the necessary bits added to fsa-database for version 1.0.0</li>
+<li>fsa-database  </li>
+<li>react-fsa-database - wrapper for using with react</li>
+<li>web - vitejs frontend for testing</li>
+<li>docs - wip.</li>
+</ol>
+<hr>
+
+<a href="#getting-stated" id="getting-stated" style="color: inherit; text-decoration: none;">
+  <h2>Getting Stated</h2>
+</a>
+<pre><code class="language-js"><span class="hl-0">// using pnp</span><br/><span class="hl-1">npm</span><span class="hl-2"> </span><span class="hl-1">install</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span><br/><br/><span class="hl-0">// using pnpm</span><br/><span class="hl-1">pnpm</span><span class="hl-2"> </span><span class="hl-1">i</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span><br/><br/><span class="hl-0">// yarn</span><br/><span class="hl-1">yarn</span><span class="hl-2"> </span><span class="hl-1">add</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span>
+</code></pre>
+
+<a href="#getting-stated-with-react" id="getting-stated-with-react" style="color: inherit; text-decoration: none;">
+  <h2>Getting Stated with React</h2>
+</a>
+<pre><code class="language-js"><span class="hl-1">pnpm</span><span class="hl-2"> </span><span class="hl-1">i</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span><span class="hl-2"> </span><span class="hl-1">react</span><span class="hl-2">-</span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span>
+</code></pre>
+<p>Add context provider to your app</p>
+<pre><code class="language-tsx"><span class="hl-0">// app.tsx</span><br/><span class="hl-0">// file extensions can be either &#39;.md&#39; or &#39;md&#39;</span><br/><br/><span class="hl-3">import</span><span class="hl-2"> {</span><span class="hl-1">FsaDbContextProvider</span><span class="hl-2">} </span><span class="hl-3">from</span><span class="hl-2"> </span><span class="hl-4">&quot;@philstenning/react-fsa-database&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-5">function</span><span class="hl-2"> </span><span class="hl-6">App</span><span class="hl-2">() {</span><br/><span class="hl-2">  </span><span class="hl-3">return</span><span class="hl-2"> (</span><br/><span class="hl-2">    </span><span class="hl-7">&lt;</span><span class="hl-8">FsaDbContextProvider</span><span class="hl-2">  </span><br/><span class="hl-2">     </span><span class="hl-9">fileExtensionsForApp</span><span class="hl-2">=</span><span class="hl-5">{</span><span class="hl-10">[</span><span class="hl-4">&#39;.txt&#39;</span><span class="hl-10">,</span><span class="hl-4">&#39;.md&#39;</span><span class="hl-10">,</span><span class="hl-4">&#39;svg&#39;</span><span class="hl-10">]</span><span class="hl-5">}</span><span class="hl-7">&gt;</span><br/><span class="hl-2">      </span><span class="hl-7">&lt;</span><span class="hl-8">YourApp</span><span class="hl-7">&gt;</span><br/><span class="hl-2">    </span><br/><span class="hl-2">      </span><span class="hl-7">&lt;/</span><span class="hl-8">YourApp</span><span class="hl-7">&gt;</span><br/><span class="hl-2">    </span><span class="hl-7">&lt;/</span><span class="hl-8">FsaDbContextProvider</span><span class="hl-7">&gt;</span><br/><span class="hl-2">  );</span><br/><span class="hl-2">}</span><br/><br/><span class="hl-3">export</span><span class="hl-2"> </span><span class="hl-3">default</span><span class="hl-2"> </span><span class="hl-1">App</span><span class="hl-2">; </span><br/><br/><br/>
+</code></pre>
+
+<a href="#add-a-root-directory" id="add-a-root-directory" style="color: inherit; text-decoration: none;">
+  <h3>Add a Root Directory</h3>
+</a>
+<pre><code class="language-tsx">
+</code></pre>
+
+<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+  <h2>Features</h2>
+</a>
+
+<a href="#files-and-directories" id="files-and-directories" style="color: inherit; text-decoration: none;">
+  <h3>Files and Directories</h3>
+</a>
+<p>fsa-database uses the File System Access API to scan a local drive for files with a given array of extensions [&#39;.jpg&#39;, &#39;.png&#39;,&#39;.gif&#39;]  and returns a list of of directories with their files that are stored in the indexDb for use within your app. These Files and Directories are then available even after the user closes the browser or reloads the browser window (after regranting permissions)</p>
+
+<a href="#collections" id="collections" style="color: inherit; text-decoration: none;">
+  <h3>Collections</h3>
+</a>
+<p>The user can create collections and then add/remove any file  from the database to it, then save the whole collection back to almost any location on their local drive. Collections once saved for the first time, can then be updated/deleted in a similar manner that you would have in a regular native app. </p>
+
+<a href="#state" id="state" style="color: inherit; text-decoration: none;">
+  <h3>State</h3>
+</a>
+<p>Built in state management, if needed, is stored in the database so after page reloads, the state of the app can be quickly restored, this state is also available across browser tabs. </p>
+<hr>
+
+<a href="#browser-compatibility" id="browser-compatibility" style="color: inherit; text-decoration: none;">
+  <h2>Browser Compatibility</h2>
+</a>
+<p>The File System Access API is <a href="https://caniuse.com/?search=File%20System%20Access%20API">not available in all browsers</a> so a fallback is provided for users not using the supported features of API, this works by storing the file with its meta data in the indexDB so we can use it from within the app.</p>
+
+<a href="#options" id="options" style="color: inherit; text-decoration: none;">
+  <h2>Options</h2>
+</a>
+<pre><code class="language-ts"><span class="hl-0">// list of folders that are not scanned. </span><br/><span class="hl-11">excludedFolders</span><span class="hl-2">: </span><span class="hl-1">string</span><span class="hl-2">[]  = [</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;node_modules&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;programFiles&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;junk&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;.git&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;.changeset&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;bin&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;__pycache__&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">]</span><br/><br/><span class="hl-2">  </span>
+</code></pre>
+<pre><code class="language-ts"><span class="hl-0">// list of extensions to scan for </span><br/><span class="hl-11">fileTypes</span><span class="hl-2">: </span><span class="hl-1">string</span><span class="hl-2">[] = [</span><span class="hl-4">&#39;jpg&#39;</span><span class="hl-2">,</span><span class="hl-4">&#39;png&#39;</span><span class="hl-2">,</span><span class="hl-4">&#39;gif&#39;</span><span class="hl-2">]</span><br/>
+</code></pre>
+<pre><code class="language-ts"><span class="hl-0">// How deep you want to scan</span><br/><span class="hl-11">maxDepth</span><span class="hl-2">: </span><span class="hl-1">number</span><span class="hl-2"> = </span><span class="hl-12">10</span>
+</code></pre>
+
+<a href="#settings" id="settings" style="color: inherit; text-decoration: none;">
+  <h2>Settings</h2>
+</a>
+<pre><code class="language-ts"><span class="hl-1">fsaSetting</span><span class="hl-2"> {</span><br/><span class="hl-2">  </span><span class="hl-1">id</span><span class="hl-2">?: </span><span class="hl-1">number</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// set internally when browser session starts</span><br/><span class="hl-2">  </span><span class="hl-11">sessionStarted</span><span class="hl-2">: </span><span class="hl-1">number</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// when files are removed from a collection,</span><br/><span class="hl-2">  </span><span class="hl-0">// or a collection is deleted</span><br/><span class="hl-2">  </span><span class="hl-0">// removed files  from local disk also</span><br/><span class="hl-2">  </span><span class="hl-11">cleanUpFiles</span><span class="hl-2">: </span><span class="hl-1">boolean</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// when a file is added to collection</span><br/><span class="hl-2">  </span><span class="hl-0">// save to disk</span><br/><span class="hl-2">  </span><span class="hl-11">autoSaveCollections</span><span class="hl-2">: </span><span class="hl-1">boolean</span><br/><br/><span class="hl-2">  </span><span class="hl-11">scanInterval</span><span class="hl-2">: </span><span class="hl-1">number</span><span class="hl-2"> </span><span class="hl-0">// default is 0 or none.</span><br/><span class="hl-2">  </span><br/><span class="hl-2">  </span><span class="hl-0">// time the user last scanned for file changes.</span><br/><span class="hl-2">  </span><span class="hl-11">lastScanned</span><span class="hl-2">: </span><span class="hl-1">number</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// when adding with drag and drop whether </span><br/><span class="hl-2">  </span><span class="hl-0">// to add files to a new folder</span><br/><span class="hl-2">  </span><span class="hl-11">allowDndFiles</span><span class="hl-2">: </span><span class="hl-1">boolean</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// When resetting db retain all root Directories.</span><br/><span class="hl-2">  </span><span class="hl-11">retainRootDirectoriesOnReset</span><span class="hl-2">: </span><span class="hl-1">boolean</span><span class="hl-2">; </span><br/><br/><span class="hl-2">}</span>
+</code></pre>
+
+<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
+  <h2>TypeScript</h2>
+</a>
+<p>Fully written with TypeScript</p>
+
+<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+  <h2>Contributing</h2>
+</a>
+<p>I&#39;m open to all community contributions! If you&#39;d like to contribute in any way, file an issue or pull request.</p>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>License</h2>
+</a>
+<p>ISC</p>
+</div></div>
+<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<nav class="tsd-navigation primary">
+<details class="tsd-index-accordion" open><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li class="current selected"><a href="modules.html">browser-<wbr/>fsa</a>
+<ul>
+<li class="tsd-kind-module"><a href="modules/fsa_browser.html">fsa-<wbr/>browser -<wbr/> v0.1.0</a></li>
+<li class="tsd-kind-module"><a href="modules/fsa_database.html">fsa-<wbr/>database -<wbr/> v0.1.0</a></li>
+<li class="tsd-kind-module"><a href="modules/react_fsa_database.html">react-<wbr/>fsa-<wbr/>database -<wbr/> v0.1.0</a></li></ul></li></ul></div></details></nav></div></div>
+<div class="container tsd-generator">
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div><script src="assets/main.js"></script></body></html>

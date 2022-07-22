@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import styles from './leftSidebar.module.css'
 function LeftSidebar() {
   const ref = useRef<HTMLDivElement>(null)
@@ -24,3 +24,4 @@ function LeftSidebar() {
 }
 
 export default LeftSidebar
+

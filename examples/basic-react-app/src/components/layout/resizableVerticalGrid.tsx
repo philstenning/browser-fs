@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styles from './resizableVerticalGrid.module.css'
 type ResizableGrid = {
   children: React.ReactNode[]
@@ -130,3 +130,4 @@ function Divider({ setIsResizing, isCollapsed = false, resize }: DividerProps) {
 }
 
 export default ResizableVerticalGrid
+

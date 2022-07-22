@@ -1,3 +1,4 @@
+import React from 'react'
 import { FsaDbContextProvider } from '@philstenning/react-fsa-database'
 describe('<RootDirs>', () => {
   it('mount', () => {

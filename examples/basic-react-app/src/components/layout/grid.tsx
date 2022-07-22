@@ -1,4 +1,4 @@
-import { useState, CSSProperties, useRef, useEffect } from 'react'
+import React, { useState, CSSProperties, useRef, useEffect } from 'react'
 
 import styles from './grid.module.css'
 
@@ -189,3 +189,4 @@ const Divider = ({ handleResize, id, isCollapsed, resize }: DividerProps) => {
 }
 
 export default ResizableHorizontalGrid
+
