@@ -54,8 +54,6 @@ async function rescan() {
   console.time('reScanDirectories')
 
   for (const currentDir of rootDirs) {
-    // console.log(`scan of dir ${currentDir.name} started`);
-    // console.timeLog("reScanDirectories");
     // check permissions of handles
     // we have already done this but if the user
     // clicked cancel we don't get a chance to re-do
@@ -144,8 +142,8 @@ async function rescan() {
     db.directories.put(currentDir)
   }
 
-  console.timeEnd('reScanDirectories')
-  // console.log("re-scan all done...👍");
+  console.timeEnd('rescanDirectories')
+ 
 }
 
 async function updateDirectoryForRootDir(currentDir: fsaDirectory) {
