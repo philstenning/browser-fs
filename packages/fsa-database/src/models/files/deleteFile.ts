@@ -1,6 +1,12 @@
 import { db } from '../../db/setup'
 import { fsaFile } from "../types";
 import {removeFileFromAllCollection} from '../collections'
+
+/**
+ * Removes a single file from the database and any collection it is in. 
+ * @param {fsaFile} file 
+ * @returns 
+ */
 export default async function deleteFile(file: fsaFile) {
   try {
     const res =await removeFileFromAllCollection(file)
