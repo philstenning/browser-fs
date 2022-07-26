@@ -1,10 +1,9 @@
 .container {
-  /* padding: 0 2rem; */
-  min-height: 100vh;
-  background-color: rgb(221, 224, 224);
+  padding: 0 2rem;
 }
 
 .main {
+  min-height: 100vh;
   padding: 4rem 0;
   flex: 1;
   display: flex;
@@ -113,5 +112,18 @@
   .grid {
     width: 100%;
     flex-direction: column;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .card,
+  .footer {
+    border-color: #222;
+  }
+  .code {
+    background: #111;
+  }
+  .logo img {
+    filter: invert(1);
   }
 }

@@ -12,6 +12,7 @@
     "changeset": "changeset add",
     "cy": "pnpm --filter fsa-browser-test cy:open",
     "dev": "pnpm -filter fsa-browser-test dev",
+    "dev:docs": "pnpm -filter docs dev",
     "build": "turbo run build",
     "build:docs": "turbo run build:docs",
     "test": "turbo run test",
