@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# docs
+tsdoc
+
+
 # cypress
 /**/cypress/videos
 /**/cypress/screenshots
