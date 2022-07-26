@@ -1,5 +1,7 @@
-import { createStore } from "idb-keyval";
+import { createStore } from 'idb-keyval'
 
+const rootStore = function () {
+  return createStore('fsa-browser', 'virtual-root-store')
+}
 
-
-export  const rootStore = createStore("fsa-browser", "virtual-root-store");
+export default rootStore

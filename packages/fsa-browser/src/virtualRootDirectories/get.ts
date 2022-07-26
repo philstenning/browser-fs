@@ -1,7 +1,7 @@
 import { entries } from 'idb-keyval'
 import { VirtualRootDirectoryType } from './types'
 import { checkPermissionsOfHandle } from '../fileSystemOperations'
-import { rootStore } from './stores'
+import rootStore  from './stores'
 
 /**
  *  All VirtualFileSystemEntries that have been saved to indexDB are returned
@@ -9,7 +9,7 @@ import { rootStore } from './stores'
  */
 async function getAllVirtualRootDirectories(prependedText: string = '') {
   try {
-    const allEntries = await entries(rootStore)
+    const allEntries = await entries(rootStore())
 
     const allFolders: VirtualRootDirectoryType[] = []
     allEntries.forEach((entry) => {
