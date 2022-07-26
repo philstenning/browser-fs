@@ -1,13 +1,13 @@
 import React from 'react'
 import {
-  useDirectories,
+
   useFsaDbContext,
-  useCollections,
+  useCollectionFiles,
 } from '@philstenning/react-fsa-database'
 import styles from './directoryFiles.module.css'
 
 function DirectoryFiles() {
-  const { addFileToCollection } = useCollections()
+  const { addFileToCollection } = useCollectionFiles()
   // const { directoryFiles } = useDirectories()
   const { setCurrentFileId, dbState } = useFsaDbContext()
   return (

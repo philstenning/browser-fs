@@ -1,13 +1,12 @@
 import React from 'react'
 import { fsaFile } from '@philstenning/fsa-database'
 import {
-  useCollections,
-  useFsaDbContext
+  useFsaDbContext,
+  useCollectionFiles
 } from '@philstenning/react-fsa-database'
-//@ts-ignore
-// import styles from "./currentCollectionItems.module.css";
+
 function CollectionItems() {
-  const { currentCollectionItems, removeFileFromCollection } = useCollections()
+  const { collectionFiles, removeFileFromCollection } = useCollectionFiles()
   const { dbState, setCurrentFileId } = useFsaDbContext()
 
   const removeItem = (
@@ -31,7 +30,7 @@ function CollectionItems() {
       <h4>Collection Items</h4>
       {/* currentCollectionItems */}
       <ul data-cy="currentCollection">
-        {currentCollectionItems.map((item, index) => (
+        {collectionFiles.map((item, index) => (
           <li
             key={item.id}
             className={`${dbState.currentFileId === item.id ? 'active' : ''} ${

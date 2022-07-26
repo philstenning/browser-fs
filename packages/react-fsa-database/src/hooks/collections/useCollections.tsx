@@ -66,9 +66,7 @@ const useCollections = () => {
       setCurrentCollectionId('')
     }
   }
-
-  // const currentCollectionItems = getItems()
-
+  
   const cloneCollection = async (
     collection: fsaCollection,
     name: string = 'copy'

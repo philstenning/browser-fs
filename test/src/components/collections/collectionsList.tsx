@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
 import {
   useCollections,
+  useCollectionFiles,
   useFsaDbContext
 } from '@philstenning/react-fsa-database'
 import { fsaCollection } from '@philstenning/fsa-database'
 //@ts-ignore
 import styles from './collectionsList.module.css'
+
 function CollectionList() {
   const {
     collections,
-    removeAllFilesFromCollection,
     removeCollection,
     cloneCollection,
     saveCollectionToFileSystem
   } = useCollections()
-
+  
+  const { removeAllFilesFromCollection } = useCollectionFiles()
   const { dbState, setCurrentCollectionId } = useFsaDbContext()
 
   const clearCollection = (

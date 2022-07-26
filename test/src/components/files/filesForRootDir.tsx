@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   useRootFileList,
-  useCollections,
+  useCollectionFiles,
   useFsaDbContext
 } from '@philstenning/react-fsa-database'
 import { fsaFile, checkHandlePermission } from '@philstenning/fsa-database'
@@ -13,7 +13,7 @@ import styles from './filesForRootDir.module.css'
 function FilesForRootDir() {
   const { dbState, setCurrentFileId } = useFsaDbContext()
   const list = useRootFileList(true, true)
-  const { addFileToCollection } = useCollections()
+  const { addFileToCollection } = useCollectionFiles()
 
   const handleClick = async (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
