@@ -6,6 +6,7 @@ import { initialDbState } from '../state/initialState'
  * looks at the db to find the last used
  * root dir then set it as currentRootDir
  * and currentDir
+ * @category Root Directories
  */
 export default async function selectPreviouslySelectedRootDir() {
   // if there is  one  or zero left .

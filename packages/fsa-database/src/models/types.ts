@@ -94,26 +94,38 @@ export type fsaError = {
 
 export interface fsaSetting {
   id?: number
+  /**
+   * time the current session started 
+   */
   sessionStarted: number
-  // when files are removed from a collection,
-  // or a collection is deleted
-  // removed files  from local disk also
+  /**
+   * when files are removed from a collection,
+   * or a collection is deleted
+   * removed files  from local disk also
+   */
   cleanUpFiles: boolean
-  // when a file is added to collection
-  // save to disk
+  /**
+   * when a file is added to collection
+   * save to disk
+   */
   autoSaveCollections: boolean
-  scanInterval: number // default is 0 or none.
+  /**
+   * @default  0 or none.
+   */
+  scanInterval: number
   lastScanned: number
-  // when adding with drag and drop whether 
-  // to add files to a new folder
-  allowDndFiles:boolean
-  // When resetting db retain all root Directories.
-  retainRootDirectoriesOnReset:boolean; 
-
+  /**
+   * when adding with drag and drop whether
+   * to add files to a new folder
+   */
+  allowDndFiles: boolean
+  /**
+   * When resetting db retain all root Directories.
+   * */
+  retainRootDirectoriesOnReset: boolean
 }
 
 export interface fsaExcludedDirectory {
   id?: number
   name: string
 }
-

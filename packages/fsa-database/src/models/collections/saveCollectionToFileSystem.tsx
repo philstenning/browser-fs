@@ -3,6 +3,9 @@ import { db } from '../../db/setup'
 import { fsaCollection, fsaFile } from '../types'
 import updatePermissionsForRootDirAndChildren from './updatePermissionsForRootDirAndChildren'
 
+/**
+ * @category Collections
+ */
 export default async function saveCollectionToFileSystem(collectionId: string) {
   const collection = await getCollectionsSavedLocationHandle(collectionId)
   if (!collection || !collection.handle) return false

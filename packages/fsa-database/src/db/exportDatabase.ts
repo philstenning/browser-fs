@@ -1,6 +1,11 @@
 import { exportDB } from 'dexie-export-import'
 import { db } from './setup'
 
+/**
+ * Exports the current db to a blob that is saved to
+ * the local file system using the showSaveFilePicker function.
+ * @category Database
+ */
 export default async function exportDatabase() {
   try {
     const blob = await exportDB(db, {})

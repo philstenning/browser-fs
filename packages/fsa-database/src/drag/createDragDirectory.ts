@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid'
 
 /**
  * Creates a root directory for dragNDrop files in the database.
+ * @category Drag'n'drop
  * @param {string} name the name you want to call the directory.
  * @returns {Promise<fsaDirectory| false>} A promise that resolves to a newly created fsaDirectory or false if it did not compleat.
  */

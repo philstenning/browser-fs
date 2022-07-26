@@ -12,6 +12,7 @@ import parseVirtualFileSystemEntry from '../../fileSystem/parseVirtualFileSystem
 /**
  * Creates a root directory in the database from a virtualRootDirectory object
  * @param {VirtualRootDirectoryType} virtualRootDirectory
+ * @category Root Directories
  */
 export default async function addRootDirectory(
   virtualRootDirectory: VirtualRootDirectoryType

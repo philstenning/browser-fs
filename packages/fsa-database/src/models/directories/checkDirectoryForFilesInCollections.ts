@@ -1,6 +1,9 @@
 import {  fsaDirectory } from "../types";
 import { db } from '../../db/setup'
 
+/**
+ * @category Directories
+ */
 export default  async function checkDirectoryForFilesInCollections(dir: fsaDirectory) {
   let counter = 0;
   let hasCollections = false;

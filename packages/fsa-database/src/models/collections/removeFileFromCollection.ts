@@ -2,6 +2,9 @@ import { fsaCollection, fsaFile } from '../types'
 import putCollectionAndFile from './putCollectionAndFile'
 import removeFileFromCollectionsSavedLocation from './removeFileFromCollectionsSavedLocation'
 
+/**
+ * @category Collections
+ */
 export default async function removeFileFromCollection(
   collection: fsaCollection,
   file: fsaFile

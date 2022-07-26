@@ -2,6 +2,9 @@ import { checkPermissionsOfHandle } from '@philstenning/fsa-browser'
 import { fsaFile } from '../models/types'
 import { db } from '../db/setup'
 
+/**
+ * @category Local File System
+ */
 export default async function checkHandlePermission(file: fsaFile) {
   const res = await checkPermissionsOfHandle(file.handle)
   if (res) {

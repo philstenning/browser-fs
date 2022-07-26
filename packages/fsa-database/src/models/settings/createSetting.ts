@@ -2,6 +2,9 @@ import { fsaSetting } from '../types'
 import saveSetting from '../settings/saveSetting'
 import getCurrentSetting from './getCurrentSetting'
 
+/**
+ * @category Settings
+ */
 export default async function createSetting(
   save: boolean = true,
   setting?: fsaSetting

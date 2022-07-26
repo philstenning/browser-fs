@@ -3,8 +3,9 @@ import removeFileFromAllCollection from '../collections/removeFileFromAllCollect
 
 /**
  * Removes all files whose rootId property matched the given param.
- * @param rootId 
- * @returns 
+ * @param rootId
+ * @category Files
+ * @returns
  */
 export default async function deleteRootFolderFiles(rootId: string) {
   try {

@@ -1,6 +1,9 @@
 import { db } from '../../db/setup'
 import { initialDbState } from './initialState'
 
+/**
+ * @category State
+ */
 export default async function getCurrentState() {
   try {
     let state = await db.state.toCollection().last()

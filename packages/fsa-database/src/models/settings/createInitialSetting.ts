@@ -1,5 +1,9 @@
 import { fsaSetting } from '../types'
 
+/**
+ * @category Settings
+ * @returns 
+ */
 export default function createInitialSetting() {
   const now = Date.now()
   const setting: fsaSetting = {

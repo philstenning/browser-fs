@@ -26,9 +26,10 @@ type DirectoryEntry = {
  * Note the file/blob is copied to the database so you will end up with large
  * database table for the files so use the FSA api instead this is for browsers
  * that do not support FSA access.
+ * @category Legacy (non FSA support)
  * @param fileList
- * @returns
- */
+ * @returns {Promise<void>}  Promise that return void when resolved. 
+ * */
 export default async function saveLegacyInputFiles(fileList: FileList | null) {
   if (!fileList || fileList.length === 0) return
   await isScanning(true)

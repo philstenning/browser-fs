@@ -2,6 +2,11 @@ import { fsaFile } from '../models/types'
 import { createFile} from '../models/files/'
 import { getFileExtension, bytesToSize } from '../utils'
 import { db } from '../db/setup'
+
+/**
+ * 
+ * @category Drag'n'drop
+ */
 async function createDragFile(
   parentId: string,
   rootId: string,

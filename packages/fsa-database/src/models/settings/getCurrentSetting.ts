@@ -1,6 +1,9 @@
 import { db } from '../../db/setup'
 import createInitialSetting from './createInitialSetting'
 
+/**
+ * @category Settings
+ */
 export default async function getCurrentSetting() {
   try {
     const setting = await db.settings.toCollection().last()

@@ -1,6 +1,9 @@
 import { db } from '../../db/setup'
 import updateSetting from './updateSetting'
 
+/**
+ * @category Settings
+ */
 export default async function updateSettingLastScanned(
   timeOfScan: number = Date.now()
 ) {

@@ -1,6 +1,9 @@
 import { initialDbState } from './initialState'
 import getCurrentState from './getCurrentState'
 
+/**
+ * @category State
+ */
 export default async function getCurrentStateWithOutId() {
   try {
     const state = await getCurrentState()

@@ -2,7 +2,6 @@ import { db } from '../../db/setup'
 import { fsaFile } from '../types'
 import { getFileNameWithoutExtension, getFileExtension } from '../../utils'
 
-
 /**
  * Creates a unique name for the a file in the database.
  * this is used across collections and only need to
@@ -10,10 +9,13 @@ import { getFileNameWithoutExtension, getFileExtension } from '../../utils'
  * this prevents name collisions when saving to disk
  * and makes it easier to see what file is being used.
  *
+ * @category Files
  * @param {fsaFile} file
  * @returns {string} Unique File name
  */
-export default async function createUniqueNameForFile(file: fsaFile): Promise<string> {
+export default async function createUniqueNameForFile(
+  file: fsaFile
+): Promise<string> {
   const { name, id } = file
   // we have already given it one exit
   if (!!file.uniqueName) {
@@ -63,7 +65,7 @@ export default async function createUniqueNameForFile(file: fsaFile): Promise<st
   // we now have the unique file name.
   const newUniqueName = `${nameWithoutExt}__duplicate(${counter}).${getFileExtension(
     name
-  )}` 
+  )}`
 
   // console.log(`3️⃣ needs adding ${newUniqueName}`)
   return newUniqueName

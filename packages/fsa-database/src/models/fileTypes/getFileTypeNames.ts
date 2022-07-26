@@ -1,5 +1,9 @@
 import { db } from '../../db'
 
+/**
+ *
+ * @category Files Types
+ */
 export default async function getFileTypeNames() {
   try {
     const res = await db.fileTypes

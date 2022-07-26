@@ -1,4 +1,4 @@
-import { db } from './setup'
+import { db,FsaDb } from './setup'
 import deleteDatabase from './deleteDatabase'
 import exportDatabase from './exportDatabase'
 import fetchDatabase from './fetchDatabase'
@@ -12,8 +12,10 @@ export {
   deleteDatabase,
   exportDatabase,
   fetchDatabase,
+  FsaDb,
   importDatabase,
   initializeDatabase,
   loadDatabase,
   resetDatabase
+
 }

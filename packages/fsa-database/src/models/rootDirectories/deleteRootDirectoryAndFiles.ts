@@ -5,6 +5,10 @@ import { db } from '../../db/setup'
 
 import selectPreviouslySelectedRootDir from './selectPreviouslySelectedRootDir'
 
+/**
+ * @category Root Directories
+ * @returns
+ */
 export default async function deleteRootDirectory(dir: fsaDirectory) {
   if (!dir.id) return false
 

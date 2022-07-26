@@ -1,3 +1,7 @@
+
+/**
+ * @category Utils
+ */
 export default function bytesToSize(bytes: number) {
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
   if (bytes === 0) return 'n/a'

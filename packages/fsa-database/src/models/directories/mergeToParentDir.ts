@@ -2,6 +2,9 @@
 import { fsaDirectory } from '../types'
 import { db } from '../../db/setup'
 
+/**
+ * @category Directories
+ */
 export default async function mergeToParentDirectory(
   directory: fsaDirectory,
   toRoot: boolean = false

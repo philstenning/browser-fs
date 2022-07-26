@@ -1,5 +1,9 @@
 import { db } from '../../db/setup'
 
+/**
+ * 
+ * @category Root Directories
+ */
 export default async function rootDirHasFilesInCollections(
   rootId: string
 ): Promise<boolean> {

@@ -5,8 +5,7 @@ import { fsaCollection } from "../types";
  * Just updates data, Do not change the files with this function,
  * it will not add/remove them for you, use the removeFileFromCollection()
  * addFileToCollection() instead.
- * @param collection
- * @returns
+ * @category Collections
  */
 export default async function updateCollection(collection: fsaCollection) {
   // if any other changes lets save again

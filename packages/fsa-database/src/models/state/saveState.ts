@@ -1,6 +1,9 @@
 import { fsaState } from '../types'
 import { db } from '../../db/setup'
 
+/**
+ * @category State
+ */
 export default async function saveState(state: fsaState) {
   try {
     delete state.id

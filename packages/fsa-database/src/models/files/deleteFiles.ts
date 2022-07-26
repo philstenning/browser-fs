@@ -1,12 +1,12 @@
-
 import { fsaFile } from '../types'
-import deleteFile  from './deleteFile'
+import deleteFile from './deleteFile'
 
 /**
  * Remove all the files in the params array from the database, and also
  * removes them from any collections they are in.
- * @param {fsaFile[]}files 
- * @returns 
+ * @param {fsaFile[]}files
+ * @category Files
+ * @returns
  */
 export default async function deleteFiles(files: fsaFile[]) {
   if (!files.length) return false
