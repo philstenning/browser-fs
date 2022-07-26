@@ -1,0 +1,13 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "packages/fsa-browser",
+    "packages/fsa-database",
+    "packages/react-fsa-database"
+  ],
+  "entryPointStrategy": "packages",
+  "out": "tsdoc",
+
+  "githubPages": false,
+  "cleanOutputDir": true
+}
