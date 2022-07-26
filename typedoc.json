@@ -1,12 +1,14 @@
 {
   "$schema": "https://typedoc.org/schema.json",
+  "basePath": "./grrr/",
   "entryPoints": [
     "packages/fsa-browser",
     "packages/fsa-database",
     "packages/react-fsa-database"
   ],
+  "includeVersion": false,
   "entryPointStrategy": "packages",
-  "out": "tsdoc",
+  "out": "test/dist",
 
   "githubPages": false,
   "cleanOutputDir": true

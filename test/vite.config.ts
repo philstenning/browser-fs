@@ -6,7 +6,9 @@ export default defineConfig(({ mode }) => {
   if (mode === 'production') {
     return {
       plugins: [react()],
-       base: '/browser-fs/'
+       base: '/browser-fs/test/',
+      //  build:{ outDir:"/foofoo/"}
+      
     }
   }
   return { plugins: [react()] }
