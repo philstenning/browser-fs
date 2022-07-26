@@ -12,7 +12,7 @@ import {
 } from './models/types'
 import type { fsaBrowserStorage } from './utils/browserStorage'
 /*  --------- database  ---------  */
-import { db } from './db/setup'
+import { db, FsaDb } from './db/setup'
 import deleteDatabase from './db/deleteDatabase'
 import exportDatabase from './db/exportDatabase'
 import fetchDatabase from './db/fetchDatabase' // use for testing
@@ -122,7 +122,7 @@ export type {
   fsaFileType,
   fsaSetting,
   fsaState,
-  fsaBrowserStorage
+  fsaBrowserStorage,
 }
 // all exports
 export {
@@ -132,6 +132,7 @@ export {
   exportDatabase,
   importDatabase,
   fetchDatabase,
+  FsaDb,
   loadDatabase,
   resetDatabase,
   deleteDatabase,
