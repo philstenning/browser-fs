@@ -8,6 +8,9 @@ import {
   selectRootDirectory as addRootDirectory,
 } from '@philstenning/fsa-database'
 
+/**
+ * @category Hooks
+ */
 export default function useRootDirectories() {
   const [rootDirectories, setRootDirectories] = useState<fsaDirectory[]>([])
 

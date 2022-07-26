@@ -70,6 +70,9 @@ function getItems() {
   return list ?? []
 }
 
+/**
+* @category Hooks
+ */
 const useCollections = () => {
   const collections =
     useLiveQuery(() =>

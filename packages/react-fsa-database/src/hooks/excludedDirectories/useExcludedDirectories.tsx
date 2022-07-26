@@ -7,6 +7,9 @@ import {
   fsaExcludedDirectory,
 } from '@philstenning/fsa-database'
 
+/**
+ * @category Hooks
+ */
 export default function useExcludedDirectories() {
   const [excludedDirectories, setExcludedDirectories] = useState<
     fsaExcludedDirectory[]

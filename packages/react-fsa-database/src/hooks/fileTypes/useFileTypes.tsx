@@ -6,6 +6,9 @@ import {
 } from '@philstenning/fsa-database'
 import { useLiveQuery } from 'dexie-react-hooks'
 
+/**
+ * @category Hooks
+ */
 function useFileTypes() {
   const fileTypes = useLiveQuery(() => db.fileTypes.toArray()) ?? []
 

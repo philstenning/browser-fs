@@ -10,6 +10,9 @@ import {
 } from '@philstenning/fsa-database'
 import useFsaDbContext from '../context/useFsaDbContext'
 
+/**
+* @category Hooks
+ */
 function useDirectories() {
   const [showHidden, setShowHidden] = useState(true)
   const { setCurrentDirectoryId } = useFsaDbContext()

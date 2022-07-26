@@ -1,7 +1,10 @@
 /*  --------- Types  ---------  */
-import type { FsaDbContextType } from './context/dbContext'
+import type {
+  FsaDbContextType,
+  FsaDbContextProviderProps,
+} from './context/dbContext'
 
-/*  --------- Context  ---------  */
+import type {DuplicateFile} from './hooks/files/useFindDuplicateFiles'
 import FsaDbContextProvider from './context/dbContext'
 
 /*  --------- Hooks  ---------  */
@@ -29,6 +32,7 @@ import useSettings from './hooks/settings/useSettings'
 export {
   // context
   FsaDbContextProvider,
+  FsaDbContextProviderProps,
   useFsaDbContext,
   // files
   useCurrentFile,
@@ -46,4 +50,4 @@ export {
   useSettings,
 }
 
-export type { FsaDbContextType }
+export type { FsaDbContextType, DuplicateFile }

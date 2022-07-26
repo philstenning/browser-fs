@@ -1,5 +1,9 @@
 import { db } from '@philstenning/fsa-database'
 import { useLiveQuery } from 'dexie-react-hooks'
+
+/**
+ * @category Hooks
+ */
 function useRootFileList(
   filterBySelectedFileTypes: boolean = true,
   filterByRootDirectory: boolean = true
