@@ -2,7 +2,7 @@ import { db } from '../../db/setup'
 
 /**
  * Returns true if the excluded name has been removed from the database
- * @param {number} id 
+ * @category Excluded Directories
  * @returns {Promise<boolean>} A Promise of true or false when fulfilled
  */
 export default async function deleteExcludedDirectoryName(id: number | undefined): Promise<boolean> {

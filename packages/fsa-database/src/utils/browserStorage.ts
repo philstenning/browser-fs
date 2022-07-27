@@ -7,6 +7,9 @@ export type fsaBrowserStorage = {
   remainingFormatted: string
 }
 
+/**
+ * @category Utils
+ */
 async function checkBrowserStorage(): Promise<fsaBrowserStorage> {
   //  not available in safari tp v16.0 atm
   const defaultVal: fsaBrowserStorage = {

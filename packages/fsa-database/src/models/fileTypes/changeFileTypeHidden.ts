@@ -1,5 +1,7 @@
 import { db } from '../../db'
-
+/**
+ * @category Files Types
+ */
 export default async function changeFileTypeHidden(
   id: number,
   hidden: boolean = false

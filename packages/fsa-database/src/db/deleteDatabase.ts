@@ -1,6 +1,11 @@
 import { db, FsaDb } from './setup'
 
-// after calling this the browser need to refresh
+
+/**
+ *  Removes the database from the browser with it's data,
+ *  after calling this the browser need to refresh
+ * @category Database
+ */
 export default async function deleteDatabase() {
   db.close()
   const dbToDel = new FsaDb()

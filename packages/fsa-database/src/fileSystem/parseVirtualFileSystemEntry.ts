@@ -9,6 +9,8 @@ import { saveFile, createFile } from '../models/files'
  * we convert it into folders and files and save to the database.
  * The assumption is the data has been validated in the scanLocalDrive function and
  * should be valid and have permissions.
+ * 
+ * @category Local File System
  * @param virtualFileSystemEntry
  * @returns true if complected successfully, false if not.
  */

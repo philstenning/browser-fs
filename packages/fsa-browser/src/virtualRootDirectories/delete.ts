@@ -1,6 +1,6 @@
 import { del, clear } from "idb-keyval";
 import { VirtualRootDirectoryType } from "./types";
-import { rootStore } from "./stores";
+import rootStore from "./stores";
 
 /**
  * Clears all saved VirtualRootDirectories from the store.
@@ -8,7 +8,7 @@ import { rootStore } from "./stores";
  */
 async function deleteAllVirtualRootDirectories() {
   try {
-    await clear(rootStore);
+    await clear(rootStore());
     return true;
   } catch (e) {
     console.error(`Error clearing rootStore data.`);
@@ -32,7 +32,7 @@ async function deleteVirtualRootDirectory(
       virtualFileSystemEntry.name,
       virtualFileSystemEntry.id
     );
-    await del(`${prependedText}${virtualFileSystemEntry.id}`, rootStore);
+    await del(`${prependedText}${virtualFileSystemEntry.id}`, rootStore());
     return true;
   } catch (e) {
     console.log(`error deleting file: ${virtualFileSystemEntry.name}: ${e}`);

@@ -53,5 +53,10 @@
   "bugs": {
     "url": "https://github.com/philstenning/browser-fs/issues"
   },
-  "homepage": "https://github.com/philstenning/browser-fs/packages/fsa-database#readme"
+  "homepage": "https://github.com/philstenning/browser-fs/packages/fsa-database#readme",
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "readmeFile": "./readme.md",
+    "displayName": "fsa-database"
+  }
 }

@@ -1,6 +1,11 @@
 import dragAddFilesToDirectory from '../drag/dragAddFilesToDirectory'
 import processDragDirectories from './processDragDirectories'
 
+/**
+ * @category Drag'n'drop
+ * @param dataTransferItemList 
+ * @param folderName 
+ */
 export default async function saveDragItems(
   dataTransferItemList: DataTransferItemList,
   folderName: string = 'user Files'

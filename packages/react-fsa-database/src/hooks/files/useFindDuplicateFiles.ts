@@ -1,6 +1,7 @@
 import { db, fsaFile, updateFile } from '@philstenning/fsa-database'
 import { useLiveQuery } from 'dexie-react-hooks'
-export type DuplicateFile ={
+
+export type DuplicateFile = {
   id: number
   name: string
   count: number
@@ -20,6 +21,9 @@ const unHideAllForFileName = async (fileName: string, rootId: string = '') => {
   await db.files.bulkPut(updatedFiles)
 }
 
+/**
+ * @category Hooks
+ */
 export default function useFindDuplicateFiles(showHidden = false, rootId = '') {
   const duplicateFiles =
     useLiveQuery(async () => {

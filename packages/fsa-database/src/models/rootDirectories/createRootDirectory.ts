@@ -3,6 +3,12 @@ import { db } from '../../db/setup'
 import createDirectory from '../directories/createDirectory'
 import rootDirectoryAlreadyExists from './rootDirectoryAlreadyExists'
 
+/**
+ * @category Root Directories
+ * @param handle 
+ * @param creator 
+ * @returns 
+ */
 export default async function createRootDirectory(
   handle: FileSystemDirectoryHandle,
   creator: string = 'user'

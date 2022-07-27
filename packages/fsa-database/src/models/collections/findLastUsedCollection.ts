@@ -1,25 +1,28 @@
-import { db } from "../../db/setup";
+import { db } from '../../db/setup'
 
+/**
+ * @category Collections
+ */
 export default async function findLastUsedCollection() {
   // filter state to not empty
   try {
     const filteredState = await db.state
       .reverse()
       .filter(
-        (f) => f.currentCollectionId !== "" && f.currentCollectionId !== "null"
+        (f) => f.currentCollectionId !== '' && f.currentCollectionId !== 'null'
       )
-      .toArray();
+      .toArray()
     // find the firs valid option.
     for (const state of filteredState) {
       if (state.currentCollectionId) {
-        const col = await db.userCollections.get(state.currentCollectionId);
+        const col = await db.userCollections.get(state.currentCollectionId)
         if (col) {
-          return col;
+          return col
         }
       }
     }
   } catch (error) {
-    console.error(`Error finding last Collection. ${error}`);
+    console.error(`Error finding last Collection. ${error}`)
   }
-  return null;
+  return null
 }

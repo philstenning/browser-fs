@@ -16,6 +16,7 @@ const logProgress = (data: ImportProgress) => {
  * this is used for testing only as the file handles
  * do not serialize - this should be stubbed in cypress
  * and put in the fixtures directory.
+ * @category Database
  * @param {string}fileName
  */
 export default async function fetchDatabase(

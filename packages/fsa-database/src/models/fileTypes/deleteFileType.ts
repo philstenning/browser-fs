@@ -4,7 +4,7 @@ import { deleteFile } from '../files'
 /**
  * Removes a fileType from the database with the
  * option of also removing the files of that type also.
- *
+ * @category Files Types
  * @param {fsaFileType} fileType
  * @param {Promise<boolean>} [andAllFilesWithExtension=false]
  * @returns A Promise of boolean - true if completed successfully
@@ -24,8 +24,8 @@ export default async function deleteFileType(
         .where('type')
         .equals(fileType.name)
         .each((item) => files.push(item.id))
-       //  remove all the files
-       // this removes them from the collections as well.
+      //  remove all the files
+      // this removes them from the collections as well.
       for (const id of files) {
         const file = await db.files.get(id)
         if (file) {

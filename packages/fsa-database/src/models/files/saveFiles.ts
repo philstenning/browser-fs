@@ -4,6 +4,7 @@ import { fsaFile } from '../types'
  * Saves or updates the files if they already exists in the database,
  * the original files are overwritten.
  * @param {fsaFile[]} files
+ * @category Files
  * @returns {}
  */
 export default async function saveFiles(files: fsaFile[]) {

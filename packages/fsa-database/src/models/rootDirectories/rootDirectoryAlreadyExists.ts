@@ -2,6 +2,7 @@ import { db } from '../../db/setup'
 
 /**
  * Returns true if a root directory with the same name exists already
+ * @category Root Directories
  * @param {string} name
  * @returns {Promise<boolean>} When resolved, returns true if no Root directories have the same name
  */

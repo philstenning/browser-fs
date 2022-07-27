@@ -5,8 +5,7 @@ import removeAllFilesFromCollection from './removeAllFilesFromCollection'
 /**
  * Remove the id from the files.userCollections prop
  * then remove collection from database.
- * @param collection
- * @returns
+ * @category Collections
  */
 export default async function deleteCollection(collection: fsaCollection) {
   if (!collection.id) return false

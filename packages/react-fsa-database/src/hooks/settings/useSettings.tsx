@@ -6,6 +6,9 @@ import {
   createInitialSetting,
 } from '@philstenning/fsa-database'
 
+/**
+ * @category Hooks
+ */
 export default function useSettings() {
   const [fsaSettings, setSettings] = useState(createInitialSetting())
   const settings = useLiveQuery(async () => {

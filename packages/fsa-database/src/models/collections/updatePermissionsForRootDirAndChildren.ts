@@ -4,8 +4,7 @@ import { fsaDirectory } from '../types'
 /**
  * updates all the directories with the same rootId with the
  * value from the readPermission param.
- * @param rootId {string}
- * @param readPermission {boolean=} [readPermission=true]
+ * @category Collections
  */
 export default async function updatePermissionsForRootDirAndChildren(
   rootId: string,

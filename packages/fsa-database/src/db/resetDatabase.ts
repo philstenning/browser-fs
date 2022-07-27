@@ -4,6 +4,11 @@ import getCurrentSetting from '../models/settings/getCurrentSetting'
 import { initialDbState } from '../models/state/initialState'
 import { db } from './setup'
 
+/**
+ * Clears all the data from the database, the structure is 
+ * unchanged.
+ * @category Database
+ */
 export default async function resetDatabase() {
   try {
     const settings = await getCurrentSetting()

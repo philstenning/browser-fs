@@ -2,6 +2,9 @@
 import { fsaDirectory } from '../types'
 import { db } from '../../db/setup'
 
+/**
+ * @category Directories
+ */
 export default async function unMergeDirectories(rootDir: fsaDirectory) {
   await db.transaction('rw', db.directories, db.files, async () => {
     const files = await db.files.where('rootId').equals(rootDir.id).toArray()

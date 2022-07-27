@@ -4,6 +4,9 @@ import findLastUsedCollection from './findLastUsedCollection'
 import createCollection from './createCollection'
 import setCurrentCollectionId from '../state/setCurrentDirectoryId'
 
+/**
+ * @category Collections
+ */
 export default async function findLastUsedCollectionOrCreatNew(
   nameIfNotExit: string = 'collection'
 ) {

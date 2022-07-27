@@ -5,6 +5,10 @@ import getFileExtension from '../../utils/getFileExtension'
 import getFileNameWithoutExtension from '../../utils/getFileNameWithoutExtension'
 import createUniqueNameForFile from '../files/createUniqueNameForFile'
 
+
+/**
+ * @category Collections
+ */
 export default async function addFileToCollection(
   file: fsaFile,
   collection?: fsaCollection

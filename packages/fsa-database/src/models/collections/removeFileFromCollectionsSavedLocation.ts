@@ -2,6 +2,9 @@ import { checkPermissionsOfHandle } from '@philstenning/fsa-browser'
 import { fsaCollection, fsaFile } from "../types";
 import getCurrentSetting from "../settings/getCurrentSetting";
 
+/**
+ * @category Collections
+ */
 export default async function removeFileFromCollectionsSavedLocation(
   file: fsaFile,
   collection: fsaCollection

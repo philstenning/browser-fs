@@ -3,6 +3,9 @@ import { fsaCollection, fsaCollectionFile } from '../types'
 import setCurrentCollectionId from '../state/setCurrentCollectionId'
 import { db } from '../../db/setup'
 
+/**
+ * @category Collections
+ */
 export default async function createCollection(
   name: string,
   files: fsaCollectionFile[] = [],

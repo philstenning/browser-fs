@@ -71,5 +71,10 @@
   "bugs": {
     "url": "https://github.com/philstenning/browser-fs/issues"
   },
-  "homepage": "https://github.com/philstenning/browser-fs/packages/react-fsa-browser#readme"
+  "homepage": "https://github.com/philstenning/browser-fs/packages/react-fsa-browser#readme",
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "readmeFile": "./readme.md",
+    "displayName": "react-fsa-database"
+  }
 }

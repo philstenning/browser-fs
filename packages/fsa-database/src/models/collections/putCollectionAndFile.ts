@@ -1,6 +1,9 @@
 import { db } from '../../db/setup'
 import { fsaCollection, fsaFile  } from "../types";
 
+/**
+ * @category Collections
+ */
 export default async function putCollectionAndFile(collection: fsaCollection, file: fsaFile) {
   try {
     const updatedAt = Date.now();

@@ -3,9 +3,7 @@ import { db } from '../../db/setup'
 /**
  * This is called after all files have been added to the database
  * so you can update the scanFinished prop at the same time.
- * @param directoryId 
- * @param update 
- * @param scanFinished 
+ * @category Directories
  */
 export default async function updateFileIdsForDirectory(
   directoryId: string,

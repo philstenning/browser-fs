@@ -5,19 +5,8 @@ import bytesToSize from '../../utils/bytesToSize'
 /**
  * A fsaFile factory function used to create each file as it
  * is added to the database.
- * @param {FileSystemFileHandle } handle - fileSystemFileHandle
- * @param {string} parentId id of the parent directory
- * @param { string }rootId   id of the root directory
- * @param { string }path  the path relative from the root directory
- * @param { string }type  the extension type
- * @param { string } [name=handle.name] if not supplied it is the handle.name
- * @param { string }  [creator] - not yet implemented
- * @param { boolean} [printed=false] -
- * @param {string[]} tags
- * @param { string } description
- * @param { string } imageUrl
- * @param { string[] } userCollectionIds
- * @returns {Promise<fsaFile>}  When resolved, a fsaFile
+ * @category Files
+ * @returns {Promise<fsaFile>} Promise that resolves to fsaFile
  */
 export default async function createFile(
   handle: FileSystemFileHandle,

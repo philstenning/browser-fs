@@ -3,6 +3,10 @@ import { ImportProgress } from 'dexie-export-import/dist/import'
 import { db } from './setup'
 import resetPermissionsOnAllDirectories from './resetPermissionsOnAllDirectories'
 
+/**
+ * Import a previously saved db, it must be the same db.version
+ * @category Database
+ */
 export default async function importDatabase() {
   try {
     const result = await window.showOpenFilePicker()

@@ -10,6 +10,9 @@ import {
   fsaExcludedDirectory,
 } from '../'
 
+/**
+ * @category Database
+ */
 export class FsaDb extends Dexie {
   files!: Dexie.Table<fsaFile, string>
   directories!: Dexie.Table<fsaDirectory, string>
@@ -37,4 +40,9 @@ export class FsaDb extends Dexie {
     })
   }
 }
+/**
+ * Holds a reference to a new FsaDb class,
+ * use this instead of calling the class constructor.
+ * @category Database
+ */
 export const db = new FsaDb()

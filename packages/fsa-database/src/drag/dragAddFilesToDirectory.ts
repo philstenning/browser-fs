@@ -8,6 +8,13 @@ import getDragDirectoryByName from './getDragDirectoryByName'
 import createDragDirectory from './createDragDirectory'
 import { getCurrentSetting } from '../models/settings'
 
+/**
+ * @category Drag'n'drop
+ * @param files
+ * @param name
+ * @param dirId
+ * @returns
+ */
 export default async function dragAddFilesToDirectory(
   files: File[],
   name: string,

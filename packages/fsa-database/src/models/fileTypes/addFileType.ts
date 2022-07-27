@@ -5,6 +5,7 @@ import { fsaFileType } from '../types'
  * Add a new fileType/extension that you would like to
  * add to the database when scanning the local drive
  * @param {string} name
+ * @category Files Types
  * @returns {Promise<number | boolean>} A Promise that resolves to the id of the added record of false
  */
 export default async function addFileType(name: string): Promise<number | boolean> {

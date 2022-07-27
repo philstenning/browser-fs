@@ -22,20 +22,22 @@ export type FsaDbContextType = {
   isScanning: boolean
 }
 
-type Props = {
-  children: React.ReactNode
+export type FsaDbContextProviderProps = {
+  /**
+   * Any file extension that your app wants to scan for.
+   * The format can be '.ext' or 'ext'
+   * @defaultValue ['stl', 'gcode', '3mf', 'jpg']
+   */
   fileExtensionsForApp?: string[]
 }
 
 /**
- *
- * @param param0
- * @returns
+ * @category Context Provider
  */
 export default function FsaDbContextProvider({
   children,
   fileExtensionsForApp = ['stl', 'gcode', '3mf', 'jpg'],
-}: Props) {
+}: React.PropsWithChildren<FsaDbContextProviderProps>) {
   const [dbState, setDbState] = useState<fsaState>(initialDbState)
   const [isScanning, setIsReScanning] = useState(false)
 

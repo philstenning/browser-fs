@@ -7,6 +7,10 @@ import { getCurrentState } from '../models/state'
 import { FoldersToExcludeFromScanning } from '@philstenning/fsa-browser'
 import resetPermissionsOnAllDirectories from './resetPermissionsOnAllDirectories'
 
+/**
+ * @category Database
+ * @param fileTypes
+ */
 export default async function initializeDatabase(fileTypes: string[]) {
   console.time('initializeDb')
   const state = await getCurrentState()

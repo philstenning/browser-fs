@@ -1,6 +1,9 @@
 import { db } from '../../db/setup'
 import { fsaSetting } from '../types'
 
+/**
+ * @category Settings
+ */
 export default async function updateSetting(setting: fsaSetting) {
   try {
     delete setting.id
