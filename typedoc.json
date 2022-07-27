@@ -1,6 +1,5 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "basePath": "./grrr/",
   "entryPoints": [
     "packages/fsa-browser",
     "packages/fsa-database",
@@ -8,8 +7,13 @@
   ],
   "includeVersion": false,
   "entryPointStrategy": "packages",
-  "out": "test/dist",
-
+  "out": "docs/generated",
+  "pretty": true,
   "githubPages": false,
-  "cleanOutputDir": true
+  "cleanOutputDir": true,
+  "plugin": [
+    "typedoc-plugin-resolve-crossmodule-references",
+    "typedoc-plugin-markdown"
+  ]
+  
 }
