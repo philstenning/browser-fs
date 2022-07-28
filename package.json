@@ -20,9 +20,10 @@
     "release": "changeset publish",
     "changeset:version": "changeset version",
     "move": "mkdir ./foo && cp -r ./browser-fs/** ./foo",
-    "td": "typedoc --publicPath /api/",
+    "td": "typedoc ",
     "td:prod": "typedoc --publicPath /browser-fs/",
-    "td:json": "typedoc --json out.json --pretty"
+    "td:json": "typedoc --options typedoc2.json --pretty",
+    "docs":"pnpm --filter docs dev"
   },
   "repository": {
     "type": "git",
