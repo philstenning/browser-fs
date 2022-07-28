@@ -51,7 +51,6 @@ export async function getDocData(id: string, directory = defaultDir) {
   const processedContent = await remark()
     .use(html)
     .process(content)
-  console.log(processedContent.value)
   const contentHtml = processedContent.value.toString()
   return {
     id,

@@ -21,6 +21,8 @@ const getStaticPaths: GetStaticPaths = async () => {
     fallback: false
   }
 }
+
+
 const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params as IParams
   const docData =await getDocData(id)
