@@ -3,33 +3,31 @@ import type { NextPage,GetStaticProps} from 'next'
 import Head from 'next/head'
 // import Image from 'next/image'
 // import styles from '../styles/Home.module.css'
-import {getDocs, AllDocs} from '../lib/apiDocs'
+import {getMarkdownFile} from '../lib/readmeFiles'
 import Layout from '../components/layout'
 
+import {getLayoutData, LayoutData} from '../lib/layoutData'
+
 export const getStaticProps:GetStaticProps = async ()=>{
-  const allDocs = getDocs()
+  const data =await getMarkdownFile('../../../../readme.md')
+  const layoutData = getLayoutData()
   return{
     props:{
-      allDocs
+      data,
+      layoutData:layoutData
     }
   }
 }
 
-type props= {allDocs:AllDocs[]}
+type props= {data:{contentHtml:string}
+layoutData:LayoutData
+}
 
-const Home: NextPage<props> = ({allDocs}) => {
+//  Route /index.html
+const Home: NextPage<props> = ({data,layoutData}) => {
   return (
-    <Layout>
-    <ul>
-
-     {allDocs.map(file=>(<li key={file.id}> 
-     <Link href={`/docs/${file.id}`}>
-          <a>Home</a>
-        </Link>
-     </li>))}
-    
-    </ul>
-
+    <Layout layoutData={layoutData}>
+      <div dangerouslySetInnerHTML={{ __html:data.contentHtml}}/>
     </Layout>
   )
 }

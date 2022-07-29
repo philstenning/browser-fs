@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from 'querystring'
-import { ApiPackages, ChildrenEntity1 } from './api.d'
+import { ApiPackages, ChildrenEntity1, IPackage } from './api.d'
 import api from '../generated/json/api.json'
 
 export interface IParams extends ParsedUrlQuery {
@@ -9,7 +9,7 @@ export interface IParams extends ParsedUrlQuery {
 /**
  * filter the api.json and return just the names of the packages
  */
-function getPackageNames() {
+function getPackageNamesWithParams() {
   if (!api)
     throw new Error(
       `Json file has not been generated, "run pnpm td:json" in the root directory`
@@ -21,18 +21,35 @@ function getPackageNames() {
   return modules
 }
 
-export type PackageType = {
+
+function getPackageNames(){
+  if (!api)
+    throw new Error(
+      `Json file has not been generated, "run pnpm td:json" in the root directory`
+    )
+
+
+  const modules = api.children
+    .filter((item) => item.kindString === 'Module')
+    .map((i) => (i.name))
+    
+  return modules
+}
+
+export type PackageDetails = {
   name: string
-  data: PackageEntities[]
+  data: PackageEntities[] 
+  raw: IPackage
 }
 
 export type PackageEntities = {
   name: string
   children: ChildrenEntity1[]
+ 
 }
 
-function getPackageDetails(name: string): PackageType {
-  const data = api.children.find((item) => item.name === name)
+function getPackageDetails(name: string): PackageDetails {
+  const data = getPackage(name) 
 
   const functions: PackageEntities = { children: [], name: 'Functions' }
   const interfaces: PackageEntities = { children: [], name: 'Interface' }
@@ -42,10 +59,17 @@ function getPackageDetails(name: string): PackageType {
     else if (child.kindString === 'Interface') interfaces.children.push(child)
     else if (child.kindString === 'Type alias') types.children.push(child)
   })
+  // const raw  = api.
   return {
     name,
-    data: [interfaces, types, functions]
+    data: [interfaces, types, functions],
+    raw:data as IPackage
   }
 }
 
-export { getPackageNames, getPackageDetails }
+export { getPackageNames, getPackageDetails , getPackageNamesWithParams}
+
+
+function getPackage(name:string){
+  return api.children.find(i=>i.name === name)
+}

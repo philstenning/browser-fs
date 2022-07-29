@@ -1,24 +1,31 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 
 import Layout from '../../../components/layout'
-import SideBar from '../../../components/sidebar'
+
 import {
   IParams,
-  getPackageNames,
+  getPackageNamesWithParams,
   getPackageDetails,
-  PackageType
+  PackageDetails
 } from '../../../lib/api'
 
+import {getLayoutData, LayoutData} from '../../../lib/layoutData'
+
+
+
+type Props ={
+  layoutData:LayoutData
+}
+
+// Route /module/fsa-module-name
 export default function Module({
-  packageDetails
-}: {
-  packageDetails: PackageType
-}) {
+  layoutData
+}: Props) {
   
-  const {data} = packageDetails
+  
   return (
-    <Layout>
-      <SideBar data={data}/>
+    <Layout layoutData={layoutData} >
+      <h1>content here</h1>
     </Layout>
   )
 }
@@ -29,7 +36,7 @@ export default function Module({
 
 // {/* <hr /> <span></span> { item.signatures?.map(sig=>sig.comment?.summary[0]?.text)} */}
 const getStaticPaths: GetStaticPaths = () => {
-  const paths = getPackageNames()
+  const paths = getPackageNamesWithParams()
   return {
     paths,
     fallback: false
@@ -39,10 +46,11 @@ const getStaticPaths: GetStaticPaths = () => {
 const getStaticProps: GetStaticProps = (context) => {
   // console.log(context)
   const { name } = context.params as IParams
-  const packageDetails = getPackageDetails(name)
+
+  const layoutData = getLayoutData(name)
   return {
     props: {
-      packageDetails
+      layoutData
     }
   }
 }
