@@ -24,9 +24,11 @@ type SidebarChildEntity = {
   name: string // myFunctionName, interface Name
 }
 
-export function getSidebarData(moduleName: string): SidebarModule | boolean {
+export function getSidebarPackageDetails(
+  moduleName: string
+): SidebarModule | null {
   const foundModule = api.children.find((m) => m.name === moduleName)
-  if (!foundModule) return false
+  if (!foundModule) return null
 
   // create the return object without the entities added.
   const sidebarModule: SidebarModule = {
@@ -52,15 +54,20 @@ export function getSidebarData(moduleName: string): SidebarModule | boolean {
       }
     }
     // add 'Others' category for any items without a category added in the jsdoc.
-    sidebarEntityItem.categories.push(createOtherCategory(sidebarEntity,foundModule.children))
+    const Others = createOtherCategory(sidebarEntity, foundModule.children)
+    if (Others.sidebarChildEntity.length > 0) {
+      sidebarEntityItem.categories.push(Others)
+    }
 
     // now finally add entities to the module
     sidebarModule.entities.push(sidebarEntityItem)
   }
-  console.log(JSON.stringify(sidebarModule, null, 2))
   return sidebarModule
 }
 
+/**
+ * Creates an SidebarEntityCategory
+ */
 function createCategories(
   category: GroupsEntityOrCategoriesEntity,
   moduleChildren: ChildrenEntity1[]
@@ -71,7 +78,7 @@ function createCategories(
   }
   if (category.children) {
     for (const id of category.children) {
-      const name = moduleChildren.find((i) => id === id)?.name ?? 'Not Found'
+      const name = moduleChildren.find((i) => i.id === id)?.name ?? 'Not Found'
       sidebarEntityCategory.sidebarChildEntity.push({
         id,
         name
@@ -82,8 +89,8 @@ function createCategories(
 }
 
 /**
- *  this catches all items not in a category
- *  and creates one called Other.
+ *  This creates  a SidebarEntityCategory titled 'Other', item entities not in a category
+ *  are put in it and returned. 
  */
 function createOtherCategory(
   sidebarEntity: GroupsEntity,
@@ -106,7 +113,7 @@ function createOtherCategory(
   // create category entity for all remaining items.
   // and add them to the already created sidebarEntityCategory
   children.forEach((child) => {
-      const name = moduleChildren.find((i) => i.id === child)?.name ?? 'Not Found'
+    const name = moduleChildren.find((i) => i.id === child)?.name ?? 'Not Found'
     sidebarEntityCategory.sidebarChildEntity.push({
       id: child,
       name

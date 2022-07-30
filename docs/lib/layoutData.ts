@@ -1,25 +1,24 @@
-import { getPackageNames, getPackageDetails, PackageDetails } from './api'
-
+import { getPackageNames } from './api'
+import { getSidebarPackageDetails, SidebarModule } from './sidebar'
 export type LayoutData = {
   packageNames: string[]
   sidebarData: SideBarData
 }
 
 export type SideBarData = {
-    
-    packageNames: string[]
-    packageDetails: PackageDetails | null
-  
+  packageNames: string[]
+  packageDetails: SidebarModule
 }
 
-function getLayoutData(packageName?: string): LayoutData {
+function getLayoutData(packageName?: string): LayoutData | null {
   const packageNames = getPackageNames()
-  const packageDetails = packageName ? getPackageDetails(packageName) : null
+  const packageDetails = getSidebarPackageDetails(packageName ?? '')
+  if (!packageDetails) return null
   return {
     packageNames,
-    sidebarData:{
-        packageDetails,
-        packageNames
+    sidebarData: {
+      packageDetails,
+      packageNames
     }
   }
 }
