@@ -6,14 +6,14 @@ import { SideBarData } from '../lib/layoutData'
 const Sidebar = ({ packageDetails, packageNames }: SideBarData) => {
   console.log(packageDetails?.name)
 
-  const getUncategorizedItems = (group: GroupsEntity) => {
-    if (!group.children) return []
-    const children = new Set(group.children)
-    group.categories?.forEach((item) =>
-      item.children?.forEach((c) => children.delete(c))
-    )
-    return Array.from(children)
-  }
+  // const getUncategorizedItems = (group: GroupsEntity) => {
+  //   if (!group.children) return []
+  //   const children = new Set(group.children)
+  //   group.categories?.forEach((item) =>
+  //     item.children?.forEach((c) => children.delete(c))
+  //   )
+  //   return Array.from(children)
+  // }
 
   return (
     <div>
@@ -90,7 +90,6 @@ const Other = ({
   childrenEntity: ChildrenEntity1[] | null | undefined
 }) => {
   const [items, setItems] = useState<number[]>([])
-  const [name,setName] = useState('')
   const getUncategorizedItems = (group: GroupsEntity) => {
     if (!group.children) return []
     const children = new Set(group.children)
