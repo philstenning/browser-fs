@@ -1,5 +1,7 @@
 import { ParsedUrlQuery } from 'querystring'
 import { ApiPackages, ChildrenEntity1 } from './api.d'
+import { remark } from 'remark'
+import html from 'remark-html'
 import api from '../generated/json/api.json'
 
 export interface IParams extends ParsedUrlQuery {
@@ -18,6 +20,21 @@ function getAllModulesItemsPaths() {
   return items
 }
 
+async function getModuleItemHtml(name: string) {
+  console.log(name)
+  const selectedModule = getModuleItem(name)
+  const processedContent = await remark()
+    .use(html)
+    // .process(`# fff`)
+  .process(` \`\`\`json 
+  ${JSON.stringify(selectedModule)}
+  \`\`\``)
+  const contentHtml = processedContent.value.toString()
+  console.log(contentHtml)
+  return contentHtml
+  
+}
+
 function getModuleItem(name: string): ChildrenEntity1 {
   let moduleItem: ChildrenEntity1 = {
     id: 1,
@@ -34,4 +51,4 @@ function getModuleItem(name: string): ChildrenEntity1 {
 
   return moduleItem
 }
-export { getAllModulesItemsPaths, getModuleItem }
+export { getAllModulesItemsPaths, getModuleItem, getModuleItemHtml }
