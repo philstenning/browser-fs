@@ -8,6 +8,7 @@ export interface ApiPackages {
   groups?: GroupsEntityOrCategoriesEntity[] | null
 }
 export interface Flags {}
+
 export interface IPackage {
   id: number
   name: string

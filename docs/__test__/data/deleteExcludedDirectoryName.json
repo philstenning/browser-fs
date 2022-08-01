@@ -1,0 +1,70 @@
+ {
+      "id": 597,
+      "name": "deleteExcludedDirectoryName",
+      "kind": 64,
+      "kindString": "Function",
+      "flags": {},
+      "sources": [
+        {
+          "fileName": "packages/fsa-database/src/models/excludedDirectories/deleteExcludedDirectoryName.ts",
+          "line": 8,
+          "character": 30,
+          "url": "https://github.com/philstenning/browser-fs/blob/2ff820f/packages/fsa-database/src/models/excludedDirectories/deleteExcludedDirectoryName.ts#L8"
+        }
+      ],
+      "signatures": [
+        {
+          "id": 598,
+          "name": "deleteExcludedDirectoryName",
+          "kind": 4096,
+          "kindString": "Call signature",
+          "flags": {},
+          "comment": {
+            "summary": [
+              {
+                "kind": "text",
+                "text": "Returns true if the excluded name has been removed from the database"
+              }
+            ],
+            "blockTags": [
+              {
+                "tag": "@returns",
+                "content": [
+                  {
+                    "kind": "text",
+                    "text": "A Promise of true or false when fulfilled"
+                  }
+                ]
+              }
+            ]
+          },
+          "parameters": [
+            {
+              "id": 599,
+              "name": "id",
+              "kind": 32768,
+              "kindString": "Parameter",
+              "flags": {},
+              "type": {
+                "type": "union",
+                "types": [
+                  {
+                    "type": "intrinsic",
+                    "name": "undefined"
+                  },
+                  {
+                    "type": "intrinsic",
+                    "name": "number"
+                  }
+                ]
+              }
+            }
+          ],
+          "type": {
+            "type": "reference",
+            "id": 266,
+            "name": "Promise"
+          }
+        }
+      ]
+    }

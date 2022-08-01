@@ -2,11 +2,11 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Layout from '../../../components/layout'
 import { ChildrenEntity1 } from '../../../lib/api.d'
-// import { getPackageDetails, PackageType } from '../../../lib/api'
+import ApiFunction from '../../../components/apiTypes/apiFunction'
 import {
   getAllModulesItemsPaths,
   getModuleItem,
-  getModuleItemHtml,
+  // getModuleItemHtml,
   IParams
 } from '../../../lib/items'
 import { getLayoutData, LayoutData } from '../../../lib/layoutData'
@@ -14,21 +14,23 @@ import { getLayoutData, LayoutData } from '../../../lib/layoutData'
 type props = {
   itemResult: ChildrenEntity1
   layoutData: LayoutData
-  html: string
+  // html: string
 }
 
-const Item: NextPage<props> = ({ itemResult, layoutData, html }) => {
+const Item: NextPage<props> = ({ itemResult, layoutData }) => {
   const router = useRouter()
   const { name, item } = router.query
-  console.log('html', html)
+  // console.log('html', html)
+
   return (
     <Layout layoutData={layoutData}>
-      <div>
+      {itemResult.kindString==='Function' && <ApiFunction itemResult={itemResult}/>}
+      {/* <div>
         <ul>
           <li>id: {itemResult.id}</li>
           <li>name: {itemResult.name}</li>
           <li>Type: {itemResult.kindString}</li>
-          {/* <li>comment:{itemResult.comment?.summary}</li> */}
+      
 
           <li>Type: {itemResult.sources && itemResult.sources[0].url}</li>
 
@@ -66,23 +68,9 @@ const Item: NextPage<props> = ({ itemResult, layoutData, html }) => {
         <hr />
         <div dangerouslySetInnerHTML={{ __html: html }} />
 
-        {/* <div>{html}</div> */}
         <div>{JSON.stringify(itemResult, null, 6)}</div>
-      </div>
+      </div> */}
 
-      {/* <main>
-        <h2>{name}</h2> <h3>{item}</h3>
-     
-        <div>
-          {itemResult?.signatures
-            // ?.map((sig) => sig?.comment?.summary[0]?.text)
-            ?.toString()}
-        </div>
-        <ul>
-          <li>Groups: {JSON.stringify(itemResult.groups)}</li>
-        </ul>
-        <div> {JSON.stringify(itemResult.signatures,null,'\t')}</div>
-      </main> */}
     </Layout>
   )
 }
@@ -98,13 +86,13 @@ const getStaticPaths: GetStaticPaths = () => {
 const getStaticProps: GetStaticProps = async (context) => {
   const { name, item } = context.params as IParams
   const itemResult = getModuleItem(item)
-  const html = await getModuleItemHtml(item)
+  // const html = await getModuleItemHtml(item)
   const layoutData = getLayoutData(name)
   return {
     props: {
       itemResult,
       layoutData,
-      html
+      // html
     }
   }
 }

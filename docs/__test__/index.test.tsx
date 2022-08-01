@@ -29,6 +29,7 @@ describe('fsa-database should have functions',()=>{
         ?.name
       expect(functionName).toBe('checkHandlePermission')
     })
+    
 })
 
 export {}

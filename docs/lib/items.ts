@@ -21,7 +21,7 @@ function getAllModulesItemsPaths() {
 }
 
 async function getModuleItemHtml(name: string) {
-  console.log(name)
+  // console.log(name)
   const selectedModule = getModuleItem(name)
   const processedContent = await remark()
     .use(html)
@@ -30,7 +30,7 @@ async function getModuleItemHtml(name: string) {
   ${JSON.stringify(selectedModule)}
   \`\`\``)
   const contentHtml = processedContent.value.toString()
-  console.log(contentHtml)
+  // console.log(contentHtml)
   return contentHtml
   
 }

@@ -2,6 +2,19 @@ import { ParsedUrlQuery } from 'querystring'
 import { ApiPackages, ChildrenEntity1, IPackage } from './api.d'
 import api from '../generated/json/api.json'
 
+
+export type PackageDetails = {
+  name: string
+  data: PackageEntities[] 
+  raw: IPackage
+}
+
+export type PackageEntities = {
+  name: string
+  children: ChildrenEntity1[]
+ 
+}
+
 export interface IParams extends ParsedUrlQuery {
   name: string
 }
@@ -27,8 +40,6 @@ function getPackageNames(){
     throw new Error(
       `Json file has not been generated, "run pnpm td:json" in the root directory`
     )
-
-
   const modules = api.children
     .filter((item) => item.kindString === 'Module')
     .map((i) => (i.name))
@@ -36,17 +47,6 @@ function getPackageNames(){
   return modules
 }
 
-export type PackageDetails = {
-  name: string
-  data: PackageEntities[] 
-  raw: IPackage
-}
-
-export type PackageEntities = {
-  name: string
-  children: ChildrenEntity1[]
- 
-}
 
 function getPackageDetails(name: string): PackageDetails {
   const data = getPackage(name) 
