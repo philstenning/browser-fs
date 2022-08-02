@@ -4,7 +4,18 @@ import type {
   FsaDbContextProviderProps,
 } from './context/dbContext'
 
-import type {DuplicateFile} from './hooks/files/useFindDuplicateFiles'
+import type {
+  fsaFile,
+  fsaState,
+  fsaCollection,
+  fsaExcludedDirectory,
+  fsaFileType,
+  fsaCollectionFile,
+  fsaSetting,
+  fsaDirectory,
+} from '@philstenning/fsa-database'
+
+import type { DuplicateFile } from './hooks/files/useFindDuplicateFiles'
 import FsaDbContextProvider from './context/dbContext'
 
 /*  --------- Hooks  ---------  */
@@ -50,4 +61,16 @@ export {
   useSettings,
 }
 
-export type { FsaDbContextType, DuplicateFile }
+export type {
+  FsaDbContextType,
+  DuplicateFile,
+  // reexports
+  fsaFile,
+  fsaState,
+  fsaCollection,
+  fsaExcludedDirectory,
+  fsaFileType,
+  fsaCollectionFile,
+  fsaSetting,
+  fsaDirectory,
+}

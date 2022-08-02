@@ -9,7 +9,7 @@ importers:
       '@types/node': ^18.0.4
       rimraf: ^3.0.2
       turbo: ^1.3.1
-      typedoc: ^0.23.8
+      typedoc: ^0.23.10
       typedoc-plugin-markdown: ^3.13.4
       typedoc-plugin-resolve-crossmodule-references: ^0.2.0
       typescript: ^4.7.4
@@ -19,9 +19,9 @@ importers:
       '@types/node': 18.0.4
       rimraf: 3.0.2
       turbo: 1.3.1
-      typedoc: 0.23.9_typescript@4.7.4
-      typedoc-plugin-markdown: 3.13.4_typedoc@0.23.9
-      typedoc-plugin-resolve-crossmodule-references: 0.2.0_typedoc@0.23.9
+      typedoc: 0.23.10_typescript@4.7.4
+      typedoc-plugin-markdown: 3.13.4_typedoc@0.23.10
+      typedoc-plugin-resolve-crossmodule-references: 0.2.0_typedoc@0.23.10
       typescript: 4.7.4
 
   docs:
@@ -10058,40 +10058,26 @@ packages:
       - typescript
     dev: true
 
-  /typedoc-plugin-markdown/3.13.4_typedoc@0.23.9:
+  /typedoc-plugin-markdown/3.13.4_typedoc@0.23.10:
     resolution: {integrity: sha512-E/EBBmu6ARtnbswZGtBVBB/BfukZiGMOlqPc0RXCI/NFitONBahFqbCAF5fKQlijlcfipJj5pw5AMFH3NytrAw==}
     peerDependencies:
       typedoc: '>=0.23.0'
     dependencies:
       handlebars: 4.7.7
-      typedoc: 0.23.9_typescript@4.7.4
+      typedoc: 0.23.10_typescript@4.7.4
     dev: true
 
-  /typedoc-plugin-resolve-crossmodule-references/0.2.0_typedoc@0.23.9:
+  /typedoc-plugin-resolve-crossmodule-references/0.2.0_typedoc@0.23.10:
     resolution: {integrity: sha512-05tYP0Pe7Zcinp3DdBGf0F5rPCNwyfeHq0c9FhuvAjosThluqrsZYo3j63PcJXMXHnFPbVpvN9cGzLGAxxOi+Q==}
     engines: {node: '>=16'}
     peerDependencies:
       typedoc: '>=0.22 <=0.23'
     dependencies:
-      typedoc: 0.23.9_typescript@4.7.4
+      typedoc: 0.23.10_typescript@4.7.4
     dev: true
 
   /typedoc/0.23.10_typescript@4.7.4:
     resolution: {integrity: sha512-03EUiu/ZuScUBMnY6p0lY+HTH8SwhzvRE3gImoemdPDWXPXlks83UGTx++lyquWeB1MTwm9D9Ca8RIjkK3AFfQ==}
-    engines: {node: '>= 14.14'}
-    hasBin: true
-    peerDependencies:
-      typescript: 4.6.x || 4.7.x
-    dependencies:
-      lunr: 2.3.9
-      marked: 4.0.18
-      minimatch: 5.1.0
-      shiki: 0.10.1
-      typescript: 4.7.4
-    dev: true
-
-  /typedoc/0.23.9_typescript@4.7.4:
-    resolution: {integrity: sha512-rvWci2KHwteVUufZjjtIy/4PIHiE66t4VW4Ob6pezV//GHZ9Px0CHE5iq032GZzKONJWnNb+EJsrQv32INRvxA==}
     engines: {node: '>= 14.14'}
     hasBin: true
     peerDependencies:

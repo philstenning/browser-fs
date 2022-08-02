@@ -35,6 +35,9 @@ jobs:
       # the build/css directory
       - name: build docs
         run: pnpm build:docs
+
+      - name: build api docs
+        run: pmpm td3
     
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
