@@ -1,0 +1,97 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>browser-fsa</title><meta name="description" content="Documentation for browser-fsa"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">browser-fsa</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<div class="container container-main">
+<div class="col-8 col-content">
+<div class="tsd-page-title">
+<h2>browser-fsa</h2></div>
+<div class="tsd-panel tsd-typography">
+<a href="#browser-fsa" id="browser-fsa" style="color: inherit; text-decoration: none;">
+  <h1>browser-fsa</h1>
+</a>
+<p>Browser Fsa is a monorepo of libraries to simplify adding the Browser File System Access api to your app. It abstracts over the api to try and give you a near native 
+experience in the you web browser. </p>
+
+<a href="#fsa-browser" id="fsa-browser" style="color: inherit; text-decoration: none;">
+  <h2>fsa-browser</h2>
+</a>
+<p><a href="/browser-fs/module/fsa-browser">Details and API</a></p>
+<p>If you just need basic access to to the local file system you can:</p>
+<ul>
+<li>Check browser compatibility of api</li>
+<li>Get Directories from you local drives</li>
+<li>store reference of Directories in indexDb for later use even after a browser reload.</li>
+<li>Scan and rescan recursively for files of any extension type.</li>
+<li>Excluded list of directories, to help speed up scanning.</li>
+</ul>
+
+<a href="#fsa-database" id="fsa-database" style="color: inherit; text-decoration: none;">
+  <h2>fsa-database</h2>
+</a>
+<p><a href="/browser-fs/module/fsa-database">Details and API</a></p>
+<p>Add the ability to create collections of your files that can be saved back to the local drive.</p>
+<ul>
+<li>Keep collections on your local drives in sync with your browsers database.</li>
+<li>Drag and drop support.</li>
+<li>Support for browsers that don&#39;t support the File System Access api.</li>
+<li>Simple state management with history built in using indexDb.</li>
+<li>Add and remove file types from the database</li>
+<li>Toggle visibility of files by type</li>
+<li>Add and remove excluded directories to the database</li>
+<li>import/export of database (Blob) to local file.</li>
+</ul>
+
+<a href="#react-fsa-database" id="react-fsa-database" style="color: inherit; text-decoration: none;">
+  <h2>react-fsa-database</h2>
+</a>
+<p><a href="/browser-fs/module/react-fsa-database">Details and API</a></p>
+<p>Wraps fsa-database and adds hooks for simple app creation when using react.</p>
+<ul>
+<li>Uses react context for state management</li>
+<li>Hooks reload data reactively as data is updated in the database.</li>
+</ul>
+
+<a href="#tips-using-the-libraries" id="tips-using-the-libraries" style="color: inherit; text-decoration: none;">
+  <h2>Tips using the libraries</h2>
+</a>
+<p>The File System Access Api requires a user event/action to work, if it throws an error you may or may not see them, this is for security reasons so don&#39;t try to attach functions to onload or passive events.</p>
+<p>If you find that you keep needing to grant permission to the browser because you keep 
+refreshing the browser during development, just keep another tab open.</p>
+
+<a href="#browser-compatibility" id="browser-compatibility" style="color: inherit; text-decoration: none;">
+  <h2>Browser Compatibility</h2>
+</a>
+<p>The File System Access API is <a href="https://caniuse.com/?search=File%20System%20Access%20API">not available in all browsers</a> so a fallback is provided for users not using the supported features of API using fsa-database and react-fsa-database, this works by storing the file with its meta data in the indexDB so we can use it from within the app.</p>
+</div></div>
+<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<nav class="tsd-navigation primary">
+<details class="tsd-index-accordion" open><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li class="current selected"><a href="modules.html">browser-<wbr/>fsa</a>
+<ul>
+<li class="tsd-kind-module"><a href="modules/fsa_browser.html">fsa-<wbr/>browser</a></li>
+<li class="tsd-kind-module"><a href="modules/fsa_database.html">fsa-<wbr/>database</a></li>
+<li class="tsd-kind-module"><a href="modules/react_fsa_database.html">react-<wbr/>fsa-<wbr/>database</a></li></ul></li></ul></div></details></nav></div></div>
+<div class="container tsd-generator">
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div><script src="assets/main.js"></script></body></html>

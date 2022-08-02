@@ -1,0 +1,400 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>fsa-database | browser-fsa</title><meta name="description" content="Documentation for browser-fsa"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script async src="../assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base="..">
+<div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">browser-fsa</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<div class="container container-main">
+<div class="col-8 col-content">
+<div class="tsd-page-title">
+<ul class="tsd-breadcrumb">
+<li><a href="../modules.html">browser-fsa</a></li>
+<li><a href="fsa_database.html">fsa-database</a></li></ul>
+<h1>Module fsa-database</h1></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/philstenning/browser-fs/blob/5cd60de/packages/fsa-database/src/index.ts#L2">packages/fsa-database/src/index.ts:2</a></li></ul></aside>
+<section class="tsd-panel-group">
+<section class="tsd-panel tsd-typography">
+<a href="#fsa-database" id="fsa-database" style="color: inherit; text-decoration: none;">
+  <h1>fsa-database</h1>
+</a>
+<p>Create collections of files from your local drive for use in the browser.</p>
+
+<a href="#overview" id="overview" style="color: inherit; text-decoration: none;">
+  <h2>Overview</h2>
+</a>
+<p>Use fsa-database to recursively scan your local drive for files of a any given extension and save them to the browsers indexDB, then create collections from them for further use within your app</p>
+
+<a href="#concepts" id="concepts" style="color: inherit; text-decoration: none;">
+  <h3>Concepts</h3>
+</a>
+<hr>
+<ul>
+<li><a href="#fsa-database">fsa-database</a><ul>
+<li><a href="#overview">Overview</a><ul>
+<li><a href="#concepts">Concepts</a></li>
+</ul>
+</li>
+<li><a href="#getting-stated">Getting Stated</a></li>
+<li><a href="#getting-stated-with-react">Getting Stated with React</a><ul>
+<li><a href="#add-a-root-directory">Add a Root Directory</a></li>
+</ul>
+</li>
+<li><a href="#features">Features</a><ul>
+<li><a href="#files-and-directories">Files and Directories</a></li>
+<li><a href="#collections">Collections</a></li>
+<li><a href="#state">State</a></li>
+</ul>
+</li>
+<li><a href="#browser-compatibility">Browser Compatibility</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#settings">Settings</a></li>
+<li><a href="#typescript">TypeScript</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+<p>This is a monorepo containing the following packages / projects:</p>
+<ol>
+<li>fsa-browser - base package this will be removed and all the necessary bits added to fsa-database for version 1.0.0</li>
+<li>fsa-database  </li>
+<li>react-fsa-database - wrapper for using with react</li>
+<li>web - vitejs frontend for testing</li>
+<li>docs - wip.</li>
+</ol>
+<hr>
+
+<a href="#getting-stated" id="getting-stated" style="color: inherit; text-decoration: none;">
+  <h2>Getting Stated</h2>
+</a>
+<pre><code class="language-js"><span class="hl-0">// using pnp</span><br/><span class="hl-1">npm</span><span class="hl-2"> </span><span class="hl-1">install</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span><br/><br/><span class="hl-0">// using pnpm</span><br/><span class="hl-1">pnpm</span><span class="hl-2"> </span><span class="hl-1">i</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span><br/><br/><span class="hl-0">// yarn</span><br/><span class="hl-1">yarn</span><span class="hl-2"> </span><span class="hl-1">add</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span>
+</code></pre>
+
+<a href="#getting-stated-with-react" id="getting-stated-with-react" style="color: inherit; text-decoration: none;">
+  <h2>Getting Stated with React</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-2">pnpm i fsa-database react-fsa-database</span>
+</code></pre>
+<p>Add context provider to your app</p>
+<pre><code class="language-tsx"><span class="hl-0">// app.tsx</span><br/><span class="hl-0">// file extensions can be either &#39;.md&#39; or &#39;md&#39;</span><br/><br/><span class="hl-3">import</span><span class="hl-2"> {</span><span class="hl-1">FsaDbContextProvider</span><span class="hl-2">} </span><span class="hl-3">from</span><span class="hl-2"> </span><span class="hl-4">&quot;@philstenning/react-fsa-database&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-5">function</span><span class="hl-2"> </span><span class="hl-6">App</span><span class="hl-2">() {</span><br/><span class="hl-2">  </span><span class="hl-3">return</span><span class="hl-2"> (</span><br/><span class="hl-2">    </span><span class="hl-7">&lt;</span><span class="hl-8">FsaDbContextProvider</span><span class="hl-2">  </span><br/><span class="hl-2">     </span><span class="hl-9">fileExtensionsForApp</span><span class="hl-2">=</span><span class="hl-5">{</span><span class="hl-10">[</span><span class="hl-4">&#39;.txt&#39;</span><span class="hl-10">,</span><span class="hl-4">&#39;.md&#39;</span><span class="hl-10">,</span><span class="hl-4">&#39;svg&#39;</span><span class="hl-10">]</span><span class="hl-5">}</span><span class="hl-7">&gt;</span><br/><span class="hl-2">      </span><span class="hl-7">&lt;</span><span class="hl-8">YourApp</span><span class="hl-7">&gt;</span><br/><span class="hl-2">    </span><br/><span class="hl-2">      </span><span class="hl-7">&lt;/</span><span class="hl-8">YourApp</span><span class="hl-7">&gt;</span><br/><span class="hl-2">    </span><span class="hl-7">&lt;/</span><span class="hl-8">FsaDbContextProvider</span><span class="hl-7">&gt;</span><br/><span class="hl-2">  );</span><br/><span class="hl-2">}</span><br/><br/><span class="hl-3">export</span><span class="hl-2"> </span><span class="hl-3">default</span><span class="hl-2"> </span><span class="hl-1">App</span><span class="hl-2">; </span><br/><br/><br/>
+</code></pre>
+
+<a href="#add-a-root-directory" id="add-a-root-directory" style="color: inherit; text-decoration: none;">
+  <h3>Add a Root Directory</h3>
+</a>
+
+<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+  <h2>Features</h2>
+</a>
+
+<a href="#files-and-directories" id="files-and-directories" style="color: inherit; text-decoration: none;">
+  <h3>Files and Directories</h3>
+</a>
+<p>fsa-database uses the File System Access API to scan a local drive for files with a given array of extensions [&#39;.jpg&#39;, &#39;.png&#39;,&#39;.gif&#39;]  and returns a list of of directories with their files that are stored in the indexDb for use within your app. These Files and Directories are then available even after the user closes the browser or reloads the browser window (after regranting permissions)</p>
+
+<a href="#collections" id="collections" style="color: inherit; text-decoration: none;">
+  <h3>Collections</h3>
+</a>
+<p>The user can create collections and then add/remove any file  from the database to it, then save the whole collection back to almost any location on their local drive. Collections once saved for the first time, can then be updated/deleted in a similar manner that you would have in a regular native app. </p>
+
+<a href="#state" id="state" style="color: inherit; text-decoration: none;">
+  <h3>State</h3>
+</a>
+<p>Built in state management, if needed, is stored in the database so after page reloads, the state of the app can be quickly restored, this state is also available across browser tabs. </p>
+<hr>
+
+<a href="#browser-compatibility" id="browser-compatibility" style="color: inherit; text-decoration: none;">
+  <h2>Browser Compatibility</h2>
+</a>
+<p>The File System Access API is <a href="https://caniuse.com/?search=File%20System%20Access%20API">not available in all browsers</a> so a fallback is provided for users not using the supported features of API, this works by storing the file with its meta data in the indexDB so we can use it from within the app.</p>
+
+<a href="#options" id="options" style="color: inherit; text-decoration: none;">
+  <h2>Options</h2>
+</a>
+<pre><code class="language-ts"><span class="hl-0">// list of folders that are not scanned. </span><br/><span class="hl-11">excludedFolders</span><span class="hl-2">: </span><span class="hl-1">string</span><span class="hl-2">[]  = [</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;node_modules&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;programFiles&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;junk&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;.git&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;.changeset&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;bin&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;__pycache__&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">]</span><br/><br/><span class="hl-2">  </span>
+</code></pre>
+<pre><code class="language-ts"><span class="hl-0">// list of extensions to scan for </span><br/><span class="hl-11">fileTypes</span><span class="hl-2">: </span><span class="hl-1">string</span><span class="hl-2">[] = [</span><span class="hl-4">&#39;jpg&#39;</span><span class="hl-2">,</span><span class="hl-4">&#39;png&#39;</span><span class="hl-2">,</span><span class="hl-4">&#39;gif&#39;</span><span class="hl-2">]</span><br/>
+</code></pre>
+<pre><code class="language-ts"><span class="hl-0">// How deep you want to scan</span><br/><span class="hl-11">maxDepth</span><span class="hl-2">: </span><span class="hl-1">number</span><span class="hl-2"> = </span><span class="hl-12">10</span>
+</code></pre>
+
+<a href="#settings" id="settings" style="color: inherit; text-decoration: none;">
+  <h2>Settings</h2>
+</a>
+<pre><code class="language-ts"><span class="hl-1">fsaSetting</span><span class="hl-2"> {</span><br/><span class="hl-2">  </span><span class="hl-1">id</span><span class="hl-2">?: </span><span class="hl-1">number</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// set internally when browser session starts</span><br/><span class="hl-2">  </span><span class="hl-11">sessionStarted</span><span class="hl-2">: </span><span class="hl-1">number</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// when files are removed from a collection,</span><br/><span class="hl-2">  </span><span class="hl-0">// or a collection is deleted</span><br/><span class="hl-2">  </span><span class="hl-0">// removed files  from local disk also</span><br/><span class="hl-2">  </span><span class="hl-11">cleanUpFiles</span><span class="hl-2">: </span><span class="hl-1">boolean</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// when a file is added to collection</span><br/><span class="hl-2">  </span><span class="hl-0">// save to disk</span><br/><span class="hl-2">  </span><span class="hl-11">autoSaveCollections</span><span class="hl-2">: </span><span class="hl-1">boolean</span><br/><br/><span class="hl-2">  </span><span class="hl-11">scanInterval</span><span class="hl-2">: </span><span class="hl-1">number</span><span class="hl-2"> </span><span class="hl-0">// default is 0 or none.</span><br/><span class="hl-2">  </span><br/><span class="hl-2">  </span><span class="hl-0">// time the user last scanned for file changes.</span><br/><span class="hl-2">  </span><span class="hl-11">lastScanned</span><span class="hl-2">: </span><span class="hl-1">number</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// when adding with drag and drop whether </span><br/><span class="hl-2">  </span><span class="hl-0">// to add files to a new folder</span><br/><span class="hl-2">  </span><span class="hl-11">allowDndFiles</span><span class="hl-2">: </span><span class="hl-1">boolean</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// When resetting db retain all root Directories.</span><br/><span class="hl-2">  </span><span class="hl-11">retainRootDirectoriesOnReset</span><span class="hl-2">: </span><span class="hl-1">boolean</span><span class="hl-2">; </span><br/><br/><span class="hl-2">}</span>
+</code></pre>
+
+<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
+  <h2>TypeScript</h2>
+</a>
+<p>Fully written with TypeScript</p>
+
+<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+  <h2>Contributing</h2>
+</a>
+<p>I&#39;m open to all community contributions! If you&#39;d like to contribute in any way, file an issue or pull request.</p>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>License</h2>
+</a>
+<p>ISC</p>
+</section></section>
+<section class="tsd-panel-group tsd-index-group">
+<section class="tsd-panel tsd-index-panel">
+<h3 class="tsd-index-heading uppercase">Index</h3>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Classes - Database</h3>
+<div class="tsd-index-list"><a href="../classes/fsa_database.FsaDb.html" class="tsd-index-link tsd-kind-class tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-class)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-128-path"></rect><path d="M11.898 16.1201C11.098 16.1201 10.466 15.8961 10.002 15.4481C9.53803 15.0001 9.30603 14.3841 9.30603 13.6001V9.64012C9.30603 8.85612 9.53803 8.24012 10.002 7.79212C10.466 7.34412 11.098 7.12012 11.898 7.12012C12.682 7.12012 13.306 7.34812 13.77 7.80412C14.234 8.25212 14.466 8.86412 14.466 9.64012H13.386C13.386 9.14412 13.254 8.76412 12.99 8.50012C12.734 8.22812 12.37 8.09212 11.898 8.09212C11.426 8.09212 11.054 8.22412 10.782 8.48812C10.518 8.75212 10.386 9.13212 10.386 9.62812V13.6001C10.386 14.0961 10.518 14.4801 10.782 14.7521C11.054 15.0161 11.426 15.1481 11.898 15.1481C12.37 15.1481 12.734 15.0161 12.99 14.7521C13.254 14.4801 13.386 14.0961 13.386 13.6001H14.466C14.466 14.3761 14.234 14.9921 13.77 15.4481C13.306 15.8961 12.682 16.1201 11.898 16.1201Z" fill="var(--color-text)" id="icon-128-text"></path></svg><span>Fsa<wbr/>Db</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Interfaces</h3>
+<div class="tsd-index-list"><a href="../interfaces/fsa_database.VirtualFileSystemEntry.html" class="tsd-index-link tsd-kind-interface tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-256-path"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)" id="icon-256-text"></path></svg><span>Virtual<wbr/>File<wbr/>System<wbr/>Entry</span></a>
+<a href="../interfaces/fsa_database.VirtualRootDirectoryType.html" class="tsd-index-link tsd-kind-interface tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>Virtual<wbr/>Root<wbr/>Directory<wbr/>Type</span></a>
+<a href="../interfaces/fsa_database.fsaCollection.html" class="tsd-index-link tsd-kind-interface tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>fsa<wbr/>Collection</span></a>
+<a href="../interfaces/fsa_database.fsaCollectionFile.html" class="tsd-index-link tsd-kind-interface tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>fsa<wbr/>Collection<wbr/>File</span></a>
+<a href="../interfaces/fsa_database.fsaDirectory.html" class="tsd-index-link tsd-kind-interface tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>fsa<wbr/>Directory</span></a>
+<a href="../interfaces/fsa_database.fsaExcludedDirectory.html" class="tsd-index-link tsd-kind-interface tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>fsa<wbr/>Excluded<wbr/>Directory</span></a>
+<a href="../interfaces/fsa_database.fsaFile.html" class="tsd-index-link tsd-kind-interface tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>fsa<wbr/>File</span></a>
+<a href="../interfaces/fsa_database.fsaSetting.html" class="tsd-index-link tsd-kind-interface tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>fsa<wbr/>Setting</span></a>
+<a href="../interfaces/fsa_database.fsaState.html" class="tsd-index-link tsd-kind-interface tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg><span>fsa<wbr/>State</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Type Aliases</h3>
+<div class="tsd-index-list"><a href="../types/fsa_database.fsaBrowserStorage.html" class="tsd-index-link tsd-kind-type-alias tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-4194304-path"></rect><path d="M11.31 16V8.224H8.91V7.24H14.79V8.224H12.39V16H11.31Z" fill="var(--color-text)" id="icon-4194304-text"></path></svg><span>fsa<wbr/>Browser<wbr/>Storage</span></a>
+<a href="../types/fsa_database.fsaError.html" class="tsd-index-link tsd-kind-type-alias tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg><span>fsa<wbr/>Error</span></a>
+<a href="../types/fsa_database.fsaFileType.html" class="tsd-index-link tsd-kind-type-alias tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg><span>fsa<wbr/>File<wbr/>Type</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Variables - Database</h3>
+<div class="tsd-index-list"><a href="../variables/fsa_database.db.html" class="tsd-index-link tsd-kind-variable tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-variable)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-32-path"></rect><path d="M11.106 16L8.85 7.24H9.966L11.454 13.192C11.558 13.608 11.646 13.996 11.718 14.356C11.79 14.708 11.842 14.976 11.874 15.16C11.906 14.976 11.954 14.708 12.018 14.356C12.09 13.996 12.178 13.608 12.282 13.192L13.758 7.24H14.85L12.582 16H11.106Z" fill="var(--color-text)" id="icon-32-text"></path></svg><span>db</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Variables - State</h3>
+<div class="tsd-index-list"><a href="../variables/fsa_database.initialDbState.html" class="tsd-index-link tsd-kind-variable tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-32-path"></use><use href="#icon-32-text"></use></svg><span>initial<wbr/>Db<wbr/>State</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Collections</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.addFileToCollection.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-64-path"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)" id="icon-64-text"></path></svg><span>add<wbr/>File<wbr/>To<wbr/>Collection</span></a>
+<a href="../functions/fsa_database.createCollection.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>create<wbr/>Collection</span></a>
+<a href="../functions/fsa_database.deleteCollection.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>delete<wbr/>Collection</span></a>
+<a href="../functions/fsa_database.findLastUsedCollection.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>find<wbr/>Last<wbr/>Used<wbr/>Collection</span></a>
+<a href="../functions/fsa_database.findLastUsedCollectionOrCreatNew.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>find<wbr/>Last<wbr/>Used<wbr/>Collection<wbr/>Or<wbr/>Creat<wbr/>New</span></a>
+<a href="../functions/fsa_database.removeAllFilesFromCollection.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>remove<wbr/>All<wbr/>Files<wbr/>From<wbr/>Collection</span></a>
+<a href="../functions/fsa_database.removeFileFromAllCollection.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>remove<wbr/>File<wbr/>From<wbr/>All<wbr/>Collection</span></a>
+<a href="../functions/fsa_database.removeFileFromCollection.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>remove<wbr/>File<wbr/>From<wbr/>Collection</span></a>
+<a href="../functions/fsa_database.removeFileFromCollectionsSavedLocation.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>remove<wbr/>File<wbr/>From<wbr/>Collections<wbr/>Saved<wbr/>Location</span></a>
+<a href="../functions/fsa_database.saveCollectionToFileSystem.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>save<wbr/>Collection<wbr/>To<wbr/>File<wbr/>System</span></a>
+<a href="../functions/fsa_database.updateCollection.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>update<wbr/>Collection</span></a>
+<a href="../functions/fsa_database.updatePermissionsForRootDirAndChildren.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>update<wbr/>Permissions<wbr/>For<wbr/>Root<wbr/>Dir<wbr/>And<wbr/>Children</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Database</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.deleteDatabase.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>delete<wbr/>Database</span></a>
+<a href="../functions/fsa_database.exportDatabase.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>export<wbr/>Database</span></a>
+<a href="../functions/fsa_database.fetchDatabase.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>fetch<wbr/>Database</span></a>
+<a href="../functions/fsa_database.importDatabase.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>import<wbr/>Database</span></a>
+<a href="../functions/fsa_database.initializeDatabase.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>initialize<wbr/>Database</span></a>
+<a href="../functions/fsa_database.loadDatabase.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>load<wbr/>Database</span></a>
+<a href="../functions/fsa_database.resetDatabase.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>reset<wbr/>Database</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Directories</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.checkDirectoryForFilesInCollections.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>check<wbr/>Directory<wbr/>For<wbr/>Files<wbr/>In<wbr/>Collections</span></a>
+<a href="../functions/fsa_database.createDirectory.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>create<wbr/>Directory</span></a>
+<a href="../functions/fsa_database.hideDirectoryAndFiles.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>hide<wbr/>Directory<wbr/>And<wbr/>Files</span></a>
+<a href="../functions/fsa_database.mergeToParentDirectory.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>merge<wbr/>To<wbr/>Parent<wbr/>Directory</span></a>
+<a href="../functions/fsa_database.unMergeDirectories.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>un<wbr/>Merge<wbr/>Directories</span></a>
+<a href="../functions/fsa_database.updateDirectory.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>update<wbr/>Directory</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Drag&#39;n&#39;drop</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.saveDragItems.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>save<wbr/>Drag<wbr/>Items</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Excluded Directories</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.addExcludedDirectoryName.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>add<wbr/>Excluded<wbr/>Directory<wbr/>Name</span></a>
+<a href="../functions/fsa_database.deleteExcludedDirectoryName.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>delete<wbr/>Excluded<wbr/>Directory<wbr/>Name</span></a>
+<a href="../functions/fsa_database.getExcludedDirectoriesList.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>get<wbr/>Excluded<wbr/>Directories<wbr/>List</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Files</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.createFile.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>create<wbr/>File</span></a>
+<a href="../functions/fsa_database.deleteFile.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>delete<wbr/>File</span></a>
+<a href="../functions/fsa_database.deleteFiles.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>delete<wbr/>Files</span></a>
+<a href="../functions/fsa_database.deleteRootFolderFiles.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>delete<wbr/>Root<wbr/>Folder<wbr/>Files</span></a>
+<a href="../functions/fsa_database.saveFile.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>save<wbr/>File</span></a>
+<a href="../functions/fsa_database.saveFiles.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>save<wbr/>Files</span></a>
+<a href="../functions/fsa_database.updateFile.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>update<wbr/>File</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Files Types</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.addFileType.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>add<wbr/>File<wbr/>Type</span></a>
+<a href="../functions/fsa_database.changeFileTypeHidden.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>change<wbr/>File<wbr/>Type<wbr/>Hidden</span></a>
+<a href="../functions/fsa_database.deleteFileType.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>delete<wbr/>File<wbr/>Type</span></a>
+<a href="../functions/fsa_database.getFileTypeNames.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>get<wbr/>File<wbr/>Type<wbr/>Names</span></a>
+<a href="../functions/fsa_database.hideFileType.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>hide<wbr/>File<wbr/>Type</span></a>
+<a href="../functions/fsa_database.showFileType.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>show<wbr/>File<wbr/>Type</span></a>
+<a href="../functions/fsa_database.toggleFileTypeHidden.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>toggle<wbr/>File<wbr/>Type<wbr/>Hidden</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Legacy (non FSA support)</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.saveLegacyInputFiles.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>save<wbr/>Legacy<wbr/>Input<wbr/>Files</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Local File System</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.checkHandlePermission.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>check<wbr/>Handle<wbr/>Permission</span></a>
+<a href="../functions/fsa_database.parseVirtualFileSystemEntry.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>parse<wbr/>Virtual<wbr/>File<wbr/>System<wbr/>Entry</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Root Directories</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.addRootDirectory.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>add<wbr/>Root<wbr/>Directory</span></a>
+<a href="../functions/fsa_database.createRootDirectory.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>create<wbr/>Root<wbr/>Directory</span></a>
+<a href="../functions/fsa_database.deleteRootDirectory.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>delete<wbr/>Root<wbr/>Directory</span></a>
+<a href="../functions/fsa_database.rescanRootDirectories.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>rescan<wbr/>Root<wbr/>Directories</span></a>
+<a href="../functions/fsa_database.rootDirHasFilesInCollections.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>root<wbr/>Dir<wbr/>Has<wbr/>Files<wbr/>In<wbr/>Collections</span></a>
+<a href="../functions/fsa_database.selectRootDirectory.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>select<wbr/>Root<wbr/>Directory</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Settings</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.createInitialSetting.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>create<wbr/>Initial<wbr/>Setting</span></a>
+<a href="../functions/fsa_database.createSetting.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>create<wbr/>Setting</span></a>
+<a href="../functions/fsa_database.getCurrentSetting.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>get<wbr/>Current<wbr/>Setting</span></a>
+<a href="../functions/fsa_database.saveSetting.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>save<wbr/>Setting</span></a>
+<a href="../functions/fsa_database.updateSetting.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>update<wbr/>Setting</span></a>
+<a href="../functions/fsa_database.updateSettingLastScanned.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>update<wbr/>Setting<wbr/>Last<wbr/>Scanned</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - State</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.getCurrentState.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>get<wbr/>Current<wbr/>State</span></a>
+<a href="../functions/fsa_database.getCurrentStateWithOutId.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>get<wbr/>Current<wbr/>State<wbr/>With<wbr/>Out<wbr/>Id</span></a>
+<a href="../functions/fsa_database.saveState.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>save<wbr/>State</span></a>
+<a href="../functions/fsa_database.setCurrentCollectionId.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>set<wbr/>Current<wbr/>Collection<wbr/>Id</span></a>
+<a href="../functions/fsa_database.setCurrentDirectoryId.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>set<wbr/>Current<wbr/>Directory<wbr/>Id</span></a>
+<a href="../functions/fsa_database.setCurrentFileId.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>set<wbr/>Current<wbr/>File<wbr/>Id</span></a>
+<a href="../functions/fsa_database.setCurrentRootDirectoryId.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>set<wbr/>Current<wbr/>Root<wbr/>Directory<wbr/>Id</span></a>
+<a href="../functions/fsa_database.setIsScanning.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>set<wbr/>Is<wbr/>Scanning</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Utils</h3>
+<div class="tsd-index-list"><a href="../functions/fsa_database.bytesToSize.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>bytes<wbr/>To<wbr/>Size</span></a>
+<a href="../functions/fsa_database.checkBrowserStorage.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>check<wbr/>Browser<wbr/>Storage</span></a>
+<a href="../functions/fsa_database.getFileExtension.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>get<wbr/>File<wbr/>Extension</span></a>
+<a href="../functions/fsa_database.getFileNameWithoutExtension.html" class="tsd-index-link tsd-kind-function tsd-parent-kind-module"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>get<wbr/>File<wbr/>Name<wbr/>Without<wbr/>Extension</span></a>
+</div></section></section></section></div>
+<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<nav class="tsd-navigation primary">
+<details class="tsd-index-accordion" open><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li class="current"><a href="../modules.html">browser-<wbr/>fsa</a>
+<ul>
+<li class="tsd-kind-module"><a href="fsa_browser.html">fsa-<wbr/>browser</a></li>
+<li class="current selected tsd-kind-module"><a href="fsa_database.html">fsa-<wbr/>database</a></li>
+<li class="tsd-kind-module"><a href="react_fsa_database.html">react-<wbr/>fsa-<wbr/>database</a></li></ul></li></ul></div></details></nav>
+<nav class="tsd-navigation secondary menu-sticky">
+<ul>
+<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/fsa_database.FsaDb.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-128-path"></use><use href="#icon-128-text"></use></svg>Fsa<wbr/>Db</a></li>
+<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/fsa_database.VirtualFileSystemEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Virtual<wbr/>File<wbr/>System<wbr/>Entry</a></li>
+<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/fsa_database.VirtualRootDirectoryType.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>Virtual<wbr/>Root<wbr/>Directory<wbr/>Type</a></li>
+<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/fsa_database.fsaCollection.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>fsa<wbr/>Collection</a></li>
+<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/fsa_database.fsaCollectionFile.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>fsa<wbr/>Collection<wbr/>File</a></li>
+<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/fsa_database.fsaDirectory.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>fsa<wbr/>Directory</a></li>
+<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/fsa_database.fsaExcludedDirectory.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>fsa<wbr/>Excluded<wbr/>Directory</a></li>
+<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/fsa_database.fsaFile.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>fsa<wbr/>File</a></li>
+<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/fsa_database.fsaSetting.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>fsa<wbr/>Setting</a></li>
+<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/fsa_database.fsaState.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-256-path"></use><use href="#icon-256-text"></use></svg>fsa<wbr/>State</a></li>
+<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="../types/fsa_database.fsaBrowserStorage.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>fsa<wbr/>Browser<wbr/>Storage</a></li>
+<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="../types/fsa_database.fsaError.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>fsa<wbr/>Error</a></li>
+<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="../types/fsa_database.fsaFileType.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-4194304-path"></use><use href="#icon-4194304-text"></use></svg>fsa<wbr/>File<wbr/>Type</a></li>
+<li class="tsd-kind-variable tsd-parent-kind-module"><a href="../variables/fsa_database.db.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-32-path"></use><use href="#icon-32-text"></use></svg>db</a></li>
+<li class="tsd-kind-variable tsd-parent-kind-module"><a href="../variables/fsa_database.initialDbState.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-32-path"></use><use href="#icon-32-text"></use></svg>initial<wbr/>Db<wbr/>State</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.addExcludedDirectoryName.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>add<wbr/>Excluded<wbr/>Directory<wbr/>Name</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.addFileToCollection.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>add<wbr/>File<wbr/>To<wbr/>Collection</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.addFileType.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>add<wbr/>File<wbr/>Type</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.addRootDirectory.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>add<wbr/>Root<wbr/>Directory</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.bytesToSize.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>bytes<wbr/>To<wbr/>Size</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.changeFileTypeHidden.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>change<wbr/>File<wbr/>Type<wbr/>Hidden</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.checkBrowserStorage.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>check<wbr/>Browser<wbr/>Storage</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.checkDirectoryForFilesInCollections.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>check<wbr/>Directory<wbr/>For<wbr/>Files<wbr/>In<wbr/>Collections</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.checkHandlePermission.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>check<wbr/>Handle<wbr/>Permission</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.createCollection.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>Collection</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.createDirectory.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>Directory</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.createFile.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>File</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.createInitialSetting.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>Initial<wbr/>Setting</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.createRootDirectory.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>Root<wbr/>Directory</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.createSetting.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>create<wbr/>Setting</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.deleteCollection.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>delete<wbr/>Collection</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.deleteDatabase.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>delete<wbr/>Database</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.deleteExcludedDirectoryName.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>delete<wbr/>Excluded<wbr/>Directory<wbr/>Name</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.deleteFile.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>delete<wbr/>File</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.deleteFileType.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>delete<wbr/>File<wbr/>Type</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.deleteFiles.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>delete<wbr/>Files</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.deleteRootDirectory.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>delete<wbr/>Root<wbr/>Directory</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.deleteRootFolderFiles.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>delete<wbr/>Root<wbr/>Folder<wbr/>Files</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.exportDatabase.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>export<wbr/>Database</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.fetchDatabase.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>fetch<wbr/>Database</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.findLastUsedCollection.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>find<wbr/>Last<wbr/>Used<wbr/>Collection</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.findLastUsedCollectionOrCreatNew.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>find<wbr/>Last<wbr/>Used<wbr/>Collection<wbr/>Or<wbr/>Creat<wbr/>New</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.getCurrentSetting.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Current<wbr/>Setting</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.getCurrentState.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Current<wbr/>State</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.getCurrentStateWithOutId.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Current<wbr/>State<wbr/>With<wbr/>Out<wbr/>Id</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.getExcludedDirectoriesList.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>Excluded<wbr/>Directories<wbr/>List</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.getFileExtension.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>File<wbr/>Extension</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.getFileNameWithoutExtension.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>File<wbr/>Name<wbr/>Without<wbr/>Extension</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.getFileTypeNames.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>get<wbr/>File<wbr/>Type<wbr/>Names</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.hideDirectoryAndFiles.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>hide<wbr/>Directory<wbr/>And<wbr/>Files</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.hideFileType.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>hide<wbr/>File<wbr/>Type</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.importDatabase.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>import<wbr/>Database</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.initializeDatabase.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>initialize<wbr/>Database</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.loadDatabase.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>load<wbr/>Database</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.mergeToParentDirectory.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>merge<wbr/>To<wbr/>Parent<wbr/>Directory</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.parseVirtualFileSystemEntry.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>parse<wbr/>Virtual<wbr/>File<wbr/>System<wbr/>Entry</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.removeAllFilesFromCollection.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>remove<wbr/>All<wbr/>Files<wbr/>From<wbr/>Collection</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.removeFileFromAllCollection.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>remove<wbr/>File<wbr/>From<wbr/>All<wbr/>Collection</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.removeFileFromCollection.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>remove<wbr/>File<wbr/>From<wbr/>Collection</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.removeFileFromCollectionsSavedLocation.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>remove<wbr/>File<wbr/>From<wbr/>Collections<wbr/>Saved<wbr/>Location</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.rescanRootDirectories.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>rescan<wbr/>Root<wbr/>Directories</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.resetDatabase.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>reset<wbr/>Database</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.rootDirHasFilesInCollections.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>root<wbr/>Dir<wbr/>Has<wbr/>Files<wbr/>In<wbr/>Collections</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.saveCollectionToFileSystem.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>save<wbr/>Collection<wbr/>To<wbr/>File<wbr/>System</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.saveDragItems.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>save<wbr/>Drag<wbr/>Items</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.saveFile.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>save<wbr/>File</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.saveFiles.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>save<wbr/>Files</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.saveLegacyInputFiles.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>save<wbr/>Legacy<wbr/>Input<wbr/>Files</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.saveSetting.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>save<wbr/>Setting</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.saveState.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>save<wbr/>State</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.selectRootDirectory.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>select<wbr/>Root<wbr/>Directory</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.setCurrentCollectionId.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>set<wbr/>Current<wbr/>Collection<wbr/>Id</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.setCurrentDirectoryId.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>set<wbr/>Current<wbr/>Directory<wbr/>Id</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.setCurrentFileId.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>set<wbr/>Current<wbr/>File<wbr/>Id</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.setCurrentRootDirectoryId.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>set<wbr/>Current<wbr/>Root<wbr/>Directory<wbr/>Id</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.setIsScanning.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>set<wbr/>Is<wbr/>Scanning</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.showFileType.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>show<wbr/>File<wbr/>Type</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.toggleFileTypeHidden.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>toggle<wbr/>File<wbr/>Type<wbr/>Hidden</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.unMergeDirectories.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>un<wbr/>Merge<wbr/>Directories</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.updateCollection.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>update<wbr/>Collection</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.updateDirectory.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>update<wbr/>Directory</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.updateFile.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>update<wbr/>File</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.updatePermissionsForRootDirAndChildren.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>update<wbr/>Permissions<wbr/>For<wbr/>Root<wbr/>Dir<wbr/>And<wbr/>Children</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.updateSetting.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>update<wbr/>Setting</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/fsa_database.updateSettingLastScanned.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>update<wbr/>Setting<wbr/>Last<wbr/>Scanned</a></li></ul></nav></div></div>
+<div class="container tsd-generator">
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div><script src="../assets/main.js"></script></body></html>
