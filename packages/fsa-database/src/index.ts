@@ -10,6 +10,10 @@ import {
   fsaSetting,
   fsaState,
 } from './models/types'
+import type {
+  VirtualFileSystemEntry,
+  VirtualRootDirectoryType,
+} from '@philstenning/fsa-browser'
 import type { fsaBrowserStorage } from './utils/browserStorage'
 /*  --------- database  ---------  */
 import { db, FsaDb } from './db/setup'
@@ -123,6 +127,9 @@ export type {
   fsaSetting,
   fsaState,
   fsaBrowserStorage,
+  // reexport
+  VirtualFileSystemEntry,
+  VirtualRootDirectoryType,
 }
 // all exports
 export {

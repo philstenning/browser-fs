@@ -6,7 +6,7 @@ experience in the you web browser.
 
 ## fsa-browser
 
-[Details and API](/browser-fs/modules/fsa_browser.html)
+[Details and API](/browser-fs/module/fsa-browser)
 
 If you just need basic access to to the local file system you can:
 
@@ -19,7 +19,7 @@ If you just need basic access to to the local file system you can:
 
 ## fsa-database
 
-[Details and API](/browser-fs/modules/fsa_database.html)
+[Details and API](/browser-fs/module/fsa-database)
 
 Add the ability to create collections of your files that can be saved back to the local drive.
 
@@ -34,7 +34,7 @@ Add the ability to create collections of your files that can be saved back to th
 
 ## react-fsa-database
 
-[Details and API](/browser-fs/modules/react_fsa_database.html)
+[Details and API](/browser-fs/module/react-fsa-database)
 
 Wraps fsa-database and adds hooks for simple app creation when using react.
 

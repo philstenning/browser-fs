@@ -19,7 +19,12 @@
     "preview": "pnpm --filter fsa-browser-test preview ",
     "release": "changeset publish",
     "changeset:version": "changeset version",
-    "move": "mkdir ./foo && cp -r ./browser-fs/** ./foo"
+    "move": "mkdir ./foo && cp -r ./browser-fs/** ./foo",
+    "td": "typedoc ",
+    "td:prod": "typedoc --publicPath /browser-fs/",
+    "td:json": "typedoc --options typedoc2.json --pretty",
+    "docs": "pnpm --filter docs dev",
+    "td3": "typedoc --options typedoc3.json --pretty  --logLevel Verbose"
   },
   "repository": {
     "type": "git",
@@ -37,7 +42,7 @@
     "@types/node": "^18.0.4",
     "rimraf": "^3.0.2",
     "turbo": "^1.3.1",
-    "typedoc": "^0.23.8",
+    "typedoc": "^0.23.10",
     "typedoc-plugin-markdown": "^3.13.4",
     "typedoc-plugin-resolve-crossmodule-references": "^0.2.0",
     "typescript": "^4.7.4"

@@ -5,14 +5,11 @@
     "packages/fsa-database",
     "packages/react-fsa-database"
   ],
-  "includeVersion": false,
+  "includeVersion": true,
   "entryPointStrategy": "packages",
-  "out": "docs/generated",
   "pretty": true,
   "githubPages": false,
-  "cleanOutputDir": true,
-  "plugin": [
-    "typedoc-plugin-markdown"
-  ]
-  
+  "cleanOutputDir": false,
+  "plugin": ["typedoc-plugin-resolve-crossmodule-references"],
+  "json": "docs/generated/json/api.json"
 }

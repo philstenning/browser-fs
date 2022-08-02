@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "types": ["wicg-file-system-access"],
+    "types": ["wicg-file-system-access", "@philstenning/fsa-database"],
     "outDir": "dist/esm",
     "removeComments": true,
-    "sourceMap": true,
+    "sourceMap": true
   },
   "include": ["./src/index.ts"],
   "extends": "../../tsconfig.json"

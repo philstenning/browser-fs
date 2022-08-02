@@ -32,6 +32,12 @@ export type FsaDbContextProviderProps = {
 }
 
 /**
+ * ```tsx
+ * <FsaDbContextProvider fileExtensionsForApp ={['.jpg','png']}>
+ * {you app here}
+ * </FsaDbContextProvider>
+ *
+ * ```
  * @category Context Provider
  */
 export default function FsaDbContextProvider({
