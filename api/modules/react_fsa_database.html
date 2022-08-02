@@ -14,12 +14,128 @@
 <li><a href="react_fsa_database.html">react-fsa-database</a></li></ul>
 <h1>Module react-fsa-database</h1></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/philstenning/browser-fs/blob/5cd60de/packages/react-fsa-database/src/index.ts#L2">packages/react-fsa-database/src/index.ts:2</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/philstenning/browser-fs/blob/a633d7d/packages/react-fsa-database/src/index.ts#L2">packages/react-fsa-database/src/index.ts:2</a></li></ul></aside>
 <section class="tsd-panel-group">
 <section class="tsd-panel tsd-typography">
 <a href="#react-fsa-database" id="react-fsa-database" style="color: inherit; text-decoration: none;">
   <h1>react-fsa-database</h1>
 </a>
+<ul>
+<li><a href="#react-fsa-database">react-fsa-database</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#features">Features</a><ul>
+<li><a href="#hooks">Hooks</a></li>
+<li><a href="#state-management">State Management</a></li>
+</ul>
+</li>
+<li><a href="#getting-started">Getting Started</a><ul>
+<li><a href="#install">Install</a></li>
+<li><a href="#add-context-provider-to-your-app">Add context provider to your app</a></li>
+<li><a href="#add-a-root-directory">Add a Root Directory</a></li>
+<li><a href="#list-files">List Files</a></li>
+<li><a href="#add-collection">Add Collection</a></li>
+<li><a href="#add-file-to-collection">Add File to collection</a></li>
+</ul>
+</li>
+<li><a href="#options">Options</a></li>
+<li><a href="#settings">Settings</a></li>
+<li><a href="#typescript">TypeScript</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+<a href="#overview" id="overview" style="color: inherit; text-decoration: none;">
+  <h2>Overview</h2>
+</a>
+<p>Most of the features of fsa-database wrapped with hooks for easy, clean component creation.</p>
+
+<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+  <h2>Features</h2>
+</a>
+
+<a href="#hooks" id="hooks" style="color: inherit; text-decoration: none;">
+  <h3>Hooks</h3>
+</a>
+<p>Hooks take care or reloading your data reactively in your components </p>
+
+<a href="#state-management" id="state-management" style="color: inherit; text-decoration: none;">
+  <h3>State Management</h3>
+</a>
+<p>Uses React Context for state management </p>
+
+<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+  <h2>Getting Started</h2>
+</a>
+
+<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+  <h3>Install</h3>
+</a>
+<pre><code class="language-js"><span class="hl-0">// using npm</span><br/><span class="hl-1">npm</span><span class="hl-2"> </span><span class="hl-1">install</span><span class="hl-2"> @</span><span class="hl-1">philstenning</span><span class="hl-2">/</span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span><br/><br/><span class="hl-0">// using pnpm</span><br/><span class="hl-1">pnpm</span><span class="hl-2"> </span><span class="hl-1">i</span><span class="hl-2"> @</span><span class="hl-1">philstenning</span><span class="hl-2">/</span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span><br/><br/><span class="hl-0">// yarn</span><br/><span class="hl-1">yarn</span><span class="hl-2"> </span><span class="hl-1">add</span><span class="hl-2"> @</span><span class="hl-1">philstenning</span><span class="hl-2">/</span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span>
+</code></pre>
+
+<a href="#add-context-provider-to-your-app" id="add-context-provider-to-your-app" style="color: inherit; text-decoration: none;">
+  <h3>Add context provider to your app</h3>
+</a>
+<pre><code class="language-tsx"><span class="hl-0">// app.tsx</span><br/><span class="hl-0">// file extensions can be either &#39;.md&#39; or &#39;md&#39;</span><br/><span class="hl-3">import</span><span class="hl-2"> { </span><span class="hl-1">FsaDbContextProvider</span><span class="hl-2"> } </span><span class="hl-3">from</span><span class="hl-2"> </span><span class="hl-4">&#39;@philstenning/react-fsa-database&#39;</span><br/><br/><span class="hl-5">function</span><span class="hl-2"> </span><span class="hl-6">App</span><span class="hl-2">() {</span><br/><span class="hl-2">  </span><span class="hl-3">return</span><span class="hl-2"> (</span><br/><span class="hl-2">    </span><span class="hl-7">&lt;</span><span class="hl-8">FsaDbContextProvider</span><span class="hl-2"> </span><span class="hl-9">fileExtensionsForApp</span><span class="hl-2">=</span><span class="hl-5">{</span><span class="hl-10">[</span><span class="hl-4">&#39;.txt&#39;</span><span class="hl-10">, </span><span class="hl-4">&#39;.md&#39;</span><span class="hl-10">, </span><span class="hl-4">&#39;svg&#39;</span><span class="hl-10">]</span><span class="hl-5">}</span><span class="hl-7">&gt;</span><br/><span class="hl-2">      </span><span class="hl-7">&lt;</span><span class="hl-8">YourApp</span><span class="hl-7">&gt;&lt;/</span><span class="hl-8">YourApp</span><span class="hl-7">&gt;</span><br/><span class="hl-2">    </span><span class="hl-7">&lt;/</span><span class="hl-8">FsaDbContextProvider</span><span class="hl-7">&gt;</span><br/><span class="hl-2">  )</span><br/><span class="hl-2">}</span><br/><br/><span class="hl-3">export</span><span class="hl-2"> </span><span class="hl-3">default</span><span class="hl-2"> </span><span class="hl-1">App</span>
+</code></pre>
+
+<a href="#add-a-root-directory" id="add-a-root-directory" style="color: inherit; text-decoration: none;">
+  <h3>Add a Root Directory</h3>
+</a>
+<pre><code class="language-tsx"><span class="hl-0">// TODO</span>
+</code></pre>
+
+<a href="#list-files" id="list-files" style="color: inherit; text-decoration: none;">
+  <h3>List Files</h3>
+</a>
+<pre><code class="language-tsx"><span class="hl-0">// TODO</span>
+</code></pre>
+
+<a href="#add-collection" id="add-collection" style="color: inherit; text-decoration: none;">
+  <h3>Add Collection</h3>
+</a>
+<pre><code class="language-tsx"><span class="hl-0">// TODO</span>
+</code></pre>
+
+<a href="#add-file-to-collection" id="add-file-to-collection" style="color: inherit; text-decoration: none;">
+  <h3>Add File to collection</h3>
+</a>
+<pre><code class="language-tsx"><span class="hl-0">// TODO</span>
+</code></pre>
+<hr>
+
+<a href="#options" id="options" style="color: inherit; text-decoration: none;">
+  <h2>Options</h2>
+</a>
+<pre><code class="language-ts"><span class="hl-0">// list of folders that are not scanned.</span><br/><span class="hl-11">excludedFolders</span><span class="hl-2">: </span><span class="hl-1">string</span><span class="hl-2">[]  = [</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;node_modules&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;programFiles&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;junk&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;.git&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;.changeset&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;bin&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-4">&quot;__pycache__&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">]</span><br/><br/>
+</code></pre>
+<pre><code class="language-ts"><span class="hl-0">// list of extensions to scan for</span><br/><span class="hl-11">fileTypes</span><span class="hl-2">: </span><span class="hl-1">string</span><span class="hl-2">[] = [</span><span class="hl-4">&#39;jpg&#39;</span><span class="hl-2">,</span><span class="hl-4">&#39;png&#39;</span><span class="hl-2">,</span><span class="hl-4">&#39;gif&#39;</span><span class="hl-2">]</span><br/>
+</code></pre>
+<pre><code class="language-ts"><span class="hl-0">// How deep you want to scan</span><br/><span class="hl-11">maxDepth</span><span class="hl-2">: </span><span class="hl-1">number</span><span class="hl-2"> = </span><span class="hl-12">10</span>
+</code></pre>
+
+<a href="#settings" id="settings" style="color: inherit; text-decoration: none;">
+  <h2>Settings</h2>
+</a>
+<pre><code class="language-ts"><span class="hl-1">fsaSetting</span><span class="hl-2"> {</span><br/><span class="hl-2">  </span><span class="hl-1">id</span><span class="hl-2">?: </span><span class="hl-1">number</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// set internally when browser session starts</span><br/><span class="hl-2">  </span><span class="hl-11">sessionStarted</span><span class="hl-2">: </span><span class="hl-1">number</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// when files are removed from a collection,</span><br/><span class="hl-2">  </span><span class="hl-0">// or a collection is deleted</span><br/><span class="hl-2">  </span><span class="hl-0">// removed files  from local disk also</span><br/><span class="hl-2">  </span><span class="hl-11">cleanUpFiles</span><span class="hl-2">: </span><span class="hl-1">boolean</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// when a file is added to collection</span><br/><span class="hl-2">  </span><span class="hl-0">// save to disk</span><br/><span class="hl-2">  </span><span class="hl-11">autoSaveCollections</span><span class="hl-2">: </span><span class="hl-1">boolean</span><br/><br/><span class="hl-2">  </span><span class="hl-11">scanInterval</span><span class="hl-2">: </span><span class="hl-1">number</span><span class="hl-2"> </span><span class="hl-0">// default is 0 or none.</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// time the user last scanned for file changes.</span><br/><span class="hl-2">  </span><span class="hl-11">lastScanned</span><span class="hl-2">: </span><span class="hl-1">number</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// when adding with drag and drop whether</span><br/><span class="hl-2">  </span><span class="hl-0">// to add files to a new folder</span><br/><span class="hl-2">  </span><span class="hl-11">allowDndFiles</span><span class="hl-2">: </span><span class="hl-1">boolean</span><br/><br/><span class="hl-2">  </span><span class="hl-0">// When resetting db retain all root Directories.</span><br/><span class="hl-2">  </span><span class="hl-11">retainRootDirectoriesOnReset</span><span class="hl-2">: </span><span class="hl-1">boolean</span><span class="hl-2">;</span><br/><br/><span class="hl-2">}</span>
+</code></pre>
+
+<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
+  <h2>TypeScript</h2>
+</a>
+<p>Fully written with TypeScript</p>
+
+<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+  <h2>Contributing</h2>
+</a>
+<p>I&#39;m open to all community contributions! If you&#39;d like to contribute in any way, file an issue or pull request.</p>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>License</h2>
+</a>
+<p>ISC</p>
 </section></section>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">

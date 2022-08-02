@@ -14,41 +14,30 @@
 <li><a href="fsa_database.html">fsa-database</a></li></ul>
 <h1>Module fsa-database</h1></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/philstenning/browser-fs/blob/5cd60de/packages/fsa-database/src/index.ts#L2">packages/fsa-database/src/index.ts:2</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/philstenning/browser-fs/blob/a633d7d/packages/fsa-database/src/index.ts#L2">packages/fsa-database/src/index.ts:2</a></li></ul></aside>
 <section class="tsd-panel-group">
 <section class="tsd-panel tsd-typography">
 <a href="#fsa-database" id="fsa-database" style="color: inherit; text-decoration: none;">
   <h1>fsa-database</h1>
 </a>
-<p>Create collections of files from your local drive for use in the browser.</p>
-
-<a href="#overview" id="overview" style="color: inherit; text-decoration: none;">
-  <h2>Overview</h2>
-</a>
-<p>Use fsa-database to recursively scan your local drive for files of a any given extension and save them to the browsers indexDB, then create collections from them for further use within your app</p>
-
-<a href="#concepts" id="concepts" style="color: inherit; text-decoration: none;">
-  <h3>Concepts</h3>
-</a>
-<hr>
 <ul>
 <li><a href="#fsa-database">fsa-database</a><ul>
-<li><a href="#overview">Overview</a><ul>
-<li><a href="#concepts">Concepts</a></li>
-</ul>
-</li>
-<li><a href="#getting-stated">Getting Stated</a></li>
-<li><a href="#getting-stated-with-react">Getting Stated with React</a><ul>
-<li><a href="#add-a-root-directory">Add a Root Directory</a></li>
-</ul>
-</li>
+<li><a href="#overview">Overview</a></li>
 <li><a href="#features">Features</a><ul>
 <li><a href="#files-and-directories">Files and Directories</a></li>
 <li><a href="#collections">Collections</a></li>
-<li><a href="#state">State</a></li>
+<li><a href="#flatten-directory-structure">Flatten Directory structure</a></li>
+<li><a href="#rescan">Rescan</a></li>
+<li><a href="#state-management">State Management</a></li>
+<li><a href="#uses-dexiejs">Uses Dexie.js</a></li>
 </ul>
 </li>
 <li><a href="#browser-compatibility">Browser Compatibility</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#getting-started-with-react">Getting Started with React</a><ul>
+<li><a href="#add-a-root-directory">Add a Root Directory</a></li>
+</ul>
+</li>
 <li><a href="#options">Options</a></li>
 <li><a href="#settings">Settings</a></li>
 <li><a href="#typescript">TypeScript</a></li>
@@ -57,34 +46,11 @@
 </ul>
 </li>
 </ul>
-<p>This is a monorepo containing the following packages / projects:</p>
-<ol>
-<li>fsa-browser - base package this will be removed and all the necessary bits added to fsa-database for version 1.0.0</li>
-<li>fsa-database  </li>
-<li>react-fsa-database - wrapper for using with react</li>
-<li>web - vitejs frontend for testing</li>
-<li>docs - wip.</li>
-</ol>
-<hr>
 
-<a href="#getting-stated" id="getting-stated" style="color: inherit; text-decoration: none;">
-  <h2>Getting Stated</h2>
+<a href="#overview" id="overview" style="color: inherit; text-decoration: none;">
+  <h2>Overview</h2>
 </a>
-<pre><code class="language-js"><span class="hl-0">// using pnp</span><br/><span class="hl-1">npm</span><span class="hl-2"> </span><span class="hl-1">install</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span><br/><br/><span class="hl-0">// using pnpm</span><br/><span class="hl-1">pnpm</span><span class="hl-2"> </span><span class="hl-1">i</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span><br/><br/><span class="hl-0">// yarn</span><br/><span class="hl-1">yarn</span><span class="hl-2"> </span><span class="hl-1">add</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span>
-</code></pre>
-
-<a href="#getting-stated-with-react" id="getting-stated-with-react" style="color: inherit; text-decoration: none;">
-  <h2>Getting Stated with React</h2>
-</a>
-<pre><code class="language-bash"><span class="hl-2">pnpm i fsa-database react-fsa-database</span>
-</code></pre>
-<p>Add context provider to your app</p>
-<pre><code class="language-tsx"><span class="hl-0">// app.tsx</span><br/><span class="hl-0">// file extensions can be either &#39;.md&#39; or &#39;md&#39;</span><br/><br/><span class="hl-3">import</span><span class="hl-2"> {</span><span class="hl-1">FsaDbContextProvider</span><span class="hl-2">} </span><span class="hl-3">from</span><span class="hl-2"> </span><span class="hl-4">&quot;@philstenning/react-fsa-database&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-5">function</span><span class="hl-2"> </span><span class="hl-6">App</span><span class="hl-2">() {</span><br/><span class="hl-2">  </span><span class="hl-3">return</span><span class="hl-2"> (</span><br/><span class="hl-2">    </span><span class="hl-7">&lt;</span><span class="hl-8">FsaDbContextProvider</span><span class="hl-2">  </span><br/><span class="hl-2">     </span><span class="hl-9">fileExtensionsForApp</span><span class="hl-2">=</span><span class="hl-5">{</span><span class="hl-10">[</span><span class="hl-4">&#39;.txt&#39;</span><span class="hl-10">,</span><span class="hl-4">&#39;.md&#39;</span><span class="hl-10">,</span><span class="hl-4">&#39;svg&#39;</span><span class="hl-10">]</span><span class="hl-5">}</span><span class="hl-7">&gt;</span><br/><span class="hl-2">      </span><span class="hl-7">&lt;</span><span class="hl-8">YourApp</span><span class="hl-7">&gt;</span><br/><span class="hl-2">    </span><br/><span class="hl-2">      </span><span class="hl-7">&lt;/</span><span class="hl-8">YourApp</span><span class="hl-7">&gt;</span><br/><span class="hl-2">    </span><span class="hl-7">&lt;/</span><span class="hl-8">FsaDbContextProvider</span><span class="hl-7">&gt;</span><br/><span class="hl-2">  );</span><br/><span class="hl-2">}</span><br/><br/><span class="hl-3">export</span><span class="hl-2"> </span><span class="hl-3">default</span><span class="hl-2"> </span><span class="hl-1">App</span><span class="hl-2">; </span><br/><br/><br/>
-</code></pre>
-
-<a href="#add-a-root-directory" id="add-a-root-directory" style="color: inherit; text-decoration: none;">
-  <h3>Add a Root Directory</h3>
-</a>
+<p>Create collections of files from your local drive for use in the browser.</p>
 
 <a href="#features" id="features" style="color: inherit; text-decoration: none;">
   <h2>Features</h2>
@@ -93,23 +59,57 @@
 <a href="#files-and-directories" id="files-and-directories" style="color: inherit; text-decoration: none;">
   <h3>Files and Directories</h3>
 </a>
-<p>fsa-database uses the File System Access API to scan a local drive for files with a given array of extensions [&#39;.jpg&#39;, &#39;.png&#39;,&#39;.gif&#39;]  and returns a list of of directories with their files that are stored in the indexDb for use within your app. These Files and Directories are then available even after the user closes the browser or reloads the browser window (after regranting permissions)</p>
+<p>Use fsa-database to recursively scan your local drive for files of any extension [&#39;.svg&#39;, &#39;gcode&#39;, &#39;jpg&#39;] and save a reference to them in the browsers indexDB, you can then use the files within your app with almost the same ease of use as you would natively. The Files and Directories are then available even after the user closes the browser or reloads the browser window (after regranting permissions)</p>
 
 <a href="#collections" id="collections" style="color: inherit; text-decoration: none;">
   <h3>Collections</h3>
 </a>
-<p>The user can create collections and then add/remove any file  from the database to it, then save the whole collection back to almost any location on their local drive. Collections once saved for the first time, can then be updated/deleted in a similar manner that you would have in a regular native app. </p>
+<p>fsa-database has a collections feature that allows you to create a collection, add files to it, then save the collection back to your local drive, these collections on your local drive <strong>can</strong> then be kept in sync adding and removing files as you update your collection in your app.</p>
 
-<a href="#state" id="state" style="color: inherit; text-decoration: none;">
-  <h3>State</h3>
+<a href="#flatten-directory-structure" id="flatten-directory-structure" style="color: inherit; text-decoration: none;">
+  <h3>Flatten Directory structure</h3>
+</a>
+<p>The directory structure of you fileSystem is retained from the root directory in the database, but you have the ability to flatten it if you wish, and move any directory&#39;s content up into their parents directory but also allowing it to be reset to its origin if needed.</p>
+
+<a href="#rescan" id="rescan" style="color: inherit; text-decoration: none;">
+  <h3>Rescan</h3>
+</a>
+<p>Rescan your directories for files that have been added or removed since your initial scan and automatically remove obsolete files from collections. </p>
+
+<a href="#state-management" id="state-management" style="color: inherit; text-decoration: none;">
+  <h3>State Management</h3>
 </a>
 <p>Built in state management, if needed, is stored in the database so after page reloads, the state of the app can be quickly restored, this state is also available across browser tabs. </p>
+
+<a href="#uses-dexiejs" id="uses-dexiejs" style="color: inherit; text-decoration: none;">
+  <h3>Uses Dexie.js</h3>
+</a>
+<p>Under the hood fsa-database used <a href="https://dexie.org/">Dexie.js</a> to store data in the browsers indexDb so all its features are available to you.</p>
 <hr>
 
 <a href="#browser-compatibility" id="browser-compatibility" style="color: inherit; text-decoration: none;">
   <h2>Browser Compatibility</h2>
 </a>
 <p>The File System Access API is <a href="https://caniuse.com/?search=File%20System%20Access%20API">not available in all browsers</a> so a fallback is provided for users not using the supported features of API, this works by storing the file with its meta data in the indexDB so we can use it from within the app.</p>
+<hr>
+
+<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+  <h2>Getting Started</h2>
+</a>
+<pre><code class="language-js"><span class="hl-0">// using npm</span><br/><span class="hl-1">npm</span><span class="hl-2"> </span><span class="hl-1">install</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span><br/><br/><span class="hl-0">// using pnpm</span><br/><span class="hl-1">pnpm</span><span class="hl-2"> </span><span class="hl-1">i</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span><br/><br/><span class="hl-0">// yarn</span><br/><span class="hl-1">yarn</span><span class="hl-2"> </span><span class="hl-1">add</span><span class="hl-2"> </span><span class="hl-1">fsa</span><span class="hl-2">-</span><span class="hl-1">database</span>
+</code></pre>
+
+<a href="#getting-started-with-react" id="getting-started-with-react" style="color: inherit; text-decoration: none;">
+  <h2>Getting Started with React</h2>
+</a>
+<p>If you use react <a href="/browser-fs/api/modules/react_fsa_database">react-fsa-database</a> wraps most of the features of this library but also adds a context provider for state management.</p>
+<p>Add context provider to your app</p>
+<pre><code class="language-tsx"><span class="hl-0">// app.tsx</span><br/><span class="hl-0">// file extensions can be either &#39;.md&#39; or &#39;md&#39;</span><br/><br/><span class="hl-3">import</span><span class="hl-2"> {</span><span class="hl-1">FsaDbContextProvider</span><span class="hl-2">} </span><span class="hl-3">from</span><span class="hl-2"> </span><span class="hl-4">&quot;@philstenning/react-fsa-database&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-5">function</span><span class="hl-2"> </span><span class="hl-6">App</span><span class="hl-2">() {</span><br/><span class="hl-2">  </span><span class="hl-3">return</span><span class="hl-2"> (</span><br/><span class="hl-2">    </span><span class="hl-7">&lt;</span><span class="hl-8">FsaDbContextProvider</span><span class="hl-2">  </span><br/><span class="hl-2">     </span><span class="hl-9">fileExtensionsForApp</span><span class="hl-2">=</span><span class="hl-5">{</span><span class="hl-10">[</span><span class="hl-4">&#39;.txt&#39;</span><span class="hl-10">,</span><span class="hl-4">&#39;.md&#39;</span><span class="hl-10">,</span><span class="hl-4">&#39;svg&#39;</span><span class="hl-10">]</span><span class="hl-5">}</span><span class="hl-7">&gt;</span><br/><span class="hl-2">      </span><span class="hl-7">&lt;</span><span class="hl-8">YourApp</span><span class="hl-7">&gt;</span><br/><span class="hl-2">    </span><br/><span class="hl-2">      </span><span class="hl-7">&lt;/</span><span class="hl-8">YourApp</span><span class="hl-7">&gt;</span><br/><span class="hl-2">    </span><span class="hl-7">&lt;/</span><span class="hl-8">FsaDbContextProvider</span><span class="hl-7">&gt;</span><br/><span class="hl-2">  );</span><br/><span class="hl-2">}</span><br/><br/><span class="hl-3">export</span><span class="hl-2"> </span><span class="hl-3">default</span><span class="hl-2"> </span><span class="hl-1">App</span><span class="hl-2">; </span><br/><br/><br/>
+</code></pre>
+
+<a href="#add-a-root-directory" id="add-a-root-directory" style="color: inherit; text-decoration: none;">
+  <h3>Add a Root Directory</h3>
+</a>
 
 <a href="#options" id="options" style="color: inherit; text-decoration: none;">
   <h2>Options</h2>
