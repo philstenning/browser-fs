@@ -1,45 +1,67 @@
 # fsa-database
 
-Create collections of files from your local drive for use in the browser.
-
-## Overview
-
-Use fsa-database to recursively scan your local drive for files of a any given extension and save them to the browsers indexDB, then create collections from them for further use within your app
-
-### Concepts 
-
-
-___
 
 - [fsa-database](#fsa-database)
   - [Overview](#overview)
-    - [Concepts](#concepts)
-  - [Getting Stated](#getting-stated)
-  - [Getting Stated with React](#getting-stated-with-react)
-    - [Add a Root Directory](#add-a-root-directory)
   - [Features](#features)
     - [Files and Directories](#files-and-directories)
     - [Collections](#collections)
-    - [State](#state)
+    - [Flatten Directory structure](#flatten-directory-structure)
+    - [Rescan](#rescan)
+    - [State Management](#state-management)
+    - [Uses Dexie.js](#uses-dexiejs)
   - [Browser Compatibility](#browser-compatibility)
+  - [Getting Started](#getting-started)
+  - [Getting Started with React](#getting-started-with-react)
+    - [Add a Root Directory](#add-a-root-directory)
   - [Options](#options)
   - [Settings](#settings)
   - [TypeScript](#typescript)
   - [Contributing](#contributing)
   - [License](#license)
 
-This is a monorepo containing the following packages / projects:
+## Overview
+Create collections of files from your local drive for use in the browser.
 
-1. fsa-browser - base package this will be removed and all the necessary bits added to fsa-database for version 1.0.0
-2. fsa-database  
-3. react-fsa-database - wrapper for using with react
-4. web - vitejs frontend for testing
-5. docs - wip.
+## Features
+
+### Files and Directories
+Use fsa-database to recursively scan your local drive for files of any extension ['.svg', 'gcode', 'jpg'] and save a reference to them in the browsers indexDB, you can then use the files within your app with almost the same ease of use as you would natively. The Files and Directories are then available even after the user closes the browser or reloads the browser window (after regranting permissions)
+
+
+### Collections
+
+fsa-database has a collections feature that allows you to create a collection, add files to it, then save the collection back to your local drive, these collections on your local drive __can__ then be kept in sync adding and removing files as you update your collection in your app.
+
+### Flatten Directory structure
+
+The directory structure of you fileSystem is retained from the root directory in the database, but you have the ability to flatten it if you wish, and move any directory's content up into their parents directory but also allowing it to be reset to its origin if needed.
+
+
+### Rescan 
+
+Rescan your directories for files that have been added or removed since your initial scan and automatically remove obsolete files from collections. 
+
+### State Management
+
+Built in state management, if needed, is stored in the database so after page reloads, the state of the app can be quickly restored, this state is also available across browser tabs. 
+
+### Uses Dexie.js
+Under the hood fsa-database used [Dexie.js](https://dexie.org/) to store data in the browsers indexDb so all its features are available to you.
+
+
 ___
-## Getting Stated
+## Browser Compatibility
+
+The File System Access API is [not available in all browsers](https://caniuse.com/?search=File%20System%20Access%20API) so a fallback is provided for users not using the supported features of API, this works by storing the file with its meta data in the indexDB so we can use it from within the app.
+
+
+
+___
+## Getting Started
 
 ```js
-// using pnp
+// using npm
 npm install fsa-database
 
 // using pnpm
@@ -48,11 +70,9 @@ pnpm i fsa-database
 // yarn
 yarn add fsa-database
 ```
-## Getting Stated with React
+## Getting Started with React
 
-```bash
-pnpm i fsa-database react-fsa-database
-```
+If you use react [react-fsa-database](/browser-fs/api/modules/react_fsa_database) wraps most of the features of this library but also adds a context provider for state management.
 
 Add context provider to your app
 ```tsx
@@ -81,23 +101,7 @@ export default App;
 
 
 
-## Features
 
-### Files and Directories
-
-fsa-database uses the File System Access API to scan a local drive for files with a given array of extensions ['.jpg', '.png','.gif']  and returns a list of of directories with their files that are stored in the indexDb for use within your app. These Files and Directories are then available even after the user closes the browser or reloads the browser window (after regranting permissions)
-
-### Collections
-
-The user can create collections and then add/remove any file  from the database to it, then save the whole collection back to almost any location on their local drive. Collections once saved for the first time, can then be updated/deleted in a similar manner that you would have in a regular native app. 
-
-### State
-
-Built in state management, if needed, is stored in the database so after page reloads, the state of the app can be quickly restored, this state is also available across browser tabs. 
-___
-## Browser Compatibility
-
-The File System Access API is [not available in all browsers](https://caniuse.com/?search=File%20System%20Access%20API) so a fallback is provided for users not using the supported features of API, this works by storing the file with its meta data in the indexDB so we can use it from within the app.
 
 ## Options
 
