@@ -2,16 +2,17 @@
   "name": "docs",
   "version": "0.1.0",
   "private": true,
-   "type": "module",
   "scripts": {
     "dev": "next dev",
     "xbuild": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch",
-    "parseJson":"ts-node-dev ./lib/processApi/processFile.ts"
+    "parseJson": "ts-node-dev ./lib/processApi/processFile.ts"
   },
   "dependencies": {
+    "@philstenning/fsa-browser": "workspace:^0.1.0",
+    "@philstenning/react-fsa-database": "workspace:^0.1.0",
     "next": "12.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0"

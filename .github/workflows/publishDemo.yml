@@ -33,11 +33,11 @@ jobs:
       
       # compiles and moves the css into
       # the build/css directory
-      - name: build docs
+      - name: build test pages
         run: pnpm build:docs
 
       - name: build api docs
-        run: pnpm td3
+        run: pnpm td
     
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

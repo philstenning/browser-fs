@@ -19,12 +19,10 @@
     "preview": "pnpm --filter fsa-browser-test preview ",
     "release": "changeset publish",
     "changeset:version": "changeset version",
-    "move": "mkdir ./foo && cp -r ./browser-fs/** ./foo",
     "td": "typedoc ",
-    "td:prod": "typedoc --publicPath /browser-fs/",
-    "td:json": "typedoc --options typedoc2.json --pretty",
-    "docs": "pnpm --filter docs dev",
-    "td3": "typedoc --options typedoc3.json --pretty  --logLevel Verbose"
+    "td:json": "typedoc --options typedoc.markdown.json",
+    "docs:dev": "pnpm --filter docs dev"
+    
   },
   "repository": {
     "type": "git",
