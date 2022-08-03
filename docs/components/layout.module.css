@@ -1,4 +1,0 @@
-.main {
-  display: grid;
-  grid-template-columns: 30ch minmax(20ch, 80ch );
-}
