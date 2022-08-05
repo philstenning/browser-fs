@@ -29,6 +29,7 @@ importers:
       '@philstenning/react-fsa-database': workspace:*
       '@types/react': ^18.0.15
       '@types/react-dom': ^18.0.6
+      '@types/wicg-file-system-access': ^2020.9.5
       '@vitejs/plugin-react': ^2.0.0
       open-props: ^1.4.5
       postcss: ^8.4.6
@@ -50,6 +51,7 @@ importers:
     devDependencies:
       '@types/react': 18.0.15
       '@types/react-dom': 18.0.6
+      '@types/wicg-file-system-access': 2020.9.5
       '@vitejs/plugin-react': 2.0.0_vite@3.0.4
       postcss: 8.4.14
       postcss-combine-duplicated-selectors: 10.0.3_postcss@8.4.14
