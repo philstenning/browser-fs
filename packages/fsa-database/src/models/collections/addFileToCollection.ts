@@ -23,6 +23,7 @@ export default async function addFileToCollection(
     } else return
   }
 
+  // we could have a file with the same name from a different folder
   const uniqueFileName = await createUniqueNameForFile(file)
   const uniqueNamedFile: fsaFile = { ...file, uniqueName: uniqueFileName }
 

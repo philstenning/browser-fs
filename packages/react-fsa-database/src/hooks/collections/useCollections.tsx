@@ -71,7 +71,7 @@ function getItems() {
 }
 
 /**
-* @category Hooks
+ * @category Hooks
  */
 const useCollections = () => {
   const collections =
@@ -110,6 +110,10 @@ const useCollections = () => {
     }
   }
 
+  /**
+   * Add a fsaFile to the current selected collection,
+   * if a collection is passed in then that collection receives the file
+   */
   const addFileToCollection = async (
     file: fsaFile,
     collection?: fsaCollection
@@ -121,10 +125,15 @@ const useCollections = () => {
     }
     // console.log('file added to collection...')
     // set the passed collection to the current collection if it isn't already.
-    if (collection && dbState.currentCollectionId !== collection.id)
+    if (collection && dbState.currentCollectionId !== collection.id) {
       setCurrentCollectionId(collection.id)
+    }
   }
 
+  /**
+   * Removes a fsaFile from the current selected collection,
+   * if a collection is passed in then that collection has the file removed.
+   */
   const removeFileFromCollection = async (
     file: fsaFile,
     collection?: fsaCollection
