@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "scan your local drive using the file system access api and store the results in a database",
   "main": "src/index.ts",
-  "module": "dist/esm/index.js",
+  "module": "src/index.ts",
   "publishConfig": {
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",

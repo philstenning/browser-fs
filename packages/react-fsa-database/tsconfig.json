@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["wicg-file-system-access", "@philstenning/fsa-database"],
+    "types": ["wicg-file-system-access"],
     "outDir": "dist/esm",
     "removeComments": true,
     "sourceMap": true
