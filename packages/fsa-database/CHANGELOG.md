@@ -1,5 +1,11 @@
 # @philstenning/fsa-database
 
+## 0.1.1
+
+### Patch Changes
+
+- [#186](https://github.com/philstenning/browser-fs/pull/186) [`f2515f1`](https://github.com/philstenning/browser-fs/commit/f2515f137c13cfb6ff227ff3f37c3616ebbd05c5) Thanks [@philstenning](https://github.com/philstenning)! - checkHandlePermission added fsaDirectories as union type
+
 ## 0.1.0
 
 ### Minor Changes
