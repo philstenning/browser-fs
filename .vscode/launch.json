@@ -18,6 +18,14 @@
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}/packages/web",
             
+        },
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
+            "name": "Debug docs",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/docs/src",
+            
         }
     ]
 }
