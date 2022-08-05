@@ -8,7 +8,8 @@ const DirectoriesForRoot = () => {
     const {dbState, setCurrentDirectoryId} = useFsaDbContext()
 
   return (
-    <div className='root-dirs'>
+    <div className='directories-for-root'>
+      <h4>Directories</h4>
     <ul>{directoriesForRootDirectory?.map(d=>(
         <li key={d.id}
         onClick={()=>setCurrentDirectoryId(d.id)}
