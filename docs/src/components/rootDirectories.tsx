@@ -1,19 +1,21 @@
 import {
   useRootDirectories,
   useFsaDbContext
+  
 } from '@philstenning/react-fsa-database'
 
 function RootDirectories() {
   const { addRootDirectory, rootDirectories } = useRootDirectories()
-  const { dbState } = useFsaDbContext()
+  const { dbState:{currentRootDirectoryId} } = useFsaDbContext()
   return (
-    <>
+    <div>
+    <h3>Root Directories</h3>
       <button onClick={addRootDirectory}>Add</button>
       <ul>
         {rootDirectories.map((rd) => (
           <li
             className={
-              dbState.currentRootDirectoryId === rd.id ? 'selected' : ''
+              currentRootDirectoryId === rd.id ? 'selected' : ''
             }
             key={rd.id}
           >
@@ -21,7 +23,7 @@ function RootDirectories() {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   )
 }
 
