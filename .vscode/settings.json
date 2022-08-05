@@ -1,14 +1,21 @@
 {
   "cssvar.files": [
     // "./node_modules/open-props/open-props.min.css",
-    "./packages/web/node_modules/open-props/open-props.min.css"
+    "./docs/node_modules/open-props/open-props.min.css"
+    // "./docs/node_modules/open-props/open-props.min.css"
+
     // if you have an alternative path to where your styles are located
     // you can add it in this array of files
     // ".src/styles/variables.css"
   ],
 
   // you can also add support for autocomplete in other file extensions
-  "cssvar.extensions": ["css", "html", "jsx", "tsx", "scss"],
+  "cssvar.extensions": ["css", "jsx", "tsx", "scss"],
+
+  // this is now needed to work.
+  "cssvar.ignore": [],
+
+
   "cSpell.words": ["ffcd_listItem_", "rescan", "szhsin"],
   "conventionalCommits.scopes": [
     "basic-app",

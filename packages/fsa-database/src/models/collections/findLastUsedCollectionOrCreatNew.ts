@@ -2,7 +2,7 @@ import { fsaCollection } from '../types'
 import { db } from '../../db/setup'
 import findLastUsedCollection from './findLastUsedCollection'
 import createCollection from './createCollection'
-import setCurrentCollectionId from '../state/setCurrentDirectoryId'
+import setCurrentCollectionId from '../state/setCurrentCollectionId'
 
 /**
  * @category Collections
@@ -16,16 +16,17 @@ export default async function findLastUsedCollectionOrCreatNew(
   // if there is only one return that one.
   if (count === 1) {
     collection = await db.userCollections.toCollection().last()
-
+    
     // find the last used one.
   } else if (count > 1) {
     const col = await findLastUsedCollection()
     if (col) collection = col
-
+    
     // no collections create a new one.
   } else {
     collection = await createCollection(nameIfNotExit)
   }
+  
   // we should have a collection
   if (collection) {
     await setCurrentCollectionId(collection.id)
