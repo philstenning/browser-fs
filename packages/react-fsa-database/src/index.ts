@@ -35,6 +35,9 @@ import useRootFileList from './hooks/files/useRootFileList'
 // fileTypes
 import useFileTypesNames from './hooks/fileTypes/useFileTypesNames'
 import useFileTypes from './hooks/fileTypes/useFileTypes'
+// permissions
+import usePermissions from './hooks/permissions/usePermissions'
+
 // root directories
 import useRootDirectories from './hooks/rootDirectories/useRootDirectories'
 // settings
@@ -53,6 +56,8 @@ export {
   // file types
   useFileTypes,
   useFileTypesNames,
+  // permissions
+  usePermissions,
   // root directories
   useRootDirectories,
   useExcludedDirectories,

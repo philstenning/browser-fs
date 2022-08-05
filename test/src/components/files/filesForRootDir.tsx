@@ -2,9 +2,10 @@ import React from 'react'
 import {
   useRootFileList,
   useCollections,
-  useFsaDbContext
+  useFsaDbContext,
+  usePermissions
 } from '@philstenning/react-fsa-database'
-import { fsaFile, checkHandlePermission } from '@philstenning/fsa-database'
+import { fsaFile } from '@philstenning/fsa-database'
 //@ts-ignore
 import styles from './filesForRootDir.module.css'
 
@@ -12,6 +13,7 @@ import styles from './filesForRootDir.module.css'
 
 function FilesForRootDir() {
   const { dbState, setCurrentFileId } = useFsaDbContext()
+  const {checkPermission} = usePermissions()
   const list = useRootFileList(true, true)
   const { addFileToCollection } = useCollections()
 
@@ -29,7 +31,7 @@ function FilesForRootDir() {
     file: fsaFile
   ) => {
     e.stopPropagation()
-    checkHandlePermission(file)
+    checkPermission(file)
   }
 
   const listStyles = (file: fsaFile) => {

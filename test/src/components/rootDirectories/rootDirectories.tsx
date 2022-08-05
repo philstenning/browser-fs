@@ -1,7 +1,8 @@
 import React from 'react'
 import {
   useRootDirectories,
-  useFsaDbContext
+  useFsaDbContext,
+  usePermissions
 } from '@philstenning/react-fsa-database'
 import {
   fsaDirectory,
@@ -21,7 +22,7 @@ const RootDirectories = () => {
     useRootDirectories()
 
   const { dbState, setCurrentRootDirectoryId, isScanning } = useFsaDbContext()
-
+  const {checkAllRootDirectoryPermissions} = usePermissions()
   const saveFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
     // console.log(e.target.files)
     if (e.target.files) {
@@ -74,6 +75,7 @@ const RootDirectories = () => {
         <button disabled={isScanning} onClick={rescanRootDirectories}>
           ReScan Root Directories
         </button>
+        <button onClick={checkAllRootDirectoryPermissions}>Get all Permissions</button>
       </div>
     </div>
   )
