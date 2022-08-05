@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "description": "Adds a database using dixie to the project",
   "main": "src/index.ts",
-  "module": "src/index.ts",
-  "types": "dist/esm/index.d.ts",
   "publishConfig": {
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",
+    "types": "dist/esm/index.d.ts",
     "registry": "https://npm.pkg.github.com"
   },
   "files": [
