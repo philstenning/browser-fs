@@ -40,38 +40,17 @@ li {
   cursor: pointer;
 }
 
+.has-permission{
+  text-decoration: line-through;
+  color: var(--orange-5);
+}
+
 main {
   overflow-y: scroll;
 }
-.card-grid {
-  height: auto;
-  width: 100%;
-  max-width: 1000px;
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto;
-  gap: 1rem;
-  /* justify-content:space-between; */
-  /* align-items: center; */
-}
 
-.card {
-  width: 100%;
-  padding: var(--size-3);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  aspect-ratio: 1 / 1;
-  background-color: var(--gray-8);
-  
-  /* font-size: var(--size-1); */
-  overflow: hidden;
-  border:var(--border-size-1) solid var(--gray-8) ;
-  border-radius: var(--radius-2);
-  
-}
+
+
 
 .current-file{
   border:var(--border-size-1) solid var(--__selected-color) ;

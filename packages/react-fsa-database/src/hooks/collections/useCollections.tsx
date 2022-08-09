@@ -168,6 +168,12 @@ const useCollections = () => {
     return clone
   }
 
+  const fileIsInCurrentCollection = (id: string) => {
+    return currentCollectionItems.filter((f) => f.id === id).length > 0
+      ? true
+      : false
+  }
+
   return {
     collections,
     addCollection,
@@ -177,6 +183,7 @@ const useCollections = () => {
     updateCollection,
     currentCollectionItems,
     cloneCollection,
+    fileIsInCurrentCollection,
     removeAllFilesFromCollection,
     saveCollectionToFileSystem,
   }
