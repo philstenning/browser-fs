@@ -22,7 +22,6 @@
     "td": "typedoc ",
     "td:json": "typedoc --options typedoc.markdown.json",
     "docs:dev": "pnpm --filter docs dev"
-    
   },
   "repository": {
     "type": "git",
@@ -37,6 +36,7 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.5",
     "@changesets/cli": "^2.23.2",
+    "@types/jest": "^28.1.6",
     "@types/node": "^18.0.4",
     "rimraf": "^3.0.2",
     "turbo": "^1.3.1",

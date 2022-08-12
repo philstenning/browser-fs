@@ -122,9 +122,15 @@ function createVirtualFileSystemHandleFromFile(
 ) {
   const { name } = handle
   // get the file extension
-  const fileExtension = name.slice(((name.lastIndexOf('.') - 1) >>> 0) + 2)
+  const fileExtension = name.slice(((name.lastIndexOf('.') - 1) >>> 0) + 2).toLowerCase()
+  console.log({fileExtension})
+  
+  //remove the period and convert toLowercase all fileTypes in array
+  const extensions = fileTypes.map(t=> t.replace('.','').toLowerCase())
+
   // check if current file has the the requested extension.
-  if (!fileTypes.includes(fileExtension)) return null
+  if(!extensions.includes(fileExtension))return null
+
   const file = createVirtualFileSystemEntry(
     handle,
     `${path}/${name}`,
@@ -154,4 +160,4 @@ function createVirtualFileSystemEntry(
   }
 }
 
-export { scanLocalDrive }
+export { scanLocalDrive,createVirtualFileSystemHandleFromFile }

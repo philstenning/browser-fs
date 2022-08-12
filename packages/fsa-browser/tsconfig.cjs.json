@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["wicg-file-system-access"],
+    "types": ["wicg-file-system-access","jest"],
     "useDefineForClassFields": true,
     "lib": ["es2015", "es2016", "es2017", "es2018","DOM"],
     "allowJs": false,
