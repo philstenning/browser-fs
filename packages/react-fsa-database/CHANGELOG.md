@@ -1,5 +1,12 @@
 # @philstenning/react-fsa-database
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @philstenning/fsa-database@0.1.2
+
 ## 0.2.0
 
 ### Minor Changes
