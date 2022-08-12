@@ -1,5 +1,12 @@
 # @philstenning/fsa-database
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`b8c9989`](https://github.com/philstenning/browser-fs/commit/b8c998989f0539b6eb882c7770b8cb2f9f566b97)]:
+  - @philstenning/fsa-browser@0.1.1
+
 ## 0.1.1
 
 ### Patch Changes
