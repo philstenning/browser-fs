@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["wicg-file-system-access"],
+    "types": ["wicg-file-system-access", "jest", "node"],
     "strictPropertyInitialization": false,
     "outDir": "dist/esm"
     // "baseUrl": "src",
@@ -8,5 +8,6 @@
     // },
   },
   "include": ["./src/index.ts"],
-  "extends": "../../tsconfig.json"
+  "extends": "../../tsconfig.json",
+  "exclude": ["**/*.spec.ts"]
 }
