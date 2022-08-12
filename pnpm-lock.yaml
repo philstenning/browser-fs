@@ -27,6 +27,7 @@ importers:
   docs:
     specifiers:
       '@philstenning/react-fsa-database': workspace:*
+      '@types/offscreencanvas': ^2019.7.0
       '@types/react': ^18.0.15
       '@types/react-dom': ^18.0.6
       '@types/wicg-file-system-access': ^2020.9.5
@@ -49,6 +50,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
+      '@types/offscreencanvas': 2019.7.0
       '@types/react': 18.0.15
       '@types/react-dom': 18.0.6
       '@types/wicg-file-system-access': 2020.9.5
@@ -2297,6 +2299,10 @@ packages:
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
+    dev: true
+
+  /@types/offscreencanvas/2019.7.0:
+    resolution: {integrity: sha512-PGcyveRIpL1XIqK8eBsmRBt76eFgtzuPiSTyKHZxnGemp2yzGzWpjYKAfK3wIMiU7eH+851yEpiuP8JZerTmWg==}
     dev: true
 
   /@types/parse-json/4.0.0:

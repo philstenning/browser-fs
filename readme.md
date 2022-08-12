@@ -5,7 +5,7 @@ Browser Fsa is a monorepo of libraries to simplify adding the Browser File Syste
 
 ## fsa-browser
 
-[Details and API](/browser-fs/api/modules/fsa_browser)
+[Details and API](https://philstenning.github.io/browser-fs/api/modules/fsa_browser)
 
 If you just need basic access to to the local file system you can:
 
@@ -18,7 +18,7 @@ If you just need basic access to to the local file system you can:
 
 ## fsa-database
 
-[Details and API](/browser-fs/api/modules/fsa_database)
+[Details and API](https://philstenning.github.io/browser-fs/api/modules/fsa_database)
 
 Add the ability to create collections of your files that can be saved back to the local drive.
 
@@ -33,7 +33,7 @@ Add the ability to create collections of your files that can be saved back to th
 
 ## react-fsa-database
 
-[Details and API](/browser-fs/api/modules/react_fsa_database)
+[Details and API](https://philstenning.github.io/browser-fs/api/modules/react_fsa_database)
 
 Wraps fsa-database and adds hooks for simple app creation when using react.
 

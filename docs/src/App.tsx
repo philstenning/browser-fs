@@ -7,14 +7,16 @@ import Collections from './components/collections'
 import State from './components/state'
 function App() {
   return (
-    <FsaDbContextProvider fileExtensionsForApp={['jpeg', 'png', 'gif', 'jpg', 'svg','webP']}>
+    <FsaDbContextProvider
+      fileExtensionsForApp={['jpeg', 'png', 'gif', 'jpg', 'svg', 'webP']}
+    >
+      {/* <FsaDbContextProvider fileExtensionsForApp={['3mf', 'stl', 'gcode']}> */}
       <div className="app">
         <div className="sidebar">
-           <RootDirectories />
-           {/* <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem, animi illo quibusdam ea ipsam doloribus voluptatibus praesentium quaerat, incidunt, voluptatum quos pariatur rerum saepe at aperiam repudiandae neque architecto quo.</div> */}
+          <RootDirectories />
           <DirectoriesForRoot />
-          <Collections/>
-          <State/> 
+          <Collections />
+          <State />
         </div>
         <FilesForDirectory />{' '}
       </div>
